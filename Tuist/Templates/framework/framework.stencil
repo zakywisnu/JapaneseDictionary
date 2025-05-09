@@ -1,0 +1,19 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+func targets() -> [Target] {
+    var target: [Target] = []
+    target += Target.create(
+        name: "{{ name }}",
+        product: .framework,
+        destination: .{{ platform }},
+        withUnitTest: true
+    )
+    return target
+}
+
+let project = Project(
+    name: "{{ name }}",
+    packages: [],
+    targets: targets()
+)

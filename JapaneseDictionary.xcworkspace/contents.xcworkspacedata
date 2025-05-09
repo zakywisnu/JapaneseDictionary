@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Frameworks"
+      name = "Frameworks">
+      <FileRef
+         location = "group:CoreKit/CoreKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:DomainKit/DomainKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:SwiftUIApps/SwiftUIApps.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:JapaneseDictionary/JapaneseDictionary.xcodeproj">
+   </FileRef>
+</Workspace>

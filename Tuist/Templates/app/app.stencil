@@ -1,0 +1,37 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let infoPlist: [String: Plist.Value] = [
+    "UIApplicationSceneManifest": [
+        "UIApplicationSupportsMultipleScenes": true,
+        "UISceneConfigurations": [
+            "UIWindowSceneSessionRoleApplication": [
+                [
+                    "UISceneConfigurationName": "Default Configuration",
+                    "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+                ]
+            ]
+        ]
+    ],
+    "UILaunchStoryboardName": "LaunchScreen"
+]
+
+func targets() -> [Target] {
+    var target: [Target] = []
+    target += Target.create(
+        name: "{{ name }}",
+        product: .app,
+        destination: .{{ platform }},
+        dependencies: [],
+        infoPlist: infoPlist,
+        deploymentTargets: .iOS("16.0"),
+        withUnitTest: true
+    )
+    return target
+}
+
+let project = Project(
+    name: "{{ name }}",
+    packages: [],
+    targets: targets()
+)

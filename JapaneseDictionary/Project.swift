@@ -9,17 +9,6 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let infoPlist: [String: Plist.Value] = [
-    "UIApplicationSceneManifest": [
-        "UIApplicationSupportsMultipleScenes": true,
-        "UISceneConfigurations": [
-            "UIWindowSceneSessionRoleApplication": [
-                [
-                    "UISceneConfigurationName": "Default Configuration",
-                    "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
-                ]
-            ]
-        ]
-    ],
     "UILaunchStoryboardName": "LaunchScreen",
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
@@ -33,9 +22,14 @@ func targets() -> [Target] {
         product: .app,
         destination: [.iPhone],
         dependencies: [
-//            .project(target: "ToDoSwiftUI", path: "../Frameworks/ToDoSwiftUI/", status: .required, condition: nil),
-//            .project(target: "CoreKit", path: "../Frameworks/CoreKit/", status: .required, condition: nil),
-//            .project(target: "DomainKit", path: "../Frameworks/DomainKit/", status: .required, condition: nil),
+            .project(target: "SwiftUIApps", path: "../Frameworks/SwiftUIApps/", status: .required, condition: nil),
+            .project(target: "CoreKit", path: "../Frameworks/CoreKit/", status: .required, condition: nil),
+            .project(target: "DomainKit", path: "../Frameworks/DomainKit/", status: .required, condition: nil),
+            .project(target: "DataKit", path: "../Frameworks/DataKit/", status: .required, condition: nil),
+            .external(name: "ZeroNetwork", condition: nil),
+            .external(name: "ZeroCoreKit", condition: nil),
+            .external(name: "ZeroDesignKit", condition: nil),
+            .target(name: "JapaneseDictionaryWidget")
         ],
         infoPlist: infoPlist,
         resources: ["Resources/**"],
@@ -43,16 +37,21 @@ func targets() -> [Target] {
         withUnitTest: true
     )
     
-//    target += Target.create(
-//        name: "JapaneseDictionaryWidget",
-//        product: .appExtension,
-//        destination: .iOS,
-//        dependencies: [],
-//        infoPlist: ["NSExtension": ["NSExtensionPointIdentifier": "com.apple.widgetkit-extension"]],
-//        sources: ["JapaneseDictionaryWidget/**"],
-//        deploymentTargets: .iOS("18.0"),
-//        withUnitTest: false
-//    )
+    target += Target.create(
+        name: "JapaneseDictionaryWidget",
+        product: .appExtension,
+        destination: .iOS,
+        dependencies: [
+            .project(target: "SwiftUIApps", path: "../Frameworks/SwiftUIApps/", status: .required, condition: nil),
+            .project(target: "DomainKit", path: "../Frameworks/DomainKit/", status: .required, condition: nil),
+            .project(target: "DataKit", path: "../Frameworks/DataKit/", status: .required, condition: nil),
+            .external(name: "ZeroDesignKit", condition: nil),
+        ],
+        infoPlist: ["NSExtension": ["NSExtensionPointIdentifier": "com.apple.widgetkit-extension"]],
+        sources: ["JapaneseDictionaryWidget/**"],
+        deploymentTargets: .iOS("18.0"),
+        withUnitTest: false
+    )
     return target
 }
 

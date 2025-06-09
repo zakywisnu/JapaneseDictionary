@@ -17,6 +17,7 @@ extension Target {
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
         deploymentTargets: DeploymentTargets? = nil,
+        entitlements: Entitlements? = nil,
         withUnitTest: Bool = true
     ) -> [Target] {
         return self.project(
@@ -41,6 +42,7 @@ extension Target {
         sources: SourceFilesList = [],
         resources: ResourceFileElements? = nil,
         deploymentTargets: DeploymentTargets? = nil,
+        entitlements: Entitlements? = nil,
         withUnitTest: Bool = true
     ) -> [Target] {
         var projects: [Target] = []
@@ -54,6 +56,7 @@ extension Target {
             infoPlist: .extendingDefault(with: infoPlist),
             sources: sources,
             resources: resources,
+            entitlements: entitlements,
             dependencies: dependencies
         )
         
@@ -65,6 +68,7 @@ extension Target {
             deploymentTargets: deploymentTargets,
             infoPlist: .default,
             sources: "Tests/**",
+            entitlements: entitlements,
             dependencies: [
                 .target(
                     name: "\(name)"

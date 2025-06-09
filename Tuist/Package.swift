@@ -23,7 +23,7 @@ let package = Package(
         // .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
         // You can read more about dependencies here: https://docs.tuist.io/documentation/tuist/dependencies
         .package(url: "https://github.com/zakywisnu/ZeroNetwork.git", branch: "main"),
-        .package(url: "https://github.com/zakywisnu/ZeroCoreKit.git", branch: "main"),
-        .package(url: "https://github.com/zakywisnu/ZeroDesignKit.git", branch: "main"),
+        .package(url: "https://github.com/zakywisnu/ZeroCoreKit.git", branch: "0.0.3"),
+        .package(url: "https://github.com/zakywisnu/ZeroDesignKit.git", branch: "0.0.16")
     ]
 )

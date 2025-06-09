@@ -3,18 +3,40 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14D10C9D51774F705B0309E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E98C8B899C9AC66197D32 /* ContentView.swift */; };
+		0114B90C97452D98D5298106 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 522CEAFB23F2A45EE5455F96 /* DataKit.framework */; };
+		0B0CCA99ECF277BCE0F2AC3B /* ZeroNetwork.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1408F4E0A3597059B3682988 /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; };
+		15E003765DF380AD47C0D9D6 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */; };
+		16BD3E5AA1E7994551A0493C /* SwiftUIApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C6B8F674395786644F742 /* SwiftUIApps.framework */; };
 		1C632CAC4585848F17383858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F74FBB853D848ED8BB2C521F /* Assets.xcassets */; };
 		20EECE5128FB1BA677698762 /* TuistBundle+JapaneseDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35002B47D04D955A139CF73B /* TuistBundle+JapaneseDictionary.swift */; };
 		498A0094C89CA74E8DB092E9 /* TuistAssets+JapaneseDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98451216A085F44D06DB72FE /* TuistAssets+JapaneseDictionary.swift */; };
+		4C2CD6435067CB009D10C0FF /* ZeroCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D97932232A712085D91408C /* ZeroCoreKit.xcframework */; };
+		4DC57B027035F15EDBFF9F16 /* SwiftUIApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C6B8F674395786644F742 /* SwiftUIApps.framework */; };
+		5074CBF99C1B1F175DB5F79B /* ZeroDesignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; };
+		58353B50572B9C54E6A154FC /* ZeroDesignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; };
+		5DEE951EFF648CFF1A5C675D /* JapaneseDictionaryWidgetControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991DDD04FCEC73433FFFB4BB /* JapaneseDictionaryWidgetControl.swift */; };
+		601907C6697CA4A13E06322D /* JapaneseDictionaryWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61798763C2979FC77F8C19BF /* JapaneseDictionaryWidgetBundle.swift */; };
 		6E3E01AF8AC940730030B3D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 760A4FBA55AD0A55A5525E29 /* Preview Assets.xcassets */; };
+		77C128B2495FF24196B0916E /* SwiftUIApps.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C6B8F674395786644F742 /* SwiftUIApps.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83BB01BC22226078A2426011 /* JapaneseDictionaryWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8F986648695123497ECCB15B /* JapaneseDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C7452F814E30800B674460 /* JapaneseDictionaryTests.swift */; };
+		9256EC7C1AA3920A53B129BC /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 522CEAFB23F2A45EE5455F96 /* DataKit.framework */; };
 		95405C6F3E6B833AAF5E14FE /* JapaneseDictionaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4B35F56CCBA1C8E660829 /* JapaneseDictionaryApp.swift */; };
-		9C09EF7F141E1D60FD2122FA /* JapaneseDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C14B102BB9A81B4D6EFBDD /* JapaneseDictionary.swift */; };
+		9E3B880B4EEBABB9B107E77C /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B88165AEF5D087375F60096 /* AppIntent.swift */; };
+		A713F1E7CD117A5C6C16AE8B /* JapaneseDictionaryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CD3905A1B45C693F21366 /* JapaneseDictionaryWidget.swift */; };
+		A7F7D2FDC49E5018B9912D8D /* CoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A96148C54A92DEA682DB585F /* ZeroDesignKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B98E43991183F173A9706D59 /* ZeroNetwork.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */; };
+		C678257D2AAFE82388232283 /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; };
+		CD43D1DAF6885D101429EA82 /* DataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 522CEAFB23F2A45EE5455F96 /* DataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EB3A3AF79E70425115F658 /* DomainKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FAA72C30C07768B985544BFC /* ZeroCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D97932232A712085D91408C /* ZeroCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFAE064E4E2D40AD1EB60803 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D878CE5353AFC71370418CDB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,15 +47,49 @@
 			remoteGlobalIDString = 4EEB658363219CF57FE978F1;
 			remoteInfo = JapaneseDictionary;
 		};
+		6C2280E553B11B6FB7BFC9C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F443BF3634C344D9EF33D8FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCB9B92D2EE885993ECADCCB;
+			remoteInfo = JapaneseDictionaryWidget;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		09C52E0671155C7123C32FD9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27EDB0FE774405801C32B08B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 13;
+			files = (
+				83BB01BC22226078A2426011 /* JapaneseDictionaryWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F67A49D63CF9A034EB471B50 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A7F7D2FDC49E5018B9912D8D /* CoreKit.framework in Embed Frameworks */,
+				CD43D1DAF6885D101429EA82 /* DataKit.framework in Embed Frameworks */,
+				D9EB3A3AF79E70425115F658 /* DomainKit.framework in Embed Frameworks */,
+				77C128B2495FF24196B0916E /* SwiftUIApps.framework in Embed Frameworks */,
+				A96148C54A92DEA682DB585F /* ZeroDesignKit.framework in Embed Frameworks */,
+				FAA72C30C07768B985544BFC /* ZeroCoreKit.xcframework in Embed Frameworks */,
+				0B0CCA99ECF277BCE0F2AC3B /* ZeroNetwork.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,21 +107,44 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01C14B102BB9A81B4D6EFBDD /* JapaneseDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionary.swift; sourceTree = "<group>"; };
+		0978AE7163E1FAD3D48E87AF /* JapaneseDictionaryWidget-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JapaneseDictionaryWidget-Info.plist"; sourceTree = "<group>"; };
 		2CB4B35F56CCBA1C8E660829 /* JapaneseDictionaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryApp.swift; sourceTree = "<group>"; };
 		2E801138EDEA26BDC15CC571 /* JapaneseDictionary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JapaneseDictionary-Info.plist"; sourceTree = "<group>"; };
 		35002B47D04D955A139CF73B /* TuistBundle+JapaneseDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+JapaneseDictionary.swift"; sourceTree = "<group>"; };
 		47F5EC381B686D3CBCFBDC8E /* JapaneseDictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JapaneseDictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D97932232A712085D91408C /* ZeroCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroCoreKit.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff/ZeroCoreKit.xcframework; sourceTree = "<absolute>"; };
+		522CEAFB23F2A45EE5455F96 /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JapaneseDictionaryWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		61798763C2979FC77F8C19BF /* JapaneseDictionaryWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidgetBundle.swift; sourceTree = "<group>"; };
 		760A4FBA55AD0A55A5525E29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		871E98C8B899C9AC66197D32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8B88165AEF5D087375F60096 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroNetwork.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373/ZeroNetwork.xcframework; sourceTree = "<absolute>"; };
 		98451216A085F44D06DB72FE /* TuistAssets+JapaneseDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+JapaneseDictionary.swift"; sourceTree = "<group>"; };
+		991DDD04FCEC73433FFFB4BB /* JapaneseDictionaryWidgetControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidgetControl.swift; sourceTree = "<group>"; };
 		9A4C66D16210CF7160C17C41 /* JapaneseDictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JapaneseDictionaryTests-Info.plist"; sourceTree = "<group>"; };
+		BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroDesignKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DomainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D878CE5353AFC71370418CDB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E80CD3905A1B45C693F21366 /* JapaneseDictionaryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidget.swift; sourceTree = "<group>"; };
 		E8C7452F814E30800B674460 /* JapaneseDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryTests.swift; sourceTree = "<group>"; };
+		ED6C6B8F674395786644F742 /* SwiftUIApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUIApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F74FBB853D848ED8BB2C521F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBE973249BEB1C0E30430BAB /* JapaneseDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		33852027B50408E4B7AE8B56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0114B90C97452D98D5298106 /* DataKit.framework in Frameworks */,
+				C678257D2AAFE82388232283 /* DomainKit.framework in Frameworks */,
+				16BD3E5AA1E7994551A0493C /* SwiftUIApps.framework in Frameworks */,
+				58353B50572B9C54E6A154FC /* ZeroDesignKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B267DC38FA3217EC1DFEBAB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,12 +156,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E003765DF380AD47C0D9D6 /* CoreKit.framework in Frameworks */,
+				9256EC7C1AA3920A53B129BC /* DataKit.framework in Frameworks */,
+				1408F4E0A3597059B3682988 /* DomainKit.framework in Frameworks */,
+				4DC57B027035F15EDBFF9F16 /* SwiftUIApps.framework in Frameworks */,
+				5074CBF99C1B1F175DB5F79B /* ZeroDesignKit.framework in Frameworks */,
+				4C2CD6435067CB009D10C0FF /* ZeroCoreKit.xcframework in Frameworks */,
+				B98E43991183F173A9706D59 /* ZeroNetwork.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DB2615DA6A7E8214FB7F456 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8B88165AEF5D087375F60096 /* AppIntent.swift */,
+				E80CD3905A1B45C693F21366 /* JapaneseDictionaryWidget.swift */,
+				61798763C2979FC77F8C19BF /* JapaneseDictionaryWidgetBundle.swift */,
+				991DDD04FCEC73433FFFB4BB /* JapaneseDictionaryWidgetControl.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		1F0F0A42B9973BB158F39AEE /* JapaneseDictionaryWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1DB2615DA6A7E8214FB7F456 /* Sources */,
+			);
+			path = JapaneseDictionaryWidget;
+			sourceTree = "<group>";
+		};
 		253BFF12DFA960B8B0190266 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +202,7 @@
 			children = (
 				7FC8E0C44040D4AA3928E3E9 /* Preview Content */,
 				F74FBB853D848ED8BB2C521F /* Assets.xcassets */,
+				D878CE5353AFC71370418CDB /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -106,6 +212,7 @@
 			children = (
 				7238C506047A4278E3C6DB78 /* Project */,
 				C46A06826A7C01D404B912DB /* Products */,
+				DAE131D61AD4CB207170148B /* Cache */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				8385EF4F7F405D87A9E3479C /* Derived */,
+				1F0F0A42B9973BB158F39AEE /* JapaneseDictionaryWidget */,
 				277BA0D58FECEAF2B8D771B2 /* Resources */,
 				EC5DB4DED0EC82998DD69F9B /* Sources */,
 				E766FBE340DF249DB76AD6C8 /* Tests */,
@@ -142,6 +250,7 @@
 			children = (
 				2E801138EDEA26BDC15CC571 /* JapaneseDictionary-Info.plist */,
 				9A4C66D16210CF7160C17C41 /* JapaneseDictionaryTests-Info.plist */,
+				0978AE7163E1FAD3D48E87AF /* JapaneseDictionaryWidget-Info.plist */,
 			);
 			path = InfoPlists;
 			sourceTree = "<group>";
@@ -149,10 +258,25 @@
 		C46A06826A7C01D404B912DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */,
+				522CEAFB23F2A45EE5455F96 /* DataKit.framework */,
+				C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */,
 				FBE973249BEB1C0E30430BAB /* JapaneseDictionary.app */,
 				47F5EC381B686D3CBCFBDC8E /* JapaneseDictionaryTests.xctest */,
+				5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */,
+				ED6C6B8F674395786644F742 /* SwiftUIApps.framework */,
+				BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DAE131D61AD4CB207170148B /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				4D97932232A712085D91408C /* ZeroCoreKit.xcframework */,
+				94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		E766FBE340DF249DB76AD6C8 /* Tests */ = {
@@ -166,8 +290,6 @@
 		EC5DB4DED0EC82998DD69F9B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				871E98C8B899C9AC66197D32 /* ContentView.swift */,
-				01C14B102BB9A81B4D6EFBDD /* JapaneseDictionary.swift */,
 				2CB4B35F56CCBA1C8E660829 /* JapaneseDictionaryApp.swift */,
 			);
 			path = Sources;
@@ -182,12 +304,14 @@
 			buildPhases = (
 				B9D56FB0E4CFD4ED1AF1B594 /* Sources */,
 				31498A2DE6A29623D88AD7AD /* Resources */,
+				27EDB0FE774405801C32B08B /* Embed Foundation Extensions */,
 				F6D852B12084CE2BE59E6FD5 /* Frameworks */,
 				F67A49D63CF9A034EB471B50 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				94D7F1B823389AD0CF51BDE2 /* PBXTargetDependency */,
 			);
 			name = JapaneseDictionary;
 			packageProductDependencies = (
@@ -217,6 +341,26 @@
 			productReference = 47F5EC381B686D3CBCFBDC8E /* JapaneseDictionaryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BCB9B92D2EE885993ECADCCB /* JapaneseDictionaryWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3CA3C7187FB2D34FD1DC07 /* Build configuration list for PBXNativeTarget "JapaneseDictionaryWidget" */;
+			buildPhases = (
+				3ABB7BF526F313C5B0976AAC /* Sources */,
+				E93BF1DB260FAA74C4EDD5D1 /* Resources */,
+				33852027B50408E4B7AE8B56 /* Frameworks */,
+				09C52E0671155C7123C32FD9 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JapaneseDictionaryWidget;
+			packageProductDependencies = (
+			);
+			productName = JapaneseDictionaryWidget;
+			productReference = 5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -245,6 +389,7 @@
 			targets = (
 				4EEB658363219CF57FE978F1 /* JapaneseDictionary */,
 				B495F89238915F0695FE0F2C /* JapaneseDictionaryTests */,
+				BCB9B92D2EE885993ECADCCB /* JapaneseDictionaryWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -262,7 +407,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C632CAC4585848F17383858 /* Assets.xcassets in Resources */,
+				FFAE064E4E2D40AD1EB60803 /* LaunchScreen.storyboard in Resources */,
 				6E3E01AF8AC940730030B3D5 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E93BF1DB260FAA74C4EDD5D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,14 +430,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3ABB7BF526F313C5B0976AAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E3B880B4EEBABB9B107E77C /* AppIntent.swift in Sources */,
+				A713F1E7CD117A5C6C16AE8B /* JapaneseDictionaryWidget.swift in Sources */,
+				601907C6697CA4A13E06322D /* JapaneseDictionaryWidgetBundle.swift in Sources */,
+				5DEE951EFF648CFF1A5C675D /* JapaneseDictionaryWidgetControl.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B9D56FB0E4CFD4ED1AF1B594 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				498A0094C89CA74E8DB092E9 /* TuistAssets+JapaneseDictionary.swift in Sources */,
 				20EECE5128FB1BA677698762 /* TuistBundle+JapaneseDictionary.swift in Sources */,
-				14D10C9D51774F705B0309E4 /* ContentView.swift in Sources */,
-				9C09EF7F141E1D60FD2122FA /* JapaneseDictionary.swift in Sources */,
 				95405C6F3E6B833AAF5E14FE /* JapaneseDictionaryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,9 +460,41 @@
 			target = 4EEB658363219CF57FE978F1 /* JapaneseDictionary */;
 			targetProxy = 548D18F141C904BC951964A3 /* PBXContainerItemProxy */;
 		};
+		94D7F1B823389AD0CF51BDE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JapaneseDictionaryWidget;
+			target = BCB9B92D2EE885993ECADCCB /* JapaneseDictionaryWidget */;
+			targetProxy = 6C2280E553B11B6FB7BFC9C1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		01BEF19F690FFFC0457ABAF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryWidget-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionary.JapaneseDictionaryWidget;
+				PRODUCT_NAME = JapaneseDictionaryWidget;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		0CA1BDD0A904198C612C62EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -360,12 +554,44 @@
 			};
 			name = Debug;
 		};
+		5E418F4D2D1DA61959446950 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryWidget-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionary.JapaneseDictionaryWidget;
+				PRODUCT_NAME = JapaneseDictionaryWidget;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6F6C36BDB809AE55827AA657 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
+					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
+				);
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -430,10 +656,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -447,8 +670,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
+					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
+				);
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,10 +691,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -542,6 +769,15 @@
 			buildConfigurations = (
 				A5C0787B8259B172E13D269F /* Debug */,
 				87FFB0BF3A6437FAA11AE64C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3CA3C7187FB2D34FD1DC07 /* Build configuration list for PBXNativeTarget "JapaneseDictionaryWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01BEF19F690FFFC0457ABAF3 /* Debug */,
+				5E418F4D2D1DA61959446950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

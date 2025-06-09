@@ -7,10 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D15575A7E2516F010264583 /* VocabDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3AD9E40AF44264D7FDE6C0 /* VocabDataModel.swift */; };
-		5FF6D3F1A4A5B52208BC8228 /* KanjiDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2AB4F5531D4E0C53E63BD /* KanjiDataModel.swift */; };
-		71EF2970551DDFE63F9EEB8C /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9A7F68060061C2401D2C03 /* CoreKit.framework */; };
-		9BE024B8AF1B8E9C150B249C /* DomainKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A78DF04D7452DC5260ACC /* DomainKit.swift */; };
+		1F459A7B907EA211C7A3A65D /* GetAllKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */; };
+		242CF9BEFE87A869124DA52C /* InstructionShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B96F47C639B9096050498F /* InstructionShape.swift */; };
+		3F2648112CB78C173072FCEF /* UpdateKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73551AF4758164C298AEECBA /* UpdateKotobaUseCase.swift */; };
+		574A66D6999A1FE03805C86F /* GetWordsProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C39837DA9C0326522F1EB7 /* GetWordsProgressUseCase.swift */; };
+		5DE8BC33C9E536E53875CC87 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B61A335EF18A298EA9E57C /* Spotlight.swift */; };
+		67F85A613785C61439C971E1 /* GetKanjiDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */; };
+		816C8683135AB3F7E9B2936C /* UpdateProgressUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */; };
+		8631C4AC3AB6983B600B6A3E /* CoachmarkExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB91A76AD923CEA49D0846 /* CoachmarkExampleView.swift */; };
+		8AF8423673BE38C4FD88B819 /* AddKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83A18C3D057529AD8686F8E /* AddKotobaUseCase.swift */; };
+		90BD892F4F17EC07D1682A49 /* UpdateWordsProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */; };
+		91F2E1634E5996FD8EDFB8CC /* CoachmarkBoundsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB434BC3081595ECA550FD1 /* CoachmarkBoundsKey.swift */; };
+		97261E0B107E85DA6F8D6E16 /* GetAllKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071615F2DF3A6CC4A8CD62D /* GetAllKotobaUseCase.swift */; };
+		9742A2641DA4F5B494F91693 /* GetKanjiDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D21B0B0CA105ED42EB76E /* GetKanjiDetailUseCase.swift */; };
+		9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */; };
+		AF19C214C830F8E5BEB95003 /* GetKotobaDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */; };
+		B0B8D42172B4FA18B99E1BCA /* DeleteKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */; };
+		D46611E90EF085A3519D17E7 /* SpotlightBoundsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E8F362C709CFFBB6A46ECC /* SpotlightBoundsKey.swift */; };
+		DF6B54F43BED24A8D4D7E358 /* UpdateKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */; };
+		E3A18540009F4257C2D666BB /* CoachmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28C181057DAF5C93FF61B3 /* CoachmarkView.swift */; };
+		E84F3B2C9B11AAD7633A5FFC /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BB86EFCCE3EB19685E0DD8 /* DataKit.framework */; };
+		F0F05127479E2FFA49FCB139 /* GetKotobaDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */; };
+		FFA612976E12CD4F166F0F31 /* AddKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B9BA6310A23F16C5788BF8 /* AddKanjiUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,12 +45,30 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1F3AD9E40AF44264D7FDE6C0 /* VocabDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabDataModel.swift; sourceTree = "<group>"; };
+		0071615F2DF3A6CC4A8CD62D /* GetAllKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKotobaUseCase.swift; sourceTree = "<group>"; };
+		0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKanjiUseCase.swift; sourceTree = "<group>"; };
+		1A28C181057DAF5C93FF61B3 /* CoachmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachmarkView.swift; sourceTree = "<group>"; };
+		22B61A335EF18A298EA9E57C /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
+		289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKanjiUseCase.swift; sourceTree = "<group>"; };
+		2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDataUseCase.swift; sourceTree = "<group>"; };
 		41D7C3680CD7590740228CA6 /* DomainKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DomainKit-Info.plist"; sourceTree = "<group>"; };
-		536A78DF04D7452DC5260ACC /* DomainKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainKit.swift; sourceTree = "<group>"; };
-		AEE2AB4F5531D4E0C53E63BD /* KanjiDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiDataModel.swift; sourceTree = "<group>"; };
+		73551AF4758164C298AEECBA /* UpdateKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKotobaUseCase.swift; sourceTree = "<group>"; };
+		750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProgressUserDefaults.swift; sourceTree = "<group>"; };
+		78B9BA6310A23F16C5788BF8 /* AddKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKanjiUseCase.swift; sourceTree = "<group>"; };
+		7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiDataUseCase.swift; sourceTree = "<group>"; };
+		7FBB91A76AD923CEA49D0846 /* CoachmarkExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachmarkExampleView.swift; sourceTree = "<group>"; };
+		8DB434BC3081595ECA550FD1 /* CoachmarkBoundsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachmarkBoundsKey.swift; sourceTree = "<group>"; };
+		942D21B0B0CA105ED42EB76E /* GetKanjiDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiDetailUseCase.swift; sourceTree = "<group>"; };
+		A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKotobaUseCase.swift; sourceTree = "<group>"; };
+		A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWordsProgressUseCase.swift; sourceTree = "<group>"; };
+		C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKanjiUseCase.swift; sourceTree = "<group>"; };
+		D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDetailUseCase.swift; sourceTree = "<group>"; };
 		DD64E77F305A0797D38EC789 /* DomainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DomainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED9A7F68060061C2401D2C03 /* CoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2C39837DA9C0326522F1EB7 /* GetWordsProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWordsProgressUseCase.swift; sourceTree = "<group>"; };
+		E4E8F362C709CFFBB6A46ECC /* SpotlightBoundsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightBoundsKey.swift; sourceTree = "<group>"; };
+		E83A18C3D057529AD8686F8E /* AddKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKotobaUseCase.swift; sourceTree = "<group>"; };
+		F1BB86EFCCE3EB19685E0DD8 /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9B96F47C639B9096050498F /* InstructionShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71EF2970551DDFE63F9EEB8C /* CoreKit.framework in Frameworks */,
+				E84F3B2C9B11AAD7633A5FFC /* DataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +89,25 @@
 				D56D161954FBD5B47D4E2CCD /* Project */,
 				DEC69AB8D5F55D9FCF67A47E /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		08FDEF940AFF91990ECC2355 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F98FADF682A60E77D949A26E /* Coachmarks */,
+				DBA301B217C614DF6FD83FE7 /* Spotlight */,
+				F9B96F47C639B9096050498F /* InstructionShape.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		26CD0AC5B8F6066720AD1D10 /* Vocab */ = {
+			isa = PBXGroup;
+			children = (
+				7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */,
+				2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */,
+			);
+			path = Vocab;
 			sourceTree = "<group>";
 		};
 		5DEE19FAE97EAAC34D702A88 /* InfoPlists */ = {
@@ -74,19 +129,21 @@
 		AB0E4ACB98106CB0A1FC0D01 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CE0DC4982D03B24A9463FD8C /* SwiftDataModel */,
-				536A78DF04D7452DC5260ACC /* DomainKit.swift */,
+				08FDEF940AFF91990ECC2355 /* Components */,
+				B1D325C5B0D1CAE56EEF1071 /* UseCase */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		CE0DC4982D03B24A9463FD8C /* SwiftDataModel */ = {
+		B1D325C5B0D1CAE56EEF1071 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				AEE2AB4F5531D4E0C53E63BD /* KanjiDataModel.swift */,
-				1F3AD9E40AF44264D7FDE6C0 /* VocabDataModel.swift */,
+				E252F0ED4DE0A5EFC0B50A97 /* Kanji */,
+				F08EE253117E2E2AB98AD720 /* Kotoba */,
+				26CD0AC5B8F6066720AD1D10 /* Vocab */,
+				E99C85AFDB17CD737E694663 /* WordsProgress */,
 			);
-			path = SwiftDataModel;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		D56D161954FBD5B47D4E2CCD /* Project */ = {
@@ -98,13 +155,66 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		DBA301B217C614DF6FD83FE7 /* Spotlight */ = {
+			isa = PBXGroup;
+			children = (
+				22B61A335EF18A298EA9E57C /* Spotlight.swift */,
+				E4E8F362C709CFFBB6A46ECC /* SpotlightBoundsKey.swift */,
+			);
+			path = Spotlight;
+			sourceTree = "<group>";
+		};
 		DEC69AB8D5F55D9FCF67A47E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED9A7F68060061C2401D2C03 /* CoreKit.framework */,
+				F1BB86EFCCE3EB19685E0DD8 /* DataKit.framework */,
 				DD64E77F305A0797D38EC789 /* DomainKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E252F0ED4DE0A5EFC0B50A97 /* Kanji */ = {
+			isa = PBXGroup;
+			children = (
+				78B9BA6310A23F16C5788BF8 /* AddKanjiUseCase.swift */,
+				C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */,
+				289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */,
+				942D21B0B0CA105ED42EB76E /* GetKanjiDetailUseCase.swift */,
+				0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */,
+			);
+			path = Kanji;
+			sourceTree = "<group>";
+		};
+		E99C85AFDB17CD737E694663 /* WordsProgress */ = {
+			isa = PBXGroup;
+			children = (
+				E2C39837DA9C0326522F1EB7 /* GetWordsProgressUseCase.swift */,
+				750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */,
+				A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */,
+			);
+			path = WordsProgress;
+			sourceTree = "<group>";
+		};
+		F08EE253117E2E2AB98AD720 /* Kotoba */ = {
+			isa = PBXGroup;
+			children = (
+				E83A18C3D057529AD8686F8E /* AddKotobaUseCase.swift */,
+				A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */,
+				0071615F2DF3A6CC4A8CD62D /* GetAllKotobaUseCase.swift */,
+				D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */,
+				73551AF4758164C298AEECBA /* UpdateKotobaUseCase.swift */,
+			);
+			path = Kotoba;
+			sourceTree = "<group>";
+		};
+		F98FADF682A60E77D949A26E /* Coachmarks */ = {
+			isa = PBXGroup;
+			children = (
+				8DB434BC3081595ECA550FD1 /* CoachmarkBoundsKey.swift */,
+				7FBB91A76AD923CEA49D0846 /* CoachmarkExampleView.swift */,
+				1A28C181057DAF5C93FF61B3 /* CoachmarkView.swift */,
+			);
+			path = Coachmarks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +247,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 68490CBBBE14752559C56A81 /* Build configuration list for PBXProject "DomainKit" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -171,9 +283,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BE024B8AF1B8E9C150B249C /* DomainKit.swift in Sources */,
-				5FF6D3F1A4A5B52208BC8228 /* KanjiDataModel.swift in Sources */,
-				5D15575A7E2516F010264583 /* VocabDataModel.swift in Sources */,
+				91F2E1634E5996FD8EDFB8CC /* CoachmarkBoundsKey.swift in Sources */,
+				8631C4AC3AB6983B600B6A3E /* CoachmarkExampleView.swift in Sources */,
+				E3A18540009F4257C2D666BB /* CoachmarkView.swift in Sources */,
+				242CF9BEFE87A869124DA52C /* InstructionShape.swift in Sources */,
+				5DE8BC33C9E536E53875CC87 /* Spotlight.swift in Sources */,
+				D46611E90EF085A3519D17E7 /* SpotlightBoundsKey.swift in Sources */,
+				FFA612976E12CD4F166F0F31 /* AddKanjiUseCase.swift in Sources */,
+				9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */,
+				1F459A7B907EA211C7A3A65D /* GetAllKanjiUseCase.swift in Sources */,
+				9742A2641DA4F5B494F91693 /* GetKanjiDetailUseCase.swift in Sources */,
+				DF6B54F43BED24A8D4D7E358 /* UpdateKanjiUseCase.swift in Sources */,
+				8AF8423673BE38C4FD88B819 /* AddKotobaUseCase.swift in Sources */,
+				B0B8D42172B4FA18B99E1BCA /* DeleteKotobaUseCase.swift in Sources */,
+				97261E0B107E85DA6F8D6E16 /* GetAllKotobaUseCase.swift in Sources */,
+				AF19C214C830F8E5BEB95003 /* GetKotobaDetailUseCase.swift in Sources */,
+				3F2648112CB78C173072FCEF /* UpdateKotobaUseCase.swift in Sources */,
+				67F85A613785C61439C971E1 /* GetKanjiDataUseCase.swift in Sources */,
+				F0F05127479E2FFA49FCB139 /* GetKotobaDataUseCase.swift in Sources */,
+				574A66D6999A1FE03805C86F /* GetWordsProgressUseCase.swift in Sources */,
+				816C8683135AB3F7E9B2936C /* UpdateProgressUserDefaults.swift in Sources */,
+				90BD892F4F17EC07D1682A49 /* UpdateWordsProgressUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

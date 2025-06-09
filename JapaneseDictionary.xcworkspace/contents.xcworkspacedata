@@ -8,6 +8,9 @@
          location = "group:CoreKit/CoreKit.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:DataKit/DataKit.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:DomainKit/DomainKit.xcodeproj">
       </FileRef>
       <FileRef
@@ -17,4 +20,11 @@
    <FileRef
       location = "group:JapaneseDictionary/JapaneseDictionary.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Dependencies">
+      <FileRef
+         location = "group:Tuist/.build/tuist-derived/ZeroDesignKit/ZeroDesignKit.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

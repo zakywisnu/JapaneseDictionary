@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E393218AC554AA93DAEF11C /* CSVReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E117358F63CB3BF1DBB472CF /* CSVReader.swift */; };
 		114150C3BA018C914EDDE766 /* ZeroCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE5D87D065B4486BAB8170E /* ZeroCoreKit.xcframework */; };
+		1CBBEE46225AF7CE82228226 /* CSVMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1EAE9A8B39F80BFED5104D /* CSVMappable.swift */; };
+		484229420033CEE102C21609 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7365399CDB12DF562B66AB /* CSVParser.swift */; };
 		4B9930007C98C2E55E57AACE /* ZeroNetwork.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E5F6CEC7784496E903A3DE /* ZeroNetwork.xcframework */; };
-		4F79AD49043B5C768C3DFBDF /* kanji_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = C092FE07076A6D9D2B702C93 /* kanji_data.csv */; };
-		5B9B29CDAA69B9E6EC3D1A67 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AD4FFBF3CE122101E210F /* SwiftData.swift */; };
-		810A1DDC71440CEC5DC8E11A /* TuistBundle+CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A37761E0186A35F25F9AAE0 /* TuistBundle+CoreKit.swift */; };
-		8E29318F1548B80760CF2E09 /* jlpt_vocab.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9223D834836313E3436BAB07 /* jlpt_vocab.csv */; };
-		D3D9F0D0989FA6D12CED0B0A /* CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC974E5DCB78384B9D719D5 /* CoreKit.swift */; };
+		62A26C61ADF057F6CAD40C68 /* CSVMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866058DEFC17AD7A1FD81CF /* CSVMapper.swift */; };
+		7A78C4DB2FDD3460E9BBC40D /* DefaultCSVReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D496B3F072139DCFE0E87 /* DefaultCSVReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,14 +31,14 @@
 
 /* Begin PBXFileReference section */
 		0AF1AC8D03B8C8961347014F /* CoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FC974E5DCB78384B9D719D5 /* CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreKit.swift; sourceTree = "<group>"; };
-		3A37761E0186A35F25F9AAE0 /* TuistBundle+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CoreKit.swift"; sourceTree = "<group>"; };
+		4866058DEFC17AD7A1FD81CF /* CSVMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMapper.swift; sourceTree = "<group>"; };
 		58E5F6CEC7784496E903A3DE /* ZeroNetwork.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroNetwork.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373/ZeroNetwork.xcframework; sourceTree = "<absolute>"; };
-		9223D834836313E3436BAB07 /* jlpt_vocab.csv */ = {isa = PBXFileReference; path = jlpt_vocab.csv; sourceTree = "<group>"; };
+		612D496B3F072139DCFE0E87 /* DefaultCSVReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCSVReader.swift; sourceTree = "<group>"; };
 		A4AE7F18209B2880C9736A37 /* CoreKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreKit-Info.plist"; sourceTree = "<group>"; };
-		C092FE07076A6D9D2B702C93 /* kanji_data.csv */ = {isa = PBXFileReference; path = kanji_data.csv; sourceTree = "<group>"; };
-		C12AD4FFBF3CE122101E210F /* SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
-		EDE5D87D065B4486BAB8170E /* ZeroCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroCoreKit.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/f74b4e5bc62b2b61fb91e45b830356fb/ZeroCoreKit.xcframework; sourceTree = "<absolute>"; };
+		E117358F63CB3BF1DBB472CF /* CSVReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVReader.swift; sourceTree = "<group>"; };
+		EA7365399CDB12DF562B66AB /* CSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
+		EB1EAE9A8B39F80BFED5104D /* CSVMappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMappable.swift; sourceTree = "<group>"; };
+		EDE5D87D065B4486BAB8170E /* ZeroCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroCoreKit.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff/ZeroCoreKit.xcframework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B9930007C98C2E55E57AACE /* ZeroNetwork.xcframework in Frameworks */,
 				114150C3BA018C914EDDE766 /* ZeroCoreKit.xcframework in Frameworks */,
+				4B9930007C98C2E55E57AACE /* ZeroNetwork.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,34 +58,27 @@
 			isa = PBXGroup;
 			children = (
 				6A35745B88D25A32CFBB851A /* Derived */,
-				4008B90B2B07778568FBE4D0 /* Resources */,
 				CDF1B14A4D2526DB59B0B7CF /* Sources */,
 			);
 			name = Project;
 			sourceTree = "<group>";
 		};
-		4008B90B2B07778568FBE4D0 /* Resources */ = {
+		5CEDADEA24AFBE85FDA5B4E8 /* CSVReader */ = {
 			isa = PBXGroup;
 			children = (
-				9223D834836313E3436BAB07 /* jlpt_vocab.csv */,
-				C092FE07076A6D9D2B702C93 /* kanji_data.csv */,
+				EB1EAE9A8B39F80BFED5104D /* CSVMappable.swift */,
+				4866058DEFC17AD7A1FD81CF /* CSVMapper.swift */,
+				EA7365399CDB12DF562B66AB /* CSVParser.swift */,
+				E117358F63CB3BF1DBB472CF /* CSVReader.swift */,
+				612D496B3F072139DCFE0E87 /* DefaultCSVReader.swift */,
 			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		68DB6FFC744BB125101A08AA /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				3A37761E0186A35F25F9AAE0 /* TuistBundle+CoreKit.swift */,
-			);
-			path = Sources;
+			path = CSVReader;
 			sourceTree = "<group>";
 		};
 		6A35745B88D25A32CFBB851A /* Derived */ = {
 			isa = PBXGroup;
 			children = (
 				AF737AE82EAD4732759F28A0 /* InfoPlists */,
-				68DB6FFC744BB125101A08AA /* Sources */,
 			);
 			path = Derived;
 			sourceTree = "<group>";
@@ -116,19 +109,10 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		C64523DA417A11927B0944DC /* SwiftData */ = {
-			isa = PBXGroup;
-			children = (
-				C12AD4FFBF3CE122101E210F /* SwiftData.swift */,
-			);
-			path = SwiftData;
-			sourceTree = "<group>";
-		};
 		CDF1B14A4D2526DB59B0B7CF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C64523DA417A11927B0944DC /* SwiftData */,
-				1FC974E5DCB78384B9D719D5 /* CoreKit.swift */,
+				5CEDADEA24AFBE85FDA5B4E8 /* CSVReader */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -171,6 +155,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = D8FC987517002C0F6AD061BF /* Build configuration list for PBXProject "CoreKit" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -195,8 +181,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E29318F1548B80760CF2E09 /* jlpt_vocab.csv in Resources */,
-				4F79AD49043B5C768C3DFBDF /* kanji_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,9 +191,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				810A1DDC71440CEC5DC8E11A /* TuistBundle+CoreKit.swift in Sources */,
-				D3D9F0D0989FA6D12CED0B0A /* CoreKit.swift in Sources */,
-				5B9B29CDAA69B9E6EC3D1A67 /* SwiftData.swift in Sources */,
+				1CBBEE46225AF7CE82228226 /* CSVMappable.swift in Sources */,
+				62A26C61ADF057F6CAD40C68 /* CSVMapper.swift in Sources */,
+				484229420033CEE102C21609 /* CSVParser.swift in Sources */,
+				0E393218AC554AA93DAEF11C /* CSVReader.swift in Sources */,
+				7A78C4DB2FDD3460E9BBC40D /* DefaultCSVReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +213,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
 					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
-					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/f74b4e5bc62b2b61fb91e45b830356fb",
 				);
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -318,8 +304,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
 					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
-					"$(SRCROOT)/../../../../../../../.cache/tuist/Binaries/f74b4e5bc62b2b61fb91e45b830356fb",
 				);
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

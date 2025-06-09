@@ -7,8 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6453AA4778A8717A987F09E5 /* SwiftUIApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC4161AAADE151D88485493 /* SwiftUIApps.swift */; };
+		0B8FC4DB3B38200AB0FBA6C8 /* ZeroDesignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC91C35EC7FCD9F2A7959011 /* ZeroDesignKit.framework */; };
+		0DB2B9C839187730E7B6D584 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26FC2AD53E33BC00EB86606 /* ProfileView.swift */; };
+		18E6297952ED5B7A943BE47B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871360D5A4FB627279F34843 /* DetailViewModel.swift */; };
+		1DD0152E88D9B9C707149C71 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B819C4DA7966B1BCC8202C /* OnboardingModel.swift */; };
+		28B2DF8EE105981E5F80D6C3 /* DetailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD586A4D98613053F196A62 /* DetailComposer.swift */; };
+		2DD1A6F480FADDC3D7D89B3F /* KotobaWordsCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00961DCF5D3842C9F4C2D78B /* KotobaWordsCollectionViewModel.swift */; };
+		30899176AEE550B84352B326 /* AppSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7E1A19E4466937FA7EDEB /* AppSplashScreen.swift */; };
+		422D5887C4B65AA7981FE754 /* Kotoba.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B07D61FF3669B8089CCAE /* Kotoba.swift */; };
+		4A383590E659A9613E5F6848 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9BCE673AF1B5F9910CC8 /* DetailView.swift */; };
+		5A0D540BA90181D9D7C7747C /* AppRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0455B3C371119E7972927 /* AppRoutes.swift */; };
+		5CC8EA294884FD7018838344 /* AppTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A005AA09C7FB0FB363EA9 /* AppTabs.swift */; };
+		636842B84D56BDFB783353B1 /* KanjiWordsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A441312AB004B64389AA3D /* KanjiWordsCollectionView.swift */; };
+		653DA36151485DB5CC2F9841 /* WordsProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D0A12D1EB0F2498BAB4DFC /* WordsProgress.swift */; };
+		6B9D8CA56370ED6F59D634AC /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7126D06B542930D77AE488 /* RouterView.swift */; };
+		6BC543E02344A21E4C9E1C6C /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD45FC13CA07845F3436278 /* DashboardView.swift */; };
+		76C2F939C8E7ABDF0C860501 /* WordsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC980E56C2DDFF03F805420 /* WordsCollectionView.swift */; };
+		7B27F9D157463632AAEC9CEB /* Kanji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC84304D34A169E8DC6DF85 /* Kanji.swift */; };
+		81B5D390471709AFBC5AA13B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4C6C949132A982351E3479 /* HomeView.swift */; };
+		883AC46D953FD261A3426BF4 /* WordsCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD5FEB385C0CCB7C52DCA7 /* WordsCollectionViewModel.swift */; };
+		8D835D82EEC1903E27AA42E5 /* KotobaWordsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0678BB87734B6D56D1633 /* KotobaWordsCollectionView.swift */; };
+		8EFE2192BC9F6119177E45F5 /* WordsCollectionViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCA2E67A61A468428D19A52 /* WordsCollectionViewPager.swift */; };
+		93D09555D583F1955F080A6C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4886385B820BFD3408F6C84 /* HomeViewModel.swift */; };
+		A6FCD90BDB11D7A6165FE8F3 /* AppsOnboardingComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78AC1087D801EEE8E6658EC /* AppsOnboardingComposer.swift */; };
+		B195C46B534D67B20962D7F9 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B075D6A93FB2EC1AA4943 /* AppRouter.swift */; };
+		B691590F89841BDF7A238E82 /* HomeKotobaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB4A8563248609B2C2D16 /* HomeKotobaView.swift */; };
+		BF98AA28E679A61FE3AA692A /* AppComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402194BEE69F5DCB174AD337 /* AppComposer.swift */; };
+		D873029FAE54B44D51D78EF7 /* HomeKanjiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D756CE53CACD9EC93D72B0 /* HomeKanjiViewModel.swift */; };
+		D8C2F5CFB6F6AB0B09FB70BD /* AppsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C886BE16E384D46CAE2C66 /* AppsOnboardingView.swift */; };
+		D9DB387ECEAFA2711E2F0B60 /* HomeKotobaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC641CB2C333014E505EAA0 /* HomeKotobaViewModel.swift */; };
+		DDC569BCB521DFC4311BB425 /* ViewPagerTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E889CA08A6B62E8EA2784 /* ViewPagerTabs.swift */; };
+		E5D5F34B5D061EEF25B06CED /* HomeKanjiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2DBE83D474FA121B011B2 /* HomeKanjiView.swift */; };
+		F480E4592353206512A5CB44 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932BFAB4676390D5D9135482 /* ProfileViewModel.swift */; };
+		F52B162203348BD2EBD78645 /* KanjiWordsCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D5BF526A1F65E67CAC7B2 /* KanjiWordsCollectionViewModel.swift */; };
 		F7F0F4DFC5A9DE658B777937 /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9754CB3227C150EECA4B1A /* DomainKit.framework */; };
+		FFF57E81C9FA2160A2DFAA72 /* ProfileComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD15AE860A52F9C68D9A56 /* ProfileComposer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +58,43 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00961DCF5D3842C9F4C2D78B /* KotobaWordsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaWordsCollectionViewModel.swift; sourceTree = "<group>"; };
+		06D756CE53CACD9EC93D72B0 /* HomeKanjiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKanjiViewModel.swift; sourceTree = "<group>"; };
+		0B4B07D61FF3669B8089CCAE /* Kotoba.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kotoba.swift; sourceTree = "<group>"; };
+		1CC641CB2C333014E505EAA0 /* HomeKotobaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKotobaViewModel.swift; sourceTree = "<group>"; };
+		29CD15AE860A52F9C68D9A56 /* ProfileComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposer.swift; sourceTree = "<group>"; };
+		2CD586A4D98613053F196A62 /* DetailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailComposer.swift; sourceTree = "<group>"; };
+		402194BEE69F5DCB174AD337 /* AppComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComposer.swift; sourceTree = "<group>"; };
+		443D5BF526A1F65E67CAC7B2 /* KanjiWordsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiWordsCollectionViewModel.swift; sourceTree = "<group>"; };
+		44B819C4DA7966B1BCC8202C /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		44C0678BB87734B6D56D1633 /* KotobaWordsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaWordsCollectionView.swift; sourceTree = "<group>"; };
+		472F9BCE673AF1B5F9910CC8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		501A005AA09C7FB0FB363EA9 /* AppTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabs.swift; sourceTree = "<group>"; };
+		5BC84304D34A169E8DC6DF85 /* Kanji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kanji.swift; sourceTree = "<group>"; };
+		6AB7E1A19E4466937FA7EDEB /* AppSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSplashScreen.swift; sourceTree = "<group>"; };
 		6F9754CB3227C150EECA4B1A /* DomainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DomainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		871360D5A4FB627279F34843 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		932BFAB4676390D5D9135482 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		93D0A12D1EB0F2498BAB4DFC /* WordsProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsProgress.swift; sourceTree = "<group>"; };
+		A3A441312AB004B64389AA3D /* KanjiWordsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiWordsCollectionView.swift; sourceTree = "<group>"; };
+		AC91C35EC7FCD9F2A7959011 /* ZeroDesignKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroDesignKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADB0455B3C371119E7972927 /* AppRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoutes.swift; sourceTree = "<group>"; };
+		B26FC2AD53E33BC00EB86606 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B4886385B820BFD3408F6C84 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B8CD5FEB385C0CCB7C52DCA7 /* WordsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCollectionViewModel.swift; sourceTree = "<group>"; };
 		C15A3514B14271BAF7F1ECF2 /* SwiftUIApps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUIApps-Info.plist"; sourceTree = "<group>"; };
+		D2C2DBE83D474FA121B011B2 /* HomeKanjiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKanjiView.swift; sourceTree = "<group>"; };
+		D78AC1087D801EEE8E6658EC /* AppsOnboardingComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsOnboardingComposer.swift; sourceTree = "<group>"; };
+		DA2FB4A8563248609B2C2D16 /* HomeKotobaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKotobaView.swift; sourceTree = "<group>"; };
+		DD7126D06B542930D77AE488 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
+		E2C886BE16E384D46CAE2C66 /* AppsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsOnboardingView.swift; sourceTree = "<group>"; };
+		ECD45FC13CA07845F3436278 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		F47E889CA08A6B62E8EA2784 /* ViewPagerTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerTabs.swift; sourceTree = "<group>"; };
 		F6742001A6CF8BA673F59032 /* SwiftUIApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUIApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDC4161AAADE151D88485493 /* SwiftUIApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIApps.swift; sourceTree = "<group>"; };
+		F78B075D6A93FB2EC1AA4943 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		FCC980E56C2DDFF03F805420 /* WordsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCollectionView.swift; sourceTree = "<group>"; };
+		FE4C6C949132A982351E3479 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FFCA2E67A61A468428D19A52 /* WordsCollectionViewPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCollectionViewPager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7F0F4DFC5A9DE658B777937 /* DomainKit.framework in Frameworks */,
+				0B8FC4DB3B38200AB0FBA6C8 /* ZeroDesignKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,12 +119,107 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		14791CCFBFD3A8C21324DF35 /* ViewPager */ = {
+			isa = PBXGroup;
+			children = (
+				FFCA2E67A61A468428D19A52 /* WordsCollectionViewPager.swift */,
+			);
+			path = ViewPager;
+			sourceTree = "<group>";
+		};
+		4CB1ECB33BAB3C1BF75C03B6 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				2CD586A4D98613053F196A62 /* DetailComposer.swift */,
+				472F9BCE673AF1B5F9910CC8 /* DetailView.swift */,
+				871360D5A4FB627279F34843 /* DetailViewModel.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		4FA5BBBAD72A25EF7314F699 /* KanjiView */ = {
+			isa = PBXGroup;
+			children = (
+				D2C2DBE83D474FA121B011B2 /* HomeKanjiView.swift */,
+				06D756CE53CACD9EC93D72B0 /* HomeKanjiViewModel.swift */,
+			);
+			path = KanjiView;
+			sourceTree = "<group>";
+		};
 		58029AD8ED89B68947D92162 /* Derived */ = {
 			isa = PBXGroup;
 			children = (
 				F2020090CFB9F561F35B529D /* InfoPlists */,
 			);
 			path = Derived;
+			sourceTree = "<group>";
+		};
+		5BD080A2E00A9EA8A8975D10 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D78AC1087D801EEE8E6658EC /* AppsOnboardingComposer.swift */,
+				E2C886BE16E384D46CAE2C66 /* AppsOnboardingView.swift */,
+				44B819C4DA7966B1BCC8202C /* OnboardingModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		5EF4E045EC204AB1937C0AD2 /* Kotoba */ = {
+			isa = PBXGroup;
+			children = (
+				44C0678BB87734B6D56D1633 /* KotobaWordsCollectionView.swift */,
+				00961DCF5D3842C9F4C2D78B /* KotobaWordsCollectionViewModel.swift */,
+			);
+			path = Kotoba;
+			sourceTree = "<group>";
+		};
+		6EEAAAA51C95434B711B5BE0 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6AB7E1A19E4466937FA7EDEB /* AppSplashScreen.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		7858A2B4315B4B0C5E0BF452 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				501A005AA09C7FB0FB363EA9 /* AppTabs.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		7B4B25C1D17082B0CDE5D350 /* Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				7CF2C97A4EEE511794A99FEF /* Composer */,
+				A908F7A01AAFBC995536E88E /* Dashboard */,
+				4CB1ECB33BAB3C1BF75C03B6 /* Details */,
+				B275DC75D0F5F511B47F0383 /* Home */,
+				5BD080A2E00A9EA8A8975D10 /* Onboarding */,
+				E4DC5A18BFD88B1113F9EF54 /* Profile */,
+				6EEAAAA51C95434B711B5BE0 /* SplashScreen */,
+				9BABCAD26C2A1C0722627C78 /* WordsCollection */,
+			);
+			path = Presentations;
+			sourceTree = "<group>";
+		};
+		7CF2C97A4EEE511794A99FEF /* Composer */ = {
+			isa = PBXGroup;
+			children = (
+				402194BEE69F5DCB174AD337 /* AppComposer.swift */,
+			);
+			path = Composer;
+			sourceTree = "<group>";
+		};
+		7F546DB9C8F8EF896BA229E8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DE4A29D47F668D288DCFEECC /* Kanji */,
+				5EF4E045EC204AB1937C0AD2 /* Kotoba */,
+				14791CCFBFD3A8C21324DF35 /* ViewPager */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		84D19EF7DE880D122CF99879 = {
@@ -68,21 +230,111 @@
 			);
 			sourceTree = "<group>";
 		};
+		9BABCAD26C2A1C0722627C78 /* WordsCollection */ = {
+			isa = PBXGroup;
+			children = (
+				7F546DB9C8F8EF896BA229E8 /* Components */,
+				FCC980E56C2DDFF03F805420 /* WordsCollectionView.swift */,
+				B8CD5FEB385C0CCB7C52DCA7 /* WordsCollectionViewModel.swift */,
+			);
+			path = WordsCollection;
+			sourceTree = "<group>";
+		};
+		A908F7A01AAFBC995536E88E /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				7858A2B4315B4B0C5E0BF452 /* Tabs */,
+				ECD45FC13CA07845F3436278 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		B275DC75D0F5F511B47F0383 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CF13C170483890AAA690DE24 /* Components */,
+				FE4C6C949132A982351E3479 /* HomeView.swift */,
+				B4886385B820BFD3408F6C84 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		B8E76F3C41286296C26038DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				6F9754CB3227C150EECA4B1A /* DomainKit.framework */,
 				F6742001A6CF8BA673F59032 /* SwiftUIApps.framework */,
+				AC91C35EC7FCD9F2A7959011 /* ZeroDesignKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BFD65FFC2CA14F248AFEBC13 /* KotobaView */ = {
+			isa = PBXGroup;
+			children = (
+				DA2FB4A8563248609B2C2D16 /* HomeKotobaView.swift */,
+				1CC641CB2C333014E505EAA0 /* HomeKotobaViewModel.swift */,
+			);
+			path = KotobaView;
 			sourceTree = "<group>";
 		};
 		C2EB47424B6E0EBA9ADD8028 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FDC4161AAADE151D88485493 /* SwiftUIApps.swift */,
+				E802A32FDDB5B25A3C162EE1 /* Model */,
+				7B4B25C1D17082B0CDE5D350 /* Presentations */,
+				E4B29FBDCEBF2C53F3DBB98B /* Router */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		CF13C170483890AAA690DE24 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4FA5BBBAD72A25EF7314F699 /* KanjiView */,
+				BFD65FFC2CA14F248AFEBC13 /* KotobaView */,
+				F47E889CA08A6B62E8EA2784 /* ViewPagerTabs.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		DE4A29D47F668D288DCFEECC /* Kanji */ = {
+			isa = PBXGroup;
+			children = (
+				A3A441312AB004B64389AA3D /* KanjiWordsCollectionView.swift */,
+				443D5BF526A1F65E67CAC7B2 /* KanjiWordsCollectionViewModel.swift */,
+			);
+			path = Kanji;
+			sourceTree = "<group>";
+		};
+		E4B29FBDCEBF2C53F3DBB98B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				F78B075D6A93FB2EC1AA4943 /* AppRouter.swift */,
+				ADB0455B3C371119E7972927 /* AppRoutes.swift */,
+				DD7126D06B542930D77AE488 /* RouterView.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		E4DC5A18BFD88B1113F9EF54 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				29CD15AE860A52F9C68D9A56 /* ProfileComposer.swift */,
+				B26FC2AD53E33BC00EB86606 /* ProfileView.swift */,
+				932BFAB4676390D5D9135482 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E802A32FDDB5B25A3C162EE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5BC84304D34A169E8DC6DF85 /* Kanji.swift */,
+				0B4B07D61FF3669B8089CCAE /* Kotoba.swift */,
+				93D0A12D1EB0F2498BAB4DFC /* WordsProgress.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F2020090CFB9F561F35B529D /* InfoPlists */ = {
@@ -123,6 +375,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = ED6C1DA5DAF8EFE65E1B9166 /* Build configuration list for PBXProject "SwiftUIApps" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -157,7 +411,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6453AA4778A8717A987F09E5 /* SwiftUIApps.swift in Sources */,
+				7B27F9D157463632AAEC9CEB /* Kanji.swift in Sources */,
+				422D5887C4B65AA7981FE754 /* Kotoba.swift in Sources */,
+				653DA36151485DB5CC2F9841 /* WordsProgress.swift in Sources */,
+				BF98AA28E679A61FE3AA692A /* AppComposer.swift in Sources */,
+				6BC543E02344A21E4C9E1C6C /* DashboardView.swift in Sources */,
+				5CC8EA294884FD7018838344 /* AppTabs.swift in Sources */,
+				28B2DF8EE105981E5F80D6C3 /* DetailComposer.swift in Sources */,
+				4A383590E659A9613E5F6848 /* DetailView.swift in Sources */,
+				18E6297952ED5B7A943BE47B /* DetailViewModel.swift in Sources */,
+				E5D5F34B5D061EEF25B06CED /* HomeKanjiView.swift in Sources */,
+				D873029FAE54B44D51D78EF7 /* HomeKanjiViewModel.swift in Sources */,
+				B691590F89841BDF7A238E82 /* HomeKotobaView.swift in Sources */,
+				D9DB387ECEAFA2711E2F0B60 /* HomeKotobaViewModel.swift in Sources */,
+				DDC569BCB521DFC4311BB425 /* ViewPagerTabs.swift in Sources */,
+				81B5D390471709AFBC5AA13B /* HomeView.swift in Sources */,
+				93D09555D583F1955F080A6C /* HomeViewModel.swift in Sources */,
+				A6FCD90BDB11D7A6165FE8F3 /* AppsOnboardingComposer.swift in Sources */,
+				D8C2F5CFB6F6AB0B09FB70BD /* AppsOnboardingView.swift in Sources */,
+				1DD0152E88D9B9C707149C71 /* OnboardingModel.swift in Sources */,
+				FFF57E81C9FA2160A2DFAA72 /* ProfileComposer.swift in Sources */,
+				0DB2B9C839187730E7B6D584 /* ProfileView.swift in Sources */,
+				F480E4592353206512A5CB44 /* ProfileViewModel.swift in Sources */,
+				30899176AEE550B84352B326 /* AppSplashScreen.swift in Sources */,
+				636842B84D56BDFB783353B1 /* KanjiWordsCollectionView.swift in Sources */,
+				F52B162203348BD2EBD78645 /* KanjiWordsCollectionViewModel.swift in Sources */,
+				8D835D82EEC1903E27AA42E5 /* KotobaWordsCollectionView.swift in Sources */,
+				2DD1A6F480FADDC3D7D89B3F /* KotobaWordsCollectionViewModel.swift in Sources */,
+				8EFE2192BC9F6119177E45F5 /* WordsCollectionViewPager.swift in Sources */,
+				76C2F939C8E7ABDF0C860501 /* WordsCollectionView.swift in Sources */,
+				883AC46D953FD261A3426BF4 /* WordsCollectionViewModel.swift in Sources */,
+				B195C46B534D67B20962D7F9 /* AppRouter.swift in Sources */,
+				5A0D540BA90181D9D7C7747C /* AppRoutes.swift in Sources */,
+				6B9D8CA56370ED6F59D634AC /* RouterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

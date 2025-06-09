@@ -11,7 +11,6 @@ func targets() -> [Target] {
             .external(name: "ZeroNetwork", condition: nil),
             .external(name: "ZeroCoreKit", condition: nil)
         ],
-        resources: ["Resources/**"],
         deploymentTargets: .iOS("18.0"),
         withUnitTest: false
     )

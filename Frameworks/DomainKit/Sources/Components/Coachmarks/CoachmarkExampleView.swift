@@ -37,7 +37,9 @@ struct CoachmarkExampleView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
         .background(DefaultColors.background.opacity(0.4))
-        .addCoachmarkOverlay(show: $showCoachmark, currentSpot: $currentSpot)
+        .addCoachmarkOverlay(show: $showCoachmark, currentSpot: $currentSpot) {
+            
+        }
     }
     
     static func setCoachmarkSteps() -> [CoachmarkStep] {

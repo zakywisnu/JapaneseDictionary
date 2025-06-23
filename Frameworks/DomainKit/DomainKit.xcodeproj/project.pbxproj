@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */; };
 		AF19C214C830F8E5BEB95003 /* GetKotobaDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */; };
 		B0B8D42172B4FA18B99E1BCA /* DeleteKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */; };
+		B459FDAE2E091B120005B95B /* GetKanjiWaniKaniUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459FDAD2E091B120005B95B /* GetKanjiWaniKaniUseCase.swift */; };
 		D46611E90EF085A3519D17E7 /* SpotlightBoundsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E8F362C709CFFBB6A46ECC /* SpotlightBoundsKey.swift */; };
 		DF6B54F43BED24A8D4D7E358 /* UpdateKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */; };
 		E3A18540009F4257C2D666BB /* CoachmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28C181057DAF5C93FF61B3 /* CoachmarkView.swift */; };
@@ -61,6 +62,7 @@
 		942D21B0B0CA105ED42EB76E /* GetKanjiDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiDetailUseCase.swift; sourceTree = "<group>"; };
 		A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKotobaUseCase.swift; sourceTree = "<group>"; };
 		A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWordsProgressUseCase.swift; sourceTree = "<group>"; };
+		B459FDAD2E091B120005B95B /* GetKanjiWaniKaniUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiWaniKaniUseCase.swift; sourceTree = "<group>"; };
 		C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKanjiUseCase.swift; sourceTree = "<group>"; };
 		D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDetailUseCase.swift; sourceTree = "<group>"; };
 		DD64E77F305A0797D38EC789 /* DomainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DomainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +106,7 @@
 		26CD0AC5B8F6066720AD1D10 /* Vocab */ = {
 			isa = PBXGroup;
 			children = (
+				B459FDAD2E091B120005B95B /* GetKanjiWaniKaniUseCase.swift */,
 				7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */,
 				2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */,
 			);
@@ -247,8 +250,6 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 68490CBBBE14752559C56A81 /* Build configuration list for PBXProject "DomainKit" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -288,6 +289,7 @@
 				E3A18540009F4257C2D666BB /* CoachmarkView.swift in Sources */,
 				242CF9BEFE87A869124DA52C /* InstructionShape.swift in Sources */,
 				5DE8BC33C9E536E53875CC87 /* Spotlight.swift in Sources */,
+				B459FDAE2E091B120005B95B /* GetKanjiWaniKaniUseCase.swift in Sources */,
 				D46611E90EF085A3519D17E7 /* SpotlightBoundsKey.swift in Sources */,
 				FFA612976E12CD4F166F0F31 /* AddKanjiUseCase.swift in Sources */,
 				9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */,
@@ -479,10 +481,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

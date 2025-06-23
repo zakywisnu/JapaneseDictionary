@@ -12,9 +12,8 @@ import ZeroDesignKit
 
 @Observable
 public final class ProfileViewModel {
-    //    @ObservationIgnored
-    //    @AppStorage("hasShownKanaIntro") var hasShowIntro: Bool = false
-        var hasShowIntro: Bool = false
+    @ObservationIgnored
+    @AppStorage("hasShownProfileIntro") var hasShowIntro: Bool = false
     
     var state: State
     

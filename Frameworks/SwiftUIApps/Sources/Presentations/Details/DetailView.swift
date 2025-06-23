@@ -93,8 +93,6 @@ public struct DetailView: View {
             composeSectionLists("Onyomi", content: kanji.onyomi)
             composeSectionLists("Kunyomi", content: kanji.kunyomi)
             composeSectionLists("Meanings", content: kanji.meanings)
-            composeSections("Japanese Example", content: kanji.jpExample)
-            composeSections("English Example", content: kanji.enExample)
         }
         .padding(16)
         .background(.white)

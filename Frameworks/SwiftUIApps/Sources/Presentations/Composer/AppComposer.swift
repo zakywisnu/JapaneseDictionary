@@ -36,7 +36,7 @@ public final class AppComposer {
             getAllKotobaUseCase: DefaultGetAllKotobaUseCase(repository: repository.kotobaRepository),
             getKotobaDetailUseCase: DefaultGetKotobaDetailUseCase(repository: repository.kotobaRepository),
             updateKotobaUseCase: DefaultUpdateKotobaUseCase(repository: repository.kotobaRepository),
-            getKanjiDataUseCase: DefaultGetKanjiDataUseCase(repository: repository.vocabRepository),
+            getKanjiDataUseCase: DefaultGetKanjiWaniKaniUseCase(repository: repository.vocabRepository),
             getKotobaDataUseCase: DefaultGetKotobaUseCase(repository: repository.vocabRepository)
         )
     }

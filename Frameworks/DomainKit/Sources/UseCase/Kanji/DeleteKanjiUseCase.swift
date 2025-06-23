@@ -27,7 +27,8 @@ public struct DefaultDeleteKanjiUseCase: DeleteKanjiUseCase {
     public func execute(param: KanjiParam) throws {
         try kanjiRepository.delete(id: param.id)
         let progress = try wordsProgressRepository.getProgress()
-        progress.kanjiProgress = param.addedIndex
+        progress.kanjiIndex = param.addedIndex
+        progress.kanjiProgress = progress.kanjiProgress - 1
         progress.kanjiLevel = .init(
             rawValue: max(
                 WordsProgressModel.Level(rawValue: progress.kotobaLevel.rawValue)?.rawValue ?? "N5",
@@ -48,7 +49,9 @@ extension WordsProgressModel {
             kanjiLevel: .init(rawValue: kanjiLevel.rawValue) ?? .n5,
             kotobaLevel: .init(rawValue: kotobaLevel.rawValue) ?? .n5,
             lastKotobaUpdated: lastKotobaUpdated,
-            lastKanjiUpdated: lastKanjiUpdated
+            lastKanjiUpdated: lastKanjiUpdated,
+            kanjiIndex: kanjiIndex,
+            kotobaIndex: kotobaIndex
         )
     }
 }

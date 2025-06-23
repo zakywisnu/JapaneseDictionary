@@ -19,8 +19,6 @@ public final class KanjiDataModel: Identifiable, CSVMappable {
     public var kunyomi: [ArrayString]
     public var jlptLevel: Level
     public var meanings: [ArrayString]
-    public var jpExample: String
-    public var enExample: String
     public var dateAdded: Date?
     public var addedIndex: Int?
     
@@ -32,8 +30,6 @@ public final class KanjiDataModel: Identifiable, CSVMappable {
         kunyomi: [ArrayString],
         jlptLevel: Level,
         meanings: [ArrayString],
-        jpExample: String,
-        enExample: String,
         dateAdded: Date?,
         addedIndex: Int?
     ) {
@@ -44,8 +40,6 @@ public final class KanjiDataModel: Identifiable, CSVMappable {
         self.kunyomi = kunyomi
         self.jlptLevel = jlptLevel
         self.meanings = meanings
-        self.jpExample = jpExample
-        self.enExample = enExample
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
     }
@@ -63,8 +57,6 @@ public final class KanjiDataModel: Identifiable, CSVMappable {
             level = Int(doubleLevel)
         }
         let meanings = Self.parseArray(csvRow[6])
-        let jpExample = csvRow[7]
-        let enExample = csvRow[8]
         
         let jlptLevel = Level(rawValue: "N\(level)") ?? .n5
         
@@ -76,8 +68,6 @@ public final class KanjiDataModel: Identifiable, CSVMappable {
             kunyomi: kunyomi.map { ArrayString(value: $0) },
             jlptLevel: jlptLevel,
             meanings: meanings.map { ArrayString(value: $0) },
-            jpExample: jpExample,
-            enExample: enExample,
             dateAdded: nil,
             addedIndex: nil
         )

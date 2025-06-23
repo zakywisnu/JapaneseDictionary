@@ -17,8 +17,6 @@ public struct Kanji: Hashable {
     public var kunyomi: [String]
     public var jlptLevel: Level
     public var meanings: [String]
-    public var jpExample: String
-    public var enExample: String
     public var dateAdded: Date?
     public var addedIndex: Int?
     
@@ -39,8 +37,6 @@ public struct Kanji: Hashable {
             kunyomi: kunyomi,
             jlptLevel: .init(rawValue: jlptLevel.rawValue) ?? .n5,
             meanings: meanings,
-            jpExample: jpExample,
-            enExample: enExample,
             dateAdded: dateAdded ?? Date(),
             addedIndex: addedIndex ?? 0
         )
@@ -57,8 +53,6 @@ extension KanjiDataModel {
             kunyomi: kunyomi.map { $0.value },
             jlptLevel: .init(rawValue: jlptLevel.rawValue) ?? .n5,
             meanings: meanings.map { $0.value },
-            jpExample: jpExample,
-            enExample: enExample,
             dateAdded: dateAdded,
             addedIndex: addedIndex
         )

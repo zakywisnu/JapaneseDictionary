@@ -53,6 +53,9 @@ struct KanjiWordsCollectionView: View {
         ScrollView(.vertical) {
             ForEach(viewModel.state.currentKanjis.prefix(30), id: \.id) { kanji in
                 kanjiCardView(kanji)
+                    .onTapGesture {
+                        router.push(.detail(.init(kotoba: nil, kanji: kanji)), hideNavBar: true)
+                    }
                     .swipeActions {
                         SwipeAction(
                             symbolImage: "trash.fill",

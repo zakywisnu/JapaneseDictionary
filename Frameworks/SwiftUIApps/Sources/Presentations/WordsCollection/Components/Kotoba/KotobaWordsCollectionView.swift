@@ -22,6 +22,25 @@ struct KotobaWordsCollectionView: View {
             case .loaded:
                 if viewModel.state.currentKotobas.isEmpty {
                     emptyView()
+                        .addCoachmark(
+                            0,
+                            with: .init(
+                                shape: .rounded,
+                                title: .init(
+                                    text: "Collections of words",
+                                    font: .caption,
+                                    fontWeight: .bold,
+                                    foreground: .black
+                                ),
+                                description: .init(
+                                    text: "All of your words collection progress will be here",
+                                    font: .caption2,
+                                    fontWeight: .semibold,
+                                    foreground: .black
+                                ),
+                                radius: 4
+                            )
+                        )
                 } else {
                     loadedContent()
                 }
@@ -53,6 +72,9 @@ struct KotobaWordsCollectionView: View {
         ScrollView(.vertical) {
             ForEach(viewModel.state.currentKotobas.prefix(30), id: \.id) { kotoba in
                 kanaCardView(kotoba)
+                    .onTapGesture {
+                        router.push(.detail(.init(kotoba: kotoba, kanji: nil)), hideNavBar: true)
+                    }
                     .swipeActions {
                         SwipeAction(
                             symbolImage: "trash.fill",

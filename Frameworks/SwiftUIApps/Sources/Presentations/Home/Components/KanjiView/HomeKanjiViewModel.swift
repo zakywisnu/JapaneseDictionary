@@ -65,7 +65,8 @@ extension HomeKanjiViewModel {
     private func fetchAllKanji() {
         do {
             let result = try getKanjiDataUseCase.execute()
-                .mapToDomain().sorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
+                .mapToDomain()
+                .sorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
             state.allKanjis = result
         } catch {
             print("all kanji error: ", error)
@@ -153,20 +154,20 @@ extension HomeKanjiViewModel {
             kunyomi: kanji.kunyomi,
             jlptLevel: .init(rawValue: kanji.jlptLevel.rawValue) ?? .n5,
             meanings: kanji.meanings,
-            jpExample: kanji.jpExample,
-            enExample: kanji.enExample,
             dateAdded: Date(),
             addedIndex: progressIndex
         )
         let level: WordsProgressParam.Level = .init(rawValue: min(progress.getKanjiProgress, WordsProgressParam.Level(rawValue: kanji.jlptLevel.rawValue)?.rawValue ?? "N5")) ?? .n5
         let progressParam: WordsProgressParam = .init(
             id: progress.id,
-            kanjiProgress: progressIndex + 1,
+            kanjiProgress: progress.kanjiProgress + 1,
             kotobaProgress: progress.kotobaProgress,
             kanjiLevel: level,
             kotobaLevel: .init(rawValue: progress.kotobaLevel.rawValue) ?? .n5,
             lastKotobaUpdated: progress.lastKotobaUpdated,
-            lastKanjiUpdated: Date()
+            lastKanjiUpdated: Date(),
+            kanjiIndex: progressIndex + 1,
+            kotobaIndex: progress.kotobaIndex
         )
         
         return (kanjiParam, progressParam)
@@ -174,11 +175,11 @@ extension HomeKanjiViewModel {
     
     private func fetchNextKanji() -> (Kanji?, Int) {
         guard let progress = state.progress else {
-            return (nil, state.progress?.kanjiProgress ?? 0)
+            return (nil, state.progress?.kanjiIndex ?? 0)
         }
-        let firstIndex = progress.kanjiProgress
+        let firstIndex = progress.kanjiIndex
         var kanji: Kanji?
-        var latestIndex: Int = progress.kanjiProgress
+        var latestIndex: Int = progress.kanjiIndex
         /// check if the next words/kotoba isn't already added in the current collection
         /// if it's already added then proceed next
         for index in firstIndex..<state.allKanjis.count {

@@ -16,6 +16,8 @@ public struct WordsProgressParam: Codable {
     public var kotobaLevel: Level
     public var lastKotobaUpdated: Date
     public var lastKanjiUpdated: Date
+    public var kanjiIndex: Int
+    public var kotobaIndex: Int
     
     public init(
         id: String,
@@ -24,7 +26,9 @@ public struct WordsProgressParam: Codable {
         kanjiLevel: Level,
         kotobaLevel: Level,
         lastKotobaUpdated: Date,
-        lastKanjiUpdated: Date
+        lastKanjiUpdated: Date,
+        kanjiIndex: Int,
+        kotobaIndex: Int
     ) {
         self.id = id
         self.kanjiProgress = kanjiProgress
@@ -33,6 +37,8 @@ public struct WordsProgressParam: Codable {
         self.kotobaLevel = kotobaLevel
         self.lastKotobaUpdated = lastKotobaUpdated
         self.lastKanjiUpdated = lastKanjiUpdated
+        self.kotobaIndex = kotobaIndex
+        self.kanjiIndex = kanjiIndex
     }
     
     public enum Level: String, Codable {
@@ -67,6 +73,8 @@ public struct WordsProgressParam: Codable {
             kotobaProgress: kotobaProgress,
             kanjiLevel: .init(rawValue: kanjiLevel.rawValue) ?? .n5,
             kotobaLevel: .init(rawValue: kotobaLevel.rawValue) ?? .n5,
+            kanjiIndex: kanjiIndex,
+            kotobaIndex: kotobaIndex,
             lastKotobaUpdated: lastKotobaUpdated,
             lastKanjiUpdated: lastKanjiUpdated
         )

@@ -23,7 +23,8 @@ public struct DefaultDeleteKotobaUseCase: DeleteKotobaUseCase {
     public func execute(kotoba: KotobaParam) throws {
         try kotobaRepository.delete(id: kotoba.id)
         let progress = try wordsProgressRepository.getProgress()
-        progress.kotobaProgress = kotoba.addedIndex
+        progress.kotobaProgress = progress.kotobaProgress - 1
+        progress.kotobaIndex = kotoba.addedIndex
         progress.kotobaLevel = .init(
             rawValue: max(
                 WordsProgressModel.Level(rawValue: progress.kotobaLevel.rawValue)?.rawValue ?? "N5",

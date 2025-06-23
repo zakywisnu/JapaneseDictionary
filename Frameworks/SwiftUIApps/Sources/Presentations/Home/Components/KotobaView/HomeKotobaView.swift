@@ -107,7 +107,24 @@ struct HomeKotobaView: View {
             AsyncButtonView(config: viewModel.state.config) { @MainActor in
                 try? await viewModel.send(.didTapAddKotoba)
             }
-            .addSpotlight(1, shape: .circle, roundedRadius: 16, text: "Adding Words")
+            .addCoachmark(
+                1,
+                with: .init(
+                    title: .init(
+                        text: "Add Words",
+                        font: .caption,
+                        fontWeight: .bold,
+                        foreground: .black
+                    ),
+                    description: .init(
+                        text: "Tap here to add your first kana!",
+                        font: .caption2,
+                        fontWeight: .semibold,
+                        foreground: .black
+                    ),
+                    radius: 16
+                )
+            )
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)

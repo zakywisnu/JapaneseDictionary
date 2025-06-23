@@ -33,6 +33,8 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
                 kotobaProgress: 0,
                 kanjiLevel: .n5,
                 kotobaLevel: .n5,
+                kanjiIndex: 0,
+                kotobaIndex: 0,
                 lastKotobaUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
                 lastKanjiUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
             )
@@ -59,6 +61,8 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
             data.kotobaProgress = progress.kotobaProgress
             data.lastKanjiUpdated = progress.lastKanjiUpdated
             data.lastKotobaUpdated = progress.lastKotobaUpdated
+            data.kanjiIndex = progress.kanjiIndex
+            data.kotobaIndex = progress.kotobaIndex
             try context.save()
         } else {
             throw DataError.dataNotFound

@@ -10,6 +10,9 @@ import SwiftUI
 
 @Observable
 final class WordsCollectionViewModel {
+    @ObservationIgnored
+    @AppStorage("hasShownWordsCollectionIntro") var hasShowIntro: Bool = false
+    
     var state = State()
     
     init(state: WordsCollectionViewModel.State = State()) {
@@ -20,6 +23,14 @@ final class WordsCollectionViewModel {
         switch action {
         case .onRetry:
             state.refreshID = UUID()
+        case .onAppear:
+            Task {
+                try await Task.sleep(for: .seconds(2))
+                if !hasShowIntro {
+                    state.showCoachmark = true
+                }
+                hasShowIntro = true
+            }
         }
     }
 }
@@ -27,11 +38,14 @@ final class WordsCollectionViewModel {
 extension WordsCollectionViewModel {
     struct State {
         var selectedTab: WordsCollectionViewPager? = .kotoba
+        var showCoachmark: Bool = false
+        var currentSpot: Int = 0
         var refreshID = UUID()
     }
     
     enum Action {
         case onRetry
+        case onAppear
     }
 }
 

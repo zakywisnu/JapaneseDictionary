@@ -23,7 +23,6 @@ public struct CoachmarkBoundsKey: PreferenceKey {
     public static func reduce(value: inout [Int : CoachmarkBoundsKeyProperties], nextValue: () -> [Int : CoachmarkBoundsKeyProperties]) {
         value.merge(nextValue()) { $1 }
     }
-    
 }
 
 public struct CoachmarkBoundsKeyProperties {

@@ -10,6 +10,7 @@ import DomainKit
 import ZeroDesignKit
 
 public struct ProfileView: View {
+    @EnvironmentObject var appTabs: AppTabsViewModel
     @State private var viewModel: ProfileViewModel
     
     public init(viewModel: ProfileViewModel) {
@@ -76,7 +77,11 @@ public struct ProfileView: View {
                 viewModel.send(.didLoad)
             }
             .background(DefaultColors.background.opacity(0.4))
-            .addCoachmarkOverlay(show: $viewModel.state.showSpotlight, currentSpot: $viewModel.state.currentSpot)
+            .addCoachmarkOverlay(show: $viewModel.state.showSpotlight, currentSpot: $viewModel.state.currentSpot) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    appTabs.appTab = .home
+                }
+            }
     }
     
     @ViewBuilder

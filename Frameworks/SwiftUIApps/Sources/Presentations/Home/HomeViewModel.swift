@@ -23,11 +23,11 @@ final class HomeViewModel {
     func send(_ action: Action) {
         switch action {
         case .onAppear:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 guard let self else { return }
                 if !self.hasShowIntro {
                     withAnimation(.easeInOut) {
-                        self.state.showSpotlight = true
+                        self.state.showCoachmark = true
                     }
                     self.hasShowIntro = true
                 }
@@ -42,7 +42,7 @@ extension HomeViewModel {
     struct State {
         var selectedTab: ViewPagerTabs? = .kotoba
         var refreshID = UUID()
-        var showSpotlight: Bool = false
+        var showCoachmark: Bool = false
         var currentSpot = 0
     }
     

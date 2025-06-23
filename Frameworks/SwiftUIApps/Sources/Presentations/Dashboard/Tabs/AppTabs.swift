@@ -8,12 +8,20 @@
 import ZeroDesignKit
 import SwiftUI
 
-enum AppTabs: TabItem, CaseIterable {
+public class AppTabsViewModel: ObservableObject {
+    @Published public var appTab: AppTabs = .home
+    
+    public init(appTab: AppTabs) {
+        self.appTab = appTab
+    }
+}
+
+public enum AppTabs: TabItem, CaseIterable {
     case home
     case collection
     case profile
     
-    var title: String {
+    public var title: String {
         switch self {
         case .home:
             "Home"
@@ -24,7 +32,7 @@ enum AppTabs: TabItem, CaseIterable {
         }
     }
     
-    var symbolImage: String {
+    public var symbolImage: String {
         switch self {
         case .home:
             "house"
@@ -35,15 +43,15 @@ enum AppTabs: TabItem, CaseIterable {
         }
     }
     
-    var activeBackgroundColor: Color {
+    public var activeBackgroundColor: Color {
         DefaultColors.primary
     }
     
-    var index: Int {
+    public var index: Int {
         Self.allCases.firstIndex(of: self) ?? 0
     }
     
-    func view() -> some View {
+    public func view() -> some View {
         switch self {
         case .home:
             AppComposer.shared.composeHome()

@@ -18,6 +18,8 @@ public struct WordsProgress: Codable {
     public var kotobaLevel: Level
     public var lastKotobaUpdated: Date
     public var lastKanjiUpdated: Date
+    public var kanjiIndex: Int
+    public var kotobaIndex: Int
     
     public enum Level: String, CaseIterable, Codable {
         case n1 = "N1"
@@ -113,7 +115,9 @@ public extension WordsProgressModel {
             kanjiLevel: .init(rawValue: kanjiLevel.rawValue) ?? .n5,
             kotobaLevel: .init(rawValue: kotobaLevel.rawValue) ?? .n5,
             lastKotobaUpdated: lastKotobaUpdated,
-            lastKanjiUpdated: lastKanjiUpdated
+            lastKanjiUpdated: lastKanjiUpdated,
+            kanjiIndex: kanjiIndex,
+            kotobaIndex: kotobaIndex
         )
     }
 }

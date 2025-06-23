@@ -615,7 +615,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -625,6 +627,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionaryTests;
 				PRODUCT_NAME = JapaneseDictionaryTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -642,7 +645,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8L23V2MRR3;
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -652,6 +657,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionaryTests;
 				PRODUCT_NAME = JapaneseDictionaryTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

@@ -16,8 +16,6 @@ public struct KanjiParam {
     public var kunyomi: [String]
     public var jlptLevel: Level
     public var meanings: [String]
-    public var jpExample: String
-    public var enExample: String
     public var dateAdded: Date
     public var addedIndex: Int
     
@@ -29,8 +27,6 @@ public struct KanjiParam {
         kunyomi: [String],
         jlptLevel: Level,
         meanings: [String],
-        jpExample: String,
-        enExample: String,
         dateAdded: Date,
         addedIndex: Int
     ) {
@@ -41,8 +37,6 @@ public struct KanjiParam {
         self.kunyomi = kunyomi
         self.jlptLevel = jlptLevel
         self.meanings = meanings
-        self.jpExample = jpExample
-        self.enExample = enExample
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
     }
@@ -64,8 +58,6 @@ public struct KanjiParam {
             kunyomi: kunyomi.map { ArrayString(value: $0) },
             jlptLevel: KanjiDataModel.Level(rawValue: jlptLevel.rawValue) ?? .n5,
             meanings: meanings.map { ArrayString(value: $0) },
-            jpExample: jpExample,
-            enExample: enExample,
             dateAdded: dateAdded,
             addedIndex: addedIndex
         )

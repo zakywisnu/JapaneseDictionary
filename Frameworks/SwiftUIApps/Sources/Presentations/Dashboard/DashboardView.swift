@@ -11,9 +11,13 @@ import DomainKit
 
 struct DashboardView: View {
     @EnvironmentObject private var router: AppRouter
-    @State private var activeTab: AppTabs = .home
+    @EnvironmentObject private var activeTab: AppTabsViewModel
+    
     var body: some View {
-        AppTabBar(activeTab: $activeTab)
+        AppTabBar(activeTab: $activeTab.appTab)
+            .onChange(of: activeTab.appTab) { oldValue, newValue in
+                activeTab.appTab = newValue
+            }
     }
 }
 

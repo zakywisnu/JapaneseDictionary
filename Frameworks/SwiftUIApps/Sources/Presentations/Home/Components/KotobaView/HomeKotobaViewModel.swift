@@ -165,11 +165,13 @@ extension HomeKotobaViewModel {
         let progressParam: WordsProgressParam = .init(
             id: progress.id,
             kanjiProgress: progress.kanjiProgress,
-            kotobaProgress: progressIndex + 1,
+            kotobaProgress: progress.kotobaProgress + 1,
             kanjiLevel: .init(rawValue: progress.kanjiLevel.rawValue) ?? .n5,
             kotobaLevel: level,
             lastKotobaUpdated: Date(),
-            lastKanjiUpdated: progress.lastKanjiUpdated
+            lastKanjiUpdated: progress.lastKanjiUpdated,
+            kanjiIndex: progress.kanjiIndex,
+            kotobaIndex: progressIndex + 1
         )
         
         return (kotobaParam, progressParam)
@@ -177,11 +179,11 @@ extension HomeKotobaViewModel {
     
     private func fetchNextKotoba() -> (Kotoba?, Int) {
         guard let progress = state.progress else {
-            return (nil, state.progress?.kotobaProgress ?? 0)
+            return (nil, state.progress?.kotobaIndex ?? 0)
         }
-        let firstIndex = progress.kotobaProgress
+        let firstIndex = progress.kotobaIndex
         var kotoba: Kotoba?
-        var latestIndex: Int = progress.kotobaProgress
+        var latestIndex: Int = progress.kotobaIndex
         /// check if the next words/kotoba isn't already added in the current collection
         /// if it's already added then proceed next
         for index in firstIndex..<state.allKotobas.count {

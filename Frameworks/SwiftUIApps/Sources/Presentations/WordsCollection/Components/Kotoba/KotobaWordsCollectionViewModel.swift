@@ -37,7 +37,6 @@ public class KotobaWordsCollectionViewModel {
             }
         case .didTapDelete:
             state.overlayLoading.toggle()
-            break
         }
     }
 }

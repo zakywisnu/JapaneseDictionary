@@ -27,7 +27,7 @@ public extension View {
     }
     
     @ViewBuilder
-    func addCoachmarkOverlay(show: Binding<Bool>, currentSpot: Binding<Int>) -> some View {
+    func addCoachmarkOverlay(show: Binding<Bool>, currentSpot: Binding<Int>, _ onFinish: @escaping () -> Void) -> some View {
         self
             .overlayPreferenceValue(CoachmarkBoundsKey.self) { values in
                 if show.wrappedValue {
@@ -48,6 +48,7 @@ public extension View {
                                         currentSpot.wrappedValue += 1
                                     } else {
                                         show.wrappedValue = false
+                                        onFinish()
                                     }
                                 }
                         }

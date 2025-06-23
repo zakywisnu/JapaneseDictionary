@@ -13,8 +13,10 @@ public final class WordsProgressModel: Identifiable {
     @Attribute(.unique)
     public var id: String
     public var kanjiProgress: Int
-    public var kotobaProgress: Int
+    public var kanjiIndex: Int
     public var kanjiLevel: Level
+    public var kotobaProgress: Int
+    public var kotobaIndex: Int
     public var kotobaLevel: Level
     public var lastKotobaUpdated: Date
     public var lastKanjiUpdated: Date
@@ -25,6 +27,8 @@ public final class WordsProgressModel: Identifiable {
         kotobaProgress: Int,
         kanjiLevel: Level,
         kotobaLevel: Level,
+        kanjiIndex: Int,
+        kotobaIndex: Int,
         lastKotobaUpdated: Date,
         lastKanjiUpdated: Date
     ) {
@@ -35,6 +39,8 @@ public final class WordsProgressModel: Identifiable {
         self.kotobaLevel = kotobaLevel
         self.lastKotobaUpdated = lastKotobaUpdated
         self.lastKanjiUpdated = lastKanjiUpdated
+        self.kanjiIndex = kanjiIndex
+        self.kotobaIndex = kotobaIndex
     }
     
     public enum Level: String, CaseIterable, Codable {

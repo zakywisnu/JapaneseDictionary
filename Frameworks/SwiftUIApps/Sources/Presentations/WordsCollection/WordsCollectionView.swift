@@ -9,6 +9,7 @@ import SwiftUI
 import ZeroDesignKit
 
 struct WordsCollectionView: View {
+    @EnvironmentObject var appTabs: AppTabsViewModel
     @Bindable private var viewModel: WordsCollectionViewModel
     
     init(viewModel: WordsCollectionViewModel) {
@@ -43,6 +44,14 @@ struct WordsCollectionView: View {
                     .padding(.top, 16)
             }
             .background(DefaultColors.background.opacity(0.4))
+        }
+        .onFirstAppear {
+            viewModel.send(.onAppear)
+        }
+        .addCoachmarkOverlay(show: $viewModel.state.showCoachmark, currentSpot: $viewModel.state.currentSpot) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                appTabs.appTab = .profile
+            }
         }
     }
 }

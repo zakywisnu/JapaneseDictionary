@@ -8,6 +8,7 @@ import DataKit
 @main
 struct JapaneseDictionaryApp: App {
     @StateObject var router: AppRouter = .init(root: .splashScreen)
+    @StateObject var appTabs: AppTabsViewModel = .init(appTab: .home)
     
     init() {
         UIView.appearance().overrideUserInterfaceStyle = .light
@@ -18,6 +19,7 @@ struct JapaneseDictionaryApp: App {
             RouterView()
                 .designKitInjection()
                 .swiftUIRouterInjection(router)
+                .environmentObject(appTabs)
         }
     }
 }

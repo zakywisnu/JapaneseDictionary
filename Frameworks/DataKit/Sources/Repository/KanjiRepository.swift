@@ -43,9 +43,7 @@ public struct StandardKanjiRepository: KanjiRepository {
     public func update(_ param: KanjiDataModel) throws {
         let descriptor = getDescriptor(with: param.id)
         if let data = try context.fetch(descriptor).first {
-            data.enExample = param.enExample
             data.jlptLevel = param.jlptLevel
-            data.jpExample = param.jpExample
             data.kanji = param.kanji
             data.kunyomi = param.kunyomi
             data.meanings = param.meanings

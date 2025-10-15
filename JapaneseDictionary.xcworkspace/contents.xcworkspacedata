@@ -24,7 +24,13 @@
       location = "container:"
       name = "Dependencies">
       <FileRef
+         location = "group:Tuist/.build/tuist-derived/ZeroCoreKit/ZeroCoreKit.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Tuist/.build/tuist-derived/ZeroDesignKit/ZeroDesignKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Tuist/.build/tuist-derived/ZeroNetwork/ZeroNetwork.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

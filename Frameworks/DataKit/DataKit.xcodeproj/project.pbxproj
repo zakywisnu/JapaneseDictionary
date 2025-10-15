@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,11 +11,11 @@
 		4978CFB59E0A3EB2317BF393 /* WordsProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DF7C65460B45CA7FAB8CF /* WordsProgressModel.swift */; };
 		5F7BCE1E6D70A4C4BBE034FA /* VocabRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C930E593BF28FD6CECE24 /* VocabRepository.swift */; };
 		64693C1605093FBAFDC20A6A /* TuistBundle+DataKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712CAD88A1AD927AC15531BF /* TuistBundle+DataKit.swift */; };
+		71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */ = {isa = PBXBuildFile; fileRef = 9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */; };
 		850E4AD1E4BD98B634F00CA4 /* KanjiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */; };
 		997E18E4B51CBB53108B7620 /* WordsProgressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */; };
 		9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */; };
 		B08F40B89F2A8CFA1ECC29BD /* KotobaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8503C672F13D55942A1E9759 /* KotobaRepository.swift */; };
-		B459FDAA2E09161F0005B95B /* kanji-wanikani.json in Resources */ = {isa = PBXBuildFile; fileRef = B459FDA92E09161F0005B95B /* kanji-wanikani.json */; };
 		BA61BB89A47B2395340BFF17 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02627F41AE9CFC13B6EFC0E8 /* CoreKit.framework */; };
 		C847FED0AE088ED66105A098 /* ArrayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */; };
 		DA61DC1576ED9DB693E6231A /* KotobaDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F5332704A46634A742C344 /* KotobaDataModel.swift */; };
@@ -40,16 +40,16 @@
 /* Begin PBXFileReference section */
 		02627F41AE9CFC13B6EFC0E8 /* CoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16F5332704A46634A742C344 /* KotobaDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaDataModel.swift; sourceTree = "<group>"; };
-		3474BF66E1180F414642882E /* jlpt_vocab.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = jlpt_vocab.csv; sourceTree = "<group>"; };
+		3474BF66E1180F414642882E /* jlpt_vocab.csv */ = {isa = PBXFileReference; path = jlpt_vocab.csv; sourceTree = "<group>"; };
 		38794EEFF47FCE10026A58AA /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712CAD88A1AD927AC15531BF /* TuistBundle+DataKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DataKit.swift"; sourceTree = "<group>"; };
 		79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayString.swift; sourceTree = "<group>"; };
 		8503C672F13D55942A1E9759 /* KotobaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaRepository.swift; sourceTree = "<group>"; };
+		9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "kanji-wanikani.json"; sourceTree = "<group>"; };
 		A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsProgressRepository.swift; sourceTree = "<group>"; };
 		AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiRepository.swift; sourceTree = "<group>"; };
-		B459FDA92E09161F0005B95B /* kanji-wanikani.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "kanji-wanikani.json"; sourceTree = "<group>"; };
 		C67FC79D77F20E09A2E25253 /* DataKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DataKit-Info.plist"; sourceTree = "<group>"; };
-		CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = kanji_data.csv; sourceTree = "<group>"; };
+		CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */ = {isa = PBXFileReference; path = kanji_data.csv; sourceTree = "<group>"; };
 		DC3F3EF61CE379A59B236D07 /* KotobaMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaMigrationPlan.swift; sourceTree = "<group>"; };
 		DF2605FD00488F119F33DE4B /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
 		F40C930E593BF28FD6CECE24 /* VocabRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabRepository.swift; sourceTree = "<group>"; };
@@ -162,9 +162,9 @@
 		8B3F508EB34D6F5B8858CE3D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B459FDA92E09161F0005B95B /* kanji-wanikani.json */,
 				3474BF66E1180F414642882E /* jlpt_vocab.csv */,
 				CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */,
+				9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -226,6 +226,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 230D90505BF4873CB0460DD4 /* Build configuration list for PBXProject "DataKit" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -251,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB59BE87F03122B858E0C2A3 /* jlpt_vocab.csv in Resources */,
-				B459FDAA2E09161F0005B95B /* kanji-wanikani.json in Resources */,
+				71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */,
 				9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +418,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

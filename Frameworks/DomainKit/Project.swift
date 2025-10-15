@@ -9,6 +9,7 @@ func targets() -> [Target] {
         destination: [.iPhone],
         dependencies: [
             .project(target: "DataKit", path: "../DataKit", status: .required, condition: nil),
+            .external(name: "ZeroDesignKit", condition: nil),
         ],
         deploymentTargets: .iOS("18.0"),
         withUnitTest: false

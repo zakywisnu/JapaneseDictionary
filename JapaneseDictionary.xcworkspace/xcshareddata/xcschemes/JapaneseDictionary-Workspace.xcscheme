@@ -122,10 +122,52 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "039961F853CEDA207A6E6FB7"
+               BuildableName = "ZeroCoreKit.framework"
+               BlueprintName = "ZeroCoreKit"
+               ReferencedContainer = "container:Tuist/.build/tuist-derived/ZeroCoreKit/ZeroCoreKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4B41080EB75479F3B462AA22"
                BuildableName = "ZeroDesignKit.framework"
                BlueprintName = "ZeroDesignKit"
                ReferencedContainer = "container:Tuist/.build/tuist-derived/ZeroDesignKit/ZeroDesignKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1BF436F6677E5869A429C20C"
+               BuildableName = "ZeroNet.framework"
+               BlueprintName = "ZeroNet"
+               ReferencedContainer = "container:Tuist/.build/tuist-derived/ZeroNetwork/ZeroNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "28A3A49A3ED5D04F679B5FD4"
+               BuildableName = "ZeroNetwork.framework"
+               BlueprintName = "ZeroNetwork"
+               ReferencedContainer = "container:Tuist/.build/tuist-derived/ZeroNetwork/ZeroNetwork.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

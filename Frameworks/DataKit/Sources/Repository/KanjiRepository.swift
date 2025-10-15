@@ -18,50 +18,61 @@ public protocol KanjiRepository {
 
 public struct StandardKanjiRepository: KanjiRepository {
     let context: ModelContext
+    private let serialQueue = DispatchQueue(label: "com.zeroemotion.\(Self.self)", qos: .userInitiated)
     
     public init(context: ModelContext) {
         self.context = context
     }
     
     public func fetchAll() throws -> [KanjiDataModel] {
-        return try context.fetch(FetchDescriptor<KanjiDataModel>())
+        try serialQueue.sync {
+            return try context.fetch(FetchDescriptor<KanjiDataModel>())
+        }
     }
     
     public func fetch(id: String) throws -> KanjiDataModel {
-        let descriptor = getDescriptor(with: id)
-        guard let data = try context.fetch(descriptor).first else {
-            throw DataError.dataNotFound
+        try serialQueue.sync {
+            let descriptor = getDescriptor(with: id)
+            guard let data = try context.fetch(descriptor).first else {
+                throw DataError.dataNotFound
+            }
+            return data
         }
-        return data
     }
     
     public func add(_ param: KanjiDataModel) throws {
-        context.insert(param)
-        try context.save()
+        try serialQueue.sync {
+            context.insert(param)
+            try context.save()
+        }
     }
     
     public func update(_ param: KanjiDataModel) throws {
-        let descriptor = getDescriptor(with: param.id)
-        if let data = try context.fetch(descriptor).first {
-            data.jlptLevel = param.jlptLevel
-            data.kanji = param.kanji
-            data.kunyomi = param.kunyomi
-            data.meanings = param.meanings
-            data.onyomi = param.onyomi
-            data.stroke = param.stroke
-            try context.save()
-        } else {
-            throw DataError.dataNotFound
+        try serialQueue.sync {
+            let descriptor = getDescriptor(with: param.id)
+            if let data = try context.fetch(descriptor).first {
+                data.jlptLevel = param.jlptLevel
+                data.kanji = param.kanji
+                data.kunyomi = param.kunyomi
+                data.meanings = param.meanings
+                data.onyomi = param.onyomi
+                data.stroke = param.stroke
+                try context.save()
+            } else {
+                throw DataError.dataNotFound
+            }
         }
     }
     
     public func delete(id: String) throws {
-        let descriptor = getDescriptor(with: id)
-        if let data = try context.fetch(descriptor).first {
-            context.delete(data)
-            try context.save()
-        } else {
-            throw DataError.dataNotFound
+        try serialQueue.sync {
+            let descriptor = getDescriptor(with: id)
+            if let data = try context.fetch(descriptor).first {
+                context.delete(data)
+                try context.save()
+            } else {
+                throw DataError.dataNotFound
+            }
         }
     }
     

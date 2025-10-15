@@ -9,7 +9,8 @@ func targets() -> [Target] {
         destination: [.iPhone],
         dependencies: [
             .project(target: "DomainKit", path: "../DomainKit", status: .required, condition: nil),
-            .external(name: "ZeroDesignKit", condition: nil)
+            .external(name: "ZeroDesignKit", condition: nil),
+            .external(name: "ZeroCoreKit", condition: nil),
         ],
         resources: ["Resources/**"],
         deploymentTargets: .iOS("18.0"),

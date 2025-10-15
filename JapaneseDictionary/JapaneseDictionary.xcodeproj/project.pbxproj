@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0114B90C97452D98D5298106 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 522CEAFB23F2A45EE5455F96 /* DataKit.framework */; };
-		0B0CCA99ECF277BCE0F2AC3B /* ZeroNetwork.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1408F4E0A3597059B3682988 /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; };
 		15E003765DF380AD47C0D9D6 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */; };
 		16BD3E5AA1E7994551A0493C /* SwiftUIApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C6B8F674395786644F742 /* SwiftUIApps.framework */; };
 		1C632CAC4585848F17383858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F74FBB853D848ED8BB2C521F /* Assets.xcassets */; };
+		1CD5B208E243926A1162EAA5 /* ZeroCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722F3899818750FB2D838BB5 /* ZeroCoreKit.framework */; };
 		20EECE5128FB1BA677698762 /* TuistBundle+JapaneseDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35002B47D04D955A139CF73B /* TuistBundle+JapaneseDictionary.swift */; };
+		3B3EDF047CE4307813393DDD /* ZeroNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED92E38368662691DA826B95 /* ZeroNet.framework */; };
 		498A0094C89CA74E8DB092E9 /* TuistAssets+JapaneseDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98451216A085F44D06DB72FE /* TuistAssets+JapaneseDictionary.swift */; };
-		4C2CD6435067CB009D10C0FF /* ZeroCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D97932232A712085D91408C /* ZeroCoreKit.xcframework */; };
 		4DC57B027035F15EDBFF9F16 /* SwiftUIApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C6B8F674395786644F742 /* SwiftUIApps.framework */; };
 		5074CBF99C1B1F175DB5F79B /* ZeroDesignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; };
 		58353B50572B9C54E6A154FC /* ZeroDesignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; };
@@ -31,11 +31,12 @@
 		A713F1E7CD117A5C6C16AE8B /* JapaneseDictionaryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CD3905A1B45C693F21366 /* JapaneseDictionaryWidget.swift */; };
 		A7F7D2FDC49E5018B9912D8D /* CoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE92C9CB6F201DF25A7DBDCE /* CoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A96148C54A92DEA682DB585F /* ZeroDesignKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B98E43991183F173A9706D59 /* ZeroNetwork.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */; };
+		B5D2D062A33384906D15C06F /* ZeroNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35560B49F308DBA40476FBD8 /* ZeroNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C678257D2AAFE82388232283 /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; };
 		CD43D1DAF6885D101429EA82 /* DataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 522CEAFB23F2A45EE5455F96 /* DataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CF728C21EADD91E8DB352BF7 /* ZeroCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 722F3899818750FB2D838BB5 /* ZeroCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EB3A3AF79E70425115F658 /* DomainKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6F24D83FBC9CD6D91610F07 /* DomainKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FAA72C30C07768B985544BFC /* ZeroCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D97932232A712085D91408C /* ZeroCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EDABF3CB153C4F3CD84DC56E /* ZeroNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35560B49F308DBA40476FBD8 /* ZeroNetwork.framework */; };
 		FFAE064E4E2D40AD1EB60803 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D878CE5353AFC71370418CDB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -87,9 +88,9 @@
 				CD43D1DAF6885D101429EA82 /* DataKit.framework in Embed Frameworks */,
 				D9EB3A3AF79E70425115F658 /* DomainKit.framework in Embed Frameworks */,
 				77C128B2495FF24196B0916E /* SwiftUIApps.framework in Embed Frameworks */,
+				CF728C21EADD91E8DB352BF7 /* ZeroCoreKit.framework in Embed Frameworks */,
 				A96148C54A92DEA682DB585F /* ZeroDesignKit.framework in Embed Frameworks */,
-				FAA72C30C07768B985544BFC /* ZeroCoreKit.xcframework in Embed Frameworks */,
-				0B0CCA99ECF277BCE0F2AC3B /* ZeroNetwork.xcframework in Embed Frameworks */,
+				B5D2D062A33384906D15C06F /* ZeroNetwork.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,14 +112,14 @@
 		2CB4B35F56CCBA1C8E660829 /* JapaneseDictionaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryApp.swift; sourceTree = "<group>"; };
 		2E801138EDEA26BDC15CC571 /* JapaneseDictionary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JapaneseDictionary-Info.plist"; sourceTree = "<group>"; };
 		35002B47D04D955A139CF73B /* TuistBundle+JapaneseDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+JapaneseDictionary.swift"; sourceTree = "<group>"; };
+		35560B49F308DBA40476FBD8 /* ZeroNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F5EC381B686D3CBCFBDC8E /* JapaneseDictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JapaneseDictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D97932232A712085D91408C /* ZeroCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroCoreKit.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff/ZeroCoreKit.xcframework; sourceTree = "<absolute>"; };
 		522CEAFB23F2A45EE5455F96 /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JapaneseDictionaryWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		61798763C2979FC77F8C19BF /* JapaneseDictionaryWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidgetBundle.swift; sourceTree = "<group>"; };
+		722F3899818750FB2D838BB5 /* ZeroCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		760A4FBA55AD0A55A5525E29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B88165AEF5D087375F60096 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZeroNetwork.xcframework; path = /Users/zakywisnu/.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373/ZeroNetwork.xcframework; sourceTree = "<absolute>"; };
 		98451216A085F44D06DB72FE /* TuistAssets+JapaneseDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+JapaneseDictionary.swift"; sourceTree = "<group>"; };
 		991DDD04FCEC73433FFFB4BB /* JapaneseDictionaryWidgetControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidgetControl.swift; sourceTree = "<group>"; };
 		9A4C66D16210CF7160C17C41 /* JapaneseDictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JapaneseDictionaryTests-Info.plist"; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		E80CD3905A1B45C693F21366 /* JapaneseDictionaryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryWidget.swift; sourceTree = "<group>"; };
 		E8C7452F814E30800B674460 /* JapaneseDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseDictionaryTests.swift; sourceTree = "<group>"; };
 		ED6C6B8F674395786644F742 /* SwiftUIApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUIApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED92E38368662691DA826B95 /* ZeroNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F74FBB853D848ED8BB2C521F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBE973249BEB1C0E30430BAB /* JapaneseDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -160,9 +162,10 @@
 				9256EC7C1AA3920A53B129BC /* DataKit.framework in Frameworks */,
 				1408F4E0A3597059B3682988 /* DomainKit.framework in Frameworks */,
 				4DC57B027035F15EDBFF9F16 /* SwiftUIApps.framework in Frameworks */,
+				1CD5B208E243926A1162EAA5 /* ZeroCoreKit.framework in Frameworks */,
 				5074CBF99C1B1F175DB5F79B /* ZeroDesignKit.framework in Frameworks */,
-				4C2CD6435067CB009D10C0FF /* ZeroCoreKit.xcframework in Frameworks */,
-				B98E43991183F173A9706D59 /* ZeroNetwork.xcframework in Frameworks */,
+				3B3EDF047CE4307813393DDD /* ZeroNet.framework in Frameworks */,
+				EDABF3CB153C4F3CD84DC56E /* ZeroNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +215,6 @@
 			children = (
 				7238C506047A4278E3C6DB78 /* Project */,
 				C46A06826A7C01D404B912DB /* Products */,
-				DAE131D61AD4CB207170148B /* Cache */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,18 +267,12 @@
 				47F5EC381B686D3CBCFBDC8E /* JapaneseDictionaryTests.xctest */,
 				5A2C4CA823669D08B77083AC /* JapaneseDictionaryWidget.appex */,
 				ED6C6B8F674395786644F742 /* SwiftUIApps.framework */,
+				722F3899818750FB2D838BB5 /* ZeroCoreKit.framework */,
 				BE4814F4391311F77A7EA6BC /* ZeroDesignKit.framework */,
+				ED92E38368662691DA826B95 /* ZeroNet.framework */,
+				35560B49F308DBA40476FBD8 /* ZeroNetwork.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DAE131D61AD4CB207170148B /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				4D97932232A712085D91408C /* ZeroCoreKit.xcframework */,
-				94A0B55493920E1E5FF3A430 /* ZeroNetwork.xcframework */,
-			);
-			name = Cache;
 			sourceTree = "<group>";
 		};
 		E766FBE340DF249DB76AD6C8 /* Tests */ = {
@@ -473,7 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				DEVELOPMENT_TEAM = H443SZWX2N;
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryWidget-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -558,7 +554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				DEVELOPMENT_TEAM = H443SZWX2N;
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryWidget-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,13 +581,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				DEVELOPMENT_TEAM = H443SZWX2N;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
-					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
-				);
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -615,9 +606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -627,7 +616,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionaryTests;
 				PRODUCT_NAME = JapaneseDictionaryTests;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -645,9 +633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionaryTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -657,7 +643,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.JapaneseDictionaryTests;
 				PRODUCT_NAME = JapaneseDictionaryTests;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -678,13 +663,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8L23V2MRR3;
+				DEVELOPMENT_TEAM = H443SZWX2N;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/0a6ffa51b19e63a9bcdadc2bb79409ff",
-					"$(SRCROOT)/../../../../../../.cache/tuist/Binaries/31fe0834959d378c92897e9be6329373",
-				);
 				INFOPLIST_FILE = "Derived/InfoPlists/JapaneseDictionary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (

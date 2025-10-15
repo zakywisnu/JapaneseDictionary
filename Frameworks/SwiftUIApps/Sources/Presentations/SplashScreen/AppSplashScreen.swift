@@ -35,7 +35,7 @@ public struct AppSplashScreen: View {
                         router.setRoot(.dashboard, hideNavBar: true)
                     } else {
                         router.setRoot(.onboarding, hideNavBar: true)
-                        isOnboardingComplete = true
+//                        isOnboardingComplete = true
                     }
                 }
             }

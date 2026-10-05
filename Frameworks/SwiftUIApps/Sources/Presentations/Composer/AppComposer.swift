@@ -43,8 +43,7 @@ public final class AppComposer {
 
     @ViewBuilder
     public func makeHomeView() -> some View {
-        let viewModel = HomeViewModel()
-        HomeView(viewModel: viewModel)
+        HomeView()
     }
 
     @ViewBuilder
@@ -93,9 +92,6 @@ extension AppComposer {
         
         let storeURL = URL.applicationSupportDirectory.appending(path: "JapaneseDictionary.store")
         
-//        // Delete existing store due to schema change
-//        try? FileManager.default.removeItem(at: storeURL)
-        
         let modelConfiguration = ModelConfiguration(
             schema: schema,
             url: storeURL
@@ -105,8 +101,6 @@ extension AppComposer {
             let container = try ModelContainer(for: schema, configurations: modelConfiguration)
             let context = ModelContext(container)
             context.autosaveEnabled = true
-            
-            print(storeURL)
             
             return .init(
                 kanjiContext: context,

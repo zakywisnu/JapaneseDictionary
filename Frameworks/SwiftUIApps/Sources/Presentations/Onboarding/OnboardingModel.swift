@@ -1,66 +1,35 @@
+//
+//  OnboardingModel.swift
+//  SwiftUIApps
+//
 
+import Foundation
 
-import SwiftUI
-import DomainKit
-import ZeroDesignKit
-
-public class AppsOnboardingViewModel {
-    var pages: [OnboardingPage] = [
-        OnboardingPage(
-            image: .init(
-                image: Image(systemName: "book.fill"),
-                color: DefaultColors.Badge.background
-            ),
-            title: .init(
-                text: "Master Japanese Faster",
-                font: .title,
-                weight: .bold,
-                color: DefaultColors.primary
-            ),
-            description: .init(
-                text: "Learn thousands of words with clear definitions, examples, and audio — all in one place.",
-                font: .body,
-                weight: .regular,
-                color: DefaultColors.secondary
-            )
+public final class AppsOnboardingViewModel {
+    struct Page: Identifiable {
+        let id = UUID()
+        let character: String
+        let title: String
+        let message: String
+    }
+    
+    let pages: [Page] = [
+        Page(
+            character: "言",
+            title: "One word at a time",
+            message: "Add the next JLPT word or kanji whenever you're ready. The list starts at N5 and moves up as you go."
         ),
-        
-        OnboardingPage(
-            image: .init(
-                image: Image(systemName: "magnifyingglass.circle.fill"),
-                color: DefaultColors.Badge.background
-            ),
-            title: .init(
-                text: "Visual Kanji Lookup",
-                font: .title,
-                weight: .bold,
-                color: DefaultColors.primary
-            ),
-            description: .init(
-                text: "Use stroke input, camera, or radicals to explore kanji like never before.",
-                font: .body,
-                weight: .regular,
-                color: DefaultColors.secondary
-            )
+        Page(
+            character: "漢",
+            title: "Kanji with their readings",
+            message: "Each kanji shows its on'yomi, kun'yomi, stroke count, and meanings. Words show their reading and English."
         ),
-        
-        OnboardingPage(
-            image: .init(
-                image: Image(systemName: "icloud.slash.fill"),
-                color: DefaultColors.Badge.background
-            ),
-            title: .init(
-                text: "Access Offline Anytime",
-                font: .title,
-                weight: .bold,
-                color: DefaultColors.primary
-            ),
-            description: .init(
-                text: "No Wi-Fi? No problem. Use the dictionary anywhere, anytime — even offline.",
-                font: .body,
-                weight: .regular,
-                color: DefaultColors.secondary
-            )
+        Page(
+            character: "森",
+            title: "Everything stays on this iPhone",
+            message: "No account and no sign-in. Your collection and progress are saved on this device and work offline."
         )
     ]
+    
+    public init() {}
 }

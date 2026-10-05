@@ -6,55 +6,65 @@
 //
 
 import SwiftUI
-import ZeroDesignKit
 
 struct WordsCollectionView: View {
-    @EnvironmentObject var appTabs: AppTabsViewModel
-    @Bindable private var viewModel: WordsCollectionViewModel
-    
-    init(viewModel: WordsCollectionViewModel) {
-        self.viewModel = viewModel
-    }
+    @AppStorage("collectionStudyKind") private var kind: StudyKind = .words
+    @State private var query = ""
     
     var body: some View {
-        headerView
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: Forest.Space.l) {
+                ScreenHeader(title: "Collection")
+                searchField
+                StudyKindPicker(selection: $kind)
+            }
+            .padding(.horizontal, Forest.Space.l)
+            .padding(.top, Forest.Space.s)
+            
+            switch kind {
+            case .words:
+                AppComposer.shared.makeCollectionKotobaView(query: query)
+            case .kanji:
+                AppComposer.shared.makeCollectionKanjiView(query: query)
+            }
+        }
+        .background(Forest.canvas)
     }
     
-    var headerView: some View {
-        VStack {
-            HeaderView(
-                config: .init(
-                    title: "Collection",
-                    showBackButton: false
-                ),
-                onBackTapped: nil
-            ) {
-                HStack(spacing: 16) {
-                    Button {
-                        viewModel.send(.onRetry)
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .medium))
-                    }
+    private var searchField: some View {
+        HStack(spacing: Forest.Space.s) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(Forest.inkMuted)
+                .accessibilityHidden(true)
+            TextField(
+                "Search",
+                text: $query,
+                prompt: Text("Search Japanese, reading, or English").foregroundStyle(Forest.inkMuted)
+            )
+            .foregroundStyle(Forest.ink)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .submitLabel(.search)
+            if !query.isEmpty {
+                Button {
+                    query = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(Forest.inkMuted)
                 }
-            } content: {
-                TabViewPager(selectedTab: $viewModel.state.selectedTab)
-                    .id(viewModel.state.refreshID)
-                    .padding(.top, 16)
+                .accessibilityLabel("Clear search")
             }
-            .background(DefaultColors.background.opacity(0.4))
         }
-        .onFirstAppear {
-            viewModel.send(.onAppear)
-        }
-        .addCoachmarkOverlay(show: $viewModel.state.showCoachmark, currentSpot: $viewModel.state.currentSpot) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                appTabs.appTab = .profile
-            }
+        .padding(.horizontal, Forest.Space.m)
+        .frame(minHeight: 44)
+        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .overlay {
+            RoundedRectangle(cornerRadius: Forest.Radius.card)
+                .strokeBorder(Forest.line)
         }
     }
 }
+
 #Preview {
-    WordsCollectionView(viewModel: WordsCollectionViewModel())
+    WordsCollectionView()
 }

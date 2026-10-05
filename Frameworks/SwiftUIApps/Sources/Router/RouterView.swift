@@ -13,11 +13,13 @@ public struct RouterView: View {
     public init() {}
     
     public var body: some View {
-        switch router.currentRoot {
-        case .dashboard: DashboardView()
-        case .splashScreen: AppSplashScreen()
-        case .onboarding: AppComposer.shared.makeOnboardingView()
-        default: AppSplashScreen()
+        Group {
+            switch router.currentRoot {
+            case .dashboard: DashboardView()
+            case .onboarding: AppComposer.shared.makeOnboardingView()
+            default: AppSplashScreen()
+            }
         }
+        .transition(.opacity)
     }
 }

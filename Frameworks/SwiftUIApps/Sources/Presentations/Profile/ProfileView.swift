@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import DomainKit
-import ZeroDesignKit
 
 public struct ProfileView: View {
     @EnvironmentObject var appTabs: AppTabsViewModel
@@ -18,102 +16,107 @@ public struct ProfileView: View {
     }
     
     public var body: some View {
-        HeaderView(
-            config: .init(title: "Profile", showBackButton: false)) {
-                HStack(spacing: 16) {
-                    Button {
-                        viewModel.send(.didReload)
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .medium))
-                    }
-                }
-            } content: {
-                ZStack {
-                    switch viewModel.state.viewState {
-                    case .loaded:
-                        loadedContent()
-//                            .addSpotlight(0, shape: .rounded, roundedRadius: 4, text: "Your Overall Vocabulary and Kanji Progress")
-                            .addCoachmark(
-                                0,
-                                with: .init(
-                                    shape: .rounded,
-                                    title: .init(
-                                        text: "Summary of your progress",
-                                        font: .caption,
-                                        fontWeight: .bold,
-                                        foreground: .black
-                                    ),
-                                    description: .init(
-                                        text: "Check out your overall progress here and see how much you've learned!",
-                                        font: .caption2,
-                                        fontWeight: .semibold,
-                                        foreground: .black
-                                    ),
-                                    tooltipPosition: .bottom,
-                                    tooltipAlignment: .auto,
-                                    radius: 8,
-                                    offset: .init(width: 0, height: 0)
-                                )
-                            )
-                    case .loading:
-                        BlockLoadingView(config: .init(blockSize: .init(width: 32, height: 32)))
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    case .error:
-                        ErrorStateView(
-                            image: Image(systemName: "exclamationmark.triangle"),
-                            title: "Oops Something went wrong",
-                            message: "Please wait a moment and try again.",
-                            retryAction: {
-                                viewModel.send(.didLoad)
-                            }
-                        )
-                        .background(DefaultColors.background.opacity(0.4))
+        ScrollView {
+            VStack(alignment: .leading, spacing: Forest.Space.xl) {
+                ScreenHeader(title: "Progress")
+                
+                switch viewModel.state.loadState {
+                case .loading:
+                    ProgressView("Loading your progress")
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, Forest.Space.xxl)
+                case .failed:
+                    StateMessage(
+                        title: "Couldn't load your progress",
+                        message: "Your saved progress or the bundled word lists didn't load.",
+                        actionTitle: "Try again",
+                        action: { viewModel.send(.onAppear) }
+                    )
+                case .loaded:
+                    if let progress = viewModel.state.progress {
+                        loaded(progress)
                     }
                 }
             }
-            .onFirstAppear {
-                viewModel.send(.didLoad)
-            }
-            .background(DefaultColors.background.opacity(0.4))
-            .addCoachmarkOverlay(show: $viewModel.state.showSpotlight, currentSpot: $viewModel.state.currentSpot) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    appTabs.appTab = .home
-                }
-            }
+            .padding(.horizontal, Forest.Space.l)
+            .padding(.top, Forest.Space.s)
+            .padding(.bottom, Forest.Space.xl)
+        }
+        .background(Forest.canvas)
+        .onAppear { viewModel.send(.onAppear) }
     }
     
     @ViewBuilder
-    private func loadedContent() -> some View {
-        VStack(alignment: .center) {
-            Image(systemName: "book.pages.fill")
-                .resizable()
-                .renderingMode(.original)
-                .symbolEffect(.wiggle, options: .repeating)
-                .foregroundStyle(DefaultColors.primary)
-                .frame(width: 96, height: 96)
-            
-            VStack(spacing: 8) {
-                Text("Your Learning Journey")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-                
-                Text("Track your progress and achievements as you master Japanese vocabulary and kanji")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 16)
-            }
-            .padding(.top, 16)
-            
-            ContentGridView(activities: viewModel.state.activities)
-                .padding(.vertical, 32)
-                .padding(.horizontal, 16)
+    private func loaded(_ progress: WordsProgress) -> some View {
+        if progress.kotobaProgress == 0 && progress.kanjiProgress == 0 {
+            StateMessage(
+                title: "Nothing learned yet",
+                message: "Add your first word or kanji on Today and your progress starts here.",
+                actionTitle: "Go to Today",
+                action: { appTabs.appTab = .home }
+            )
+            .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
         }
-        .padding(.vertical, 16)
-        .frame(maxWidth: .infinity)
+        
+        trackCard(
+            noun: "Words",
+            learned: progress.kotobaProgress,
+            total: viewModel.state.totalKotoba,
+            level: progress.kotobaLevel.rawValue,
+            lastAdded: progress.kotobaProgress > 0 ? progress.lastKotobaUpdated : nil
+        )
+        trackCard(
+            noun: "Kanji",
+            learned: progress.kanjiProgress,
+            total: viewModel.state.totalKanji,
+            level: progress.kanjiLevel.rawValue,
+            lastAdded: progress.kanjiProgress > 0 ? progress.lastKanjiUpdated : nil
+        )
+        
+        Text("Progress is saved on this iPhone only. Deleting the app deletes it.")
+            .font(.footnote)
+            .foregroundStyle(Forest.inkMuted)
+    }
+    
+    private func trackCard(noun: String, learned: Int, total: Int, level: String, lastAdded: Date?) -> some View {
+        VStack(alignment: .leading, spacing: Forest.Space.m) {
+            Text(noun)
+                .font(.headline)
+                .foregroundStyle(Forest.ink)
+            
+            HStack(alignment: .firstTextBaseline, spacing: Forest.Space.xs) {
+                Text(learned.formatted())
+                    .font(.system(.largeTitle, design: .rounded).weight(.semibold))
+                    .foregroundStyle(Forest.ink)
+                Text("of \(total.formatted())")
+                    .font(.subheadline)
+                    .foregroundStyle(Forest.inkMuted)
+            }
+            .accessibilityElement(children: .combine)
+            
+            ProgressTrack(value: total > 0 ? Double(learned) / Double(total) : 0)
+            
+            HStack {
+                labeled("Studying", value: "JLPT \(level)")
+                Spacer()
+                labeled("Last added", value: lastAdded?.formatted(date: .abbreviated, time: .omitted) ?? "Not yet")
+            }
+        }
+        .padding(Forest.Space.l)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+    }
+    
+    private func labeled(_ title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(.caption)
+                .foregroundStyle(Forest.inkMuted)
+            Text(value)
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(Forest.ink)
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 

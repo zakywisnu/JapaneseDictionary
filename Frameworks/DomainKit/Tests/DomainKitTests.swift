@@ -12,7 +12,6 @@ final class DomainKitTests: XCTestCase {
     }
 
     func test_example() {
-        // Add your test here
     }
 
 }

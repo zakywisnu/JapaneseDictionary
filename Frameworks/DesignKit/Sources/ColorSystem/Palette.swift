@@ -2,9 +2,7 @@
 
 import SwiftUI
 
-/// Base color palette definition
 public enum Palette {
-    // Base Colors - using a modern, vibrant palette
     public static let azure = Color("azure", bundle: .module) // #007AFF
     public static let mint = Color("mint", bundle: .module) // #00C7BE
     public static let coral = Color("coral", bundle: .module) // #FF6B6B

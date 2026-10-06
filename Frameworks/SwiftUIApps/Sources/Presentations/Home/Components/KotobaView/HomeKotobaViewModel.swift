@@ -1,5 +1,5 @@
 //
-//  KanaViewModel.swift
+//  HomeKotobaViewModel.swift
 //  SwiftUIApps
 //
 //  Created by Ahmad Zaky W on 20/05/25.
@@ -8,7 +8,6 @@
 import Observation
 import SwiftUI
 import DomainKit
-import ZeroDesignKit
 
 @Observable
 final class HomeKotobaViewModel {
@@ -37,112 +36,79 @@ final class HomeKotobaViewModel {
     }
     
     @MainActor
-    func send(_ action: Action) async throws {
+    func send(_ action: Action) {
         switch action {
         case .onAppear:
-            fetchProgress()
-            fetchAllKotoba()
-            fetchCurrentKotoba()
-        case .didTapAddKotoba:
-            state.buttonState = .loading
-            try await Task.sleep(for: .seconds(1))
-            await addKotoba()
-            try await Task.sleep(for: .seconds(2))
-            state.buttonState = .idle
-            fetchProgress()
-            fetchCurrentKotoba()
-        case let .didTapDeleteKotoba(kotoba):
-            state.overlayLoading = true
-            try await Task.sleep(for: .seconds(1))
+            if state.allKotobas.isEmpty {
+                fetchAllKotoba()
+            }
+            reload()
+        case .didTapAdd:
+            addKotoba()
+            reload()
+        case let .didTapDelete(id):
+            guard let kotoba = state.currentKotobas.first(where: { $0.id == id }) else { return }
             deleteKotoba(kotoba)
-            fetchProgress()
-            fetchCurrentKotoba()
+            reload()
+        case .didDismissError:
+            state.errorMessage = nil
         }
     }
 }
 
 extension HomeKotobaViewModel {
+    private func reload() {
+        fetchProgress()
+        fetchCurrentKotoba()
+    }
+    
     private func fetchAllKotoba() {
         do {
-            let result = try getKotobaDataUseCase.execute().mapToKotobas().sorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
-            state.allKotobas = result
+            state.allKotobas = try getKotobaDataUseCase.execute()
+                .mapToKotobas()
+                .stableSorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
         } catch {
-            print("all kotoba error: ", error)
-            print("all kotoba error localized: ", error.localizedDescription)
+            state.loadState = .failed
         }
     }
     
     private func fetchProgress() {
-        do {
-            let result = try getWordsProgressUseCase.execute().mapToDomain()
-            state.progress = result
-        } catch {
-            print("fetch progress error: ", error)
-            print("fetch progress localized: ", error.localizedDescription)
-        }
+        state.progress = try? getWordsProgressUseCase.execute().mapToDomain()
     }
     
     private func fetchCurrentKotoba() {
-        state.viewState = .loading
         do {
             let result = try getAllKotobaUseCase.execute().mapToKotobas()
-
             state.currentKotobas = result
-                .compactMap { getTodayKotoba($0) }
-                .sorted(by: { ($0.addedIndex ?? 0) < ($1.addedIndex ?? 1) })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                guard let self else { return }
-                self.state.viewState = .loaded
-            }
+                .filter { $0.dateAdded.map { Calendar.current.isDateInToday($0) } ?? false }
+                .sorted(by: { ($0.addedIndex ?? 0) > ($1.addedIndex ?? 0) })
+            state.loadState = state.allKotobas.isEmpty ? .failed : .loaded
         } catch {
-            print("current kotoba error: ", error)
-            print("current kotoba error localized: ", error.localizedDescription)
-            state.viewState = .error
+            state.loadState = .failed
         }
     }
     
     private func deleteKotoba(_ kotoba: Kotoba) {
-        defer {
-            state.overlayLoading = false
-        }
         do {
             try deleteKotobaUseCase.execute(kotoba: kotoba.asKotobaParam)
-            // show toast success
-            state.toast = Toast(message: "Successfully deleted kotoba\nPlease refresh when you switch tabs", style: .success, isShowXMark: false)
         } catch {
-            print("delete kotoba error: ", error)
-            print("delete kotoba error localized: ", error.localizedDescription)
-            // show toast error
-            state.toast = Toast(message: "Failed to delete kotoba", style: .error, isShowXMark: false)
+            state.errorMessage = "\(kotoba.kanji) couldn't be removed. Try again."
         }
     }
     
-    private func getTodayKotoba(_ kotobas: Kotoba) -> Kotoba? {
-        guard let date = kotobas.dateAdded else { return nil }
-        return Calendar.current.isDate(date, inSameDayAs: Date()) ? kotobas : nil
-    }
-    
-    @MainActor
-    private func addKotoba() async {
+    private func addKotoba() {
         guard let progress = state.progress else {
-            state.buttonState = .error
+            state.errorMessage = "Your progress couldn't be read, so no word was added. Try again."
             return
         }
-        
         guard let (kotobaParam, progressParam) = validateParam(progress) else {
+            state.hasFinished = true
             return
         }
-        
         do {
             try addKotobaUseCase.execute(param: kotobaParam, progress: progressParam)
-            state.buttonState = .success
-            state.toast = Toast(
-                message: "Successfully added kotoba\nPlease refresh when you switch tabs",
-                style: .success,
-                isShowXMark: false
-            )
         } catch {
-            state.buttonState = .error
+            state.errorMessage = "The next word couldn't be added. Try again."
         }
     }
     
@@ -177,25 +143,18 @@ extension HomeKotobaViewModel {
         return (kotobaParam, progressParam)
     }
     
+    /// Skips words that were already added today, starting from the saved index.
     private func fetchNextKotoba() -> (Kotoba?, Int) {
-        guard let progress = state.progress else {
+        guard let progress = state.progress, progress.kotobaIndex < state.allKotobas.count else {
             return (nil, state.progress?.kotobaIndex ?? 0)
         }
-        let firstIndex = progress.kotobaIndex
-        var kotoba: Kotoba?
-        var latestIndex: Int = progress.kotobaIndex
-        /// check if the next words/kotoba isn't already added in the current collection
-        /// if it's already added then proceed next
-        for index in firstIndex..<state.allKotobas.count {
-            if !state.currentKotobas.contains(where: { kotoba in
-                return kotoba.id == state.allKotobas[index].id
-            }) {
-                kotoba = state.allKotobas[index]
-                latestIndex = max(index, latestIndex)
-                break
+        for index in progress.kotobaIndex..<state.allKotobas.count {
+            let candidate = state.allKotobas[index]
+            if !state.currentKotobas.contains(where: { $0.id == candidate.id }) {
+                return (candidate, max(index, progress.kotobaIndex))
             }
         }
-        return (kotoba, latestIndex)
+        return (nil, progress.kotobaIndex)
     }
 }
 
@@ -204,62 +163,22 @@ extension HomeKotobaViewModel {
         var progress: WordsProgress?
         var allKotobas: [Kotoba] = []
         var currentKotobas: [Kotoba] = []
-        var viewState: ViewState = .loading
-        var buttonState: ButtonState = .idle
-        var toast: Toast?
-        var overlayLoading: Bool = false
-        var config: AsyncButtonView.Config {
-            .init(
-                title: buttonState.rawValue,
-                foregroundColor: .white,
-                background: buttonState.color,
-                symbolImage: buttonState.image
-            )
+        var loadState: TodayLoadState = .loading
+        var hasFinished = false
+        var errorMessage: String?
+        
+        var entries: [StudyEntry] { currentKotobas.map(\.studyEntry) }
+        
+        var nextLevel: String? {
+            guard let index = progress?.kotobaIndex, index < allKotobas.count else { return nil }
+            return allKotobas[index].jlptLevel.rawValue
         }
     }
     
     enum Action {
         case onAppear
-        case didTapAddKotoba
-        case didTapDeleteKotoba(Kotoba)
-    }
-    
-    enum ViewState {
-        case loaded
-        case loading
-        case error
-    }
-    
-    enum ButtonState: String {
-        case idle = "Add New Word"
-        case loading = "Adding Word..."
-        case success = "Successfully Added"
-        case error = "Failed to Add"
-        
-        var color: Color {
-            switch self {
-            case .idle:
-                return DefaultColors.Button.primaryBg
-            case .loading:
-                return .blue
-            case .success:
-                return .green
-            case .error:
-                return .red
-            }
-        }
-        
-        var image: String? {
-            switch self {
-            case .idle:
-                return "plus.arrow.trianglehead.clockwise"
-            case .loading:
-                return nil
-            case .success:
-                return "checkmark.circle.fill"
-            case .error:
-                return "xmark.circle.fill"
-            }
-        }
+        case didTapAdd
+        case didTapDelete(String)
+        case didDismissError
     }
 }

@@ -12,7 +12,6 @@ final class CoreKitTests: XCTestCase {
     }
 
     func test_example() {
-        // Add your test here
     }
 
 }

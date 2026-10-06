@@ -8,13 +8,9 @@
 import DomainKit
 import Observation
 import SwiftUI
-import ZeroDesignKit
 
 @Observable
 public final class ProfileViewModel {
-    @ObservationIgnored
-    @AppStorage("hasShownProfileIntro") var hasShowIntro: Bool = false
-    
     var state: State
     
     private var getWordsProgressUseCase: GetWordsProgressUseCase
@@ -34,70 +30,38 @@ public final class ProfileViewModel {
     
     func send(_ action: Action) {
         switch action {
-        case .didLoad:
-            getWordsProgress()
-            getVocabData()
-        case .didReload:
-            getWordsProgress()
-        }
-    }
-}
-
-// MARK: Private methods
-extension ProfileViewModel {
-    private func getWordsProgress() {
-        state.viewState = .loading
-        Task { @MainActor in
-            do {
-                state.progress = try getWordsProgressUseCase.execute().mapToDomain()
-                try await Task.sleep(for: .seconds(1))
-                state.viewState = .loaded
-                try await Task.sleep(for: .seconds(1))
-                if !self.hasShowIntro {
-                    withAnimation(.easeInOut) {
-                        self.state.showSpotlight = true
-                    }
-                    self.hasShowIntro = true
-                }
-            } catch {
-                state.viewState = .error
+        case .onAppear:
+            if state.totalKotoba == 0 || state.totalKanji == 0 {
+                fetchTotals()
             }
+            fetchProgress()
         }
     }
     
-    private func getVocabData() {
+    private func fetchProgress() {
         do {
-            state.kanjiData = try getKanjiDataUseCase.execute().mapToDomain()
-            state.kotobaData = try getKotobaDataUseCase.execute().mapToKotobas()
+            state.progress = try getWordsProgressUseCase.execute().mapToDomain()
+            state.loadState = state.totalKotoba > 0 && state.totalKanji > 0 ? .loaded : .failed
         } catch {
-            print("error when fetching vocab: ", error)
+            state.loadState = .failed
         }
+    }
+    
+    private func fetchTotals() {
+        state.totalKotoba = (try? getKotobaDataUseCase.execute().count) ?? 0
+        state.totalKanji = (try? getKanjiDataUseCase.execute().count) ?? 0
     }
 }
 
-// MARK: Objects
 extension ProfileViewModel {
     struct State {
-        var viewState: ViewState = .loading
+        var loadState: TodayLoadState = .loading
         var progress: WordsProgress?
-        var kotobaData: [Kotoba] = []
-        var kanjiData: [Kanji] = []
-        var activities: [ContentGridData] {
-            guard let progress, !kotobaData.isEmpty, !kanjiData.isEmpty else { return [] }
-            return progress.mapToContent(totalKotoba: kotobaData.count, totalKanji: kanjiData.count)
-        }
-        var showSpotlight: Bool = false
-        var currentSpot = 0
+        var totalKotoba = 0
+        var totalKanji = 0
     }
     
     enum Action {
-        case didLoad
-        case didReload
-    }
-    
-    enum ViewState {
-        case loaded
-        case loading
-        case error
+        case onAppear
     }
 }

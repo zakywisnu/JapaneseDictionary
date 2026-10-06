@@ -57,7 +57,6 @@ public final class StandardVocabRepository: VocabRepository {
         
         let data = try Data(contentsOf: fileURL)
         
-        // Parse the JSON data
         let decoder = JSONDecoder()
         let kanjiWanikaniData = try decoder.decode(KanjiWKDataResponse.self, from: data)
         let sortedKanji = kanjiWanikaniData.sorted {
@@ -92,8 +91,6 @@ public final class StandardVocabRepository: VocabRepository {
                 jlptLevel = .n1
             }
             
-            // Estimate stroke count based on character complexity
-            // This is a rough estimation - you might want to use a more accurate method
             
             return KanjiDataModel(
                 id: UUID().uuidString,

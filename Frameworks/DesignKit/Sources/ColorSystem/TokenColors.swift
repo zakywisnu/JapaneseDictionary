@@ -2,7 +2,6 @@
 
 import SwiftUI
 
-/// Semantic color tokens for consistent UI elements
 public enum TokenColors {
     public enum Text {
         public static let primary = SystemColors.label

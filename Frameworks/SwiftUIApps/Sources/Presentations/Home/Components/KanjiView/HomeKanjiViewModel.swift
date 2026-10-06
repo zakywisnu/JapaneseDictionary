@@ -8,7 +8,6 @@
 import Observation
 import SwiftUI
 import DomainKit
-import ZeroDesignKit
 
 @Observable
 final class HomeKanjiViewModel {
@@ -37,106 +36,79 @@ final class HomeKanjiViewModel {
     }
     
     @MainActor
-    func send(_ action: Action) async throws {
+    func send(_ action: Action) {
         switch action {
         case .onAppear:
-            fetchProgress()
-            fetchAllKanji()
-            fetchCurrentKanji()
-        case .didTapAddKanji:
-            state.buttonState = .loading
-            try await Task.sleep(for: .seconds(1))
-            await addKanji()
-            try await Task.sleep(for: .seconds(2))
-            state.buttonState = .idle
-            fetchProgress()
-            fetchCurrentKanji()
-        case let .didTapDeleteKanji(kanji):
-            state.overlayLoading = true
-            try await Task.sleep(for: .seconds(1))
+            if state.allKanjis.isEmpty {
+                fetchAllKanji()
+            }
+            reload()
+        case .didTapAdd:
+            addKanji()
+            reload()
+        case let .didTapDelete(id):
+            guard let kanji = state.currentKanjis.first(where: { $0.id == id }) else { return }
             deleteKanji(kanji)
-            fetchProgress()
-            fetchCurrentKanji()
+            reload()
+        case .didDismissError:
+            state.errorMessage = nil
         }
     }
 }
 
 extension HomeKanjiViewModel {
+    private func reload() {
+        fetchProgress()
+        fetchCurrentKanji()
+    }
+    
     private func fetchAllKanji() {
         do {
-            let result = try getKanjiDataUseCase.execute()
+            state.allKanjis = try getKanjiDataUseCase.execute()
                 .mapToDomain()
-                .sorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
-            state.allKanjis = result
+                .stableSorted(by: { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue })
         } catch {
-            print("all kanji error: ", error)
-            print("all kanji error localized: ", error.localizedDescription)
+            state.loadState = .failed
         }
     }
     
     private func fetchProgress() {
-        do {
-            let result = try getWordsProgressUseCase.execute().mapToDomain()
-            state.progress = result
-        } catch {
-            print("fetch progress error: ", error)
-            print("fetch progress localized: ", error.localizedDescription)
-        }
+        state.progress = try? getWordsProgressUseCase.execute().mapToDomain()
     }
     
     private func fetchCurrentKanji() {
-        state.viewState = .loading
         do {
             let result = try getAllKanjiUseCase.execute().mapToDomain()
             state.currentKanjis = result
-                .compactMap { getTodayKanji($0) }
-                .sorted(by: { ($0.addedIndex ?? 0) < ($1.addedIndex ?? 1) })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.state.viewState = .loaded
-            }
+                .filter { $0.dateAdded.map { Calendar.current.isDateInToday($0) } ?? false }
+                .sorted(by: { ($0.addedIndex ?? 0) > ($1.addedIndex ?? 0) })
+            state.loadState = state.allKanjis.isEmpty ? .failed : .loaded
         } catch {
-            state.viewState = .error
+            state.loadState = .failed
         }
     }
     
     private func deleteKanji(_ kanji: Kanji) {
-        defer {
-            state.overlayLoading = false
-        }
         do {
             try deleteKanjiUseCase.execute(param: kanji.asKanjiParam)
-            // show toast success
-            state.toast = Toast(message: "Successfully deleted kanji\nPlease refresh when you switch tabs", style: .success, isShowXMark: false)
         } catch {
-            print("delete kotoba error: ", error)
-            print("delete kotoba error localized: ", error.localizedDescription)
-            // show toast error
-            state.toast = Toast(message: "Failed to delete kanji", style: .error, isShowXMark: false)
+            state.errorMessage = "\(kanji.kanji) couldn't be removed. Try again."
         }
     }
     
-    private func getTodayKanji(_ kanjis: Kanji) -> Kanji? {
-        guard let date = kanjis.dateAdded else { return nil }
-        return Calendar.current.isDate(date, inSameDayAs: Date()) ? kanjis : nil
-    }
-    
-    @MainActor
-    private func addKanji() async {
-        guard let progress = state.progress, let (kanjiParam, progressParam) = validateParam(progress) else {
-            state.buttonState = .error
+    private func addKanji() {
+        guard let progress = state.progress else {
+            state.errorMessage = "Your progress couldn't be read, so no kanji was added. Try again."
             return
         }
-        
+        guard let (kanjiParam, progressParam) = validateParam(progress) else {
+            state.hasFinished = true
+            return
+        }
         do {
             try addKanjiUseCase.execute(param: kanjiParam, progress: progressParam)
-            state.buttonState = .success
-            state.toast = Toast(
-                message: "Successfully added kanji\nPlease refresh when you switch tabs",
-                style: .success,
-                isShowXMark: false
-            )
         } catch {
-            state.buttonState = .error
+            state.errorMessage = "The next kanji couldn't be added. Try again."
         }
     }
     
@@ -173,25 +145,18 @@ extension HomeKanjiViewModel {
         return (kanjiParam, progressParam)
     }
     
+    /// Skips kanji that were already added today, starting from the saved index.
     private func fetchNextKanji() -> (Kanji?, Int) {
-        guard let progress = state.progress else {
+        guard let progress = state.progress, progress.kanjiIndex < state.allKanjis.count else {
             return (nil, state.progress?.kanjiIndex ?? 0)
         }
-        let firstIndex = progress.kanjiIndex
-        var kanji: Kanji?
-        var latestIndex: Int = progress.kanjiIndex
-        /// check if the next words/kotoba isn't already added in the current collection
-        /// if it's already added then proceed next
-        for index in firstIndex..<state.allKanjis.count {
-            if !state.currentKanjis.contains(where: { kanji in
-                return kanji.id == state.allKanjis[index].id
-            }) {
-                kanji = state.allKanjis[index]
-                latestIndex = max(index, latestIndex)
-                break
+        for index in progress.kanjiIndex..<state.allKanjis.count {
+            let candidate = state.allKanjis[index]
+            if !state.currentKanjis.contains(where: { $0.kanji == candidate.kanji }) {
+                return (candidate, max(index, progress.kanjiIndex))
             }
         }
-        return (kanji, latestIndex)
+        return (nil, progress.kanjiIndex)
     }
 }
 
@@ -200,64 +165,22 @@ extension HomeKanjiViewModel {
         var progress: WordsProgress?
         var allKanjis: [Kanji] = []
         var currentKanjis: [Kanji] = []
-        var viewState: ViewState = .loading
-        var toast: Toast?
-        var overlayLoading: Bool = false
-        var buttonState: ButtonState = .idle
-        var config: AsyncButtonView.Config {
-            .init(
-                title: buttonState.rawValue,
-                foregroundColor: .white,
-                background: buttonState.color,
-                symbolImage: buttonState.image
-            )
+        var loadState: TodayLoadState = .loading
+        var hasFinished = false
+        var errorMessage: String?
+        
+        var entries: [StudyEntry] { currentKanjis.map(\.studyEntry) }
+        
+        var nextLevel: String? {
+            guard let index = progress?.kanjiIndex, index < allKanjis.count else { return nil }
+            return allKanjis[index].jlptLevel.rawValue
         }
     }
     
     enum Action {
         case onAppear
-        case didTapAddKanji
-        case didTapDeleteKanji(Kanji)
-    }
-    
-    enum ViewState {
-        case loaded
-        case loading
-        case error
-    }
-    
-    enum ButtonState: String {
-        case idle = "Add New Word"
-        case loading = "Adding Word..."
-        case success = "Successfully Added"
-        case error = "Failed to Add"
-        
-        var color: Color {
-            switch self {
-            case .idle:
-                return DefaultColors.Button.primaryBg
-            case .loading:
-                return .blue
-            case .success:
-                return .green
-            case .error:
-                return .red
-            }
-        }
-        
-        var image: String? {
-            switch self {
-            case .idle:
-                return "plus.arrow.trianglehead.clockwise"
-            case .loading:
-                return nil
-            case .success:
-                return "checkmark.circle.fill"
-            case .error:
-                return "xmark.circle.fill"
-            }
-        }
+        case didTapAdd
+        case didTapDelete(String)
+        case didDismissError
     }
 }
-
-

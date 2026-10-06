@@ -6,101 +6,64 @@
 //
 
 import Foundation
+import Observation
 import DomainKit
-import ZeroDesignKit
 
 @Observable
 public class KotobaWordsCollectionViewModel {
     var state: State
     
     private let getAllKotobaUseCase: GetAllKotobaUseCase
-    private let getWordsProgressUseCase: GetWordsProgressUseCase
     private let deleteKotobaUseCase: DeleteKotobaUseCase
     
     public init(
         getAllKotobaUseCase: GetAllKotobaUseCase,
-        getWordsProgressUseCase: GetWordsProgressUseCase,
         deleteKotobaUseCase: DeleteKotobaUseCase
     ) {
         self.state = .init()
         self.getAllKotobaUseCase = getAllKotobaUseCase
-        self.getWordsProgressUseCase = getWordsProgressUseCase
         self.deleteKotobaUseCase = deleteKotobaUseCase
     }
     
-    func send(_ action: Action) async {
+    func send(_ action: Action) {
         switch action {
         case .onAppear:
-            Task {
-                fetchProgress()
-                fetchCurrentKotoba()
+            fetchKotobas()
+        case let .didTapDelete(id):
+            guard let kotoba = state.kotobas.first(where: { $0.id == id }) else { return }
+            do {
+                try deleteKotobaUseCase.execute(kotoba: kotoba.asKotobaParam)
+            } catch {
+                state.errorMessage = "\(kotoba.kanji) couldn't be removed. Try again."
             }
-        case .didTapDelete:
-            state.overlayLoading.toggle()
-        }
-    }
-}
-
-extension KotobaWordsCollectionViewModel {
-    private func fetchProgress() {
-        do {
-            let result = try getWordsProgressUseCase.execute().mapToDomain()
-            state.progress = result
-        } catch {
-            print("fetch progress error: ", error)
-            print("fetch progress localized: ", error.localizedDescription)
+            fetchKotobas()
+        case .didDismissError:
+            state.errorMessage = nil
         }
     }
     
-    private func fetchCurrentKotoba() {
-        state.viewState = .loading
+    private func fetchKotobas() {
         do {
-            let result = try getAllKotobaUseCase.execute().mapToKotobas()
-            state.currentKotobas = result
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.state.viewState = .loaded
-            }
+            state.kotobas = try getAllKotobaUseCase.execute()
+                .mapToKotobas()
+                .sorted(by: { ($0.dateAdded ?? .distantPast) > ($1.dateAdded ?? .distantPast) })
+            state.loadState = .loaded
         } catch {
-            print("current kotoba error: ", error)
-            print("current kotoba error localized: ", error.localizedDescription)
-            state.viewState = .error
-        }
-    }
-    
-    private func deleteKotoba(_ kotoba: Kotoba) {
-        defer {
-            state.overlayLoading = false
-        }
-        do {
-            try deleteKotobaUseCase.execute(kotoba: kotoba.asKotobaParam)
-            // show toast success
-            state.toast = Toast(message: "Successfully deleted kotoba\nPlease refresh when you switch tabs", style: .success, isShowXMark: false)
-        } catch {
-            print("delete kotoba error: ", error)
-            print("delete kotoba error localized: ", error.localizedDescription)
-            // show toast error
-            state.toast = Toast(message: "Failed to delete kotoba", style: .error, isShowXMark: false)
+            state.loadState = .failed
         }
     }
 }
 
 public extension KotobaWordsCollectionViewModel {
     struct State {
-        var progress: WordsProgress?
-        var currentKotobas: [Kotoba] = []
-        var viewState: ViewState = .loading
-        var overlayLoading: Bool = false
-        var toast: Toast?
+        var kotobas: [Kotoba] = []
+        var loadState: TodayLoadState = .loading
+        var errorMessage: String?
     }
     
     enum Action {
         case onAppear
-        case didTapDelete
-    }
-    
-    enum ViewState {
-        case loaded
-        case loading
-        case error
+        case didTapDelete(String)
+        case didDismissError
     }
 }

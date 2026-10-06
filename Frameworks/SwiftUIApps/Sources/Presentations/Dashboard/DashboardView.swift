@@ -6,21 +6,23 @@
 //
 
 import SwiftUI
-import ZeroDesignKit
-import DomainKit
 
 struct DashboardView: View {
-    @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var activeTab: AppTabsViewModel
     
     var body: some View {
-        AppTabBar(activeTab: $activeTab.appTab)
-            .onChange(of: activeTab.appTab) { oldValue, newValue in
-                activeTab.appTab = newValue
+        TabView(selection: $activeTab.appTab) {
+            ForEach(AppTabs.allCases, id: \.self) { tab in
+                tab.view()
+                    .tabItem { Label(tab.title, systemImage: tab.symbolImage) }
+                    .tag(tab)
             }
+        }
+        .tint(Forest.moss)
     }
 }
 
 #Preview {
     DashboardView()
+        .environmentObject(AppTabsViewModel(appTab: .home))
 }

@@ -12,7 +12,6 @@ final class DataKitTests: XCTestCase {
     }
 
     func test_example() {
-        // Add your test here
     }
 
 }

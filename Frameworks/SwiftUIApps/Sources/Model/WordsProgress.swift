@@ -8,7 +8,6 @@
 import Foundation
 import DomainKit
 import DataKit
-import ZeroDesignKit
 
 public struct WordsProgress: Codable {
     public var id: String
@@ -35,74 +34,6 @@ public struct WordsProgress: Codable {
     
     public var getKanjiProgress: String {
         kanjiLevel.rawValue
-    }
-    
-    public var kotobaLatestUpdated: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
-        return formatter.string(from: lastKotobaUpdated)
-    }
-    
-    public var kanjiLatestUpdated: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
-        return formatter.string(from: lastKanjiUpdated)
-    }
-    
-    public func mapToContent(totalKotoba: Int, totalKanji: Int) -> [ContentGridData] {
-        let contents: [ContentGridData] = [
-            ContentGridData(
-                icon: "character.textbox",
-                iconColor: .green,
-                label: "Kotoba",
-                primaryText: "\(kotobaProgress)",
-                backgroundColor: .green.opacity(0.2),
-                bottomType: .level(
-                    currentProgress: Double(kotobaProgress),
-                    maxProgress: Double(totalKotoba),
-                    label: "\(totalKotoba)",
-                    color: .black
-                )
-            ),
-            ContentGridData(
-                icon: "character.magnify",
-                iconColor: .red,
-                label: "Kanji",
-                primaryText: "\(kanjiProgress)",
-                backgroundColor: .red.opacity(0.2),
-                bottomType: .level(
-                    currentProgress: Double(kanjiProgress),
-                    maxProgress: Double(totalKanji),
-                    label: "\(totalKanji)",
-                    color: .black
-                )
-            ),
-            ContentGridData(
-                icon: "flame.fill",
-                iconColor: .yellow,
-                label: "Kotoba",
-                primaryText: getKotobaProgress,
-                backgroundColor: .yellow.opacity(0.2),
-                bottomType: .metrics(
-                    icon: .init(systemName: "calendar.badge.clock"),
-                    label: "\(kotobaLatestUpdated)",
-                    color: .black
-                )
-            ),
-            ContentGridData(
-                icon: "flame.fill",
-                iconColor: .orange,
-                label: "Kanji",
-                primaryText: getKanjiProgress,
-                backgroundColor: .orange.opacity(0.2),
-                bottomType: .metrics(
-                    icon: .init(systemName: "calendar.badge.clock"),
-                    label: "\(kanjiLatestUpdated)",
-                    color: .black
-                )
-            )
-        ]
-        return contents
     }
 }
 

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import ZeroCoreKit
-import ZeroDesignKit
 
 public struct AppSplashScreen: View {
     @EnvironmentObject var router: AppRouter
@@ -16,28 +15,18 @@ public struct AppSplashScreen: View {
     public init() {}
     
     public var body: some View {
-        VStack {
-            Text("言葉の森")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(DefaultColors.primary)
-            
-            Text("Your gateway to mastering Japanese.")
-                .font(.body)
-                .foregroundColor(DefaultColors.secondary)
+        VStack(spacing: Forest.Space.l) {
+            PracticeCells(text: "言葉の森", cellSize: 64, scalesWithText: false)
+            Text("JLPT words and kanji, one at a time")
+                .font(.subheadline)
+                .foregroundStyle(Forest.inkMuted)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DefaultColors.background.opacity(0.4))
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                withAnimation {
-                    if isOnboardingComplete {
-                        router.setRoot(.dashboard, hideNavBar: true)
-                    } else {
-                        router.setRoot(.onboarding, hideNavBar: true)
-//                        isOnboardingComplete = true
-                    }
-                }
+        .background(Forest.canvas)
+        .task {
+            try? await Task.sleep(for: .milliseconds(600))
+            withAnimation {
+                router.setRoot(isOnboardingComplete ? .dashboard : .onboarding, hideNavBar: true)
             }
         }
     }
@@ -59,12 +48,7 @@ struct FirstAppearanceActionModifier: ViewModifier {
 }
 
 public extension View {
-    /// Adds an action to perform when this view appears for the first time.
-    ///
-    /// - Parameter action: The action to perform. If `action` is `nil`, the
-    ///   call has no effect.
-    ///
-    /// - Returns: A view that triggers `action` when this view appears for the first time.
+    /// Unlike `onAppear`, runs only once even when the view reappears.
     func onFirstAppear(perform action: (() -> Void)? = nil) -> some View {
         modifier(FirstAppearanceActionModifier(action: action))
     }

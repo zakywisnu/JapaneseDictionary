@@ -5,7 +5,6 @@
 //  Created by Ahmad Zaky W on 19/05/25.
 //
 
-import ZeroDesignKit
 import SwiftUI
 
 public class AppTabsViewModel: ObservableObject {
@@ -16,7 +15,7 @@ public class AppTabsViewModel: ObservableObject {
     }
 }
 
-public enum AppTabs: TabItem, CaseIterable {
+public enum AppTabs: Hashable, CaseIterable {
     case home
     case collection
     case profile
@@ -24,57 +23,35 @@ public enum AppTabs: TabItem, CaseIterable {
     public var title: String {
         switch self {
         case .home:
-            "Home"
+            "Today"
         case .collection:
             "Collection"
         case .profile:
-            "Profile"
+            "Progress"
         }
     }
     
+    /// Leaf for Today: the daily word is what grows the forest (see DESIGN.md).
     public var symbolImage: String {
         switch self {
         case .home:
-            "house"
+            "leaf"
         case .collection:
-            "square.on.square"
+            "books.vertical"
         case .profile:
-            "person.circle"
+            "chart.bar"
         }
     }
     
-    public var activeBackgroundColor: Color {
-        DefaultColors.primary
-    }
-    
-    public var index: Int {
-        Self.allCases.firstIndex(of: self) ?? 0
-    }
-    
-    public func view() -> some View {
+    @ViewBuilder
+    func view() -> some View {
         switch self {
         case .home:
-            AppComposer.shared.composeHome()
-                .id(AppTabs.home)
+            AppComposer.shared.makeHomeView()
         case .collection:
-            AppComposer.shared.composeCollection()
-                .id(AppTabs.collection)
+            AppComposer.shared.makeCollectionView()
         case .profile:
             AppComposer.shared.makeProfileView()
         }
-    }
-}
-
-private extension AppComposer {
-    @ViewBuilder
-    func composeCollection() -> some View {
-        let viewModel = WordsCollectionViewModel()
-        WordsCollectionView(viewModel: viewModel)
-    }
-    
-    @ViewBuilder
-    func composeHome() -> some View {
-        let viewModel = HomeViewModel()
-        HomeView(viewModel: viewModel)
     }
 }

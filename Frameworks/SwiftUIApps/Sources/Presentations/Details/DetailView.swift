@@ -6,195 +6,119 @@
 //
 
 import SwiftUI
-import DomainKit
-import ZeroDesignKit
 
 public struct DetailView: View {
     @EnvironmentObject var router: AppRouter
     @State private var viewModel: DetailViewModel
+    @State private var isConfirmingDelete = false
     
     public init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
     }
     
     public var body: some View {
-        HeaderView(
-            config: .init(title: viewModel.state.type.title)) {
-                router.pop()
-            } trailingItems: {
-                HStack {
-                    if let kanji = viewModel.state.kanji {
-                        levelView(kanji.jlptLevel.rawValue)
-                    } else if let kotoba = viewModel.state.kotoba {
-                        levelView(kotoba.jlptLevel.rawValue)
-                    }
-                }
-            } content: {
-                VStack(spacing: 0) {
-                    ScrollView(.vertical) {
-                        if let kanji = viewModel.state.kanji {
-                            kanjiContent(kanji)
-                        }
-                        
-                        if let kotoba = viewModel.state.kotoba {
-                            kotobaContent(kotoba)
-                        }
-                    }
-                    .scrollBounceBehavior(.basedOnSize)
-                    .scrollIndicators(.hidden)
-                    
-                    DrawerButton(title: "Delete", config: $viewModel.state.drawerButtonConfig)
-                        .padding(16)
-                        .background(DefaultColors.background.opacity(0.4))
+        ScrollView {
+            VStack(spacing: Forest.Space.xl) {
+                if let kanji = viewModel.state.kanji {
+                    specimen(headword: kanji.kanji, reading: nil, level: kanji.jlptLevel.rawValue)
+                    definitionCard([
+                        ("Meanings", kanji.meanings),
+                        ("On'yomi", kanji.onyomi),
+                        ("Kun'yomi", kanji.kunyomi),
+                        ("Strokes", kanji.stroke > 0 ? ["\(kanji.stroke)"] : [])
+                    ])
+                } else if let kotoba = viewModel.state.kotoba {
+                    let entry = kotoba.studyEntry
+                    specimen(headword: entry.headword, reading: entry.reading, level: kotoba.jlptLevel.rawValue)
+                    definitionCard([("Meanings", kotoba.english)])
                 }
             }
-            .background(DefaultColors.background.opacity(0.4))
-            .loading(viewModel.state.isLoading)
-            .alertDrawer(
-                config: $viewModel.state.drawerButtonConfig,
-                primaryTitle: "Delete",
-                secondaryTitle: "Cancel") {
-                    viewModel.send(.didTapDelete({
-                        router.pop()
-                    }))
-                } onSecondaryTapped: {
-                    // Do Nothing
-                } content: {
-                    VStack(alignment: .center, spacing: 8) {
-                        Image(systemName: "exclamationmark.triangle")
-                            .resizable()
-                            .frame(width: 64, height: 64)
-                            .foregroundStyle(.red)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        Text("Are you sure?")
-                            .font(.title2.bold())
-                        
-                        Text("You can't undo this action.")
-                            .foregroundStyle(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(width: 300)
-                    }
+            .padding(Forest.Space.l)
+        }
+        .background(Forest.canvas)
+        .navigationTitle(viewModel.state.type.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Remove from collection", systemImage: "trash", role: .destructive) {
+                    isConfirmingDelete = true
                 }
-    }
-    
-    @ViewBuilder
-    func kanjiContent(_ kanji: Kanji) -> some View {
-        VStack {
-            Text(kanji.kanji)
-                .font(.largeTitle)
-                .padding()
-                .background(DefaultColors.background)
-                .clipShape(.rect(cornerRadius: 16))
-                .padding()
-                .fixedSize()
-            
-            composeSections("Strokes", content: "\(kanji.stroke) strokes")
-            composeSectionLists("Onyomi", content: kanji.onyomi)
-            composeSectionLists("Kunyomi", content: kanji.kunyomi)
-            composeSectionLists("Meanings", content: kanji.meanings)
-        }
-        .padding(16)
-        .background(.white)
-        .clipShape(.rect(cornerRadius: 16))
-        .padding(16)
-        .frame(maxHeight: .infinity)
-    }
-    
-    @ViewBuilder
-    func kotobaContent(_ kotoba: Kotoba) -> some View {
-        VStack(spacing: 16) {
-            Text(kotoba.kanji)
-                .font(.largeTitle)
-                .padding()
-                .background(DefaultColors.background)
-                .clipShape(.rect(cornerRadius: 16))
-                .padding()
-                .fixedSize()
-            
-            composeSections("Furigana", content: kotoba.furigana)
-            composeSectionLists("Meanings", content: kotoba.english)
-            Spacer()
-        }
-        .padding(16)
-        .background(.white)
-        .clipShape(.rect(cornerRadius: 16))
-        .padding(16)
-        .frame(height: 450)
-    }
-    
-    @ViewBuilder
-    private func levelView(_ level: String) -> some View {
-        Text(level)
-            .font(.body.bold())
-            .foregroundStyle(.white)
-            .padding(8)
-            .background(Color.red)
-            .clipShape(.rect(cornerRadius: 8))
-    }
-    
-    @ViewBuilder
-    private func composeSections(_ title: String, content: String) -> some View {
-        HStack(spacing: 8) {
-            Text(title)
-                .lineLimit(nil)
-                .multilineTextAlignment(.leading)
-                .font(.callout)
-                .padding(.leading, 8)
-                .frame(width: 100, alignment: .leading)
-                .padding([.leading, .vertical], 8)
-            
-            Text(":")
-                .padding(.vertical, 8)
-                .font(.caption)
-            
-            Text(content)
-                .font(.callout)
-                .lineLimit(nil)
-                .multilineTextAlignment(.leading)
-        }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(DefaultColors.background)
-        .clipShape(.rect(cornerRadius: 16))
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
-    }
-    
-    @ViewBuilder
-    private func composeSectionLists(_ title: String, content: [String]) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text(title)
-                .lineLimit(nil)
-                .multilineTextAlignment(.leading)
-                .font(.callout)
-                .padding(.leading, 8)
-                .frame(width: 100, alignment: .leading)
-                .padding([.leading, .vertical], 8)
-            
-            Text(":")
-                .padding(.vertical, 8)
-                .font(.caption)
-            
-            VStack(alignment: .leading) {
-                ForEach(content, id: \.self) { data in
-                    HStack(spacing: 8) {
-                        Text("•")
-                            .font(.body)
-                        
-                        Text(data)
-                            .font(.callout)
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.leading)
+                .tint(Forest.danger)
+                .confirmationDialog(
+                    "Remove this \(viewModel.state.type.noun) from your collection?",
+                    isPresented: $isConfirmingDelete,
+                    titleVisibility: .visible
+                ) {
+                    Button("Remove", role: .destructive) {
+                        viewModel.send(.didConfirmDelete({ router.pop() }))
                     }
+                } message: {
+                    Text("It comes off your progress and will be the next one offered on Today.")
                 }
             }
-            .padding(.vertical, 4)
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(DefaultColors.background)
-        .clipShape(.rect(cornerRadius: 16))
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
+        .alert(
+            "Something went wrong",
+            isPresented: Binding(get: { viewModel.state.errorMessage != nil }, set: { _ in viewModel.send(.didDismissError) })
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.state.errorMessage ?? "")
+        }
+    }
+    
+    private func specimen(headword: String, reading: String?, level: String) -> some View {
+        VStack(spacing: Forest.Space.m) {
+            ViewThatFits(in: .horizontal) {
+                ForEach([120, 96, 72, 56, 44] as [CGFloat], id: \.self) { size in
+                    PracticeCells(text: headword, cellSize: size)
+                }
+                Text(headword)
+                    .font(.headword(40, relativeTo: .largeTitle))
+                    .foregroundStyle(Forest.ink)
+                    .multilineTextAlignment(.center)
+            }
+            
+            if let reading {
+                Text(reading)
+                    .font(.title3)
+                    .foregroundStyle(Forest.inkMuted)
+                    .textSelection(.enabled)
+            }
+            LevelTag(level: level)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, Forest.Space.xl)
+        .padding(.horizontal, Forest.Space.l)
+        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+    }
+    
+    private func definitionCard(_ rows: [(title: String, values: [String])]) -> some View {
+        let visible = rows.filter { !$0.values.isEmpty }
+        return VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(visible.enumerated()), id: \.offset) { index, row in
+                if index > 0 {
+                    Rectangle()
+                        .fill(Forest.line)
+                        .frame(height: 1)
+                        .padding(.leading, Forest.Space.l)
+                }
+                VStack(alignment: .leading, spacing: Forest.Space.xs) {
+                    Text(row.title)
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Forest.inkMuted)
+                    Text(row.values.joined(separator: ", "))
+                        .font(.body)
+                        .foregroundStyle(Forest.ink)
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(Forest.Space.l)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
     }
 }
 
@@ -202,14 +126,11 @@ public struct DetailView: View {
     AppComposer.shared.makeDetailView(
         .init(
             kotoba: .init(
-                id: "123",
-                kanji: "asd",
-                furigana: "asd",
-                english: [
-                    "asd",
-                    "asd"
-                ],
-                jlptLevel: .n3
+                id: "preview",
+                kanji: "原則",
+                furigana: "げんそく",
+                english: ["principle", "general rule"],
+                jlptLevel: .n1
             ),
             kanji: nil
         )

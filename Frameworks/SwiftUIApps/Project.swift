@@ -14,7 +14,7 @@ func targets() -> [Target] {
         ],
         resources: ["Resources/**"],
         deploymentTargets: .iOS("18.0"),
-        withUnitTest: false
+        withUnitTest: true
     )
     return target
 }

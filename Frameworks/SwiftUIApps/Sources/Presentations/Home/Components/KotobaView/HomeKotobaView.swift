@@ -28,7 +28,11 @@ struct HomeKotobaView: View {
                 guard let kotoba = viewModel.state.currentKotobas.first(where: { $0.id == entry.id }) else { return }
                 router.push(.detail(.init(kotoba: kotoba, kanji: nil)), hideNavBar: false)
             },
-            onRetry: { viewModel.send(.onAppear) }
+            onRetry: { viewModel.send(.onAppear) },
+            onReview: {
+                let session = ReviewSession(kind: .words, items: viewModel.state.currentKotobas.map(ReviewItem.init(word:)))
+                router.push(.review(session), hideNavBar: false)
+            }
         )
         .onAppear { viewModel.send(.onAppear) }
         .alert(

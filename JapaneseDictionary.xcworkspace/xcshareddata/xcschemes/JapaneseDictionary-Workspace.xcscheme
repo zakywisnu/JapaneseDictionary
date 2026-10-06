@@ -122,6 +122,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5056039024BA8D7438BDD132"
+               BuildableName = "SwiftUIAppsTests.xctest"
+               BlueprintName = "SwiftUIAppsTests"
+               ReferencedContainer = "container:Frameworks/SwiftUIApps/SwiftUIApps.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "039961F853CEDA207A6E6FB7"
                BuildableName = "ZeroCoreKit.framework"
                BlueprintName = "ZeroCoreKit"
@@ -187,6 +201,17 @@
                BuildableName = "JapaneseDictionaryTests.xctest"
                BlueprintName = "JapaneseDictionaryTests"
                ReferencedContainer = "container:JapaneseDictionary/JapaneseDictionary.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5056039024BA8D7438BDD132"
+               BuildableName = "SwiftUIAppsTests.xctest"
+               BlueprintName = "SwiftUIAppsTests"
+               ReferencedContainer = "container:Frameworks/SwiftUIApps/SwiftUIApps.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

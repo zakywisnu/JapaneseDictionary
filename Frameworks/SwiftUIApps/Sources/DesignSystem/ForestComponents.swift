@@ -141,10 +141,51 @@ struct StudyRow: View {
             if showsLevel {
                 LevelTag(level: entry.level)
             }
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Forest.inkMuted)
+                .padding(.top, Forest.Space.s)
+                .accessibilityHidden(true)
         }
         .padding(.vertical, Forest.Space.xs)
         .contentShape(.rect)
         .accessibilityElement(children: .combine)
+    }
+}
+
+private struct StudyRemovalActions: ViewModifier {
+    let entry: StudyEntry
+    let noun: String
+    let onDelete: (StudyEntry) -> Void
+    @State private var isConfirming = false
+
+    func body(content: Content) -> some View {
+        content
+            .swipeActions(allowsFullSwipe: false) {
+                Button("Remove") { isConfirming = true }
+                    .tint(Forest.danger)
+            }
+            .contextMenu {
+                Button("Remove from collection", systemImage: "trash", role: .destructive) {
+                    isConfirming = true
+                }
+            }
+            .confirmationDialog(
+                "Remove \(entry.headword) from your collection?",
+                isPresented: $isConfirming,
+                titleVisibility: .visible
+            ) {
+                Button("Remove", role: .destructive) { onDelete(entry) }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("This \(noun) will be removed from your collection and progress, then offered next on Today.")
+            }
+    }
+}
+
+extension View {
+    func studyRemovalActions(entry: StudyEntry, noun: String, onDelete: @escaping (StudyEntry) -> Void) -> some View {
+        modifier(StudyRemovalActions(entry: entry, noun: noun, onDelete: onDelete))
     }
 }
 

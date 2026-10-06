@@ -73,15 +73,7 @@ struct CollectionListView: View {
                         }
                         .buttonStyle(.plain)
                         .listRowBackground(Forest.surface)
-                        .swipeActions {
-                            Button("Remove", role: .destructive) { onDelete(entry) }
-                                .tint(Forest.danger)
-                        }
-                        .contextMenu {
-                            Button("Remove from collection", systemImage: "trash", role: .destructive) {
-                                onDelete(entry)
-                            }
-                        }
+                        .studyRemovalActions(entry: entry, noun: noun, onDelete: onDelete)
                     }
                 } header: {
                     HStack {

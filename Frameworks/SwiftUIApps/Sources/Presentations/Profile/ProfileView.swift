@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct ProfileView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @EnvironmentObject var appTabs: AppTabsViewModel
     @State private var viewModel: ProfileViewModel
     
@@ -50,7 +51,7 @@ public struct ProfileView: View {
     private func loaded(_ progress: WordsProgress) -> some View {
         if progress.kotobaProgress == 0 && progress.kanjiProgress == 0 {
             StateMessage(
-                title: "Nothing learned yet",
+                title: "Nothing added yet",
                 message: "Add your first word or kanji on Today and your progress starts here.",
                 actionTitle: "Go to Today",
                 action: { appTabs.appTab = .home }
@@ -60,32 +61,32 @@ public struct ProfileView: View {
         
         trackCard(
             noun: "Words",
-            learned: progress.kotobaProgress,
+            added: progress.kotobaProgress,
             total: viewModel.state.totalKotoba,
             level: progress.kotobaLevel.rawValue,
             lastAdded: progress.kotobaProgress > 0 ? progress.lastKotobaUpdated : nil
         )
         trackCard(
             noun: "Kanji",
-            learned: progress.kanjiProgress,
+            added: progress.kanjiProgress,
             total: viewModel.state.totalKanji,
             level: progress.kanjiLevel.rawValue,
             lastAdded: progress.kanjiProgress > 0 ? progress.lastKanjiUpdated : nil
         )
         
-        Text("Progress is saved on this iPhone only. Deleting the app deletes it.")
+        Text("Counts show items in your collection. Progress is saved on this iPhone only. Deleting the app deletes it.")
             .font(.footnote)
             .foregroundStyle(Forest.inkMuted)
     }
     
-    private func trackCard(noun: String, learned: Int, total: Int, level: String, lastAdded: Date?) -> some View {
+    private func trackCard(noun: String, added: Int, total: Int, level: String, lastAdded: Date?) -> some View {
         VStack(alignment: .leading, spacing: Forest.Space.m) {
-            Text(noun)
+            Text("\(noun) in collection")
                 .font(.headline)
                 .foregroundStyle(Forest.ink)
             
             HStack(alignment: .firstTextBaseline, spacing: Forest.Space.xs) {
-                Text(learned.formatted())
+                Text(added.formatted())
                     .font(.system(.largeTitle, design: .rounded).weight(.semibold))
                     .foregroundStyle(Forest.ink)
                 Text("of \(total.formatted())")
@@ -94,12 +95,16 @@ public struct ProfileView: View {
             }
             .accessibilityElement(children: .combine)
             
-            ProgressTrack(value: total > 0 ? Double(learned) / Double(total) : 0)
+            ProgressTrack(value: total > 0 ? Double(added) / Double(total) : 0)
             
-            HStack {
-                labeled("Studying", value: "JLPT \(level)")
-                Spacer()
+            let layout = dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.m))
+                : AnyLayout(HStackLayout(alignment: .top, spacing: Forest.Space.l))
+            layout {
+                labeled("Current level", value: "JLPT \(level)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 labeled("Last added", value: lastAdded?.formatted(date: .abbreviated, time: .omitted) ?? "Not yet")
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding(Forest.Space.l)
@@ -115,6 +120,7 @@ public struct ProfileView: View {
             Text(value)
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(Forest.ink)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
     }

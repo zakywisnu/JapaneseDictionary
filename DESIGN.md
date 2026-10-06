@@ -72,7 +72,7 @@ Every headword sits in practice squares (`PracticeCells`): one square per charac
 
 - **Colors:** fill `sunken`, border and guides `line` (guides dashed 3/3), glyph `ink`.
 - **Corners:** square, on purpose. Practice paper has square cells.
-- **Sizes:** row 34pt, detail picks the largest of 120 / 96 / 72 / 56 / 44pt that fits, onboarding 132pt, splash 64pt.
+- **Sizes:** row 34pt, detail picks the largest of 120 / 96 / 72 / 56 / 44pt that fits, onboarding 132pt (96pt at accessibility text sizes), splash 64pt.
 - **Dynamic Type:** in rows and detail the square scales with `@ScaledMetric(relativeTo: .title2)` and the glyph stays a fixed fraction of it, so characters never spill out. Onboarding and splash art set `scalesWithText: false`.
 - **Overflow:** `Headword` falls back to plain Mincho text when a word is too long for squares.
 
@@ -89,7 +89,7 @@ Every headword sits in practice squares (`PracticeCells`): one square per charac
 |---|---|---|
 | `ScreenHeader` | Large title with optional caption above | Caption is the date on Today. Marked as a header for VoiceOver |
 | `StudyKindPicker` | Words / Kanji switch | System segmented picker. Choice is remembered per screen (`@AppStorage`) |
-| `StudyRow` | One word or kanji in a list | Practice squares, reading, meaning (2 lines max), optional `LevelTag`. Combined into one VoiceOver element |
+| `StudyRow` | One word or kanji in a list | Practice squares, reading, meaning (2 lines max), optional `LevelTag`, and a neutral disclosure chevron. Combined into one VoiceOver element |
 | `LevelTag` | JLPT level | Hidden inside Collection, where the section header already says the level. VoiceOver reads "JLPT N5" |
 | `PracticeCells` / `Headword` | The motif | See above |
 | `PrimaryButtonStyle` | The screen's single focal action | Moss capsule, `onMoss` text, min height 50, full width, 0.98 press scale, 50% opacity when disabled |
@@ -104,10 +104,10 @@ Lists use `.insetGrouped` with hidden scroll background, `surface` row backgroun
 |---|---|---|
 | Splash | 言葉の森 in practice squares | Tagline below. Moves on after 0.6s |
 | Onboarding | Character in a large square | 3 pages (言, 漢, 森), Skip top right, page dots, Next / Start learning. Finishing saves `isOnboardingComplete` |
-| Today | Add next word/kanji | Date caption, picker, count card ("3 words added today", next JLPT level), list of today's items, newest first |
+| Today | Add next word/kanji | Date caption, picker, compact add card (headline count, next JLPT level), list of today's items, newest first. Count supports the action without competing with the headwords |
 | Collection | The list | Search field (Japanese, reading, or English), picker, sections by JLPT level N5 → N1 with counts |
 | Detail | The headword | Specimen card (squares, reading, level), definition card (Meanings, On'yomi, Kun'yomi, Strokes). Native back. Trash in toolbar opens a confirmation anchored to it |
-| Progress | Words and Kanji cards | Learned "of" total, progress track, Studying level, Last added. Footnote that progress lives only on this iPhone |
+| Progress | Words and Kanji cards | Words/Kanji in collection "of" bundled total, progress track, Current level, Last added. Metadata stacks at accessibility text sizes. Footnotes explain collection counts and local storage |
 
 Tabs are the system `TabView`: **Today** (`leaf`, the daily word grows the forest), **Collection** (`books.vertical`), **Progress** (`chart.bar`).
 
@@ -127,9 +127,10 @@ Every list screen has all three. Each says why and what to do next.
 ## Interaction
 
 - Add is instant; the new row appears at the top of Today.
-- Remove: swipe action or long-press menu in lists, toolbar trash plus confirmation in Detail. Removing decrements progress, so the confirmation says it becomes the next item offered.
+- Remove: swipe action or long-press menu in lists, toolbar trash in Detail. Every entry point asks for confirmation, naming the headword and explaining that it becomes the next item offered. Full-swipe removal is disabled.
 - Screens reload on appear. No "pull to refresh" or "please refresh" messages.
 - Search dismisses the keyboard on scroll and has a clear button.
+- Clear search has its own 44pt touch target. Onboarding pages scroll at accessibility text sizes, with smaller fixed artwork and persistent Next / Start learning controls.
 
 ## Motion
 
@@ -142,6 +143,14 @@ MOTION 1. System push/pop and tab transitions, button press scale, list insert/r
 - Rows are single VoiceOver elements reading headword, reading, meaning, level.
 - Decorative art (onboarding squares, progress track) is hidden from VoiceOver.
 - Icon-only buttons have text labels (for example "Remove from collection", "Clear search").
+
+## Review flow
+
+Today offers a neutral Review today's words / kanji action when the selected list has loaded with at least one item. Add next remains the moss primary action. Review snapshots the saved items in their current order and does not change collection progress.
+
+The pushed review screen hides the tab bar. Show the headword and level first, then reveal stored readings and meanings on request. Keep the headword stable during reveal, honor Reduce Motion, and reset scroll position when changing items. The bottom safe-area action remains reachable while long answers scroll. Previous hides the answer again.
+
+Completion says how many items were reviewed, with Back to Today and a neutral Review again action. Empty sessions use StateMessage with a next step. The full interaction and edge cases are in `docs/design/review-flow.md`.
 
 ## Voice and copy
 

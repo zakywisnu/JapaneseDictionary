@@ -13,6 +13,7 @@ public enum AppRoutes: Routable {
     case splashScreen
     case dashboard
     case detail(DetailViewModel.Config)
+    case review(ReviewSession)
     
     @ViewBuilder
     public func view() -> some View {
@@ -25,6 +26,8 @@ public enum AppRoutes: Routable {
             DashboardView()
         case let .detail(config):
             AppComposer.shared.makeDetailView(config)
+        case let .review(session):
+            AppComposer.shared.makeReviewView(session)
         }
     }
 }

@@ -53,7 +53,7 @@ public struct DetailView: View {
                         viewModel.send(.didConfirmDelete({ router.pop() }))
                     }
                 } message: {
-                    Text("It comes off your progress and will be the next one offered on Today.")
+                    Text("This \(viewModel.state.type.noun) will be removed from your collection and progress, then offered next on Today.")
                 }
             }
         }

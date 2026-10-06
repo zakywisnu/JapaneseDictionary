@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct AppsOnboardingView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @EnvironmentObject var router: AppRouter
     @AppStorage("isOnboardingComplete") private var isOnboardingComplete = false
     @State private var index = 0
@@ -57,23 +58,39 @@ public struct AppsOnboardingView: View {
         .background(Forest.canvas)
     }
     
+    @ViewBuilder
     private func pageView(_ page: AppsOnboardingViewModel.Page) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            ScrollView {
+                pageContent(page, cellSize: 96)
+                    .padding(.vertical, Forest.Space.xl)
+            }
+        } else {
+            VStack {
+                Spacer()
+                pageContent(page, cellSize: 132)
+                Spacer()
+            }
+        }
+    }
+
+    private func pageContent(_ page: AppsOnboardingViewModel.Page, cellSize: CGFloat) -> some View {
         VStack(spacing: Forest.Space.xl) {
-            Spacer()
-            PracticeCells(text: page.character, cellSize: 132, scalesWithText: false)
+            PracticeCells(text: page.character, cellSize: cellSize, scalesWithText: false)
                 .accessibilityHidden(true)
             VStack(spacing: Forest.Space.m) {
                 Text(page.title)
                     .font(.title2.bold())
                     .foregroundStyle(Forest.ink)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                 Text(page.message)
                     .font(.body)
                     .foregroundStyle(Forest.inkMuted)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal, Forest.Space.xl)
-            Spacer()
         }
     }
     

@@ -41,7 +41,8 @@ struct WordsCollectionView: View {
                 text: $query,
                 prompt: Text("Search Japanese, reading, or English").foregroundStyle(Forest.inkMuted)
             )
-            .foregroundStyle(Forest.ink)
+                .foregroundStyle(Forest.ink)
+                .padding(.vertical, Forest.Space.s)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .submitLabel(.search)
@@ -51,6 +52,8 @@ struct WordsCollectionView: View {
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(Forest.inkMuted)
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(.rect)
                 }
                 .accessibilityLabel("Clear search")
             }

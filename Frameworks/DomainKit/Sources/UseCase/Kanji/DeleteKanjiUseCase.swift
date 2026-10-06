@@ -31,7 +31,7 @@ public struct DefaultDeleteKanjiUseCase: DeleteKanjiUseCase {
         progress.kanjiProgress = progress.kanjiProgress - 1
         progress.kanjiLevel = .init(
             rawValue: max(
-                WordsProgressModel.Level(rawValue: progress.kotobaLevel.rawValue)?.rawValue ?? "N5",
+                WordsProgressModel.Level(rawValue: progress.kanjiLevel.rawValue)?.rawValue ?? "N5",
                 WordsProgressModel.Level(rawValue: param.jlptLevel.rawValue)?.rawValue ?? "N5"
             )
         ) ?? .n5

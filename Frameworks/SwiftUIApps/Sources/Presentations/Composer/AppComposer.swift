@@ -80,6 +80,10 @@ public final class AppComposer {
         let viewModel = AppsOnboardingViewModel()
         AppsOnboardingView(viewModel: viewModel)
     }
+
+    public func makeReviewView(_ session: ReviewSession) -> some View {
+        ReviewView(viewModel: ReviewViewModel(session: session))
+    }
 }
 
 extension AppComposer {

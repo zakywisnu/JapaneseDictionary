@@ -28,7 +28,11 @@ struct HomeKanjiView: View {
                 guard let kanji = viewModel.state.currentKanjis.first(where: { $0.id == entry.id }) else { return }
                 router.push(.detail(.init(kotoba: nil, kanji: kanji)), hideNavBar: false)
             },
-            onRetry: { viewModel.send(.onAppear) }
+            onRetry: { viewModel.send(.onAppear) },
+            onReview: {
+                let session = ReviewSession(kind: .kanji, items: viewModel.state.currentKanjis.map(ReviewItem.init(kanji:)))
+                router.push(.review(session), hideNavBar: false)
+            }
         )
         .onAppear { viewModel.send(.onAppear) }
         .alert(

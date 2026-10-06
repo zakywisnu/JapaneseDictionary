@@ -34,6 +34,7 @@ struct TodayListView: View {
     let onDelete: (StudyEntry) -> Void
     let onSelect: (StudyEntry) -> Void
     let onRetry: () -> Void
+    let onReview: () -> Void
 
     private var nouns: String { noun.pluralNoun }
 
@@ -70,21 +71,27 @@ struct TodayListView: View {
                         .padding(.vertical, Forest.Space.s)
                         .listRowBackground(Forest.surface)
                 } else {
+                    VStack(alignment: .leading, spacing: Forest.Space.s) {
+                        Button(action: onReview) {
+                            Text("Review today's \(nouns)")
+                                .font(.body.weight(.semibold))
+                                .foregroundStyle(Forest.ink)
+                                .frame(maxWidth: .infinity, minHeight: 44)
+                                .contentShape(.rect)
+                        }
+                        .buttonStyle(.plain)
+                        Text("Try the reading and meaning before revealing the answer.")
+                            .font(.subheadline)
+                            .foregroundStyle(Forest.inkMuted)
+                    }
+                    .listRowBackground(Forest.surface)
                     ForEach(entries) { entry in
                         Button { onSelect(entry) } label: {
                             StudyRow(entry: entry)
                         }
                         .buttonStyle(.plain)
                         .listRowBackground(Forest.surface)
-                        .swipeActions {
-                            Button("Remove", role: .destructive) { onDelete(entry) }
-                                .tint(Forest.danger)
-                        }
-                        .contextMenu {
-                            Button("Remove from collection", systemImage: "trash", role: .destructive) {
-                                onDelete(entry)
-                            }
-                        }
+                        .studyRemovalActions(entry: entry, noun: noun, onDelete: onDelete)
                     }
                 }
             } header: {
@@ -103,7 +110,7 @@ struct TodayListView: View {
         VStack(alignment: .leading, spacing: Forest.Space.m) {
             HStack(alignment: .firstTextBaseline, spacing: Forest.Space.s) {
                 Text("\(entries.count)")
-                    .font(.system(.largeTitle, design: .rounded).weight(.semibold))
+                    .font(.headline.monospacedDigit())
                     .foregroundStyle(Forest.ink)
                     .contentTransition(.numericText())
                 Text(entries.count == 1 ? "\(noun) added today" : "\(nouns) added today")

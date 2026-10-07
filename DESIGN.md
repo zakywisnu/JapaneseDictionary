@@ -166,6 +166,12 @@ Progress offers Backup and restore as a neutral action. The pushed screen explai
 
 Before replacement, save a recovery backup of the current collection locally. Failed validation or saving gives a concrete next action and keeps current data available. Success returns to Progress, clears active review routes and offers Share recovery backup so the learner can keep the prior collection's file. All backup processing works offline; choosing a system Files destination does not add accounts or sync to the app.
 
+## Word memory helper
+
+Word Detail offers a neutral Help me remember action after the bundled definition and optional reviewed example. The headword remains the focal point. Generation produces a short Explanation and Memory tip card, with the caption "AI-generated suggestion. Check it against the meanings above." It never replaces dictionary content or presents a mnemonic as a kanji's historical origin. Kanji Detail has no helper.
+
+Generate only on request. Show a named loading indicator and Cancel while generating. Regenerate keeps the previous suggestion visible; failure keeps it available and offers retry. Save suggestion is explicit; success says Saved on this iPhone. Unsaved results say Not saved. Persisted advice remains readable when the model is unavailable. Unsupported OS/device, disabled Apple Intelligence, preparing model and unsupported language each explain why generation is unavailable, with Check availability where useful. Native back cancels pending work without saving. Use existing Forest colors/spacing/card radius and system text styles; no decorative AI icon or badge.
+
 ## Voice and copy
 
 - Short, plain, encouraging. Say what happened and what to do next.

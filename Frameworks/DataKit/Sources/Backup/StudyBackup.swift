@@ -8,7 +8,8 @@ public struct BackupWord: Codable, Equatable {
     public var jlptLevel: KotobaDataModel.Level
     public var dateAdded: Date?
     public var addedIndex: Int?
-    public init(id: String, kanji: String, furigana: String, english: [String], jlptLevel: KotobaDataModel.Level, dateAdded: Date?, addedIndex: Int?) {
+    public var memoryAid: MemoryAidSuggestion?
+    public init(id: String, kanji: String, furigana: String, english: [String], jlptLevel: KotobaDataModel.Level, dateAdded: Date?, addedIndex: Int?, memoryAid: MemoryAidSuggestion? = nil) {
         self.id = id
         self.kanji = kanji
         self.furigana = furigana
@@ -16,12 +17,18 @@ public struct BackupWord: Codable, Equatable {
         self.jlptLevel = jlptLevel
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
+        self.memoryAid = memoryAid
     }
     init(_ model: KotobaDataModel) {
-        self.init(id: model.id, kanji: model.kanji, furigana: model.furigana, english: model.english.map(\.value), jlptLevel: model.jlptLevel, dateAdded: model.dateAdded, addedIndex: model.addedIndex)
+        self.init(id: model.id, kanji: model.kanji, furigana: model.furigana, english: model.english.map(\.value), jlptLevel: model.jlptLevel, dateAdded: model.dateAdded, addedIndex: model.addedIndex, memoryAid: Self.memoryAid(model))
+    }
+    private static func memoryAid(_ model: KotobaDataModel) -> MemoryAidSuggestion? {
+        guard model.memoryExplanation != nil || model.memoryMnemonic != nil else { return nil }
+        // Keep partial stored advice invalid so export rejects it instead of discarding it.
+        return .init(explanation: model.memoryExplanation ?? "", mnemonic: model.memoryMnemonic ?? "")
     }
     var model: KotobaDataModel {
-        KotobaDataModel(id: id, kanji: kanji, furigana: furigana, english: english.map { ArrayString(value: $0) }, jlptLevel: jlptLevel, dateAdded: dateAdded, addedIndex: addedIndex)
+        KotobaDataModel(id: id, kanji: kanji, furigana: furigana, english: english.map { ArrayString(value: $0) }, jlptLevel: jlptLevel, dateAdded: dateAdded, addedIndex: addedIndex, memoryExplanation: memoryAid?.explanation, memoryMnemonic: memoryAid?.mnemonic)
     }
 }
 

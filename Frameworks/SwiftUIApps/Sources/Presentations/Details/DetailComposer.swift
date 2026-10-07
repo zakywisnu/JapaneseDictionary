@@ -6,15 +6,32 @@
 //
 
 import SwiftUI
+import DataKit
 
 extension AppComposer {
-    @ViewBuilder
     func makeDetailView(_ config: DetailViewModel.Config) -> some View {
+        DetailCompositionView(composer: self, config: config)
+    }
+}
+
+private struct DetailCompositionView: View {
+    let composer: AppComposer
+    let config: DetailViewModel.Config
+
+    var body: some View {
         let viewModel = DetailViewModel(
             config,
-            deleteKanjiUseCase: useCase.deleteKanjiUseCase,
-            deleteKotobaUseCase: useCase.deleteKotobaUseCase
+            deleteKanjiUseCase: composer.useCase.deleteKanjiUseCase,
+            deleteKotobaUseCase: composer.useCase.deleteKotobaUseCase
         )
-        DetailView(viewModel: viewModel, examples: examples)
+        let memoryAid = config.kanji == nil ? config.kotoba.map { kotoba in
+            MemoryAidViewModel(
+                word: MemoryAidWord(id: kotoba.id, headword: kotoba.kanji, reading: kotoba.furigana,
+                                    meanings: kotoba.english, level: kotoba.jlptLevel.rawValue),
+                repository: StandardMemoryAidRepository(store: composer.store),
+                generator: MemoryAidGeneratorFactory.make()
+            )
+        } : nil
+        DetailView(viewModel: viewModel, examples: composer.examples, memoryAid: memoryAid)
     }
 }

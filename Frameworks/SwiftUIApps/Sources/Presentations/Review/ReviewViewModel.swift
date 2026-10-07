@@ -1,10 +1,18 @@
 import Observation
+import Foundation
+import DataKit
+import DomainKit
 
 @Observable
 final class ReviewViewModel {
     private(set) var state: State
 
-    init(session: ReviewSession) {
+    private let recordRating: ((SavedStudyID, UUID, RecallRating, Date) throws -> Void)?
+    private let now: () -> Date
+
+    init(session: ReviewSession, recordRating: ((SavedStudyID, UUID, RecallRating, Date) throws -> Void)? = nil, now: @escaping () -> Date = Date.init) {
+        self.recordRating = recordRating
+        self.now = now
         state = State(session: session)
     }
 
@@ -15,44 +23,73 @@ final class ReviewViewModel {
         case .reveal:
             guard !state.isComplete else { return }
             state.isAnswerVisible = true
-        case .next:
-            guard state.isAnswerVisible, !state.isComplete else { return }
-            if state.index == state.session.items.count - 1 {
-                state.isComplete = true
-            } else {
-                state.index += 1
-                state.isAnswerVisible = false
-            }
-        case .previous:
-            guard state.index > 0, !state.isComplete else { return }
-            state.index -= 1
-            state.isAnswerVisible = false
+        case .rate(let rating):
+            guard state.isAnswerVisible, !state.isComplete, state.saveError == nil else { return }
+            rate(rating)
+        case .retry:
+            guard let rating = state.pendingRating else { return }
+            rate(rating)
         case .restart:
-            state.index = 0
+            guard state.session.origin != .due else { return }
+            state.session.id = UUID()
+            state.saveError = nil
+            state.pendingRating = nil
+            state.queue = PracticeQueue(ids: state.session.items.map(\.savedID))
             state.isAnswerVisible = false
-            state.isComplete = false
+            state.presentationRevision += 1
         }
     }
 
-    struct State {
-        let session: ReviewSession
-        var index = 0
-        var isAnswerVisible = false
-        var isComplete = false
+    private func rate(_ rating: RecallRating) {
+        guard let item = state.currentItem else { return }
+        if state.session.origin == .due {
+            do {
+                guard let recordRating else { throw ReviewSaveError.unavailable }
+                let id = SavedStudyID(kind: state.session.kind == .words ? .word : .kanji, id: item.savedID)
+                try recordRating(id, state.session.id, rating, now())
+            } catch {
+                state.pendingRating = rating
+                state.saveError = "\(item.headword)'s review couldn't be saved. Try again or exit review."
+                return
+            }
+        }
+        state.saveError = nil
+        state.pendingRating = nil
+        state.queue.rate(rating)
+        state.isAnswerVisible = false
+        state.presentationRevision += 1
+    }
 
-        var currentItem: ReviewItem? {
-            guard session.items.indices.contains(index) else { return nil }
-            return session.items[index]
+    private enum ReviewSaveError: Error { case unavailable }
+
+    struct State {
+        var session: ReviewSession
+        var queue: PracticeQueue
+        var saveError: String?
+        var pendingRating: RecallRating?
+        var isAnswerVisible = false
+        var presentationRevision = 0
+
+        init(session: ReviewSession) {
+            self.session = session
+            queue = PracticeQueue(ids: session.items.map(\.savedID))
         }
 
-        var isLastItem: Bool { index == session.items.count - 1 }
-        var canGoBack: Bool { index > 0 && !isComplete }
+        var currentItem: ReviewItem? {
+            guard let id = queue.currentID else { return nil }
+            return session.items.first { $0.savedID == id }
+        }
+
+        var remainingCount: Int { queue.remainingCount }
+        var repeatAttempts: Int { queue.repeatAttempts }
+        var distinctItemCount: Int { Set(session.items.map(\.savedID)).count }
+        var isComplete: Bool { queue.currentID == nil }
     }
 
     enum Action {
         case reveal
-        case next
-        case previous
+        case rate(RecallRating)
+        case retry
         case restart
     }
 }

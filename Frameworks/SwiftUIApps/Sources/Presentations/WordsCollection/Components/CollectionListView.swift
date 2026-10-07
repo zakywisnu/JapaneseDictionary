@@ -14,6 +14,7 @@ struct CollectionListView: View {
     let onSelect: (StudyEntry) -> Void
     let onRetry: () -> Void
     let onGoToToday: () -> Void
+    let onReview: () -> Void
 
     private static let levelOrder = ["N5", "N4", "N3", "N2", "N1"]
 
@@ -40,12 +41,6 @@ struct CollectionListView: View {
                 action: onGoToToday
             )
             .frame(maxHeight: .infinity)
-        case .loaded where filtered.isEmpty:
-            StateMessage(
-                title: "No matches for \"\(query)\"",
-                message: "Search looks at the Japanese, the reading, and the English meaning."
-            )
-            .frame(maxHeight: .infinity, alignment: .top)
         case .loaded:
             list
         }
@@ -64,6 +59,24 @@ struct CollectionListView: View {
     private var list: some View {
         let groups = Dictionary(grouping: filtered, by: \.level)
         return List {
+            Section {
+                Button(action: onReview) {
+                    Text("Review \(nouns)")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(Forest.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .listRowBackground(Forest.surface)
+            }
+            if filtered.isEmpty {
+                StateMessage(
+                    title: "No matches for \"\(query)\"",
+                    message: "Search looks at the Japanese, the reading, and the English meaning."
+                )
+                .listRowBackground(Forest.surface)
+            }
             ForEach(Self.levelOrder.filter { groups[$0] != nil }, id: \.self) { level in
                 let items = groups[level] ?? []
                 Section {

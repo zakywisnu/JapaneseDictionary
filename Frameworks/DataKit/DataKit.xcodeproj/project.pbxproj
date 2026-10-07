@@ -7,25 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13AEC140E412BF124DDB043A /* tatoeba-attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B76F727B8FB83837ACCF698 /* tatoeba-attribution.txt */; };
 		1421C4AC7F45D2B227445897 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2605FD00488F119F33DE4B /* DataError.swift */; };
+		15C03E79967A6D29FE0C75ED /* DataKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */; };
+		21E4AEDC11AF8E83AE132D4B /* BackupValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1299C2F9D2DD50BE855E060 /* BackupValidator.swift */; };
+		42ACDCE04B5F3FA5D1A4B769 /* ReviewStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */; };
 		4978CFB59E0A3EB2317BF393 /* WordsProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DF7C65460B45CA7FAB8CF /* WordsProgressModel.swift */; };
 		5F7BCE1E6D70A4C4BBE034FA /* VocabRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C930E593BF28FD6CECE24 /* VocabRepository.swift */; };
+		61279B8D9E2F454B19D2E63F /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38794EEFF47FCE10026A58AA /* DataKit.framework */; };
 		64693C1605093FBAFDC20A6A /* TuistBundle+DataKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712CAD88A1AD927AC15531BF /* TuistBundle+DataKit.swift */; };
+		6942A5CDB9162AF621EE799D /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF727B1BE0677A083ED3916 /* ReviewRepository.swift */; };
 		71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */ = {isa = PBXBuildFile; fileRef = 9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */; };
 		850E4AD1E4BD98B634F00CA4 /* KanjiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */; };
+		932EFB71F06806E4632580A2 /* BackupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D5089C426D08DA365078A /* BackupRepository.swift */; };
 		997E18E4B51CBB53108B7620 /* WordsProgressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */; };
 		9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */; };
 		B08F40B89F2A8CFA1ECC29BD /* KotobaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8503C672F13D55942A1E9759 /* KotobaRepository.swift */; };
+		B58ABBE798A0CEC6C57D21F4 /* StudyMutationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2AFA2D770298C289ACCEFF /* StudyMutationRepository.swift */; };
+		B645A7A090118DCD2488C3B9 /* StudyBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982C5D890665D364BF3DE49D /* StudyBackup.swift */; };
+		BA2E130913201E061DE4C86D /* ExampleRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C729F2FD050AB8F32DEDC8 /* ExampleRepositoryTests.swift */; };
 		BA61BB89A47B2395340BFF17 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02627F41AE9CFC13B6EFC0E8 /* CoreKit.framework */; };
+		C1C49FD40C65A0AF61921F2A /* StudyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6498E823AB8903601934F /* StudyStore.swift */; };
 		C847FED0AE088ED66105A098 /* ArrayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */; };
+		C90AD13448845331D157EA85 /* examples-n5.json in Resources */ = {isa = PBXBuildFile; fileRef = 03660AF259E3511586C9D2BC /* examples-n5.json */; };
 		DA61DC1576ED9DB693E6231A /* KotobaDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F5332704A46634A742C344 /* KotobaDataModel.swift */; };
+		DD2128F3348393CD2CFEE048 /* StudyBackupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E795995D05857A1B7ACF85 /* StudyBackupTests.swift */; };
+		E54CE102CE943CA18428044F /* ExampleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1336E489427C6CCEC72634 /* ExampleRepository.swift */; };
 		EE72AF4D4B83C323178E5D7E /* KanjiDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FB0011F4FA3898062E510F /* KanjiDataModel.swift */; };
+		F4D97EED1A26FB66B39970AF /* ReviewRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666DB02556BA7F834F8D4B13 /* ReviewRecordModel.swift */; };
 		F677932B471415D470CC2471 /* KotobaMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3F3EF61CE379A59B236D07 /* KotobaMigrationPlan.swift */; };
 		FB59BE87F03122B858E0C2A3 /* jlpt_vocab.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3474BF66E1180F414642882E /* jlpt_vocab.csv */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E00F588DAF0013B38C24A96E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A578222A654276944D00F888 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02BA723BAEB9642C0EDB34BF;
+			remoteInfo = DataKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		0945044C6FAEBBBD05344BAC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		239AB34443FCB7D67779D690 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -39,22 +74,38 @@
 
 /* Begin PBXFileReference section */
 		02627F41AE9CFC13B6EFC0E8 /* CoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03660AF259E3511586C9D2BC /* examples-n5.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "examples-n5.json"; sourceTree = "<group>"; };
+		0B1336E489427C6CCEC72634 /* ExampleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepository.swift; sourceTree = "<group>"; };
+		0B76F727B8FB83837ACCF698 /* tatoeba-attribution.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "tatoeba-attribution.txt"; sourceTree = "<group>"; };
+		148D5089C426D08DA365078A /* BackupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupRepository.swift; sourceTree = "<group>"; };
 		16F5332704A46634A742C344 /* KotobaDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaDataModel.swift; sourceTree = "<group>"; };
+		17C729F2FD050AB8F32DEDC8 /* ExampleRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepositoryTests.swift; sourceTree = "<group>"; };
 		3474BF66E1180F414642882E /* jlpt_vocab.csv */ = {isa = PBXFileReference; path = jlpt_vocab.csv; sourceTree = "<group>"; };
 		38794EEFF47FCE10026A58AA /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		489028A2D0F85E744DD97567 /* DataKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		666DB02556BA7F834F8D4B13 /* ReviewRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecordModel.swift; sourceTree = "<group>"; };
+		6B989D700CDE909B81ADC1B8 /* DataKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DataKitTests-Info.plist"; sourceTree = "<group>"; };
+		6ED6498E823AB8903601934F /* StudyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyStore.swift; sourceTree = "<group>"; };
 		712CAD88A1AD927AC15531BF /* TuistBundle+DataKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DataKit.swift"; sourceTree = "<group>"; };
 		79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayString.swift; sourceTree = "<group>"; };
+		7B2AFA2D770298C289ACCEFF /* StudyMutationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMutationRepository.swift; sourceTree = "<group>"; };
 		8503C672F13D55942A1E9759 /* KotobaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaRepository.swift; sourceTree = "<group>"; };
 		9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "kanji-wanikani.json"; sourceTree = "<group>"; };
+		982C5D890665D364BF3DE49D /* StudyBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBackup.swift; sourceTree = "<group>"; };
+		A0E795995D05857A1B7ACF85 /* StudyBackupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBackupTests.swift; sourceTree = "<group>"; };
 		A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsProgressRepository.swift; sourceTree = "<group>"; };
 		AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiRepository.swift; sourceTree = "<group>"; };
 		C67FC79D77F20E09A2E25253 /* DataKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DataKit-Info.plist"; sourceTree = "<group>"; };
 		CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */ = {isa = PBXFileReference; path = kanji_data.csv; sourceTree = "<group>"; };
+		D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataKitTests.swift; sourceTree = "<group>"; };
 		DC3F3EF61CE379A59B236D07 /* KotobaMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaMigrationPlan.swift; sourceTree = "<group>"; };
 		DF2605FD00488F119F33DE4B /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStoreTests.swift; sourceTree = "<group>"; };
+		F1299C2F9D2DD50BE855E060 /* BackupValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupValidator.swift; sourceTree = "<group>"; };
 		F40C930E593BF28FD6CECE24 /* VocabRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabRepository.swift; sourceTree = "<group>"; };
 		F7FB0011F4FA3898062E510F /* KanjiDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiDataModel.swift; sourceTree = "<group>"; };
 		FA3DF7C65460B45CA7FAB8CF /* WordsProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsProgressModel.swift; sourceTree = "<group>"; };
+		FCF727B1BE0677A083ED3916 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +114,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA61BB89A47B2395340BFF17 /* CoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CDBD42FFAA422CA30929047 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61279B8D9E2F454B19D2E63F /* DataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +142,7 @@
 			children = (
 				02627F41AE9CFC13B6EFC0E8 /* CoreKit.framework */,
 				38794EEFF47FCE10026A58AA /* DataKit.framework */,
+				489028A2D0F85E744DD97567 /* DataKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,6 +163,17 @@
 			path = Kanji;
 			sourceTree = "<group>";
 		};
+		381BEE4E0871051933CF6807 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */,
+				17C729F2FD050AB8F32DEDC8 /* ExampleRepositoryTests.swift */,
+				EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */,
+				A0E795995D05857A1B7ACF85 /* StudyBackupTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		41B5D7E9B65AA6D05F5A1AFA /* WordsProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +185,11 @@
 		487D463B39468FF1F766999F /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				0B1336E489427C6CCEC72634 /* ExampleRepository.swift */,
 				AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */,
 				8503C672F13D55942A1E9759 /* KotobaRepository.swift */,
+				FCF727B1BE0677A083ED3916 /* ReviewRepository.swift */,
+				7B2AFA2D770298C289ACCEFF /* StudyMutationRepository.swift */,
 				F40C930E593BF28FD6CECE24 /* VocabRepository.swift */,
 				A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */,
 			);
@@ -125,11 +199,21 @@
 		51C8D7668B69635D4028A584 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CAF184F516FA513E8F01B02F /* Backup */,
 				77443571DE9033E29D188DB3 /* Errors */,
 				487D463B39468FF1F766999F /* Repository */,
+				589245F96006041F8BCD4A8B /* Store */,
 				CE182922E0A430F148502F3A /* SwiftDataModel */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		589245F96006041F8BCD4A8B /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6ED6498E823AB8903601934F /* StudyStore.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		77443571DE9033E29D188DB3 /* Errors */ = {
@@ -138,6 +222,14 @@
 				DF2605FD00488F119F33DE4B /* DataError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		78A1B1869FCE1ACE803C3BDF /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				666DB02556BA7F834F8D4B13 /* ReviewRecordModel.swift */,
+			);
+			path = Review;
 			sourceTree = "<group>";
 		};
 		86E4AEB59A2B77EBE1578E31 /* Kotoba */ = {
@@ -155,6 +247,7 @@
 				02BD3B21E62A67FA4D8312B6 /* Derived */,
 				8B3F508EB34D6F5B8858CE3D /* Resources */,
 				51C8D7668B69635D4028A584 /* Sources */,
+				381BEE4E0871051933CF6807 /* Tests */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -162,9 +255,11 @@
 		8B3F508EB34D6F5B8858CE3D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03660AF259E3511586C9D2BC /* examples-n5.json */,
 				3474BF66E1180F414642882E /* jlpt_vocab.csv */,
 				CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */,
 				9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */,
+				0B76F727B8FB83837ACCF698 /* tatoeba-attribution.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -177,11 +272,22 @@
 			);
 			sourceTree = "<group>";
 		};
+		CAF184F516FA513E8F01B02F /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				148D5089C426D08DA365078A /* BackupRepository.swift */,
+				F1299C2F9D2DD50BE855E060 /* BackupValidator.swift */,
+				982C5D890665D364BF3DE49D /* StudyBackup.swift */,
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
 		CE182922E0A430F148502F3A /* SwiftDataModel */ = {
 			isa = PBXGroup;
 			children = (
 				3197A8F4AF40CFCD7449DA85 /* Kanji */,
 				86E4AEB59A2B77EBE1578E31 /* Kotoba */,
+				78A1B1869FCE1ACE803C3BDF /* Review */,
 				41B5D7E9B65AA6D05F5A1AFA /* WordsProgress */,
 				79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */,
 			);
@@ -192,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				C67FC79D77F20E09A2E25253 /* DataKit-Info.plist */,
+				6B989D700CDE909B81ADC1B8 /* DataKitTests-Info.plist */,
 			);
 			path = InfoPlists;
 			sourceTree = "<group>";
@@ -219,6 +326,27 @@
 			productReference = 38794EEFF47FCE10026A58AA /* DataKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		DDDBD7F55B13896E29384B6E /* DataKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDA1A0BE5CB4C8DFCD07324B /* Build configuration list for PBXNativeTarget "DataKitTests" */;
+			buildPhases = (
+				06499178F25AB431676C723F /* Sources */,
+				2B38DD9DF56B1C29F9E9CE8A /* Resources */,
+				3CDBD42FFAA422CA30929047 /* Frameworks */,
+				239AB34443FCB7D67779D690 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF47C9C40400F4EB87492A64 /* PBXTargetDependency */,
+			);
+			name = DataKitTests;
+			packageProductDependencies = (
+			);
+			productName = DataKitTests;
+			productReference = 489028A2D0F85E744DD97567 /* DataKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -243,43 +371,81 @@
 			projectRoot = "";
 			targets = (
 				02BA723BAEB9642C0EDB34BF /* DataKit */,
+				DDDBD7F55B13896E29384B6E /* DataKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2B38DD9DF56B1C29F9E9CE8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92C4C46C94523EA48064AE7B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90AD13448845331D157EA85 /* examples-n5.json in Resources */,
 				FB59BE87F03122B858E0C2A3 /* jlpt_vocab.csv in Resources */,
 				71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */,
 				9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */,
+				13AEC140E412BF124DDB043A /* tatoeba-attribution.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		06499178F25AB431676C723F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15C03E79967A6D29FE0C75ED /* DataKitTests.swift in Sources */,
+				BA2E130913201E061DE4C86D /* ExampleRepositoryTests.swift in Sources */,
+				42ACDCE04B5F3FA5D1A4B769 /* ReviewStoreTests.swift in Sources */,
+				DD2128F3348393CD2CFEE048 /* StudyBackupTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7220B2CBD3C6061075B78DAD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				64693C1605093FBAFDC20A6A /* TuistBundle+DataKit.swift in Sources */,
+				932EFB71F06806E4632580A2 /* BackupRepository.swift in Sources */,
+				21E4AEDC11AF8E83AE132D4B /* BackupValidator.swift in Sources */,
+				B645A7A090118DCD2488C3B9 /* StudyBackup.swift in Sources */,
 				1421C4AC7F45D2B227445897 /* DataError.swift in Sources */,
+				E54CE102CE943CA18428044F /* ExampleRepository.swift in Sources */,
 				850E4AD1E4BD98B634F00CA4 /* KanjiRepository.swift in Sources */,
 				B08F40B89F2A8CFA1ECC29BD /* KotobaRepository.swift in Sources */,
+				6942A5CDB9162AF621EE799D /* ReviewRepository.swift in Sources */,
+				B58ABBE798A0CEC6C57D21F4 /* StudyMutationRepository.swift in Sources */,
 				5F7BCE1E6D70A4C4BBE034FA /* VocabRepository.swift in Sources */,
 				997E18E4B51CBB53108B7620 /* WordsProgressRepository.swift in Sources */,
+				C1C49FD40C65A0AF61921F2A /* StudyStore.swift in Sources */,
 				C847FED0AE088ED66105A098 /* ArrayString.swift in Sources */,
 				EE72AF4D4B83C323178E5D7E /* KanjiDataModel.swift in Sources */,
 				DA61DC1576ED9DB693E6231A /* KotobaDataModel.swift in Sources */,
 				F677932B471415D470CC2471 /* KotobaMigrationPlan.swift in Sources */,
+				F4D97EED1A26FB66B39970AF /* ReviewRecordModel.swift in Sources */,
 				4978CFB59E0A3EB2317BF393 /* WordsProgressModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CF47C9C40400F4EB87492A64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DataKit;
+			target = 02BA723BAEB9642C0EDB34BF /* DataKit */;
+			targetProxy = E00F588DAF0013B38C24A96E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0681B2C346EF56BF95882436 /* Release */ = {
@@ -431,6 +597,34 @@
 			};
 			name = Debug;
 		};
+		821E839D2DD2901EA83E74A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/DataKitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.DataKitTests;
+				PRODUCT_NAME = DataKitTests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
 		DB493573E3BF0511E7778586 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -464,6 +658,30 @@
 			};
 			name = Release;
 		};
+		E9D70524DD112CDC04CDF41A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/DataKitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeroemotion.DataKitTests;
+				PRODUCT_NAME = DataKitTests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -481,6 +699,15 @@
 			buildConfigurations = (
 				7777AEC39A24FE3432826630 /* Debug */,
 				DB493573E3BF0511E7778586 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDA1A0BE5CB4C8DFCD07324B /* Build configuration list for PBXNativeTarget "DataKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				821E839D2DD2901EA83E74A9 /* Debug */,
+				E9D70524DD112CDC04CDF41A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

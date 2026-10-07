@@ -1,11 +1,14 @@
 import SwiftUI
+import DataKit
 
 struct ReviewView: View {
     @EnvironmentObject private var router: AppRouter
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    private let examples: ExampleRepository
     @State private var viewModel: ReviewViewModel
 
-    init(viewModel: ReviewViewModel) {
+    init(viewModel: ReviewViewModel, examples: ExampleRepository = .bundled()) {
+        self.examples = examples
         self.viewModel = viewModel
     }
 
@@ -17,21 +20,27 @@ struct ReviewView: View {
                 if session.items.isEmpty {
                     StateMessage(
                         title: "No \(session.nouns) to review",
-                        message: "Add an item on Today to begin."
+                        message: session.origin.emptyMessage
                     )
                 } else if viewModel.state.isComplete {
                     StateMessage(
                         title: "Review complete",
-                        message: "You've gone through \(session.items.count) \(session.items.count == 1 ? session.noun : session.nouns) added today."
+                        message: "You've gone through \(viewModel.state.distinctItemCount) \(viewModel.state.distinctItemCount == 1 ? session.noun : session.nouns) \(session.origin.completionContext)."
                     )
+                    Text("\(viewModel.state.repeatAttempts) \(viewModel.state.repeatAttempts == 1 ? "repeat attempt" : "repeat attempts")")
+                        .font(.subheadline)
+                        .foregroundStyle(Forest.inkMuted)
                 } else if let item = viewModel.state.currentItem {
-                    Text("\(session.noun.capitalized) \(viewModel.state.index + 1) of \(session.items.count)")
+                    Text("\(viewModel.state.remainingCount) remaining")
                         .font(.subheadline.monospacedDigit())
                         .foregroundStyle(Forest.inkMuted)
                     specimen(item)
                     if viewModel.state.isAnswerVisible {
                         answer(item)
                             .transition(.opacity)
+                        if let key = item.exampleWordKey, let example = examples.example(for: key) {
+                            ExampleSentenceCard(example: example)
+                        }
                     } else {
                         Text("Try the reading and meaning.")
                             .font(.subheadline)
@@ -43,7 +52,7 @@ struct ReviewView: View {
             .frame(maxWidth: .infinity)
             .padding(Forest.Space.l)
         }
-        .id(viewModel.state.isComplete ? -1 : viewModel.state.index)
+        .id(viewModel.state.presentationRevision)
         .background(Forest.canvas)
         .safeAreaInset(edge: .bottom, spacing: 0) { actions }
         .navigationTitle("Review \(session.nouns)")
@@ -109,24 +118,43 @@ struct ReviewView: View {
     private var actions: some View {
         VStack(spacing: Forest.Space.s) {
             if session.items.isEmpty || viewModel.state.isComplete {
-                Button("Back to Today") { router.pop() }
+                Button(session.origin.backTitle) { router.pop() }
                     .buttonStyle(PrimaryButtonStyle())
-                if viewModel.state.isComplete {
+                if viewModel.state.isComplete && session.origin != .due {
                     Button("Review again") { viewModel.send(.restart) }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.inkMuted)
                         .frame(minHeight: 44)
                 }
+            } else if let error = viewModel.state.saveError {
+                Text(error)
+                    .font(.subheadline)
+                    .foregroundStyle(Forest.ink)
+                    .multilineTextAlignment(.center)
+                Button("Retry") { viewModel.send(.retry) }
+                    .buttonStyle(PrimaryButtonStyle())
+                Button("Exit review") { router.pop() }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(Forest.ink)
+                    .frame(minHeight: 44)
             } else {
-                Button(primaryTitle) {
-                    viewModel.send(viewModel.state.isAnswerVisible ? .next : .reveal)
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                if viewModel.state.canGoBack {
-                    Button("Previous \(session.noun)") { viewModel.send(.previous) }
-                        .buttonStyle(.plain)
+                if viewModel.state.isAnswerVisible {
+                    Text("Again repeats this item in this session.")
+                        .font(.footnote)
                         .foregroundStyle(Forest.inkMuted)
-                        .frame(minHeight: 44)
+                        .multilineTextAlignment(.center)
+                    Button("Got it") { viewModel.send(.rate(.gotIt)) }
+                        .buttonStyle(PrimaryButtonStyle())
+                    Button { viewModel.send(.rate(.again)) } label: {
+                        Text("Again")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(Forest.ink)
+                } else {
+                    Button("Reveal answer") { viewModel.send(.reveal) }
+                        .buttonStyle(PrimaryButtonStyle())
                 }
             }
         }
@@ -135,8 +163,4 @@ struct ReviewView: View {
         .background(Forest.canvas)
     }
 
-    private var primaryTitle: String {
-        if !viewModel.state.isAnswerVisible { return "Reveal answer" }
-        return viewModel.state.isLastItem ? "Finish review" : "Next \(session.noun)"
-    }
 }

@@ -40,7 +40,7 @@ public struct AppNavigationStack<Content: View>: View {
 extension AppRoutes {
     var isPushed: Bool {
         switch self {
-        case .detail, .review: return true
+        case .detail, .review, .sources, .backup: return true
         default: return false
         }
     }

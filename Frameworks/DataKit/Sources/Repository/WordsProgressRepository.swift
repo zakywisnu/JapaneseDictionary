@@ -15,18 +15,22 @@ public protocol WordsProgressRepository {
 }
 
 public final class StandardWordsProgressRepository: WordsProgressRepository {
-    
-    let context: ModelContext
-    
+
+    private let contextProvider: () -> ModelContext
+    private var context: ModelContext { contextProvider() }
+
     public init(context: ModelContext) {
-        self.context = context
-        setup()
+        self.contextProvider = { context }
+        try? setup()
     }
-    
-    public func setup() {
+
+    public init(store: StudyStore) {
+        contextProvider = { store.context }
+    }
+
+    public func setup() throws {
+        guard try context.fetch(getDescriptor()).isEmpty else { return }
         do {
-            try getProgress()
-        } catch {
             let data = WordsProgressModel(
                 id: UUID().uuidString,
                 kanjiProgress: 0,
@@ -38,20 +42,25 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
                 lastKotobaUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
                 lastKanjiUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
             )
-            
+
             context.insert(data)
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
         }
     }
-    
+
     @discardableResult
     public func getProgress() throws -> WordsProgressModel {
+        try setup()
         let descriptor = getDescriptor()
         guard let progress = try context.fetch(descriptor).first else {
             throw DataError.dataNotFound
         }
         return progress
     }
-    
+
     public func updateProgress(_ progress: WordsProgressModel) throws {
         let descriptor = getDescriptor()
         if let data = try context.fetch(descriptor).first {
@@ -68,7 +77,7 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
             throw DataError.dataNotFound
         }
     }
-    
+
     private func getDescriptor() -> FetchDescriptor<WordsProgressModel> {
         return FetchDescriptor<WordsProgressModel>()
     }

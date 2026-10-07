@@ -8,6 +8,7 @@
 import Observation
 import SwiftUI
 import DomainKit
+import DataKit
 
 @Observable
 final class HomeKanjiViewModel {
@@ -19,14 +20,18 @@ final class HomeKanjiViewModel {
     private let addKanjiUseCase: AddKanjiUseCase
     private let deleteKanjiUseCase: DeleteKanjiUseCase
     
+    private let getDueReviewsUseCase: GetDueReviewsUseCase
+
     init(
         state: State = .init(),
         getKanjiDataUseCase: GetKanjiDataUseCase,
         getAllKanjiUseCase: GetAllKanjiUseCase,
         getWordsProgressUseCase: GetWordsProgressUseCase,
         addKanjiUseCase: AddKanjiUseCase,
-        deleteKanjiUseCase: DeleteKanjiUseCase
+        deleteKanjiUseCase: DeleteKanjiUseCase,
+        getDueReviewsUseCase: GetDueReviewsUseCase
     ) {
+        self.getDueReviewsUseCase = getDueReviewsUseCase
         self.state = state
         self.getKanjiDataUseCase = getKanjiDataUseCase
         self.getAllKanjiUseCase = getAllKanjiUseCase
@@ -50,6 +55,8 @@ final class HomeKanjiViewModel {
             guard let kanji = state.currentKanjis.first(where: { $0.id == id }) else { return }
             deleteKanji(kanji)
             reload()
+        case .retryDue:
+            fetchDueReviews()
         case .didDismissError:
             state.errorMessage = nil
         }
@@ -58,10 +65,22 @@ final class HomeKanjiViewModel {
 
 extension HomeKanjiViewModel {
     private func reload() {
+        fetchDueReviews()
         fetchProgress()
         fetchCurrentKanji()
     }
     
+    private func fetchDueReviews() {
+        state.dueLoadState = .loading
+        do {
+            state.dueItems = try getDueReviewsUseCase.execute(kind: .kanji, now: Date()).map { ReviewItem(saved: $0.item) }
+            state.dueLoadState = .loaded
+        } catch {
+            state.dueItems = []
+            state.dueLoadState = .failed
+        }
+    }
+
     private func fetchAllKanji() {
         do {
             state.allKanjis = try getKanjiDataUseCase.execute()
@@ -162,6 +181,8 @@ extension HomeKanjiViewModel {
 
 extension HomeKanjiViewModel {
     struct State {
+        var dueItems: [ReviewItem] = []
+        var dueLoadState: TodayLoadState = .loading
         var progress: WordsProgress?
         var allKanjis: [Kanji] = []
         var currentKanjis: [Kanji] = []
@@ -178,6 +199,7 @@ extension HomeKanjiViewModel {
     }
     
     enum Action {
+        case retryDue
         case onAppear
         case didTapAdd
         case didTapDelete(String)

@@ -15,6 +15,6 @@ extension AppComposer {
             deleteKanjiUseCase: useCase.deleteKanjiUseCase,
             deleteKotobaUseCase: useCase.deleteKotobaUseCase
         )
-        DetailView(viewModel: viewModel)
+        DetailView(viewModel: viewModel, examples: examples)
     }
 }

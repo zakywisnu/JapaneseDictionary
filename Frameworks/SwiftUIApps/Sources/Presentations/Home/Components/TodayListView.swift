@@ -25,6 +25,10 @@ enum TodayLoadState {
 }
 
 struct TodayListView: View {
+    let dueCount: Int
+    let dueLoadState: TodayLoadState
+    let onRetryDue: () -> Void
+    let onReviewDue: () -> Void
     let noun: String
     let entries: [StudyEntry]
     let loadState: TodayLoadState
@@ -61,6 +65,14 @@ struct TodayListView: View {
             Section {
                 addCard
                     .listRowBackground(Forest.surface)
+            }
+
+            Section {
+                dueContent
+                    .listRowBackground(Forest.surface)
+            } header: {
+                Text("Due for review")
+                    .textCase(nil)
             }
 
             Section {
@@ -104,6 +116,34 @@ struct TodayListView: View {
         .listStyle(.insetGrouped)
         .scrollContentBackground(.hidden)
         .animation(.default, value: entries)
+    }
+
+    @ViewBuilder
+    private var dueContent: some View {
+        switch dueLoadState {
+        case .loading:
+            ProgressView("Loading due \(nouns)")
+        case .failed:
+            StateMessage(title: "Couldn't read due \(nouns)", message: "Your saved collection or review schedule didn't load.", actionTitle: "Try again", action: onRetryDue)
+        case .loaded:
+            if dueCount == 0 {
+                StateMessage(title: "No \(nouns) due", message: "Add a \(noun) to begin, or return when your next review is due.")
+            } else {
+                VStack(alignment: .leading, spacing: Forest.Space.s) {
+                    Button(action: onReviewDue) {
+                        Text("Review \(dueCount) due \(dueCount == 1 ? noun : nouns)")
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(Forest.ink)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                    Text("Ratings save your next review date. Intervals are 1, 3, 7, 14 and 30 days; Again resets to 1 day.")
+                        .font(.subheadline)
+                        .foregroundStyle(Forest.inkMuted)
+                }
+            }
+        }
     }
 
     private var addCard: some View {

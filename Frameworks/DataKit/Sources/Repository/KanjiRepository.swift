@@ -17,19 +17,24 @@ public protocol KanjiRepository {
 }
 
 public struct StandardKanjiRepository: KanjiRepository {
-    let context: ModelContext
+    private let contextProvider: () -> ModelContext
+    private var context: ModelContext { contextProvider() }
     private let serialQueue = DispatchQueue(label: "com.zeroemotion.\(Self.self)", qos: .userInitiated)
-    
+
     public init(context: ModelContext) {
-        self.context = context
+        self.contextProvider = { context }
     }
-    
+
+    public init(store: StudyStore) {
+        contextProvider = { store.context }
+    }
+
     public func fetchAll() throws -> [KanjiDataModel] {
         try serialQueue.sync {
             return try context.fetch(FetchDescriptor<KanjiDataModel>())
         }
     }
-    
+
     public func fetch(id: String) throws -> KanjiDataModel {
         try serialQueue.sync {
             let descriptor = getDescriptor(with: id)
@@ -39,14 +44,14 @@ public struct StandardKanjiRepository: KanjiRepository {
             return data
         }
     }
-    
+
     public func add(_ param: KanjiDataModel) throws {
         try serialQueue.sync {
             context.insert(param)
             try context.save()
         }
     }
-    
+
     public func update(_ param: KanjiDataModel) throws {
         try serialQueue.sync {
             let descriptor = getDescriptor(with: param.id)
@@ -63,7 +68,7 @@ public struct StandardKanjiRepository: KanjiRepository {
             }
         }
     }
-    
+
     public func delete(id: String) throws {
         try serialQueue.sync {
             let descriptor = getDescriptor(with: id)
@@ -75,7 +80,7 @@ public struct StandardKanjiRepository: KanjiRepository {
             }
         }
     }
-    
+
     private func getDescriptor(with id: String) -> FetchDescriptor<KanjiDataModel> {
         return FetchDescriptor<KanjiDataModel>(
             predicate: #Predicate { $0.id == id }

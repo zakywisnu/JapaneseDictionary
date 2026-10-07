@@ -17,6 +17,13 @@ struct HomeKotobaView: View {
     
     var body: some View {
         TodayListView(
+            dueCount: viewModel.state.dueItems.count,
+            dueLoadState: viewModel.state.dueLoadState,
+            onRetryDue: { viewModel.send(.retryDue) },
+            onReviewDue: {
+                let session = ReviewSession(kind: .words, items: viewModel.state.dueItems, origin: .due)
+                router.push(.review(session), hideNavBar: false)
+            },
             noun: "word",
             entries: viewModel.state.entries,
             loadState: viewModel.state.loadState,

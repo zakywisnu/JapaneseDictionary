@@ -14,6 +14,8 @@ public enum AppRoutes: Routable {
     case dashboard
     case detail(DetailViewModel.Config)
     case review(ReviewSession)
+    case sources
+    case backup
     
     @ViewBuilder
     public func view() -> some View {
@@ -28,6 +30,10 @@ public enum AppRoutes: Routable {
             AppComposer.shared.makeDetailView(config)
         case let .review(session):
             AppComposer.shared.makeReviewView(session)
+        case .sources:
+            SourcesView()
+        case .backup:
+            AppComposer.shared.makeBackupView()
         }
     }
 }

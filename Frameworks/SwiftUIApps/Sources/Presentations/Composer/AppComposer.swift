@@ -13,26 +13,37 @@ import DataKit
 public final class AppComposer {
     public static let shared = AppComposer()
     public let useCase: UseCase
+    public let store: StudyStore
+    let backupRestoreStatus = BackupRestoreStatus()
+    private var backupCatalog: CatalogSnapshot?
+    private var backupRepository: BackupRepository?
+    private let getDueReviews: GetDueReviewsUseCase
+    private let recordReview: RecordReviewUseCase
+    let examples = ExampleRepository.bundled()
     
     private init() {
-        let context = Self.composeModelContext()
+        do { store = try StudyStore() }
+        catch { fatalError("Failed to create study store: \(error)") }
+        let reviewRepository = StandardReviewRepository(store: store)
+        getDueReviews = DefaultGetDueReviewsUseCase(repository: reviewRepository)
+        recordReview = DefaultRecordReviewUseCase(repository: reviewRepository)
         let repository = Repository(
-            kanjiRepository: StandardKanjiRepository(context: context.kanjiContext),
-            kotobaRepository: StandardKotobaRepository(context: context.kotobaContext),
+            kanjiRepository: StandardKanjiRepository(store: store),
+            kotobaRepository: StandardKotobaRepository(store: store),
             vocabRepository: StandardVocabRepository(),
-            wordsProgressRepository: StandardWordsProgressRepository(context: context.wordsProgressContext)
+            wordsProgressRepository: StandardWordsProgressRepository(store: store)
         )
         
         self.useCase = UseCase(
             getWordsProgressUseCase: DefaultGetWordsProgressUseCase(wordsProgressRepository: repository.wordsProgressRepository),
             updateWordsProgressUseCase: DefaultUpdateWordsProgressUseCase(wordsProgressRepository: repository.wordsProgressRepository),
             addKanjiUseCase: DefaultAddKanjiUseCase(kanjiRepository: repository.kanjiRepository, wordsProgressRepository: repository.wordsProgressRepository),
-            deleteKanjiUseCase: DefaultDeleteKanjiUseCase(kanjiRepository: repository.kanjiRepository, wordsProgressRepository: repository.wordsProgressRepository),
+            deleteKanjiUseCase: DefaultDeleteKanjiUseCase(mutationRepository: StandardStudyMutationRepository(store: store)),
             getAllKanjiUseCase: DefaultGetAllKanjiUseCase(repository: repository.kanjiRepository),
             getKanjiDetailUseCase: DefaultGetKanjiDetailUseCase(repository: repository.kanjiRepository),
             updateKanjiUseCase: DefaultUpdateKanjiUseCase(repository: repository.kanjiRepository),
             addKotobaUseCase: DefaultAddKotobaUseCase(kotobaRepository: repository.kotobaRepository, wordsProgressRepository: repository.wordsProgressRepository),
-            deleteKotobaUseCase: DefaultDeleteKotobaUseCase(kotobaRepository: repository.kotobaRepository, wordsProgressRepository: repository.wordsProgressRepository),
+            deleteKotobaUseCase: DefaultDeleteKotobaUseCase(mutationRepository: StandardStudyMutationRepository(store: store)),
             getAllKotobaUseCase: DefaultGetAllKotobaUseCase(repository: repository.kotobaRepository),
             getKotobaDetailUseCase: DefaultGetKotobaDetailUseCase(repository: repository.kotobaRepository),
             updateKotobaUseCase: DefaultUpdateKotobaUseCase(repository: repository.kotobaRepository),
@@ -53,7 +64,8 @@ public final class AppComposer {
             getAllKotobaUseCase: useCase.getAllKotobaUseCase,
             getWordsProgressUseCase: useCase.getWordsProgressUseCase,
             addKotobaUseCase: useCase.addKotobaUseCase,
-            deleteKotobaUseCase: useCase.deleteKotobaUseCase
+            deleteKotobaUseCase: useCase.deleteKotobaUseCase,
+            getDueReviewsUseCase: getDueReviews
         )
         HomeKotobaView(viewModel: viewModel)
     }
@@ -65,7 +77,8 @@ public final class AppComposer {
             getAllKanjiUseCase: useCase.getAllKanjiUseCase,
             getWordsProgressUseCase: useCase.getWordsProgressUseCase,
             addKanjiUseCase: useCase.addKanjiUseCase,
-            deleteKanjiUseCase: useCase.deleteKanjiUseCase
+            deleteKanjiUseCase: useCase.deleteKanjiUseCase,
+            getDueReviewsUseCase: getDueReviews
         )
         HomeKanjiView(viewModel: viewModel)
     }
@@ -81,41 +94,51 @@ public final class AppComposer {
         AppsOnboardingView(viewModel: viewModel)
     }
 
+    public func makeBackupView() -> some View {
+        let model = BackupViewModel(export: { [self] in
+            try ExportBackupUseCase(repository: composeBackupRepository()).execute()
+        }, prepare: { [self] data in
+            let catalog = try composeBackupCatalog()
+            return try await Task.detached(priority: .userInitiated) {
+                try BackupValidator.validate(data, catalog: catalog)
+            }.value
+        }, restore: { [self] backup in
+            try RestoreBackupUseCase(repository: composeBackupRepository()).execute(backup)
+        }, didRestore: { [backupRestoreStatus] recovery in
+            backupRestoreStatus.recoveryURL = recovery
+        }, availableRecoveryBackup: {
+            let recovery = URL.applicationSupportDirectory.appending(path: "Backups/kotoba-recovery.json")
+            return FileManager.default.fileExists(atPath: recovery.path) ? recovery : nil
+        })
+        return BackupView(viewModel: model)
+    }
+
+    private func composeBackupCatalog() throws -> CatalogSnapshot {
+        if let backupCatalog { return backupCatalog }
+        let vocabulary = StandardVocabRepository()
+        let words = try vocabulary.fetchKotobaData().stableSorted { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue }
+        let kanjis = try vocabulary.fetchKanjiWanikaniData().stableSorted { $0.jlptLevel.rawValue > $1.jlptLevel.rawValue }
+        let catalog = CatalogSnapshot(words: words, kanjis: kanjis)
+        backupCatalog = catalog
+        return catalog
+    }
+
+    private func composeBackupRepository() throws -> BackupRepository {
+        if let backupRepository { return backupRepository }
+        let recovery = URL.applicationSupportDirectory.appending(path: "Backups/kotoba-recovery.json")
+        let repository = try BackupRepository(store: store, catalog: composeBackupCatalog(), recoveryURL: recovery)
+        backupRepository = repository
+        return repository
+    }
+
     public func makeReviewView(_ session: ReviewSession) -> some View {
-        ReviewView(viewModel: ReviewViewModel(session: session))
+        ReviewView(viewModel: ReviewViewModel(session: session, recordRating: { [recordReview] id, sessionID, rating, now in
+            try recordReview.execute(id: id, sessionID: sessionID, rating: rating, now: now)
+        }), examples: examples)
     }
 }
 
 extension AppComposer {
-    private static func composeModelContext() -> AppModelContext {
-        let schema = Schema([
-            KanjiDataModel.self,
-            KotobaDataModel.self,
-            WordsProgressModel.self
-        ])
-        
-        let storeURL = URL.applicationSupportDirectory.appending(path: "JapaneseDictionary.store")
-        
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            url: storeURL
-        )
-        
-        do {
-            let container = try ModelContainer(for: schema, configurations: modelConfiguration)
-            let context = ModelContext(container)
-            context.autosaveEnabled = true
-            
-            return .init(
-                kanjiContext: context,
-                kotobaContext: context,
-                wordsProgressContext: context
-            )
-        } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
-        }
-    }
-    
     public static func getProgressFromUserDefaults() -> WordsProgress? {
         guard let data = UserDefaults.standard.data(forKey: "wordsProgress") else { return nil }
         let decoder = JSONDecoder()

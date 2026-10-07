@@ -32,7 +32,7 @@ One accent (moss), warm paper neutrals, one destructive color. Every text pair p
 | `line` | `#DAD8C6` | `#2F382D` | Hairlines, square borders and guides, inactive page dots |
 | `moss` | `#45694D` | `#8DB592` | The accent |
 | `onMoss` | `#FFFFFF` | `#10170F` | Text on moss |
-| `danger` | `#A8402F` | `#E0806E` | Remove actions only |
+| `danger` | `#A8402F` | `#E0806E` | Remove and backup replacement actions only |
 
 Checked contrast ratios:
 
@@ -105,7 +105,7 @@ Lists use `.insetGrouped` with hidden scroll background, `surface` row backgroun
 | Splash | 言葉の森 in practice squares | Tagline below. Moves on after 0.6s |
 | Onboarding | Character in a large square | 3 pages (言, 漢, 森), Skip top right, page dots, Next / Start learning. Finishing saves `isOnboardingComplete` |
 | Today | Add next word/kanji | Date caption, picker, compact add card (headline count, next JLPT level), list of today's items, newest first. Count supports the action without competing with the headwords |
-| Collection | The list | Search field (Japanese, reading, or English), picker, sections by JLPT level N5 → N1 with counts |
+| Collection | The list | Search field (Japanese, reading, or English), picker, neutral Review action, sections by JLPT level N5 → N1 with counts |
 | Detail | The headword | Specimen card (squares, reading, level), definition card (Meanings, On'yomi, Kun'yomi, Strokes). Native back. Trash in toolbar opens a confirmation anchored to it |
 | Progress | Words and Kanji cards | Words/Kanji in collection "of" bundled total, progress track, Current level, Last added. Metadata stacks at accessibility text sizes. Footnotes explain collection counts and local storage |
 
@@ -148,9 +148,23 @@ MOTION 1. System push/pop and tab transitions, button press scale, list insert/r
 
 Today offers a neutral Review today's words / kanji action when the selected list has loaded with at least one item. Add next remains the moss primary action. Review snapshots the saved items in their current order and does not change collection progress.
 
-The pushed review screen hides the tab bar. Show the headword and level first, then reveal stored readings and meanings on request. Keep the headword stable during reveal, honor Reduce Motion, and reset scroll position when changing items. The bottom safe-area action remains reachable while long answers scroll. Previous hides the answer again.
+Collection offers a neutral Review words / kanji action after successful loading with saved items, including when browsing search has no matches. Its setup sheet independently selects All levels or N5–N1 and 10, 20 (default), or All items. Show the selected count; disable Start review for empty selections and explain how to choose another level. Start snapshots saved content, newest first with saved ID as the date tie-break. Search never silently filters review. Cancel returns without starting a session.
 
-Completion says how many items were reviewed, with Back to Today and a neutral Review again action. Empty sessions use StateMessage with a next step. The full interaction and edge cases are in `docs/design/review-flow.md`.
+The pushed review screen hides the tab bar. Show the headword and level first, then reveal stored readings and meanings on request. Keep the headword stable during reveal, honor Reduce Motion, and reset scroll position when changing items. The bottom safe-area action remains reachable while long answers scroll. After reveal, Got it removes the item and Again returns it to the end of the in-memory queue, hiding the answer even when only one item remains. Got it is moss; Again is neutral with a 44pt target. Explain that Again repeats this session. Show remaining items rather than a fixed position; omit Previous because ratings have already consumed queue entries.
+
+Completion says how many distinct items were practiced, reports repeat attempts separately, and says whether they were added today or came from the collection, with Back to Today / Back to Collection and a neutral Review again action. Empty sessions use StateMessage with a next step. The full interaction and edge cases are in `docs/design/review-flow.md`.
+
+## Due review and optional examples
+
+Today separates Due for review from Added today for the selected Words / Kanji kind. Its neutral action shows the due count; Add next remains the moss primary action. Loading names the due list, empty explains adding or returning later, and failures name the saved collection or schedule with Try again. Ratings in this mode save before changing the queue. A save failure keeps the revealed item and offers Retry / Exit review. Retry preserves the pending rating and session identity. Successful reviews use 1, 3, 7, 14 and 30 calendar-day intervals; Again resets to 1 day. Today and Collection practice leave schedules unchanged. Completion says these items were due for review without claiming mastery. Completed due sessions offer only Back to Today; the next session must load a fresh due list rather than repeat the stale snapshot.
+
+Approved vocabulary examples appear as an optional answer card only after reveal, matched by the original headword, reading and level. Kana-only words retain their original reading for matching while omitting its duplicate display. Missing or unreadable optional examples do not interrupt review. Sources is a pushed screen with native back navigation. The current release has zero approved examples, so no example cards appear.
+
+## Local backup
+
+Progress offers Backup and restore as a neutral action. The pushed screen explains that a backup contains the collection, progress and review dates. Export uses the system file picker so the learner chooses where to keep a JSON file. Import accepts a chosen JSON file, validates it before offering any replacement, and shows its date and word / kanji counts. Cancel leaves current data untouched. Replace current collection is an explicit destructive confirmation; it replaces rather than merges the selected backup.
+
+Before replacement, save a recovery backup of the current collection locally. Failed validation or saving gives a concrete next action and keeps current data available. Success returns to Progress, clears active review routes and offers Share recovery backup so the learner can keep the prior collection's file. All backup processing works offline; choosing a system Files destination does not add accounts or sync to the app.
 
 ## Voice and copy
 

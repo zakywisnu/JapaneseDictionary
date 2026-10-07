@@ -52,9 +52,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DDDBD7F55B13896E29384B6E"
+               BuildableName = "DataKitTests.xctest"
+               BlueprintName = "DataKitTests"
+               ReferencedContainer = "container:Frameworks/DataKit/DataKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "811EA4273DAB3937B4010303"
                BuildableName = "DomainKit.framework"
                BlueprintName = "DomainKit"
+               ReferencedContainer = "container:Frameworks/DomainKit/DomainKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "50D831A3343792ED47808DE0"
+               BuildableName = "DomainKitTests.xctest"
+               BlueprintName = "DomainKitTests"
                ReferencedContainer = "container:Frameworks/DomainKit/DomainKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -192,6 +220,28 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DDDBD7F55B13896E29384B6E"
+               BuildableName = "DataKitTests.xctest"
+               BlueprintName = "DataKitTests"
+               ReferencedContainer = "container:Frameworks/DataKit/DataKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "50D831A3343792ED47808DE0"
+               BuildableName = "DomainKitTests.xctest"
+               BlueprintName = "DomainKitTests"
+               ReferencedContainer = "container:Frameworks/DomainKit/DomainKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             parallelizable = "NO">

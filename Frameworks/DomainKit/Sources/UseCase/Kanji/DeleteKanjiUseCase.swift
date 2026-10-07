@@ -13,29 +13,14 @@ public protocol DeleteKanjiUseCase {
 }
 
 public struct DefaultDeleteKanjiUseCase: DeleteKanjiUseCase {
-    private let kanjiRepository: KanjiRepository
-    private let wordsProgressRepository: WordsProgressRepository
-    
-    public init(
-        kanjiRepository: KanjiRepository,
-        wordsProgressRepository: WordsProgressRepository
-    ) {
-        self.kanjiRepository = kanjiRepository
-        self.wordsProgressRepository = wordsProgressRepository
+    private let mutationRepository: StudyMutationRepository
+
+    public init(mutationRepository: StudyMutationRepository) {
+        self.mutationRepository = mutationRepository
     }
-    
+
     public func execute(param: KanjiParam) throws {
-        try kanjiRepository.delete(id: param.id)
-        let progress = try wordsProgressRepository.getProgress()
-        progress.kanjiIndex = param.addedIndex
-        progress.kanjiProgress = progress.kanjiProgress - 1
-        progress.kanjiLevel = .init(
-            rawValue: max(
-                WordsProgressModel.Level(rawValue: progress.kanjiLevel.rawValue)?.rawValue ?? "N5",
-                WordsProgressModel.Level(rawValue: param.jlptLevel.rawValue)?.rawValue ?? "N5"
-            )
-        ) ?? .n5
-        try wordsProgressRepository.updateProgress(progress)
+        let progress = try mutationRepository.delete(id: .init(kind: .kanji, id: param.id))
         UpdateProgressUserDefaults.update(progress.mapToParam())
     }
 }
@@ -53,5 +38,15 @@ extension WordsProgressModel {
             kanjiIndex: kanjiIndex,
             kotobaIndex: kotobaIndex
         )
+    }
+}
+
+extension StudyProgress {
+    func mapToParam() -> WordsProgressParam {
+        .init(id: id, kanjiProgress: kanjiProgress, kotobaProgress: kotobaProgress,
+              kanjiLevel: .init(rawValue: kanjiLevel) ?? .n5,
+              kotobaLevel: .init(rawValue: kotobaLevel) ?? .n5,
+              lastKotobaUpdated: lastKotobaUpdated, lastKanjiUpdated: lastKanjiUpdated,
+              kanjiIndex: kanjiIndex, kotobaIndex: kotobaIndex)
     }
 }

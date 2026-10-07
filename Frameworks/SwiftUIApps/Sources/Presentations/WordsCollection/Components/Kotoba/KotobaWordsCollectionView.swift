@@ -12,6 +12,7 @@ struct KotobaWordsCollectionView: View {
     @EnvironmentObject var appTabs: AppTabsViewModel
     @State var viewModel: KotobaWordsCollectionViewModel
     let query: String
+    @State private var isReviewSetupPresented = false
     
     var body: some View {
         CollectionListView(
@@ -25,8 +26,14 @@ struct KotobaWordsCollectionView: View {
                 router.push(.detail(.init(kotoba: kotoba, kanji: nil)), hideNavBar: false)
             },
             onRetry: { viewModel.send(.onAppear) },
-            onGoToToday: { appTabs.appTab = .home }
+            onGoToToday: { appTabs.appTab = .home },
+            onReview: { isReviewSetupPresented = true }
         )
+        .sheet(isPresented: $isReviewSetupPresented) {
+            ReviewSetupView(kind: .words, items: viewModel.state.kotobas.map(ReviewItem.init(word:))) { session in
+                router.push(.review(session), hideNavBar: false)
+            }
+        }
         .onAppear { viewModel.send(.onAppear) }
         .alert(
             "Something went wrong",

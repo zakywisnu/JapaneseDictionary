@@ -1,14 +1,45 @@
 import Foundation
+import DataKit
 
 public struct ReviewSession: Hashable {
     let kind: StudyKind
     let items: [ReviewItem]
+    var origin: ReviewOrigin = .today
+    var id: UUID = UUID()
 
     var noun: String { kind == .words ? "word" : "kanji" }
     var nouns: String { noun.pluralNoun }
 }
 
+enum ReviewOrigin: Hashable {
+    case today
+    case collection
+    case due
+
+    var backTitle: String { self == .collection ? "Back to Collection" : "Back to Today" }
+    var completionContext: String { self == .today ? "added today" : (self == .due ? "due for review" : "from your collection") }
+    var emptyMessage: String {
+        self == .collection ? "Return to Collection and choose another level." : "Return to Today and add an item or check what is due."
+    }
+}
+
+struct ReviewSelection {
+    var level: String?
+    var limit: Int?
+
+    func selected(_ items: [ReviewItem]) -> [ReviewItem] {
+        let ordered = items.filter { level == nil || $0.level == level }.sorted {
+            let lhs = $0.dateAdded ?? .distantPast
+            let rhs = $1.dateAdded ?? .distantPast
+            return lhs == rhs ? $0.savedID < $1.savedID : lhs > rhs
+        }
+        return limit.map { Array(ordered.prefix(max(0, $0))) } ?? ordered
+    }
+}
+
 struct ReviewItem: Hashable {
+    let savedID: String
+    let dateAdded: Date?
     let headword: String
     let reading: String?
     let meanings: [String]
@@ -16,8 +47,25 @@ struct ReviewItem: Hashable {
     let onyomi: [String]
     let kunyomi: [String]
     let strokes: Int?
+    let exampleWordKey: ExampleWordKey?
+
+    init(saved: SavedStudyItem) {
+        savedID = saved.id.id
+        dateAdded = saved.dateAdded
+        headword = saved.headword
+        reading = saved.reading
+        meanings = saved.meanings
+        level = saved.level
+        onyomi = saved.onyomi
+        kunyomi = saved.kunyomi
+        strokes = saved.strokes
+        exampleWordKey = saved.exampleWordKey
+    }
 
     init(word: Kotoba) {
+        exampleWordKey = ExampleWordKey(headword: word.kanji.isEmpty ? word.furigana : word.kanji, reading: word.furigana, level: word.jlptLevel.rawValue)
+        savedID = word.id
+        dateAdded = word.dateAdded
         let entry = word.studyEntry
         headword = entry.headword
         reading = entry.reading
@@ -29,6 +77,9 @@ struct ReviewItem: Hashable {
     }
 
     init(kanji: Kanji) {
+        exampleWordKey = nil
+        savedID = kanji.id
+        dateAdded = kanji.dateAdded
         headword = kanji.kanji
         reading = nil
         meanings = kanji.meanings

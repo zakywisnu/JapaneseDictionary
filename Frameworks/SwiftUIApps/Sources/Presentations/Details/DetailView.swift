@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import DataKit
 
 public struct DetailView: View {
     @EnvironmentObject var router: AppRouter
     @State private var viewModel: DetailViewModel
     @State private var isConfirmingDelete = false
+    private let examples: ExampleRepository
     
-    public init(viewModel: DetailViewModel) {
+    public init(viewModel: DetailViewModel, examples: ExampleRepository = .bundled()) {
+        self.examples = examples
         self.viewModel = viewModel
     }
     
@@ -31,6 +34,11 @@ public struct DetailView: View {
                     let entry = kotoba.studyEntry
                     specimen(headword: entry.headword, reading: entry.reading, level: kotoba.jlptLevel.rawValue)
                     definitionCard([("Meanings", kotoba.english)])
+                    if let example = examples.example(for: .init(
+                        headword: kotoba.kanji, reading: kotoba.furigana, level: kotoba.jlptLevel.rawValue
+                    )) {
+                        ExampleSentenceCard(example: example)
+                    }
                 }
             }
             .padding(Forest.Space.l)

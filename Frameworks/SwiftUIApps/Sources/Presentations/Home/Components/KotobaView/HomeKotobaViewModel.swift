@@ -8,6 +8,7 @@
 import Observation
 import SwiftUI
 import DomainKit
+import DataKit
 
 @Observable
 final class HomeKotobaViewModel {
@@ -19,14 +20,18 @@ final class HomeKotobaViewModel {
     private let addKotobaUseCase: AddKotobaUseCase
     private let deleteKotobaUseCase: DeleteKotobaUseCase
     
+    private let getDueReviewsUseCase: GetDueReviewsUseCase
+
     init(
         state: State = .init(),
         getKotobaDataUseCase: GetKotobaDataUseCase,
         getAllKotobaUseCase: GetAllKotobaUseCase,
         getWordsProgressUseCase: GetWordsProgressUseCase,
         addKotobaUseCase: AddKotobaUseCase,
-        deleteKotobaUseCase: DeleteKotobaUseCase
+        deleteKotobaUseCase: DeleteKotobaUseCase,
+        getDueReviewsUseCase: GetDueReviewsUseCase
     ) {
+        self.getDueReviewsUseCase = getDueReviewsUseCase
         self.state = state
         self.getKotobaDataUseCase = getKotobaDataUseCase
         self.getAllKotobaUseCase = getAllKotobaUseCase
@@ -50,6 +55,8 @@ final class HomeKotobaViewModel {
             guard let kotoba = state.currentKotobas.first(where: { $0.id == id }) else { return }
             deleteKotoba(kotoba)
             reload()
+        case .retryDue:
+            fetchDueReviews()
         case .didDismissError:
             state.errorMessage = nil
         }
@@ -58,10 +65,22 @@ final class HomeKotobaViewModel {
 
 extension HomeKotobaViewModel {
     private func reload() {
+        fetchDueReviews()
         fetchProgress()
         fetchCurrentKotoba()
     }
     
+    private func fetchDueReviews() {
+        state.dueLoadState = .loading
+        do {
+            state.dueItems = try getDueReviewsUseCase.execute(kind: .word, now: Date()).map { ReviewItem(saved: $0.item) }
+            state.dueLoadState = .loaded
+        } catch {
+            state.dueItems = []
+            state.dueLoadState = .failed
+        }
+    }
+
     private func fetchAllKotoba() {
         do {
             state.allKotobas = try getKotobaDataUseCase.execute()
@@ -160,6 +179,8 @@ extension HomeKotobaViewModel {
 
 extension HomeKotobaViewModel {
     struct State {
+        var dueItems: [ReviewItem] = []
+        var dueLoadState: TodayLoadState = .loading
         var progress: WordsProgress?
         var allKotobas: [Kotoba] = []
         var currentKotobas: [Kotoba] = []
@@ -176,6 +197,7 @@ extension HomeKotobaViewModel {
     }
     
     enum Action {
+        case retryDue
         case onAppear
         case didTapAdd
         case didTapDelete(String)

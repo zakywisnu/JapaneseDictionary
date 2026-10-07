@@ -17,17 +17,22 @@ public protocol KotobaRepository {
 }
 
 public final class StandardKotobaRepository: KotobaRepository {
-    let context: ModelContext
-    
+    private let contextProvider: () -> ModelContext
+    private var context: ModelContext { contextProvider() }
+
     public init(context: ModelContext) {
-        self.context = context
+        self.contextProvider = { context }
     }
-    
+
+    public init(store: StudyStore) {
+        contextProvider = { store.context }
+    }
+
     public func fetchAll() throws -> [KotobaDataModel] {
         let words = try context.fetch(FetchDescriptor<KotobaDataModel>())
         return words
     }
-    
+
     public func fetch(id: String) throws -> KotobaDataModel {
         let descriptor = getDescriptor(with: id)
         guard let data = try context.fetch(descriptor).first else {
@@ -35,12 +40,12 @@ public final class StandardKotobaRepository: KotobaRepository {
         }
         return data
     }
-    
+
     public func add(_ param: KotobaDataModel) throws {
         context.insert(param)
         try context.save()
     }
-    
+
     public func update(_ param: KotobaDataModel) throws {
         let descriptor = getDescriptor(with: param.id)
         if let data = try context.fetch(descriptor).first {
@@ -53,10 +58,10 @@ public final class StandardKotobaRepository: KotobaRepository {
             throw DataError.dataNotFound
         }
     }
-    
+
     public func delete(id: String) throws {
         let descriptor = getDescriptor(with: id)
-        
+
         if let data = try context.fetch(descriptor).first {
             context.delete(data)
             try context.save()
@@ -64,7 +69,7 @@ public final class StandardKotobaRepository: KotobaRepository {
             throw DataError.dataNotFound
         }
     }
-    
+
     private func getDescriptor(with id: String) -> FetchDescriptor<KotobaDataModel> {
         return FetchDescriptor<KotobaDataModel>(
             predicate: #Predicate { $0.id == id }

@@ -10,6 +10,7 @@ import SwiftUI
 public struct ProfileView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @EnvironmentObject var appTabs: AppTabsViewModel
+    @EnvironmentObject private var router: AppRouter
     @State private var viewModel: ProfileViewModel
     
     public init(viewModel: ProfileViewModel) {
@@ -38,6 +39,36 @@ public struct ProfileView: View {
                         loaded(progress)
                     }
                 }
+                if let recovery = AppComposer.shared.backupRestoreStatus.recoveryURL {
+                    VStack(alignment: .leading, spacing: Forest.Space.m) {
+                        Text("Backup restored")
+                            .font(.headline)
+                        Text("Your collection, progress and review dates have been replaced. Keep the recovery backup if you want a copy of your previous collection.")
+                            .foregroundStyle(Forest.inkMuted)
+                        ShareLink("Share recovery backup", item: recovery)
+                            .frame(minHeight: 44)
+                    }
+                    .padding(Forest.Space.l)
+                    .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                }
+                Button {
+                    router.push(.backup, hideNavBar: false)
+                } label: {
+                    Text("Backup and restore")
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(Forest.ink)
+                Button {
+                    router.push(.sources, hideNavBar: false)
+                } label: {
+                    Text("Sources")
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(Forest.ink)
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)

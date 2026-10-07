@@ -12,7 +12,7 @@ func targets() -> [Target] {
             .external(name: "ZeroDesignKit", condition: nil),
         ],
         deploymentTargets: .iOS("18.0"),
-        withUnitTest: false
+        withUnitTest: true
     )
     return target
 }

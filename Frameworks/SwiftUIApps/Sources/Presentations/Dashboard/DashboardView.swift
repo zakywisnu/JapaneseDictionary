@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import DomainKit
 
 struct DashboardView: View {
+    @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var activeTab: AppTabsViewModel
     
     var body: some View {
@@ -19,6 +21,10 @@ struct DashboardView: View {
             }
         }
         .tint(Forest.moss)
+        .onReceive(NotificationCenter.default.publisher(for: .backupRestoreCompleted)) { _ in
+            activeTab.appTab = .profile
+            router.setRoot(.dashboard)
+        }
     }
 }
 

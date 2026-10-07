@@ -1,66 +1,63 @@
-# Review today's words and kanji
+# Review words and kanji
 
-Status: implemented in the iPhone app. The interactive design preview remains a sample of the flow.
+Status: Today and Collection practice are implemented. The original interactive preview demonstrates the earlier reveal-and-next flow, rather than the current Again queue.
 
-## Purpose
+## Purpose and entry points
 
-Turn the items collected on Today into a short recall exercise. A learner should be able to start with one tap, attempt a reading and meaning, reveal the answer, and finish without setup. The flow uses saved local items and bundled definitions. Collection counts continue to describe items added, rather than mastery.
+Turn saved items into a short recall exercise. Today offers a neutral Review today's words / kanji action for successfully loaded nonempty lists; Add next stays primary. Collection offers Review words / kanji with a setup sheet for All levels or N5–N1 and a session size of 10, 20 (default), or All. Show the selected count and disable Start for empty selections with a change-level instruction. Browsing search never changes this selection.
 
-## Entry point
-
-Keep Add next word / Add next kanji as Today's moss primary action. Add a neutral, full-width Review today's words / Review today's kanji button in the Added today section header area, before the rows. Show it only when the selected kind has at least one saved item today and loading has succeeded. Add a short caption: Try the reading and meaning before revealing the answer.
-
-Use the existing Words / Kanji selection to determine the session. Do not add a separate setup screen or mix both kinds in a session. Push the review screen with AppRouter and the app's native navigation stack; keep the tab bar hidden during the focused exercise, as on Detail.
+Capture saved values when starting. Today preserves its list order; Collection uses newest-first dates with saved ID as a tie-break. Push through the native navigation stack and hide the tab bar during review. Native back exits without confirmation.
 
 ## Session sequence
 
-1. **Recall.** Title: Review words or Review kanji. A quiet item position reads Word 1 of 3 / Kanji 1 of 3. Show the headword in the existing practice squares and its JLPT tag. Hide every reading and meaning. Prompt: Try the reading and meaning. Primary action: Reveal answer.
-2. **Answer.** Retain the headword in place. Show the reading (when different from the headword) and meanings. Kanji separates On'yomi, Kun'yomi, and Strokes using the existing definition-card styling; omit missing fields. Primary action: Next word / Next kanji, or Finish review on the final item. Do not advance automatically or ask the learner to score themselves.
-3. **Complete.** Title: Review complete. Copy: You've gone through 3 words added today. Primary action: Back to Today. Secondary neutral action: Review again. Use singular grammar for one word and the unchanged plural kanji. No percentage score, mastery claim, streak, or celebration animation.
+1. **Recall.** Show the headword in practice squares, JLPT tag, and “N remaining.” Hide readings and meanings. Prompt: Try the reading and meaning. Primary action: Reveal answer.
+2. **Answer.** Keep the headword stable and show saved reading and meanings. Kanji separates On'yomi, Kun'yomi, and Strokes; omit missing fields. Got it is the moss primary action and removes the current item from the queue. Again is neutral and moves it behind other remaining items. Explain: Again repeats this item in this session.
+3. **Complete.** Report distinct items practiced, whether they were added today or came from Collection, and repeat attempts separately. Back to Today / Collection returns to the originating screen; Review again resets the original snapshot and attempts. No mastery claim, score, streak, or celebration animation.
 
-The existing native back action exits at any time without confirmation: reviewing does not write to the collection or saved progress. A neutral Previous action is available after the first item; revisiting an item hides its answer again so it can be attempted anew.
+There is no Previous action in rated practice: a consumed rating cannot be silently changed. Both ratings require reveal and hide the next answer. A one-item Again hides and reoffers that same item, without ending the session. Duplicate saved IDs appear only once in the queue.
 
 ## Layout and behavior
 
-- Reuse Forest colors, spacing and radii, PracticeCells / Headword, LevelTag, PrimaryButtonStyle, and StateMessage. Preserve Mincho for headwords and system text styles for supporting copy.
-- Put the content in a ScrollView, with the one primary action inset above the bottom safe area. Long definitions and large text scroll while the action remains reachable.
-- Fit headword cells using the existing detail sizes and plain-text fallback. Reserve the reading area for the revealed state; no hidden reading may remain in the visible prompt.
-- Show item position as text. A completion meter is unnecessary and could be confused with the persisted collection progress.
-- Use native push/pop and a brief reveal transition; honor Reduce Motion. Keep the headword stable during reveal.
-- Remove controls are absent from the review screen. Removing items remains a collection/detail action with confirmation.
-- VoiceOver interaction verification is deferred at the user's request; implementation should preserve existing labels and grouping rather than discard them.
+- Reuse Forest tokens, practice squares, Mincho headwords, system text styles, LevelTag, PrimaryButtonStyle, and StateMessage.
+- Content scrolls while bottom safe-area actions remain reachable. Long definitions and accessibility text can wrap. Every accepted rating resets scroll, including one-item Again.
+- Fit practice cells using detail sizes, with plain Mincho fallback for long headwords. Never leave hidden answer text in recall.
+- Honor Reduce Motion for reveal transitions. Do not show a completion meter that could imply persisted collection progress.
+- Keep removal in Collection/Detail; review has no remove action.
+- VoiceOver interaction verification remains deferred at the user's request.
 
 ## Data and integration
 
-Capture a value snapshot of the selected kind's Today items when starting. Preserve their existing newest-first order. This does not alter bundled sorting, saved indexes, or Add next behavior.
+ReviewSession contains immutable saved ReviewItem values, kind, and origin. ReviewItem retains saved ID, original date, headword, reading, meanings, level, and kanji-specific fields. Do not reconstruct saved kanji through regenerated bundle UUIDs.
 
-Add ReviewViewModel with the app's @Observable / state / send(_:) shape. Its session state owns the snapshot, current index, answer visibility, and completion. Session actions are reveal, next, previous, and restart; close uses the native router. Advancing requires an answer reveal; finishing never indexes beyond the last item.
+DomainKit's pure PracticeQueue deduplicates IDs preserving order, rotates Again to the tail, removes Got it, and records repeat attempts. ReviewViewModel follows @Observable / state / send and maps the current queue ID to saved content. Reveal, rate, and restart are in-memory actions; AppComposer supplies the VM. Presentation revision resets scroll even when the next item has the same ID.
 
-Use a ReviewItem presentation model with headword, optional word reading, meanings, level, and optional kanji fields. Map saved Kotoba / Kanji models at the composition boundary so the review view has no repository access. Do not reconstruct definitions by searching bundled kanji UUIDs. AppComposer supplies the view model, and a review route carries the selected session snapshot.
+Today and Collection practice do not write schedules or WordsProgress. Backgrounding retains the active in-memory queue; termination ends it. Starting anew takes a fresh snapshot. Midnight and collection changes affect the next session, not active content.
 
-No SwiftData model changes are needed for this first version. Do not persist review counts or mutate WordsProgress. Going to the background retains the active screen's in-memory state; terminating the app ends the session. Starting again takes a fresh snapshot. A session started before midnight retains its original set until closed. External collection changes affect the next session, not the active snapshot.
+## Due sessions
+
+Today has a separate Due for review section for the selected study kind. Due snapshots order oldest due dates first with saved ID as a tie-break. Unrated items are immediately due even when the device clock is earlier than their added date.
+
+Only due sessions persist ratings. Save the rating before mutating PracticeQueue; a save error keeps the revealed item, remaining count and repeat attempts unchanged. Retry uses the pending rating and the same session UUID. Exit uses native back without consuming the queue. Again resets the schedule to one calendar day; successful reviews advance through 1, 3, 7, 14 and 30 days. Existing collection counts and Add next indexes are unaffected.
+
+Due completion offers Back to Today. It cannot restart its stale snapshot: the next due session must load today's current schedule. Today / Collection practice retains Review again without scheduling writes.
+
+Approved word examples appear only after reveal. Match the original headword, furigana and level even when a kana-only word has no displayed reading annotation. Missing optional data leaves review usable. The shipped approved bundle is currently empty.
 
 ## States and edge cases
 
-- Empty input: StateMessage titled No words to review / No kanji to review, with Add an item on Today to begin and Back to Today. Never index an empty array.
-- Missing reading: omit that field; reveal the available meaning. A kana-only word can have no distinct reading annotation.
-- Missing meanings: say No meaning is available for this item and still allow Next after reveal. Never fabricate a definition or block the session.
-- One item: reveal, then Finish review; Previous is absent.
-- Long headword or definitions: fit cells or use plain Mincho; let text wrap and scroll.
-- Failed Today loading: preserve Today's existing cause-specific retry state; do not offer a review session from an incomplete list.
-- Repeat: reset the position and hide the answer while retaining the same session snapshot.
+- Empty input: StateMessage plus an origin-specific return action and next step; no array indexing.
+- Missing reading: omit it. Kana-only words need no repeated reading annotation.
+- Missing meanings: explain that none is available and still allow ratings after reveal.
+- One item: Again reoffers it; Got it completes.
+- Repeated taps: a rating hides the answer immediately, so another hidden-answer rating is ignored.
+- Repeat: restore original unique order, hide the answer, and reset repeat attempts.
+- Failed loading: preserve cause-specific retries and do not offer review from incomplete data.
 
-## Why this version
+## Acceptance checks
 
-A reveal-and-next flow fits the current local data and avoids demanding new scoring or scheduling rules. A self-rating flow could support repeat queues later, but it adds decisions to every item and needs agreed persistence semantics. Spaced repetition is a larger feature with due dates and migrations; it should have its own design when requested.
+- Both entry points practice real saved content and retain native back/swipe-back behavior.
+- Reveal precedes ratings; Again rotates and Got it consumes safely for empty, duplicate, and single-item inputs.
+- Distinct count and attempts describe different things; no rating changes collection counts or indexes.
+- Verify light/dark/accessibility text, safe-area actions, long definitions, and one-item scroll reset before calling UI verification complete.
 
-## Implementation acceptance checks
-
-- Today offers the correct review action only for nonempty, successfully loaded items of the selected kind.
-- Every item starts with its reading and meaning hidden; reveal shows real stored content.
-- Previous, next, repeat, one-item, and empty-session transitions stay within valid indexes.
-- Finishing, exiting, and repeating leave collection counts and saved indexes unchanged.
-- Light mode, dark mode, and accessibility text sizes remain readable; primary actions stay reachable with long definitions.
-- Native back and swipe-back work through AppNavigationStack.
-
-Seven view-model tests cover session transitions and saved-content mapping. The interactive preview demonstrates the interaction with labeled samples from the bundled vocabulary; it does not read the learner's actual collection.
+Queue and VM tests protect repeat, deduplication, reveal guards, restart, empty input, and saved-content mapping. Runtime UI checks are recorded separately from test results.

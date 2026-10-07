@@ -1,0 +1,1 @@
+Local retained raw inputs for the 2026-10-06 export. All three files were copied from the downloaded snapshot and checked against manifest.json SHA-256 hashes. Raw corpus files are Git-ignored. Keep this directory backed up separately when transferring the repository; manifest files alone cannot reproduce the snapshot. No corpus archive is committed.

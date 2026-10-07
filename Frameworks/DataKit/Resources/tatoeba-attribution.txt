@@ -1,0 +1,11 @@
+Example sentences
+
+This release does not include example sentences yet.
+
+Sentence source: Tatoeba contributors
+https://tatoeba.org/
+
+License: Creative Commons Attribution 2.0 France (CC BY 2.0 FR)
+https://creativecommons.org/licenses/by/2.0/fr/
+
+When included, each example retains its source and contributor credits. Changes and added readings are identified in the credits. No audio is included.

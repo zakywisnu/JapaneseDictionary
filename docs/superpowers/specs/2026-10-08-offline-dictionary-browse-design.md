@@ -1,6 +1,6 @@
-# Next phase proposal: offline dictionary browsing
+# Offline dictionary browsing
 
-Status: proposed for review; implementation is not authorized by the delivery request.
+Status: approved by the user’s “go” and implemented on `codex/offline-dictionary-browse`. Verification: ../../data/offline-dictionary-browse-verification.md.
 
 The refreshed dictionary is useful beyond the next sequential word. Let learners browse the complete bundled list, inspect full entries, and add a chosen study sense without disrupting their existing sequence.
 

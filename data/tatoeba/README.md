@@ -66,3 +66,19 @@ Keep source IDs, links, license, owners, review metadata and snapshot hashes in 
 ## Reviewer worksheet
 
 `n5-review-sheet.csv` contains all 863 pending candidates, exact catalog glosses (including homograph senses), sentence IDs/text/hashes, and blank reviewer/date/sense/reading/notes fields. Regenerate with `python3 tools/data/export_review_sheet.py`. This is an export for human review, not an approval importer. A maintainer must transcribe completed human decisions into `approvals.json` with the exact nested word key and matching hashes; blank worksheet readings become null. Running the export resets the worksheet to pending, so keep completed review work separately. No worksheet decision is automatically trusted or published.
+
+## Current catalog review preparation
+
+`current-reconciliation.json` and `current-n5-review-sheet.csv` bind the retained corpus snapshot to `vocabulary-v2.json`. Generate them with:
+
+```sh
+python3 tools/data/prepare_current_examples.py
+```
+
+The script preserves `n5-candidates.json`, the original worksheet, raw snapshots, approval ledger and app resources. Legacy CSV rows are ordered stably by N5–N1, exactly as the catalog builder orders its `legacyMap` slots. Only that explicit mapping can select a current identity; absent, retired, ambiguous or missing targets remain unresolved with a cause. No headword-only fallback selects another sense. The full report retains every candidate, including candidates omitted from the worksheet.
+
+The current worksheet selects one candidate per eligible N5 identity, in current catalog order, using the lowest numeric Japanese then English sentence ID, up to 30 identities. It includes current selected meanings, full sense notes, original legacy key, source texts/IDs/URLs/owners/license and exact text hashes. All rows remain pending; reviewer, date, decision, reason, verified-sense and reading fields are blank. The known ああ example is still pending and still requires rejection if it does not express the selected interjection sense. Binding an identity is not a sense approval.
+
+Ledger version 2 retains the version 1 decision fields and adds mandatory `catalogID` and `contextSha256`. The context hash is SHA-256 over UTF-8 JSON containing precisely `id`, `headword`, `reading`, `level`, and `studyMeanings`, encoded with sorted keys, no ASCII escaping, and separators `(',', ':')`. Preserve the selected meaning order. Approved decisions must match the catalog identity, context hash, original candidate word key, both sentence IDs and both exact source text hashes. The builder revalidates the candidate context and refuses unresolved mappings, missing reviewer/date/sense rationale, source credit failures and altered source texts. Version 2 output preserves `catalogID`, `contextSha256` and `selectedStudyMeanings` alongside all prior attribution and reading provenance.
+
+For a version 2 ledger the builder reads `current-reconciliation.json`; regenerate this report from the current catalog before building approved output. The CLI also checks approved contexts against the live catalog, rejecting a stale report after selected meanings change. Context changes require a fresh human decision and cannot silently carry over a legacy approval. Version 1 empty ledgers and synthetic legacy fixtures remain supported; a version 1 approval cannot publish a reconciled current-catalog record. Production `approvals.json` remains an empty version 1 ledger, so production has zero approved examples. Worksheet export does not import decisions or publish app content.

@@ -85,3 +85,42 @@ class ApprovedExamplesTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class CurrentApprovalTests(unittest.TestCase):
+    def setUp(self):
+        ApprovedExamplesTests.setUp(self)
+        from prepare_current_examples import context_hash
+        self.current = dict(id='sense1', headword='ああ', reading='ああ', level='N5', studyMeanings=['ah!'])
+        self.candidate.update(catalogID='sense1', currentWord=self.current,
+                              selectedStudyMeanings=['ah!'], contextSha256=context_hash(self.current), reviewStatus='pending')
+        self.approval.update(catalogID='sense1', contextSha256=self.candidate['contextSha256'])
+    def run_current(self, candidate=None, review=None):
+        return build([candidate or self.candidate], {'formatVersion':2,'reviews':[review or self.approval]}, self.snapshot)
+    def test_current_context_is_required_and_revalidated(self):
+        self.assertEqual(self.run_current()['examples'][0]['catalogID'],'sense1')
+        changed=copy.deepcopy(self.candidate)
+        changed['currentWord']['studyMeanings']=['that way']
+        with self.assertRaisesRegex(ValueError,'context'):
+            self.run_current(candidate=changed)
+        for field in ('contextSha256','catalogID'):
+            review=dict(self.approval)
+            del review[field]
+            with self.assertRaises(ValueError): self.run_current(review=review)
+    def test_live_catalog_changes_reject_stale_report(self):
+        changed=copy.deepcopy(self.current)
+        changed['studyMeanings']=['that way']
+        with self.assertRaisesRegex(ValueError,'Live catalog context'):
+            build([self.candidate], {'formatVersion':2,'reviews':[self.approval]}, self.snapshot, {'entries':[changed]})
+
+    def test_current_source_and_credit_gates(self):
+        for field in ('japanese','english'):
+            candidate=dict(self.candidate)
+            candidate[field]+=' changed'
+            with self.assertRaises(ValueError): self.run_current(candidate=candidate)
+        for field in ('reviewer','reviewedOn','verifiedSense'):
+            review=dict(self.approval, **{field:''})
+            with self.assertRaises(ValueError): self.run_current(review=review)
+    def test_legacy_cannot_publish_reconciled_candidate(self):
+        with self.assertRaises(ValueError): ApprovedExamplesTests.run_build(self)
+    def test_empty_v1_remains_supported(self):
+        self.assertEqual(ApprovedExamplesTests.run_build(self, approvals=[])['examples'],[])

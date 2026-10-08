@@ -10,7 +10,7 @@ public struct DefaultRecordReviewUseCase: RecordReviewUseCase {
     private let scheduler: ReviewScheduler
     private let calendar: Calendar
 
-    public init(repository: ReviewRepository, scheduler: ReviewScheduler = ReviewScheduler(), calendar: Calendar = .current) {
+    public init(repository: ReviewRepository, scheduler: ReviewScheduler = ReviewScheduler(), calendar: Calendar = .autoupdatingCurrent) {
         self.repository = repository
         self.scheduler = scheduler
         self.calendar = calendar
@@ -25,6 +25,7 @@ public struct DefaultRecordReviewUseCase: RecordReviewUseCase {
         // Retries preserve the first saved timestamp and due date for this session.
         let reviewedAt = sameSession ? previous!.lastReviewedAt : now
         let dueDate = try scheduler.dueDate(stage: stage, now: reviewedAt, calendar: calendar)
-        try repository.save(ReviewRecord(id: id, stage: stage, dueDate: dueDate, lastReviewedAt: reviewedAt, lastSessionID: sessionID, sessionBaselineStage: baseline, sessionHadAgain: hadAgain))
+        let activity = rating == .gotIt ? PracticeActivity(id: id, completedAt: now, calendar: calendar) : nil
+        try repository.save(ReviewRecord(id: id, stage: stage, dueDate: dueDate, lastReviewedAt: reviewedAt, lastSessionID: sessionID, sessionBaselineStage: baseline, sessionHadAgain: hadAgain), activity: activity)
     }
 }

@@ -133,7 +133,7 @@ final class CatalogMigrationTests: XCTestCase {
         let exported = try repository.validate(repository.export(preferences: preview.preferences))
         XCTAssertEqual(exported.words, preview.words)
         XCTAssertEqual(exported.progress, preview.progress)
-        XCTAssertEqual(exported.formatVersion, 2)
+        XCTAssertEqual(exported.formatVersion, 3)
     }
 
     func testFutureCatalogVersionCannotMutateSavedAnchors() throws {

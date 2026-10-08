@@ -194,3 +194,19 @@ Collection's Words view offers a neutral Browse dictionary action below the pick
 Dictionary entry detail shows the headword, primary reading, community level and the chosen Study meaning, followed by all DictionaryDetailCard sections and Sources. Add to collection is the single moss action in the bottom safe area. After saving, View saved word opens the existing saved detail; saved meanings and AI advice remain there. Failed addition keeps the entry and permits retry. Selecting a word leaves the next sequential word on Today unchanged. Dictionary browsing has no trash, review rating or AI action before saving.
 
 Empty and error messages wrap at large text sizes. Dictionary browsing puts long state guidance and its recovery action in a scrollable area.
+
+## Study lists
+
+Collection Words offers neutral Study lists and Browse dictionary actions. Lists reference saved words; assigning a word to multiple lists never copies it. Native list/detail routes show loading, empty and retry states. Create/rename sheets retain input after failure and allow Cancel. Word Detail opens an Organize in lists sheet with independent choices and explicit Save. Remove from this list retains the saved word, progress and schedules. Deleting a list asks for confirmation and explains that words stay in Collection. Review list reuses level/limit setup and the practice queue, returns to its list and leaves due dates unchanged.
+
+## Pronunciation
+
+Listen is a neutral action near supplied readings in Word and Dictionary detail. Kanji detail plays individual supplied kana readings; it never guesses a character reading. Synthesized speech is labeled plainly. Review shows Listen only after Reveal answer. Stop on hiding the answer, changing items, leaving the screen or backgrounding. Missing Japanese voice explains availability with Check again; failures offer retry. Controls use system text styles, Forest colors and 44pt targets.
+
+## Daily practice goal
+
+Today shows a compact X of Y items practiced today summary; default target is 10. Progress offers Off, 5, 10, 20 or 30 through a native settings screen with Save/Cancel. Count each saved word or kanji marked Got it once per local day across all practice and due modes. Again, adding, browsing and listening do not count. Goal reached permits continued study and claims no mastery. Save failure retains the revealed item and offers Retry/Exit. Off hides the summary while keeping activity. No streak pressure or reminders.
+
+## Expanded backup
+
+Backups include study lists, memberships, daily goal and practice activity alongside existing collection/progress/reviews/advice. Format 3 separates backup compatibility from dictionary catalog version. Restore previews lists and practice data as well as saved items; confirmation explains replacement and recovery. Older supported backups supply empty lists/activity and the default goal.

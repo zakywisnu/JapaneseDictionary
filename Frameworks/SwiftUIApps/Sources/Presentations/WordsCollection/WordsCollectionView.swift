@@ -19,6 +19,10 @@ struct WordsCollectionView: View {
                 searchField
                 StudyKindPicker(selection: $kind)
                 if kind == .words {
+                    Button("Study lists") { router.push(.studyLists, hideNavBar: false) }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Forest.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                     Button("Browse dictionary") { router.push(.dictionary, hideNavBar: false) }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.ink)

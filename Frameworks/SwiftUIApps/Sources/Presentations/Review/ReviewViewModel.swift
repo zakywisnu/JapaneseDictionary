@@ -8,10 +8,12 @@ final class ReviewViewModel {
     private(set) var state: State
 
     private let recordRating: ((SavedStudyID, UUID, RecallRating, Date) throws -> Void)?
+    private let recordPractice: ((SavedStudyID, Date) throws -> Void)?
     private let now: () -> Date
 
-    init(session: ReviewSession, recordRating: ((SavedStudyID, UUID, RecallRating, Date) throws -> Void)? = nil, now: @escaping () -> Date = Date.init) {
+    init(session: ReviewSession, recordRating: ((SavedStudyID, UUID, RecallRating, Date) throws -> Void)? = nil, recordPractice: ((SavedStudyID, Date) throws -> Void)? = nil, now: @escaping () -> Date = Date.init) {
         self.recordRating = recordRating
+        self.recordPractice = recordPractice
         self.now = now
         state = State(session: session)
     }
@@ -34,6 +36,7 @@ final class ReviewViewModel {
             state.session.id = UUID()
             state.saveError = nil
             state.pendingRating = nil
+            state.pendingActionDate = nil
             state.queue = PracticeQueue(ids: state.session.items.map(\.savedID))
             state.isAnswerVisible = false
             state.presentationRevision += 1
@@ -42,19 +45,24 @@ final class ReviewViewModel {
 
     private func rate(_ rating: RecallRating) {
         guard let item = state.currentItem else { return }
-        if state.session.origin == .due {
-            do {
+        let timestamp = state.pendingActionDate ?? now()
+        let id = SavedStudyID(kind: state.session.kind == .words ? .word : .kanji, id: item.savedID)
+        do {
+            if state.session.origin == .due {
                 guard let recordRating else { throw ReviewSaveError.unavailable }
-                let id = SavedStudyID(kind: state.session.kind == .words ? .word : .kanji, id: item.savedID)
-                try recordRating(id, state.session.id, rating, now())
-            } catch {
-                state.pendingRating = rating
-                state.saveError = "\(item.headword)'s review couldn't be saved. Try again or exit review."
-                return
+                try recordRating(id, state.session.id, rating, timestamp)
+            } else if rating == .gotIt {
+                try recordPractice?(id, timestamp)
             }
+        } catch {
+            state.pendingRating = rating
+            state.pendingActionDate = timestamp
+            state.saveError = "\(item.headword)'s completion couldn't be saved. Try again or exit review."
+            return
         }
         state.saveError = nil
         state.pendingRating = nil
+        state.pendingActionDate = nil
         state.queue.rate(rating)
         state.isAnswerVisible = false
         state.presentationRevision += 1
@@ -67,6 +75,7 @@ final class ReviewViewModel {
         var queue: PracticeQueue
         var saveError: String?
         var pendingRating: RecallRating?
+        var pendingActionDate: Date?
         var isAnswerVisible = false
         var presentationRevision = 0
 
@@ -79,6 +88,8 @@ final class ReviewViewModel {
             guard let id = queue.currentID else { return nil }
             return session.items.first { $0.savedID == id }
         }
+
+        var pronunciationReadings: [String] { isAnswerVisible ? currentItem?.spokenReadings ?? [] : [] }
 
         var remainingCount: Int { queue.remainingCount }
         var repeatAttempts: Int { queue.repeatAttempts }

@@ -3,6 +3,8 @@ import DataKit
 
 struct ReviewView: View {
     @EnvironmentObject private var router: AppRouter
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var pronunciation = PronunciationService()
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let examples: ExampleRepository
     @State private var viewModel: ReviewViewModel
@@ -38,6 +40,9 @@ struct ReviewView: View {
                     if viewModel.state.isAnswerVisible {
                         answer(item)
                             .transition(.opacity)
+                        ForEach(Array(viewModel.state.pronunciationReadings.enumerated()), id: \.offset) { _, reading in
+                            PronunciationControl(reading: reading, service: pronunciation, showsReading: session.kind == .kanji)
+                        }
                         if let key = item.exampleWordKey, let example = examples.example(for: key) {
                             ExampleSentenceCard(example: example)
                         }
@@ -59,6 +64,16 @@ struct ReviewView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .onAppear { pronunciation.refreshAvailability() }
+        .onDisappear { pronunciation.stop() }
+        .onChange(of: viewModel.state.presentationRevision) { _, _ in pronunciation.stop() }
+        .onChange(of: viewModel.state.isAnswerVisible) { _, visible in
+            if !visible { pronunciation.stop() }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { pronunciation.refreshAvailability() }
+            else { pronunciation.stop() }
+        }
         .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: viewModel.state.isAnswerVisible)
     }
 
@@ -118,10 +133,10 @@ struct ReviewView: View {
     private var actions: some View {
         VStack(spacing: Forest.Space.s) {
             if session.items.isEmpty || viewModel.state.isComplete {
-                Button(session.origin.backTitle) { router.pop() }
+                Button(session.origin.backTitle) { pronunciation.stop(); router.pop() }
                     .buttonStyle(PrimaryButtonStyle())
                 if viewModel.state.isComplete && session.origin != .due {
-                    Button("Review again") { viewModel.send(.restart) }
+                    Button("Review again") { pronunciation.stop(); viewModel.send(.restart) }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.inkMuted)
                         .frame(minHeight: 44)
@@ -133,7 +148,7 @@ struct ReviewView: View {
                     .multilineTextAlignment(.center)
                 Button("Retry") { viewModel.send(.retry) }
                     .buttonStyle(PrimaryButtonStyle())
-                Button("Exit review") { router.pop() }
+                Button("Exit review") { pronunciation.stop(); router.pop() }
                     .buttonStyle(.plain)
                     .foregroundStyle(Forest.ink)
                     .frame(minHeight: 44)
@@ -143,9 +158,9 @@ struct ReviewView: View {
                         .font(.footnote)
                         .foregroundStyle(Forest.inkMuted)
                         .multilineTextAlignment(.center)
-                    Button("Got it") { viewModel.send(.rate(.gotIt)) }
+                    Button("Got it") { pronunciation.stop(); viewModel.send(.rate(.gotIt)) }
                         .buttonStyle(PrimaryButtonStyle())
-                    Button { viewModel.send(.rate(.again)) } label: {
+                    Button { pronunciation.stop(); viewModel.send(.rate(.again)) } label: {
                         Text("Again")
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .contentShape(Rectangle())

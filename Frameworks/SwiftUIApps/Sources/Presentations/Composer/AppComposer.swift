@@ -21,6 +21,10 @@ public final class AppComposer {
     private var backupRepository: BackupRepository?
     private let getDueReviews: GetDueReviewsUseCase
     private let recordReview: RecordReviewUseCase
+    let studyLists: StudyListUseCases
+    let getDailyGoal: any GetDailyStudyGoalUseCase
+    let setDailyGoal: any SetDailyStudyGoalUseCase
+    private let practiceCompletion: any PracticeCompletionUseCase
     let examples = ExampleRepository.bundled()
     
     private init() {
@@ -30,6 +34,11 @@ public final class AppComposer {
         self.vocabularyUpgrade = vocabularyUpgrade
         let wordAddition = StandardWordAdditionRepository(store: store, prepare: vocabularyUpgrade.ensureCurrent)
         addSelectedWord = DefaultAddSelectedWordUseCase(additionRepository: wordAddition)
+        studyLists = StudyListUseCases(repository: StandardStudyListRepository(store: store, prepare: vocabularyUpgrade.ensureCurrent))
+        let goals = StandardDailyGoalRepository(store: store)
+        getDailyGoal = DefaultGetDailyStudyGoalUseCase(repository: goals)
+        setDailyGoal = DefaultSetDailyStudyGoalUseCase(repository: goals)
+        practiceCompletion = DefaultPracticeCompletionUseCase(repository: goals)
         let reviewRepository = StandardReviewRepository(store: store)
         getDueReviews = DefaultGetDueReviewsUseCase(repository: reviewRepository)
         recordReview = DefaultRecordReviewUseCase(repository: reviewRepository)
@@ -140,6 +149,8 @@ public final class AppComposer {
     public func makeReviewView(_ session: ReviewSession) -> some View {
         ReviewView(viewModel: ReviewViewModel(session: session, recordRating: { [recordReview] id, sessionID, rating, now in
             try recordReview.execute(id: id, sessionID: sessionID, rating: rating, now: now)
+        }, recordPractice: { [practiceCompletion] id, now in
+            try practiceCompletion.execute(id: id, now: now)
         }), examples: examples)
     }
 }

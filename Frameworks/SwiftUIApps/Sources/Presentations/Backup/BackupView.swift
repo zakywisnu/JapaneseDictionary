@@ -12,7 +12,7 @@ struct BackupView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Forest.Space.xl) {
-                Text("Keep a copy of your collection, progress and review dates. Choose where to save the file using Files.")
+                Text("Keep a copy of your collection, study lists, progress, review dates, daily goal and practice history. Choose where to save the file using Files.")
                     .foregroundStyle(Forest.inkMuted)
                 Button("Export backup") {
                     Task {
@@ -39,7 +39,8 @@ struct BackupView: View {
                         Text("Backup from \(backup.createdAt.formatted(date: .abbreviated, time: .shortened))")
                             .font(.headline)
                         Text("\(backup.words.count) \(backup.words.count == 1 ? "word" : "words") · \(backup.kanjis.count) kanji")
-                        Text("Restoring replaces your current collection, progress and review dates. A recovery backup of your current collection will be kept on this iPhone.")
+                        Text("\(backup.lists.count) study lists · \(backup.activities.count) practiced items\nDaily goal: \(backup.dailyGoal.map { String($0) + " items" } ?? "Off")")
+                        Text("Restoring replaces your current collection, study lists, progress, review dates, daily goal and practice history. A recovery backup of your current collection will be kept on this iPhone.")
                             .foregroundStyle(Forest.inkMuted)
                         Button("Replace current collection", role: .destructive) { isConfirming = true }
                             .buttonStyle(.bordered)
@@ -75,7 +76,7 @@ struct BackupView: View {
             Button("Replace current collection", role: .destructive) { Task { await viewModel.send(.confirmRestore) } }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("The selected backup will replace your current words, kanji, progress and review dates. A recovery backup will be saved first.")
+            Text("The selected backup will replace your current words, kanji, study lists, progress, review dates, daily goal and practice history. A recovery backup will be saved first.")
         }
     }
 

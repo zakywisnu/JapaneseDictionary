@@ -91,6 +91,25 @@ final class ReviewStoreTests: XCTestCase {
         XCTAssertTrue(try repo.records().isEmpty)
     }
 
+    func testAtomicReviewFailureRollsBackScheduleAndActivity() throws {
+        let store = try populatedStore()
+        let id = SavedStudyID(kind: .word, id: "shared")
+        let good = StandardReviewRepository(store: store)
+        let original = record(id: id, stage: 2)
+        try good.save(original)
+        let activity = PracticeActivity(id: id, completedAt: original.lastReviewedAt)
+        let failing = StandardReviewRepository(store: store, save: { context in
+            XCTAssertEqual(try context.fetch(FetchDescriptor<PracticeActivityModel>()).count, 1)
+            throw Failure.injected
+        })
+        XCTAssertThrowsError(try failing.save(record(id: id, stage: 3), activity: activity))
+        XCTAssertEqual(try good.records(), [original])
+        XCTAssertTrue(try StandardDailyGoalRepository(store: store).activities(dayKey: activity.dayKey).isEmpty)
+        try good.save(record(id: id, stage: 3), activity: activity)
+        XCTAssertEqual(try good.records().first?.stage, 3)
+        XCTAssertEqual(try StandardDailyGoalRepository(store: store).activities(dayKey: activity.dayKey), [activity])
+    }
+
     private func populatedStore() throws -> StudyStore {
         let store = try StudyStore(inMemory: true)
         seed(context: store.context)

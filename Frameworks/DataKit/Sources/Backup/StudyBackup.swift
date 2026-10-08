@@ -107,6 +107,20 @@ public struct BackupPreferences: Codable, Equatable {
     }
 }
 
+public struct BackupStudyList: Codable, Equatable {
+    public var id: String
+    public var name: String
+    public var createdAt: Date
+    public init(id: String, name: String, createdAt: Date) { self.id = id; self.name = name; self.createdAt = createdAt }
+}
+
+public struct BackupListMembership: Codable, Equatable {
+    public var listID: String
+    public var wordID: String
+    public init(listID: String, wordID: String) { self.listID = listID; self.wordID = wordID }
+    public var key: String { StudyListMembershipModel.membershipKey(listID: listID, wordID: wordID) }
+}
+
 public struct StudyBackup: Codable, Equatable {
     public var formatVersion: Int
     public var createdAt: Date
@@ -116,15 +130,55 @@ public struct StudyBackup: Codable, Equatable {
     public var progress: BackupProgress?
     public var reviews: [ReviewRecord]
     public var preferences: BackupPreferences
+    public var lists: [BackupStudyList]
+    public var memberships: [BackupListMembership]
+    public var dailyGoal: Int?
+    public var activities: [PracticeActivity]
 
-    public init(formatVersion: Int = 1, createdAt: Date, catalogFingerprint: String, words: [BackupWord], kanjis: [BackupKanji], progress: BackupProgress?, reviews: [ReviewRecord], preferences: BackupPreferences) {
-        self.formatVersion = formatVersion
-        self.createdAt = createdAt
-        self.catalogFingerprint = catalogFingerprint
-        self.words = words
-        self.kanjis = kanjis
-        self.progress = progress
-        self.reviews = reviews
-        self.preferences = preferences
+    public init(formatVersion: Int = 1, createdAt: Date, catalogFingerprint: String, words: [BackupWord], kanjis: [BackupKanji], progress: BackupProgress?, reviews: [ReviewRecord], preferences: BackupPreferences,
+                lists: [BackupStudyList] = [], memberships: [BackupListMembership] = [], dailyGoal: Int? = 10, activities: [PracticeActivity] = []) {
+        self.formatVersion = formatVersion; self.createdAt = createdAt; self.catalogFingerprint = catalogFingerprint
+        self.words = words; self.kanjis = kanjis; self.progress = progress; self.reviews = reviews; self.preferences = preferences
+        self.lists = lists; self.memberships = memberships; self.dailyGoal = dailyGoal; self.activities = activities
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case formatVersion, createdAt, catalogFingerprint, words, kanjis, progress, reviews, preferences, lists, memberships, dailyGoal, activities
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        formatVersion = try c.decode(Int.self, forKey: .formatVersion)
+        createdAt = try c.decode(Date.self, forKey: .createdAt)
+        catalogFingerprint = try c.decode(String.self, forKey: .catalogFingerprint)
+        words = try c.decode([BackupWord].self, forKey: .words)
+        kanjis = try c.decode([BackupKanji].self, forKey: .kanjis)
+        progress = try c.decodeIfPresent(BackupProgress.self, forKey: .progress)
+        reviews = try c.decode([ReviewRecord].self, forKey: .reviews)
+        preferences = try c.decode(BackupPreferences.self, forKey: .preferences)
+        if formatVersion >= 3 {
+            lists = try c.decode([BackupStudyList].self, forKey: .lists)
+            memberships = try c.decode([BackupListMembership].self, forKey: .memberships)
+            activities = try c.decode([PracticeActivity].self, forKey: .activities)
+            guard c.contains(.dailyGoal) else { throw DecodingError.keyNotFound(CodingKeys.dailyGoal, .init(codingPath: c.codingPath, debugDescription: "Missing daily goal")) }
+            dailyGoal = try c.decodeIfPresent(Int.self, forKey: .dailyGoal)
+        } else {
+            lists = try c.decodeIfPresent([BackupStudyList].self, forKey: .lists) ?? []
+            memberships = try c.decodeIfPresent([BackupListMembership].self, forKey: .memberships) ?? []
+            activities = try c.decodeIfPresent([PracticeActivity].self, forKey: .activities) ?? []
+            dailyGoal = c.contains(.dailyGoal) ? try c.decodeIfPresent(Int.self, forKey: .dailyGoal) : 10
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(formatVersion, forKey: .formatVersion); try c.encode(createdAt, forKey: .createdAt)
+        try c.encode(catalogFingerprint, forKey: .catalogFingerprint); try c.encode(words, forKey: .words)
+        try c.encode(kanjis, forKey: .kanjis); try c.encodeIfPresent(progress, forKey: .progress)
+        try c.encode(reviews, forKey: .reviews); try c.encode(preferences, forKey: .preferences)
+        if formatVersion >= 3 {
+            try c.encode(lists, forKey: .lists); try c.encode(memberships, forKey: .memberships)
+            try c.encode(dailyGoal, forKey: .dailyGoal); try c.encode(activities, forKey: .activities)
+        }
     }
 }

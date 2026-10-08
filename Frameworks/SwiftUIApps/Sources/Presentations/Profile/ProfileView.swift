@@ -43,7 +43,7 @@ public struct ProfileView: View {
                     VStack(alignment: .leading, spacing: Forest.Space.m) {
                         Text("Backup restored")
                             .font(.headline)
-                        Text("Your collection, progress and review dates have been replaced. Keep the recovery backup if you want a copy of your previous collection.")
+                        Text("Your collection, study lists, progress, review dates, daily goal and practice history have been replaced. Keep the recovery backup if you want a copy of your previous collection.")
                             .foregroundStyle(Forest.inkMuted)
                         ShareLink("Share recovery backup", item: recovery)
                             .frame(minHeight: 44)
@@ -51,6 +51,10 @@ public struct ProfileView: View {
                     .padding(Forest.Space.l)
                     .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
                 }
+                Button("Daily practice goal") { router.push(.dailyGoal, hideNavBar: false) }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(Forest.ink)
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                 Button {
                     router.push(.backup, hideNavBar: false)
                 } label: {

@@ -50,18 +50,22 @@ public protocol ReviewRepository {
     func savedItems(kind: SavedStudyKind) throws -> [SavedStudyItem]
     func records() throws -> [ReviewRecord]
     func save(_ record: ReviewRecord) throws
+    func save(_ record: ReviewRecord, activity: PracticeActivity?) throws
 }
 
 public final class StandardReviewRepository: ReviewRepository {
     private let contextProvider: () -> ModelContext
     private let saveContext: (ModelContext) throws -> Void
+    private let refreshContext: () -> Void
 
     public init(context: ModelContext, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
         contextProvider = { context }
+        refreshContext = {}
         saveContext = save
     }
     public init(store: StudyStore, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
-        contextProvider = { store.context }
+        contextProvider = { store.makeContext() }
+        refreshContext = { store.refreshContext() }
         saveContext = save
     }
 
@@ -79,6 +83,14 @@ public final class StandardReviewRepository: ReviewRepository {
     }
 
     public func save(_ record: ReviewRecord) throws {
+        try save(record, activity: nil)
+    }
+
+    public func save(_ record: ReviewRecord, activity: PracticeActivity?) throws {
+        if let activity {
+            try BackupValidator.validateActivity(activity)
+            guard activity.studyID == record.id else { throw ReviewStoreError.invalidRecord }
+        }
         guard (0...4).contains(record.stage), record.sessionBaselineStage.map({ (0...4).contains($0) }) ?? true,
               !record.id.id.isEmpty, record.dueDate.timeIntervalSince1970.isFinite,
               record.lastReviewedAt.timeIntervalSince1970.isFinite else { throw ReviewStoreError.invalidRecord }
@@ -95,7 +107,9 @@ public final class StandardReviewRepository: ReviewRepository {
             } else {
                 context.insert(ReviewRecordModel(record: record))
             }
+            if let activity { try insertPracticeActivityIfNeeded(activity, context: context) }
             try saveContext(context)
+            refreshContext()
         } catch {
             context.rollback()
             throw error

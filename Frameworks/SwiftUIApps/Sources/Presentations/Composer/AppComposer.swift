@@ -15,6 +15,7 @@ public final class AppComposer {
     public let useCase: UseCase
     public let store: StudyStore
     private let vocabularyUpgrade: VocabularyUpgradeService
+    let addSelectedWord: any AddSelectedWordUseCase
     let backupRestoreStatus = BackupRestoreStatus()
     private var backupCatalog: CatalogSnapshot?
     private var backupRepository: BackupRepository?
@@ -27,6 +28,8 @@ public final class AppComposer {
         catch { fatalError("Failed to create study store: \(error)") }
         let vocabularyUpgrade = VocabularyUpgradeService(store: store)
         self.vocabularyUpgrade = vocabularyUpgrade
+        let wordAddition = StandardWordAdditionRepository(store: store, prepare: vocabularyUpgrade.ensureCurrent)
+        addSelectedWord = DefaultAddSelectedWordUseCase(additionRepository: wordAddition)
         let reviewRepository = StandardReviewRepository(store: store)
         getDueReviews = DefaultGetDueReviewsUseCase(repository: reviewRepository)
         recordReview = DefaultRecordReviewUseCase(repository: reviewRepository)
@@ -45,7 +48,7 @@ public final class AppComposer {
             getAllKanjiUseCase: DefaultGetAllKanjiUseCase(repository: repository.kanjiRepository),
             getKanjiDetailUseCase: DefaultGetKanjiDetailUseCase(repository: repository.kanjiRepository),
             updateKanjiUseCase: DefaultUpdateKanjiUseCase(repository: repository.kanjiRepository),
-            addKotobaUseCase: DefaultAddKotobaUseCase(kotobaRepository: repository.kotobaRepository, wordsProgressRepository: repository.wordsProgressRepository),
+            addKotobaUseCase: DefaultAddKotobaUseCase(additionRepository: wordAddition),
             deleteKotobaUseCase: DefaultDeleteKotobaUseCase(mutationRepository: StandardStudyMutationRepository(store: store, prepare: vocabularyUpgrade.ensureCurrent)),
             getAllKotobaUseCase: DefaultGetAllKotobaUseCase(repository: repository.kotobaRepository),
             getKotobaDetailUseCase: DefaultGetKotobaDetailUseCase(repository: repository.kotobaRepository),

@@ -156,7 +156,8 @@ extension HomeKotobaViewModel {
             jlptLevel: .init(rawValue: kotoba.jlptLevel.rawValue) ?? .n5,
             dateAdded: Date(),
             addedIndex: progressIndex,
-            catalogID: kotoba.catalogID
+            catalogID: kotoba.catalogID,
+            expectedCursor: progress.kotobaIndex
         )
         let level: WordsProgressParam.Level = .init(rawValue: min(progress.getKotobaProgress, WordsProgressParam.Level(rawValue: kotoba.jlptLevel.rawValue)?.rawValue ?? "N5")) ?? .n5
         let progressParam: WordsProgressParam = .init(

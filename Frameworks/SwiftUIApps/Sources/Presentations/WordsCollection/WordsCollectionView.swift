@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WordsCollectionView: View {
+    @EnvironmentObject private var router: AppRouter
     @AppStorage("collectionStudyKind") private var kind: StudyKind = .words
     @State private var query = ""
     
@@ -17,6 +18,12 @@ struct WordsCollectionView: View {
                 ScreenHeader(title: "Collection")
                 searchField
                 StudyKindPicker(selection: $kind)
+                if kind == .words {
+                    Button("Browse dictionary") { router.push(.dictionary, hideNavBar: false) }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Forest.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                }
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)

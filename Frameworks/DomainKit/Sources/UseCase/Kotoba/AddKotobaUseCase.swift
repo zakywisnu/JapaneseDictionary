@@ -17,6 +17,7 @@ public struct KotobaParam {
     public var dateAdded: Date
     public var addedIndex: Int
     public var catalogID: String?
+    public var expectedCursor: Int?
     
     public init(
         id: String,
@@ -26,7 +27,8 @@ public struct KotobaParam {
         jlptLevel: Level,
         dateAdded: Date,
         addedIndex: Int,
-        catalogID: String? = nil
+        catalogID: String? = nil,
+        expectedCursor: Int? = nil
     ) {
         self.id = id
         self.kanji = kanji
@@ -36,6 +38,7 @@ public struct KotobaParam {
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
         self.catalogID = catalogID
+        self.expectedCursor = expectedCursor
     }
     
     public enum Level: String {
@@ -65,17 +68,27 @@ public protocol AddKotobaUseCase {
 }
 
 public struct DefaultAddKotobaUseCase: AddKotobaUseCase {
-    private let kotobaRepository: KotobaRepository
-    private let wordsProgressRepository: WordsProgressRepository
-    
-    public init(kotobaRepository: KotobaRepository, wordsProgressRepository: WordsProgressRepository) {
-        self.kotobaRepository = kotobaRepository
-        self.wordsProgressRepository = wordsProgressRepository
+    private let additionRepository: WordAdditionRepository
+    private let loadCatalog: () throws -> VocabularyCatalogRepository
+
+    public init(additionRepository: WordAdditionRepository,
+                loadCatalog: @escaping () throws -> VocabularyCatalogRepository = { try .bundled() }) {
+        self.additionRepository = additionRepository
+        self.loadCatalog = loadCatalog
     }
-    
+
     public func execute(param: KotobaParam, progress: WordsProgressParam) throws {
-        try kotobaRepository.add(param.toKotoba())
-        try wordsProgressRepository.updateProgress(progress.asDataModel)
-        UpdateProgressUserDefaults.update(progress)
+        let catalog = try loadCatalog()
+        guard let catalogID = param.catalogID, let entry = catalog.word(id: catalogID),
+              let expectedCursor = param.expectedCursor, expectedCursor >= 0,
+              catalog.catalog.entries.indices.contains(param.addedIndex),
+              catalog.catalog.entries[param.addedIndex].id == catalogID,
+              entry.headword == param.kanji, entry.reading == param.furigana,
+              entry.studyMeanings == param.english, entry.level == param.jlptLevel.rawValue else {
+            throw BackupError.invalid("sequential word parameters")
+        }
+        let persisted = try additionRepository.addWord(catalogID: catalogID, savedID: param.id,
+            addedAt: param.dateAdded, source: .next(expectedCursor: expectedCursor))
+        UpdateProgressUserDefaults.update(persisted.mapToParam())
     }
 }

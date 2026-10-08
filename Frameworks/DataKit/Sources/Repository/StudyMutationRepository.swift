@@ -61,7 +61,7 @@ public final class StandardStudyMutationRepository: StudyMutationRepository {
             case .word:
                 guard let word = try context.fetch(FetchDescriptor<KotobaDataModel>(predicate: #Predicate { $0.id == savedID })).first else { throw DataError.dataNotFound }
                 progress.kotobaProgress -= 1
-                if let index = word.addedIndex {
+                if let index = word.addedIndex, progress.catalogVersion != 2 || index < progress.kotobaIndex {
                     progress.kotobaIndex = index
                     if progress.catalogVersion == 2 {
                         guard let id = word.catalogID, let level = try catalogLevel(id),

@@ -201,10 +201,13 @@ struct StateMessage: View {
             Text(title)
                 .font(.headline)
                 .foregroundStyle(Forest.ink)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             Text(message)
                 .font(.subheadline)
                 .foregroundStyle(Forest.inkMuted)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             if let actionTitle, let action {
                 Button(actionTitle, action: action)
                     .buttonStyle(.bordered)

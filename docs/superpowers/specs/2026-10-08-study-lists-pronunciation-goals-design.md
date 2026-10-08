@@ -1,6 +1,6 @@
 # Study lists, pronunciation and daily goals
 
-Status: concrete design for user review. The user requested all three features and continued example-sentence work. Product implementation follows approval of this written design and its execution plan.
+Status: design explicitly approved by the user. The implementation plan is docs/superpowers/plans/2026-10-08-study-features-expansion.md; plan review precedes product implementation.
 
 ## Purpose and constraints
 

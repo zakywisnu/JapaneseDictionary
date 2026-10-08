@@ -28,12 +28,18 @@ public final class BackupRepository {
         let context = store.makeContext()
         let progress = try context.fetch(FetchDescriptor<WordsProgressModel>())
         guard progress.count <= 1 else { throw BackupError.multipleProgress }
-        let backup = StudyBackup(formatVersion: catalog.version, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
+        let goals = try context.fetch(FetchDescriptor<DailyGoalSettingsModel>())
+        guard goals.count <= 1, goals.first.map({ $0.id == DailyGoalSettingsModel.singletonID }) ?? true else { throw BackupError.invalid("daily goal settings") }
+        let lists = try context.fetch(FetchDescriptor<StudyListModel>()).map { BackupStudyList(id: $0.id, name: $0.name, createdAt: $0.createdAt) }.sorted { $0.id < $1.id }
+        let memberships = try context.fetch(FetchDescriptor<StudyListMembershipModel>()).map { BackupListMembership(listID: $0.listID, wordID: $0.wordID) }.sorted { $0.key < $1.key }
+        let activities = try context.fetch(FetchDescriptor<PracticeActivityModel>()).map(\.value).sorted { $0.key < $1.key }
+        let target: Int? = goals.isEmpty ? 10 : goals[0].target
+        let backup = StudyBackup(formatVersion: catalog.version == 2 ? 3 : catalog.version, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
             words: try context.fetch(FetchDescriptor<KotobaDataModel>()).map(BackupWord.init).sorted { $0.id < $1.id },
             kanjis: try context.fetch(FetchDescriptor<KanjiDataModel>()).map(BackupKanji.init).sorted { $0.id < $1.id },
             progress: progress.first.map(BackupProgress.init),
             reviews: try context.fetch(FetchDescriptor<ReviewRecordModel>()).map(\.value).sorted { $0.id.key < $1.id.key },
-            preferences: preferences)
+            preferences: preferences, lists: lists, memberships: memberships, dailyGoal: target, activities: activities)
         try BackupValidator.validate(backup, catalog: catalog)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -71,6 +77,10 @@ public final class BackupRepository {
         try writeRecovery(export(preferences: currentPreferences), recoveryURL)
         let context = store.makeContext()
         do {
+            for model in try context.fetch(FetchDescriptor<StudyListMembershipModel>()) { context.delete(model) }
+            for model in try context.fetch(FetchDescriptor<StudyListModel>()) { context.delete(model) }
+            for model in try context.fetch(FetchDescriptor<DailyGoalSettingsModel>()) { context.delete(model) }
+            for model in try context.fetch(FetchDescriptor<PracticeActivityModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<ReviewRecordModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<KotobaDataModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<KanjiDataModel>()) { context.delete(model) }
@@ -79,6 +89,10 @@ public final class BackupRepository {
             for kanji in backup.kanjis { context.insert(kanji.model) }
             if let progress = backup.progress { context.insert(progress.model) }
             for review in backup.reviews { context.insert(ReviewRecordModel(record: review)) }
+            for list in backup.lists { context.insert(StudyListModel(id: list.id, name: list.name, createdAt: list.createdAt)) }
+            for member in backup.memberships { context.insert(StudyListMembershipModel(listID: member.listID, wordID: member.wordID)) }
+            context.insert(DailyGoalSettingsModel(settings: .init(target: backup.dailyGoal)))
+            for activity in backup.activities { context.insert(PracticeActivityModel(activity: activity)) }
             try save(context)
         } catch {
             context.rollback()

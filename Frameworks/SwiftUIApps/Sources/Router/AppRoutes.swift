@@ -16,6 +16,9 @@ public enum AppRoutes: Routable {
     case review(ReviewSession)
     case sources
     case backup
+    case studyLists
+    case studyList(String)
+    case dailyGoal
     case dictionary
     case dictionaryEntry(String)
     
@@ -36,6 +39,12 @@ public enum AppRoutes: Routable {
             SourcesView()
         case .backup:
             AppComposer.shared.makeBackupView()
+        case .studyLists:
+            AppComposer.shared.makeStudyListsView()
+        case let .studyList(id):
+            AppComposer.shared.makeStudyListView(id)
+        case .dailyGoal:
+            AppComposer.shared.makeDailyGoalSettingsView()
         case .dictionary:
             AppComposer.shared.makeDictionaryBrowseView()
         case let .dictionaryEntry(id):

@@ -43,3 +43,28 @@ if __name__ == '__main__':
         vocabulary = list(csv.DictReader(source))
     args.output.write_text(review_sheet(candidates, vocabulary), encoding='utf-8')
     print(f'Exported {len(candidates)} pending candidate rows to {args.output}')
+
+
+CURRENT_FIELDS = ['catalogID', 'contextSha256', 'headword', 'reading', 'level',
+                  'selectedStudyMeanings', 'senseNotes', 'legacyWord', 'indexedSense',
+                  'japaneseId', 'englishId', 'japanese', 'english', 'japaneseSha256',
+                  'englishSha256', 'japaneseSource', 'englishSource', 'japaneseOwner',
+                  'englishOwner', 'license', 'status', 'reviewer', 'reviewedOn',
+                  'verifiedSense', 'reviewedReading', 'decision', 'reason', 'notes']
+
+
+def current_review_sheet(rows):
+    output = io.StringIO(newline='')
+    writer = csv.DictWriter(output, fieldnames=CURRENT_FIELDS, lineterminator='\n')
+    writer.writeheader()
+    for row in rows:
+        record = {field: row.get(field) for field in CURRENT_FIELDS if field in row}
+        record.update({key: row['currentWord'][key] for key in ('headword', 'reading', 'level')})
+        for field in ('selectedStudyMeanings', 'senseNotes'):
+            record[field] = json.dumps(row[field], ensure_ascii=False, sort_keys=True)
+        record.update(legacyWord=json.dumps(row['word'], ensure_ascii=False, sort_keys=True),
+                      japaneseSha256=text_hash(row['japanese']), englishSha256=text_hash(row['english']),
+                      status='pending', reviewer='', reviewedOn='', verifiedSense='', reviewedReading='',
+                      decision='', reason='', notes='')
+        writer.writerow(record)
+    return output.getvalue()

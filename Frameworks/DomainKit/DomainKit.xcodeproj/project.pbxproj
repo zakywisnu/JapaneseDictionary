@@ -13,6 +13,7 @@
 		1BAA6469A0DF986BC362571C /* RecallRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF01DBE45DD99259AE4251 /* RecallRating.swift */; };
 		1F459A7B907EA211C7A3A65D /* GetAllKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */; };
 		24D616B9A3B9733B5158AB1B /* AddSelectedWordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27DDE02FDB3BD12070D4A1 /* AddSelectedWordUseCase.swift */; };
+		3518ABAC58FBC93E4336D3E1 /* DailyStudyGoalUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BAF8D66B12B12C43763E4 /* DailyStudyGoalUseCases.swift */; };
 		3F2648112CB78C173072FCEF /* UpdateKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73551AF4758164C298AEECBA /* UpdateKotobaUseCase.swift */; };
 		3F413F02D585A64BF3D254C7 /* RestoreBackupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BD3E173DDF91AC368392FB /* RestoreBackupUseCase.swift */; };
 		49C081D6CB0759C0A24815D0 /* PracticeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8D38DBCA386B7880E81766 /* PracticeQueue.swift */; };
@@ -20,8 +21,10 @@
 		574A66D6999A1FE03805C86F /* GetWordsProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C39837DA9C0326522F1EB7 /* GetWordsProgressUseCase.swift */; };
 		5D0B411984FD94F4068C564C /* ReviewSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385DC1A8E6C7C636D3837DD5 /* ReviewSchedulerTests.swift */; };
 		61EB31AE6B403CC7152C7308 /* ExportBackupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BA49BABA249603DC5C0D84 /* ExportBackupUseCase.swift */; };
+		65BD784D44630E271E9D7A01 /* StudyListUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F76E4AFCE85B935E1E49E /* StudyListUseCases.swift */; };
 		67F85A613785C61439C971E1 /* GetKanjiDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */; };
 		77BD3E30DF4F9B7DBE25B800 /* MemoryAidPromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B227E6B71C8B93C6F894E /* MemoryAidPromptTests.swift */; };
+		7F18269ADC901396D0AC50E9 /* DailyStudyGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAB646367197B02CF00DDC9 /* DailyStudyGoalTests.swift */; };
 		816C8683135AB3F7E9B2936C /* UpdateProgressUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */; };
 		8AF8423673BE38C4FD88B819 /* AddKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83A18C3D057529AD8686F8E /* AddKotobaUseCase.swift */; };
 		8BC5971C1C8F0EB1AFCBB049 /* MemoryAidGenerating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C089FFB24476CC11299E6C /* MemoryAidGenerating.swift */; };
@@ -85,17 +88,20 @@
 		0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKanjiUseCase.swift; sourceTree = "<group>"; };
 		13C089FFB24476CC11299E6C /* MemoryAidGenerating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidGenerating.swift; sourceTree = "<group>"; };
 		14E2E165617AE5CB6E96B4A6 /* ReviewScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScheduler.swift; sourceTree = "<group>"; };
+		1B6BAF8D66B12B12C43763E4 /* DailyStudyGoalUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStudyGoalUseCases.swift; sourceTree = "<group>"; };
 		20EF01DBE45DD99259AE4251 /* RecallRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallRating.swift; sourceTree = "<group>"; };
 		289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKanjiUseCase.swift; sourceTree = "<group>"; };
 		2A1A5F503D045ED6EDFCB2D5 /* ZeroDesignKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroDesignKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDataUseCase.swift; sourceTree = "<group>"; };
 		2EC938E9FD44A3F78751A8E6 /* GetKanjiWanikaniDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiWanikaniDataUseCase.swift; sourceTree = "<group>"; };
 		385DC1A8E6C7C636D3837DD5 /* ReviewSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSchedulerTests.swift; sourceTree = "<group>"; };
+		398F76E4AFCE85B935E1E49E /* StudyListUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListUseCases.swift; sourceTree = "<group>"; };
 		3E8D38DBCA386B7880E81766 /* PracticeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeQueue.swift; sourceTree = "<group>"; };
 		41D7C3680CD7590740228CA6 /* DomainKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DomainKit-Info.plist"; sourceTree = "<group>"; };
 		4BF3B2E04D0D45A55E4C75AF /* DomainKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DomainKitTests-Info.plist"; sourceTree = "<group>"; };
 		4DC0AA0DB4698CB8941593C3 /* BackupUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupUseCaseTests.swift; sourceTree = "<group>"; };
 		4F27DDE02FDB3BD12070D4A1 /* AddSelectedWordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSelectedWordUseCase.swift; sourceTree = "<group>"; };
+		6AAB646367197B02CF00DDC9 /* DailyStudyGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStudyGoalTests.swift; sourceTree = "<group>"; };
 		71BA49BABA249603DC5C0D84 /* ExportBackupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportBackupUseCase.swift; sourceTree = "<group>"; };
 		73551AF4758164C298AEECBA /* UpdateKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKotobaUseCase.swift; sourceTree = "<group>"; };
 		750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProgressUserDefaults.swift; sourceTree = "<group>"; };
@@ -162,10 +168,19 @@
 			path = Vocab;
 			sourceTree = "<group>";
 		};
+		27FBB3104C803BB261FBE45B /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				398F76E4AFCE85B935E1E49E /* StudyListUseCases.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
 		30E7B589FBC2193E5D9E4902 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				4DC0AA0DB4698CB8941593C3 /* BackupUseCaseTests.swift */,
+				6AAB646367197B02CF00DDC9 /* DailyStudyGoalTests.swift */,
 				7AB85F1344950023F05DFAA7 /* DomainKitTests.swift */,
 				B12B227E6B71C8B93C6F894E /* MemoryAidPromptTests.swift */,
 				7605A3B922BB0E97348D3841 /* PracticeQueueTests.swift */,
@@ -174,6 +189,14 @@
 				02C26294ACEBC9C2EF74B73B /* WordAdditionUseCaseTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		32F7193C8FD3F121A46C6770 /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				1B6BAF8D66B12B12C43763E4 /* DailyStudyGoalUseCases.swift */,
+			);
+			path = Goals;
 			sourceTree = "<group>";
 		};
 		5DEE19FAE97EAAC34D702A88 /* InfoPlists */ = {
@@ -227,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				9103164EF0D7219CD4AE81E4 /* Backup */,
+				32F7193C8FD3F121A46C6770 /* Goals */,
+				27FBB3104C803BB261FBE45B /* Lists */,
 				956F063F64A046CFAF8CCBDC /* MemoryAid */,
 				6C7A5754EE473C71EBDDD5B2 /* Review */,
 				B1D325C5B0D1CAE56EEF1071 /* UseCase */,
@@ -398,6 +423,8 @@
 			files = (
 				61EB31AE6B403CC7152C7308 /* ExportBackupUseCase.swift in Sources */,
 				3F413F02D585A64BF3D254C7 /* RestoreBackupUseCase.swift in Sources */,
+				3518ABAC58FBC93E4336D3E1 /* DailyStudyGoalUseCases.swift in Sources */,
+				65BD784D44630E271E9D7A01 /* StudyListUseCases.swift in Sources */,
 				8BC5971C1C8F0EB1AFCBB049 /* MemoryAidGenerating.swift in Sources */,
 				E555179AAC7214125234E12C /* MemoryAidPrompt.swift in Sources */,
 				C81461CD8AEFF04FA42E3CEB /* GetDueReviewsUseCase.swift in Sources */,
@@ -431,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				906468BBD38EE42396A3A771 /* BackupUseCaseTests.swift in Sources */,
+				7F18269ADC901396D0AC50E9 /* DailyStudyGoalTests.swift in Sources */,
 				0F54E3717B6E4EEED3D53FCA /* DomainKitTests.swift in Sources */,
 				77BD3E30DF4F9B7DBE25B800 /* MemoryAidPromptTests.swift in Sources */,
 				AEB2988166800F826430FF58 /* PracticeQueueTests.swift in Sources */,

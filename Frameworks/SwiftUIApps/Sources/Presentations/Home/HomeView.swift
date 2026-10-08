@@ -17,6 +17,7 @@ struct HomeView: View {
                     title: "Today",
                     caption: Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide))
                 )
+                AppComposer.shared.makeDailyGoalSummaryView()
                 StudyKindPicker(selection: $kind)
             }
             .padding(.horizontal, Forest.Space.l)

@@ -4,6 +4,7 @@ struct ReviewSetupView: View {
     @Environment(\.dismiss) private var dismiss
     let kind: StudyKind
     let items: [ReviewItem]
+    var origin: ReviewOrigin = .collection
     let onStart: (ReviewSession) -> Void
     @State private var selection = ReviewSelection(level: nil, limit: 20)
 
@@ -41,7 +42,7 @@ struct ReviewSetupView: View {
                         .font(.subheadline)
                         .foregroundStyle(Forest.inkMuted)
                     if selected.isEmpty {
-                        StateMessage(title: "No \(noun.pluralNoun) at this level", message: "Choose another JLPT level, or return to Collection.")
+                        StateMessage(title: "No \(noun.pluralNoun) at this level", message: "Choose another JLPT level. \(origin.emptyMessage)")
                     }
                 }
                 .foregroundStyle(Forest.ink)
@@ -51,7 +52,7 @@ struct ReviewSetupView: View {
             .background(Forest.canvas)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Button("Start review") {
-                    let session = ReviewSession(kind: kind, items: selected, origin: .collection)
+                    let session = ReviewSession(kind: kind, items: selected, origin: origin)
                     dismiss()
                     onStart(session)
                 }

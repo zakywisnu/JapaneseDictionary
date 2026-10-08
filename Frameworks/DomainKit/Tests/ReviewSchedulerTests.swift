@@ -66,6 +66,26 @@ final class ReviewSchedulerTests: XCTestCase {
         XCTAssertTrue(due.contains { $0.item.id.id == word.id })
     }
 
+    func testAgainThenOvernightGotItCapturesActionDayWithoutChangingBaseline() throws {
+        let store = try makeStore()
+        let repo = StandardReviewRepository(store: store)
+        let calendar = utcCalendar()
+        let useCase = DefaultRecordReviewUseCase(repository: repo, calendar: calendar)
+        let id = SavedStudyID(kind: .word, id: "a")
+        let session = UUID()
+        let before = try XCTUnwrap(calendar.date(from: .init(year: 2026, month: 10, day: 8, hour: 23, minute: 59)))
+        let after = before.addingTimeInterval(120)
+        try useCase.execute(id: id, sessionID: session, rating: .again, now: before)
+        let goals = StandardDailyGoalRepository(store: store)
+        XCTAssertTrue(try goals.activities(dayKey: "2026-10-08").isEmpty)
+        try useCase.execute(id: id, sessionID: session, rating: .gotIt, now: after)
+        XCTAssertEqual(try goals.activities(dayKey: "2026-10-09").first?.completedAt, after)
+        XCTAssertEqual(try repo.records().first?.lastReviewedAt, before)
+        try useCase.execute(id: id, sessionID: session, rating: .gotIt, now: after.addingTimeInterval(86400))
+        XCTAssertEqual(try goals.activities(dayKey: "2026-10-10").count, 1)
+        XCTAssertEqual(try repo.records().first?.stage, 0)
+    }
+
     private func makeStore() throws -> StudyStore {
         let store = try StudyStore(inMemory: true)
         for id in ["c", "b", "a"] {

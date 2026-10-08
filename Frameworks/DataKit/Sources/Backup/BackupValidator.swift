@@ -66,7 +66,7 @@ public enum BackupValidator {
     }
 
     public static func validate(_ backup: StudyBackup, catalog: CatalogSnapshot) throws {
-        guard backup.formatVersion == catalog.version else { throw BackupError.unsupportedVersion }
+        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) else { throw BackupError.unsupportedVersion }
         guard backup.catalogFingerprint == catalog.fingerprint else { throw BackupError.foreignCatalog }
         try date(backup.createdAt)
         // Saved content requires its original Add next indexes and cumulative counters.
@@ -76,6 +76,24 @@ public enum BackupValidator {
         try unique(backup.words.map(\.id), field: "word IDs")
         try unique(backup.kanjis.map(\.id), field: "kanji IDs")
         try unique(backup.reviews.map { $0.id.key }, field: "review IDs")
+        if backup.formatVersion < 3 {
+            guard backup.lists.isEmpty, backup.memberships.isEmpty, backup.activities.isEmpty, backup.dailyGoal == 10 else { throw BackupError.invalid("study data in an older backup format") }
+        }
+        guard backup.dailyGoal.map({ [5, 10, 20, 30].contains($0) }) ?? true else { throw BackupError.invalid("daily goal") }
+        try unique(backup.lists.map(\.id), field: "study list IDs")
+        try unique(backup.lists.map { StudyListModel.normalize($0.name) }, field: "study list names")
+        try unique(backup.memberships.map(\.key), field: "list memberships")
+        try unique(backup.activities.map(\.key), field: "practice activities")
+        let listIDs = Set(backup.lists.map(\.id)), wordIDs = Set(backup.words.map(\.id))
+        for list in backup.lists {
+            guard !list.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  list.name == list.name.trimmingCharacters(in: .whitespacesAndNewlines), !list.name.isEmpty, list.name.count <= 60 else { throw BackupError.invalid("study list names") }
+            try date(list.createdAt)
+        }
+        for member in backup.memberships {
+            guard listIDs.contains(member.listID), wordIDs.contains(member.wordID) else { throw BackupError.invalid("orphan list membership") }
+        }
+        for activity in backup.activities { try validateActivity(activity) }
         for word in backup.words {
             if catalog.version == 2 {
                 if let identity = word.catalogID {
@@ -111,6 +129,20 @@ public enum BackupValidator {
             guard (0...4).contains(review.stage), review.sessionBaselineStage.map({ (0...4).contains($0) }) ?? true else { throw BackupError.invalid("review stages") }
             try date(review.dueDate); try date(review.lastReviewedAt)
         }
+    }
+
+    public static func validateActivity(_ activity: PracticeActivity) throws {
+        guard !activity.studyID.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+              activity.key == PracticeActivity.activityKey(dayKey: activity.dayKey, studyID: activity.studyID) else { throw BackupError.invalid("practice identity") }
+        let parts = activity.dayKey.split(separator: "-", omittingEmptySubsequences: false)
+        guard parts.count == 3, activity.dayKey.count == 10,
+              let year = Int(parts[0]), let month = Int(parts[1]), let day = Int(parts[2]), (1...9998).contains(year) else { throw BackupError.invalid("practice day") }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        guard let value = calendar.date(from: DateComponents(year: year, month: month, day: day)),
+              calendar.dateComponents([.year, .month, .day], from: value) == DateComponents(year: year, month: month, day: day),
+              String(format: "%04d-%02d-%02d", year, month, day) == activity.dayKey else { throw BackupError.invalid("practice day") }
+        try date(activity.completedAt)
     }
 
     private static func unique(_ ids: [String], field: String) throws {

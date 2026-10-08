@@ -75,6 +75,9 @@ public final class StandardStudyMutationRepository: StudyMutationRepository {
                 } else if progress.catalogVersion != 2 {
                     progress.kotobaIndex = 0
                 }
+                for membership in try context.fetch(FetchDescriptor<StudyListMembershipModel>(predicate: #Predicate { $0.wordID == savedID })) {
+                    context.delete(membership)
+                }
                 context.delete(word)
             case .kanji:
                 guard let kanji = try context.fetch(FetchDescriptor<KanjiDataModel>(predicate: #Predicate { $0.id == savedID })).first else { throw DataError.dataNotFound }

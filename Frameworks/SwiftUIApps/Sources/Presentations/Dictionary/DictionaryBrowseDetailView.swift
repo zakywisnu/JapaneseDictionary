@@ -3,6 +3,8 @@ import DataKit
 
 struct DictionaryBrowseDetailView: View {
     @EnvironmentObject private var router: AppRouter
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var pronunciation = PronunciationService()
     @State var viewModel: DictionaryBrowseDetailViewModel
 
     var body: some View {
@@ -39,7 +41,17 @@ struct DictionaryBrowseDetailView: View {
         .navigationTitle("Dictionary word")
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) { collectionAction }
-        .onAppear { viewModel.send(.load) }
+        .onAppear {
+            pronunciation.refreshAvailability()
+            viewModel.send(.load)
+        }
+        .onDisappear { pronunciation.stop() }
+        .onChange(of: viewModel.state.word?.headword) { _, _ in pronunciation.stop() }
+        .onChange(of: viewModel.state.word?.reading) { _, _ in pronunciation.stop() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { pronunciation.refreshAvailability() }
+            else { pronunciation.stop() }
+        }
         .alert("Word couldn't be added", isPresented: Binding(get: { viewModel.state.errorMessage != nil }, set: { _ in viewModel.send(.dismissError) })) {
             Button("OK", role: .cancel) {}
         } message: { Text(viewModel.state.errorMessage ?? "") }
@@ -75,6 +87,9 @@ struct DictionaryBrowseDetailView: View {
             }
             if word.reading != word.headword {
                 Text(word.reading).font(.title3).foregroundStyle(Forest.inkMuted).textSelection(.enabled)
+            }
+            if PronunciationService.normalizedReading(word.reading) != nil {
+                PronunciationControl(reading: word.reading, service: pronunciation)
             }
             LevelTag(level: word.level)
         }

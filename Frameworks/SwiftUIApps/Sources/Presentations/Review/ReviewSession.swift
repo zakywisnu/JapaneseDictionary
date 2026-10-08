@@ -16,10 +16,29 @@ enum ReviewOrigin: Hashable {
     case collection
     case due
 
-    var backTitle: String { self == .collection ? "Back to Collection" : "Back to Today" }
-    var completionContext: String { self == .today ? "added today" : (self == .due ? "due for review" : "from your collection") }
+    case list(id: String, name: String)
+
+    var backTitle: String {
+        switch self {
+        case .collection: return "Back to Collection"
+        case .list(_, let name): return "Back to \(name)"
+        case .today, .due: return "Back to Today"
+        }
+    }
+    var completionContext: String {
+        switch self {
+        case .today: return "added today"
+        case .due: return "due for review"
+        case .collection: return "from your collection"
+        case .list(_, let name): return "from \(name)"
+        }
+    }
     var emptyMessage: String {
-        self == .collection ? "Return to Collection and choose another level." : "Return to Today and add an item or check what is due."
+        switch self {
+        case .collection: return "Return to Collection and choose another level."
+        case .list: return "Return to your list and choose another level or organize more saved words."
+        case .today, .due: return "Return to Today and add an item or check what is due."
+        }
     }
 }
 
@@ -48,6 +67,11 @@ struct ReviewItem: Hashable {
     let kunyomi: [String]
     let strokes: Int?
     let exampleWordKey: ExampleWordKey?
+
+    var spokenReadings: [String] {
+        if let key = exampleWordKey { return [key.reading] }
+        return onyomi + kunyomi
+    }
 
     init(saved: SavedStudyItem) {
         savedID = saved.id.id

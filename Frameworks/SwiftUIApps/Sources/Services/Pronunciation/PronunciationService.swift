@@ -6,7 +6,7 @@ import UIKit
 @MainActor
 protocol PronunciationEngine: AnyObject {
     var hasJapaneseVoice: Bool { get }
-    func speak(_ text: String, id: UUID, completion: @escaping (UUID) -> Void)
+    func speak(_ text: String, id: UUID, completion: @escaping (UUID) -> Void) throws
     func stop()
 }
 
@@ -78,12 +78,18 @@ final class PronunciationService {
         let id = UUID()
         activeID = id
         state = .playing
-        engine.speak(text, id: id) { [weak self] finishedID in
-            guard let self, self.activeID == finishedID else { return }
-            self.cancelTimeout?()
-            self.cancelTimeout = nil
-            self.activeID = nil
-            self.state = .idle
+        do {
+            try engine.speak(text, id: id) { [weak self] finishedID in
+                guard let self, self.activeID == finishedID else { return }
+                self.cancelTimeout?()
+                self.cancelTimeout = nil
+                self.activeID = nil
+                self.state = .idle
+            }
+        } catch {
+            clearPlayback()
+            state = .failed("Pronunciation couldn't start. Check your audio output and try again.")
+            return
         }
         // Engines may complete synchronously; never install a timeout for finished audio.
         guard activeID == id else { return }

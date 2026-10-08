@@ -1,9 +1,74 @@
+import AVFoundation
 import Foundation
 import XCTest
 @testable import SwiftUIApps
 
 @MainActor
 final class PronunciationTests: XCTestCase {
+    func testSystemPlaybackUsesAudioSessionThatIsNotSilencedBySilentMode() throws {
+        let engine = SystemPronunciationEngine()
+        guard engine.hasJapaneseVoice else { throw XCTSkip("No Japanese voice installed") }
+        defer { engine.stop() }
+        try engine.speak("こんにちは", id: UUID()) { _ in }
+        XCTAssertEqual(AVAudioSession.sharedInstance().category, .playback)
+        XCTAssertEqual(AVAudioSession.sharedInstance().mode, .spokenAudio)
+    }
+
+    func testAudioStartFailureShowsRetryWithoutLeavingPlaybackActive() {
+        let engine = FakePronunciationEngine()
+        engine.startError = NSError(domain: "AudioStart", code: 1)
+        let timer = ManualPronunciationTimeout()
+        let service = PronunciationService(engine: engine, scheduleTimeout: timer.schedule)
+        service.listen(reading: "ねこ")
+        guard case .failed = service.state else { return XCTFail("Expected visible audio error") }
+        XCTAssertNil(service.activeID)
+        XCTAssertTrue(timer.delays.isEmpty)
+        engine.startError = nil
+        service.listen(reading: "ねこ")
+        XCTAssertEqual(service.state, .playing)
+    }
+
+    func testSystemEngineReleasesSessionOnStopAndPropagatesActivationFailure() throws {
+        var events: [String] = []
+        let engine = SystemPronunciationEngine(activateAudio: { events.append("activate") }, deactivateAudio: { events.append("deactivate") })
+        guard engine.hasJapaneseVoice else { throw XCTSkip("No Japanese voice installed") }
+        try engine.speak("こんにちは", id: UUID()) { _ in }
+        engine.stop()
+        engine.stop()
+        XCTAssertEqual(events, ["activate", "deactivate"])
+        let failure = SystemPronunciationEngine(activateAudio: { throw NSError(domain: "AudioStart", code: 1) }, deactivateAudio: { XCTFail("Never activated") })
+        XCTAssertThrowsError(try failure.speak("ねこ", id: UUID()) { _ in })
+        failure.stop()
+    }
+
+    func testSystemEngineCompletesJapanesePlayback() async throws {
+        let engine = SystemPronunciationEngine()
+        guard engine.hasJapaneseVoice else { throw XCTSkip("No Japanese voice installed") }
+        let completed = expectation(description: "Actual speech playback completed")
+        try engine.speak("こんにちは", id: UUID()) { _ in completed.fulfill() }
+        await fulfillment(of: [completed], timeout: 8)
+        engine.stop()
+    }
+
+    func testJapaneseVoiceProducesAudioSamples() async throws {
+        let voices = AVSpeechSynthesisVoice.speechVoices().filter { $0.language.hasPrefix("ja") }.sorted { $0.identifier < $1.identifier }
+        let voice = try XCTUnwrap(voices.first)
+        let synth = AVSpeechSynthesizer()
+        let utterance = AVSpeechUtterance(string: "こんにちは")
+        utterance.voice = voice
+        let generated = expectation(description: "Japanese audio samples: " + voices.map { $0.identifier }.joined(separator: ", "))
+        let lock = NSLock()
+        var done = false
+        synth.write(utterance) { buffer in
+            guard let pcm = buffer as? AVAudioPCMBuffer, pcm.frameLength > 0 else { return }
+            lock.lock()
+            if !done { done = true; generated.fulfill() }
+            lock.unlock()
+        }
+        await fulfillment(of: [generated], timeout: 8)
+        synth.stopSpeaking(at: .immediate)
+    }
+
     func testUnavailableVoiceRefusesPlaybackAndCanBeCheckedAgain() {
         let engine = FakePronunciationEngine()
         engine.hasJapaneseVoice = false
@@ -111,12 +176,14 @@ final class PronunciationTests: XCTestCase {
 
 @MainActor
 private final class FakePronunciationEngine: PronunciationEngine {
+    var startError: Error?
     var hasJapaneseVoice = true
     var stopCount = 0
     var completesImmediately = false
     var requests: [(text: String, id: UUID)] = []
     var callbacks: [UUID: (UUID) -> Void] = [:]
-    func speak(_ text: String, id: UUID, completion: @escaping (UUID) -> Void) {
+    func speak(_ text: String, id: UUID, completion: @escaping (UUID) -> Void) throws {
+        if let startError { throw startError }
         requests.append((text, id))
         callbacks[id] = completion
         if completesImmediately { completion(id) }

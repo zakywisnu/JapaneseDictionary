@@ -31,4 +31,12 @@ Xcode 27 simulator input limits: native tab/back and keyboard typing do not reli
 
 The pending worksheet is `data/tatoeba/current-n5-review-sheet.csv`; reconciliation report is `data/tatoeba/current-reconciliation.json`. Sentence publication requires fluent human review of sense, Japanese/English correctness and any reading, tied to current catalog/source hashes. No human decisions arrived during implementation. Zero new sentences have been published; the tooling and review batch are delivered.
 
-No VoiceOver or TestFlight checks, push, PR or merge performed in this implementation task.
+VoiceOver and TestFlight checks remain deferred. GitHub delivery follows the user’s subsequent commit/push/PR/merge request.
+
+## Pronunciation silence follow-up
+
+Runtime regression test confirmed the original engine left the session at soloAmbient/default, which obeys Silent mode. Explicit Listen now activates playback/spokenAudio with duckOthers; finish/cancel/stop releases the session and notifies other audio. Activation failures become visible Retry states. Regression tests failed on the old configuration, then all 10 pronunciation tests and the full 172-test workspace suite passed. Debug app rebuilt and installed. Device/host output volume and audible quality remain external checks.
+
+Further runtime investigation: the voice generated samples, while actual playback timed out with CoreAudio `Could not find default device for dOut` and `ID = 0`. macOS separately detected MacBook Pro Speakers as its default output. Restarting the simulator (shutdown/boot, no erase) restored real speech completion in 1.8 seconds. Real-engine playback and synthesis regression checks now cover this gap; state-only tests had not validated audible output.
+
+Final delivery verification: full workspace 174 passed, 0 failed/skipped; Python data regressions 37 passed; Release build successful. Real speech playback and sample generation included.

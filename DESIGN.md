@@ -201,7 +201,7 @@ Collection Words offers neutral Study lists and Browse dictionary actions. Lists
 
 ## Pronunciation
 
-Listen is a neutral action near supplied readings in Word and Dictionary detail. Kanji detail plays individual supplied kana readings; it never guesses a character reading. Synthesized speech is labeled plainly. Review shows Listen only after Reveal answer. Stop on hiding the answer, changing items, leaving the screen or backgrounding. Missing Japanese voice explains availability with Check again; failures offer retry. Controls use system text styles, Forest colors and 44pt targets.
+Listen is a neutral action near supplied readings in Word and Dictionary detail. Kanji detail plays individual supplied kana readings; it never guesses a character reading. Synthesized speech is labeled plainly. Explicit Listen playback remains audible in Silent mode, ducks other audio while speaking, and releases its audio session when stopped or finished. Review shows Listen only after Reveal answer. Stop on hiding the answer, changing items, leaving the screen or backgrounding. Missing Japanese voice explains availability with Check again; failures offer retry. Controls use system text styles, Forest colors and 44pt targets.
 
 ## Daily practice goal
 

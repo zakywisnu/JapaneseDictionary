@@ -18,6 +18,7 @@ public struct RestoreBackupUseCase {
 
     @discardableResult
     public func execute(_ backup: StudyBackup) throws -> URL {
+        let backup = try repository.validate(backup)
         let shadowData: Data?
         if let progress = backup.progress {
             let shadow = WordsProgressParam(id: progress.id, kanjiProgress: progress.kanjiProgress, kotobaProgress: progress.kotobaProgress,

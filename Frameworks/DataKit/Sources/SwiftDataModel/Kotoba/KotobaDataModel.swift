@@ -14,6 +14,7 @@ public final class KotobaDataModel: Identifiable, CSVMappable {
     
     @Attribute(.unique)
     public var id: String
+    public var catalogID: String? = nil
     public var kanji: String
     public var furigana: String
     public var english: [ArrayString]
@@ -32,9 +33,11 @@ public final class KotobaDataModel: Identifiable, CSVMappable {
         dateAdded: Date?,
         addedIndex: Int?,
         memoryExplanation: String? = nil,
-        memoryMnemonic: String? = nil
+        memoryMnemonic: String? = nil,
+        catalogID: String? = nil
     ) {
         self.id = id
+        self.catalogID = catalogID
         self.kanji = kanji
         self.furigana = furigana
         self.english = english

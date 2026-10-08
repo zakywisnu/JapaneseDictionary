@@ -13,7 +13,7 @@ struct MemoryAidCard: View {
             if let suggestion = viewModel.state.suggestion {
                 field("Explanation", text: suggestion.explanation)
                 field("Memory tip", text: suggestion.mnemonic)
-                Text("AI-generated suggestion. Check it against the meanings above.")
+                Text("AI-generated suggestion. Check it against your study meaning.")
                     .font(.footnote)
                     .foregroundStyle(Forest.inkMuted)
                 Text(viewModel.state.isSaved ? "Saved on this iPhone" : "Not saved")

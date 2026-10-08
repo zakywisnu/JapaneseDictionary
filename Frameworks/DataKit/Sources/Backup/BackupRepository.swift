@@ -6,12 +6,16 @@ public final class BackupRepository {
     private let catalog: CatalogSnapshot
     private let recoveryURL: URL
     private let save: (ModelContext) throws -> Void
+    private let prepare: () throws -> Void
+    private let legacyConverter: ((StudyBackup) throws -> StudyBackup)?
     private let writeRecovery: (Data, URL) throws -> Void
 
-    public init(store: StudyStore, catalog: CatalogSnapshot, recoveryURL: URL, save: @escaping (ModelContext) throws -> Void = { try $0.save() }, writeRecovery: @escaping (Data, URL) throws -> Void = { data, url in
+    public init(store: StudyStore, catalog: CatalogSnapshot, recoveryURL: URL, prepare: @escaping () throws -> Void = {}, legacyConverter: ((StudyBackup) throws -> StudyBackup)? = nil, save: @escaping (ModelContext) throws -> Void = { try $0.save() }, writeRecovery: @escaping (Data, URL) throws -> Void = { data, url in
         try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
         try data.write(to: url, options: .atomic)
     }) {
+        self.prepare = prepare
+        self.legacyConverter = legacyConverter
         self.store = store
         self.catalog = catalog
         self.recoveryURL = recoveryURL
@@ -20,10 +24,11 @@ public final class BackupRepository {
     }
 
     public func export(preferences: BackupPreferences) throws -> Data {
+        try prepare()
         let context = store.makeContext()
         let progress = try context.fetch(FetchDescriptor<WordsProgressModel>())
         guard progress.count <= 1 else { throw BackupError.multipleProgress }
-        let backup = StudyBackup(createdAt: Date(), catalogFingerprint: catalog.fingerprint,
+        let backup = StudyBackup(formatVersion: catalog.version, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
             words: try context.fetch(FetchDescriptor<KotobaDataModel>()).map(BackupWord.init).sorted { $0.id < $1.id },
             kanjis: try context.fetch(FetchDescriptor<KanjiDataModel>()).map(BackupKanji.init).sorted { $0.id < $1.id },
             progress: progress.first.map(BackupProgress.init),
@@ -38,12 +43,31 @@ public final class BackupRepository {
     }
 
     public func validate(_ data: Data) throws -> StudyBackup {
-        try BackupValidator.validate(data, catalog: catalog)
+        guard data.count <= BackupValidator.maximumBytes else { throw BackupError.tooLarge }
+        let backup: StudyBackup
+        do { backup = try JSONDecoder().decode(StudyBackup.self, from: data) }
+        catch { throw BackupError.corrupt }
+        return try normalized(backup)
+    }
+
+    public func validate(_ backup: StudyBackup) throws -> StudyBackup {
+        try normalized(backup)
+    }
+
+    private func normalized(_ backup: StudyBackup) throws -> StudyBackup {
+        if catalog.version == 2 && backup.formatVersion == 1, let legacyConverter {
+            let converted = try legacyConverter(backup)
+            try BackupValidator.validate(converted, catalog: catalog)
+            return converted
+        }
+        try BackupValidator.validate(backup, catalog: catalog)
+        return backup
     }
 
     @discardableResult
     public func restore(_ backup: StudyBackup, currentPreferences: BackupPreferences) throws -> URL {
-        try BackupValidator.validate(backup, catalog: catalog)
+        try prepare()
+        let backup = try normalized(backup)
         try writeRecovery(export(preferences: currentPreferences), recoveryURL)
         let context = store.makeContext()
         do {

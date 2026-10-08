@@ -42,6 +42,21 @@ public final class StandardVocabRepository: VocabRepository {
     }
     
     public func fetchKotobaData() throws -> [KotobaDataModel] {
+        try VocabularyCatalogRepository.bundled().catalog.entries.map { word in
+            KotobaDataModel(
+                id: word.id,
+                kanji: word.headword,
+                furigana: word.reading,
+                english: word.studyMeanings.map { ArrayString(value: $0) },
+                jlptLevel: KotobaDataModel.Level(rawValue: word.level)!,
+                dateAdded: nil,
+                addedIndex: nil,
+                catalogID: word.id
+            )
+        }
+    }
+
+    public func fetchLegacyKotobaData() throws -> [KotobaDataModel] {
         guard let fileURL = Bundle(for: Self.self).url(forResource: "jlpt_vocab", withExtension: "csv") else {
             throw DataError.fileNotFound
         }

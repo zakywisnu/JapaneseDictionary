@@ -7,20 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11645BB407442CAF662B6E6D /* VocabularyCatalogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A683A2E424D1F346148C72 /* VocabularyCatalogRepository.swift */; };
 		13AEC140E412BF124DDB043A /* tatoeba-attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B76F727B8FB83837ACCF698 /* tatoeba-attribution.txt */; };
 		1421C4AC7F45D2B227445897 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2605FD00488F119F33DE4B /* DataError.swift */; };
 		15C03E79967A6D29FE0C75ED /* DataKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */; };
+		15C09668813C805A00DF90D5 /* DictionaryCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C951CF5AB99E1DCB90A01A /* DictionaryCatalogTests.swift */; };
 		1F5A816B27644F8506E9D978 /* MemoryAidRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154013D4D4DF9972CBEEC63A /* MemoryAidRepository.swift */; };
 		21E4AEDC11AF8E83AE132D4B /* BackupValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1299C2F9D2DD50BE855E060 /* BackupValidator.swift */; };
 		42ACDCE04B5F3FA5D1A4B769 /* ReviewStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */; };
 		4978CFB59E0A3EB2317BF393 /* WordsProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DF7C65460B45CA7FAB8CF /* WordsProgressModel.swift */; };
+		532DF324AF785219CB5ED890 /* vocabulary-v2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B594A549A3478285703A31D /* vocabulary-v2.json */; };
 		5F7BCE1E6D70A4C4BBE034FA /* VocabRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C930E593BF28FD6CECE24 /* VocabRepository.swift */; };
 		61279B8D9E2F454B19D2E63F /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38794EEFF47FCE10026A58AA /* DataKit.framework */; };
+		61E678437B698C7BFD0260A8 /* CatalogMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B44833990C2C4D51979C326 /* CatalogMigrationTests.swift */; };
 		64693C1605093FBAFDC20A6A /* TuistBundle+DataKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712CAD88A1AD927AC15531BF /* TuistBundle+DataKit.swift */; };
 		6942A5CDB9162AF621EE799D /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF727B1BE0677A083ED3916 /* ReviewRepository.swift */; };
 		71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */ = {isa = PBXBuildFile; fileRef = 9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */; };
 		850E4AD1E4BD98B634F00CA4 /* KanjiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */; };
 		87E11BCFD877CC967AD5EB8F /* MemoryAidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B15351C15EBD8FE0BEEB0 /* MemoryAidSuggestion.swift */; };
+		8EF6897074D6C927A2CAD6BC /* CatalogMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEE87C3169B9B4B3F975FB /* CatalogMigration.swift */; };
 		932EFB71F06806E4632580A2 /* BackupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D5089C426D08DA365078A /* BackupRepository.swift */; };
 		997E18E4B51CBB53108B7620 /* WordsProgressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */; };
 		9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */; };
@@ -33,6 +38,7 @@
 		C847FED0AE088ED66105A098 /* ArrayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */; };
 		C90AD13448845331D157EA85 /* examples-n5.json in Resources */ = {isa = PBXBuildFile; fileRef = 03660AF259E3511586C9D2BC /* examples-n5.json */; };
 		CFA47F49C40349EEF45A221C /* MemoryAidRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183FFDA43D7C6214E6ED4E /* MemoryAidRepositoryTests.swift */; };
+		D6D874CA7A4F45DF19CAFF0E /* DictionaryCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168D0C8FF243E733EF5A552 /* DictionaryCatalog.swift */; };
 		DA61DC1576ED9DB693E6231A /* KotobaDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F5332704A46634A742C344 /* KotobaDataModel.swift */; };
 		DD2128F3348393CD2CFEE048 /* StudyBackupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E795995D05857A1B7ACF85 /* StudyBackupTests.swift */; };
 		E54CE102CE943CA18428044F /* ExampleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1336E489427C6CCEC72634 /* ExampleRepository.swift */; };
@@ -84,9 +90,12 @@
 		154013D4D4DF9972CBEEC63A /* MemoryAidRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidRepository.swift; sourceTree = "<group>"; };
 		16F5332704A46634A742C344 /* KotobaDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaDataModel.swift; sourceTree = "<group>"; };
 		17C729F2FD050AB8F32DEDC8 /* ExampleRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepositoryTests.swift; sourceTree = "<group>"; };
+		1ACEE87C3169B9B4B3F975FB /* CatalogMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogMigration.swift; sourceTree = "<group>"; };
+		27C951CF5AB99E1DCB90A01A /* DictionaryCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCatalogTests.swift; sourceTree = "<group>"; };
 		3474BF66E1180F414642882E /* jlpt_vocab.csv */ = {isa = PBXFileReference; path = jlpt_vocab.csv; sourceTree = "<group>"; };
 		38794EEFF47FCE10026A58AA /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		489028A2D0F85E744DD97567 /* DataKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B44833990C2C4D51979C326 /* CatalogMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogMigrationTests.swift; sourceTree = "<group>"; };
 		638B15351C15EBD8FE0BEEB0 /* MemoryAidSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidSuggestion.swift; sourceTree = "<group>"; };
 		666DB02556BA7F834F8D4B13 /* ReviewRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecordModel.swift; sourceTree = "<group>"; };
 		6B989D700CDE909B81ADC1B8 /* DataKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DataKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -95,17 +104,20 @@
 		79183FFDA43D7C6214E6ED4E /* MemoryAidRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidRepositoryTests.swift; sourceTree = "<group>"; };
 		79D2C28DDCB1A159E72B1E5C /* ArrayString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayString.swift; sourceTree = "<group>"; };
 		7B2AFA2D770298C289ACCEFF /* StudyMutationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMutationRepository.swift; sourceTree = "<group>"; };
+		7B594A549A3478285703A31D /* vocabulary-v2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "vocabulary-v2.json"; sourceTree = "<group>"; };
 		8503C672F13D55942A1E9759 /* KotobaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaRepository.swift; sourceTree = "<group>"; };
 		9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "kanji-wanikani.json"; sourceTree = "<group>"; };
 		982C5D890665D364BF3DE49D /* StudyBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBackup.swift; sourceTree = "<group>"; };
 		A0E795995D05857A1B7ACF85 /* StudyBackupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBackupTests.swift; sourceTree = "<group>"; };
 		A2BA4E2159F8D2DFC50B90A5 /* WordsProgressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsProgressRepository.swift; sourceTree = "<group>"; };
 		AE5F20CA60813BDC4F7D3B8C /* KanjiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiRepository.swift; sourceTree = "<group>"; };
+		C168D0C8FF243E733EF5A552 /* DictionaryCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCatalog.swift; sourceTree = "<group>"; };
 		C67FC79D77F20E09A2E25253 /* DataKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DataKit-Info.plist"; sourceTree = "<group>"; };
 		CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */ = {isa = PBXFileReference; path = kanji_data.csv; sourceTree = "<group>"; };
 		D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataKitTests.swift; sourceTree = "<group>"; };
 		DC3F3EF61CE379A59B236D07 /* KotobaMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotobaMigrationPlan.swift; sourceTree = "<group>"; };
 		DF2605FD00488F119F33DE4B /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		E7A683A2E424D1F346148C72 /* VocabularyCatalogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyCatalogRepository.swift; sourceTree = "<group>"; };
 		EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStoreTests.swift; sourceTree = "<group>"; };
 		F1299C2F9D2DD50BE855E060 /* BackupValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupValidator.swift; sourceTree = "<group>"; };
 		F40C930E593BF28FD6CECE24 /* VocabRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabRepository.swift; sourceTree = "<group>"; };
@@ -172,7 +184,9 @@
 		381BEE4E0871051933CF6807 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5B44833990C2C4D51979C326 /* CatalogMigrationTests.swift */,
 				D2FB2C3FEA54BC236B8F0BF2 /* DataKitTests.swift */,
+				27C951CF5AB99E1DCB90A01A /* DictionaryCatalogTests.swift */,
 				17C729F2FD050AB8F32DEDC8 /* ExampleRepositoryTests.swift */,
 				79183FFDA43D7C6214E6ED4E /* MemoryAidRepositoryTests.swift */,
 				EC867BE711E2BBA4833EDFE3 /* ReviewStoreTests.swift */,
@@ -213,6 +227,7 @@
 				487D463B39468FF1F766999F /* Repository */,
 				589245F96006041F8BCD4A8B /* Store */,
 				CE182922E0A430F148502F3A /* SwiftDataModel */,
+				8544156A9C234CA3F33BEC59 /* Vocabulary */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -239,6 +254,16 @@
 				666DB02556BA7F834F8D4B13 /* ReviewRecordModel.swift */,
 			);
 			path = Review;
+			sourceTree = "<group>";
+		};
+		8544156A9C234CA3F33BEC59 /* Vocabulary */ = {
+			isa = PBXGroup;
+			children = (
+				1ACEE87C3169B9B4B3F975FB /* CatalogMigration.swift */,
+				C168D0C8FF243E733EF5A552 /* DictionaryCatalog.swift */,
+				E7A683A2E424D1F346148C72 /* VocabularyCatalogRepository.swift */,
+			);
+			path = Vocabulary;
 			sourceTree = "<group>";
 		};
 		86E4AEB59A2B77EBE1578E31 /* Kotoba */ = {
@@ -269,6 +294,7 @@
 				CDB88D4C5B343DF4FE07D76A /* kanji_data.csv */,
 				9298FBCC2EF621D8C182FF0B /* kanji-wanikani.json */,
 				0B76F727B8FB83837ACCF698 /* tatoeba-attribution.txt */,
+				7B594A549A3478285703A31D /* vocabulary-v2.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -410,6 +436,7 @@
 				71DB28FE016A70E377F8FF16 /* kanji-wanikani.json in Resources */,
 				9F34BBC78A69E34B8E3ECE9F /* kanji_data.csv in Resources */,
 				13AEC140E412BF124DDB043A /* tatoeba-attribution.txt in Resources */,
+				532DF324AF785219CB5ED890 /* vocabulary-v2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E678437B698C7BFD0260A8 /* CatalogMigrationTests.swift in Sources */,
 				15C03E79967A6D29FE0C75ED /* DataKitTests.swift in Sources */,
+				15C09668813C805A00DF90D5 /* DictionaryCatalogTests.swift in Sources */,
 				BA2E130913201E061DE4C86D /* ExampleRepositoryTests.swift in Sources */,
 				CFA47F49C40349EEF45A221C /* MemoryAidRepositoryTests.swift in Sources */,
 				42ACDCE04B5F3FA5D1A4B769 /* ReviewStoreTests.swift in Sources */,
@@ -453,6 +482,9 @@
 				F677932B471415D470CC2471 /* KotobaMigrationPlan.swift in Sources */,
 				F4D97EED1A26FB66B39970AF /* ReviewRecordModel.swift in Sources */,
 				4978CFB59E0A3EB2317BF393 /* WordsProgressModel.swift in Sources */,
+				8EF6897074D6C927A2CAD6BC /* CatalogMigration.swift in Sources */,
+				D6D874CA7A4F45DF19CAFF0E /* DictionaryCatalog.swift in Sources */,
+				11645BB407442CAF662B6E6D /* VocabularyCatalogRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

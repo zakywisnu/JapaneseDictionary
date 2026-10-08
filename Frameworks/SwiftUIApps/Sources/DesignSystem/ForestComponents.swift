@@ -178,7 +178,7 @@ private struct StudyRemovalActions: ViewModifier {
                 Button("Remove", role: .destructive) { onDelete(entry) }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This \(noun) will be removed from your collection and progress, then offered next on Today.")
+                Text(noun == "word" ? "This word will be removed from your collection and progress." : "This \(noun) will be removed from your collection and progress, then offered next on Today.")
             }
     }
 }

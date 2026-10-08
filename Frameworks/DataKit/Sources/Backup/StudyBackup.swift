@@ -9,7 +9,8 @@ public struct BackupWord: Codable, Equatable {
     public var dateAdded: Date?
     public var addedIndex: Int?
     public var memoryAid: MemoryAidSuggestion?
-    public init(id: String, kanji: String, furigana: String, english: [String], jlptLevel: KotobaDataModel.Level, dateAdded: Date?, addedIndex: Int?, memoryAid: MemoryAidSuggestion? = nil) {
+    public var catalogID: String?
+    public init(id: String, kanji: String, furigana: String, english: [String], jlptLevel: KotobaDataModel.Level, dateAdded: Date?, addedIndex: Int?, memoryAid: MemoryAidSuggestion? = nil, catalogID: String? = nil) {
         self.id = id
         self.kanji = kanji
         self.furigana = furigana
@@ -18,9 +19,10 @@ public struct BackupWord: Codable, Equatable {
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
         self.memoryAid = memoryAid
+        self.catalogID = catalogID
     }
     init(_ model: KotobaDataModel) {
-        self.init(id: model.id, kanji: model.kanji, furigana: model.furigana, english: model.english.map(\.value), jlptLevel: model.jlptLevel, dateAdded: model.dateAdded, addedIndex: model.addedIndex, memoryAid: Self.memoryAid(model))
+        self.init(id: model.id, kanji: model.kanji, furigana: model.furigana, english: model.english.map(\.value), jlptLevel: model.jlptLevel, dateAdded: model.dateAdded, addedIndex: model.addedIndex, memoryAid: Self.memoryAid(model), catalogID: model.catalogID)
     }
     private static func memoryAid(_ model: KotobaDataModel) -> MemoryAidSuggestion? {
         guard model.memoryExplanation != nil || model.memoryMnemonic != nil else { return nil }
@@ -28,7 +30,7 @@ public struct BackupWord: Codable, Equatable {
         return .init(explanation: model.memoryExplanation ?? "", mnemonic: model.memoryMnemonic ?? "")
     }
     var model: KotobaDataModel {
-        KotobaDataModel(id: id, kanji: kanji, furigana: furigana, english: english.map { ArrayString(value: $0) }, jlptLevel: jlptLevel, dateAdded: dateAdded, addedIndex: addedIndex, memoryExplanation: memoryAid?.explanation, memoryMnemonic: memoryAid?.mnemonic)
+        KotobaDataModel(id: id, kanji: kanji, furigana: furigana, english: english.map { ArrayString(value: $0) }, jlptLevel: jlptLevel, dateAdded: dateAdded, addedIndex: addedIndex, memoryExplanation: memoryAid?.explanation, memoryMnemonic: memoryAid?.mnemonic, catalogID: catalogID)
     }
 }
 
@@ -71,7 +73,8 @@ public struct BackupProgress: Codable, Equatable {
     public var kotobaIndex: Int
     public var lastKotobaUpdated: Date
     public var lastKanjiUpdated: Date
-    public init(id: String, kanjiProgress: Int, kotobaProgress: Int, kanjiLevel: WordsProgressModel.Level, kotobaLevel: WordsProgressModel.Level, kanjiIndex: Int, kotobaIndex: Int, lastKotobaUpdated: Date, lastKanjiUpdated: Date) {
+    public var catalogVersion: Int?
+    public init(id: String, kanjiProgress: Int, kotobaProgress: Int, kanjiLevel: WordsProgressModel.Level, kotobaLevel: WordsProgressModel.Level, kanjiIndex: Int, kotobaIndex: Int, lastKotobaUpdated: Date, lastKanjiUpdated: Date, catalogVersion: Int? = nil) {
         self.id = id
         self.kanjiProgress = kanjiProgress
         self.kotobaProgress = kotobaProgress
@@ -81,12 +84,13 @@ public struct BackupProgress: Codable, Equatable {
         self.kotobaIndex = kotobaIndex
         self.lastKotobaUpdated = lastKotobaUpdated
         self.lastKanjiUpdated = lastKanjiUpdated
+        self.catalogVersion = catalogVersion
     }
     init(_ model: WordsProgressModel) {
-        self.init(id: model.id, kanjiProgress: model.kanjiProgress, kotobaProgress: model.kotobaProgress, kanjiLevel: model.kanjiLevel, kotobaLevel: model.kotobaLevel, kanjiIndex: model.kanjiIndex, kotobaIndex: model.kotobaIndex, lastKotobaUpdated: model.lastKotobaUpdated, lastKanjiUpdated: model.lastKanjiUpdated)
+        self.init(id: model.id, kanjiProgress: model.kanjiProgress, kotobaProgress: model.kotobaProgress, kanjiLevel: model.kanjiLevel, kotobaLevel: model.kotobaLevel, kanjiIndex: model.kanjiIndex, kotobaIndex: model.kotobaIndex, lastKotobaUpdated: model.lastKotobaUpdated, lastKanjiUpdated: model.lastKanjiUpdated, catalogVersion: model.catalogVersion)
     }
     var model: WordsProgressModel {
-        WordsProgressModel(id: id, kanjiProgress: kanjiProgress, kotobaProgress: kotobaProgress, kanjiLevel: kanjiLevel, kotobaLevel: kotobaLevel, kanjiIndex: kanjiIndex, kotobaIndex: kotobaIndex, lastKotobaUpdated: lastKotobaUpdated, lastKanjiUpdated: lastKanjiUpdated)
+        WordsProgressModel(id: id, kanjiProgress: kanjiProgress, kotobaProgress: kotobaProgress, kanjiLevel: kanjiLevel, kotobaLevel: kotobaLevel, kanjiIndex: kanjiIndex, kotobaIndex: kotobaIndex, lastKotobaUpdated: lastKotobaUpdated, lastKanjiUpdated: lastKanjiUpdated, catalogVersion: catalogVersion)
     }
 }
 

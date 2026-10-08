@@ -102,13 +102,13 @@ public final class MemoryAidViewModel {
     private func generationMessage(for error: Error) -> String {
         switch error as? MemoryAidGenerationError {
         case .refused:
-            return "A suggestion for \(word.headword) couldn't be provided. Try again, or use the meanings above."
+            return "A suggestion for \(word.headword) couldn't be provided. Try again, or use your study meaning."
         case .invalidResponse:
             return "The suggestion for \(word.headword) was incomplete. Try generating it again."
         case .invalidInput:
             return "This word's study details couldn't be used. Reopen \(word.headword) from your collection and try again."
         default:
-            return "A suggestion for \(word.headword) couldn't be generated. Try generating again, or use the meanings above."
+            return "A suggestion for \(word.headword) couldn't be generated. Try generating again, or use your study meaning."
         }
     }
 }

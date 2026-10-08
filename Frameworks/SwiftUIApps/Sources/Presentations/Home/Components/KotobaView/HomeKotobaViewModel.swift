@@ -66,7 +66,8 @@ final class HomeKotobaViewModel {
 extension HomeKotobaViewModel {
     private func reload() {
         fetchDueReviews()
-        fetchProgress()
+        state.loadState = .loading
+        guard fetchProgress() else { return }
         fetchCurrentKotoba()
     }
     
@@ -91,17 +92,27 @@ extension HomeKotobaViewModel {
         }
     }
     
-    private func fetchProgress() {
-        state.progress = try? getWordsProgressUseCase.execute().mapToDomain()
+    private func fetchProgress() -> Bool {
+        do {
+            state.progress = try getWordsProgressUseCase.execute().mapToDomain()
+            return true
+        } catch {
+            state.progress = nil
+            state.loadState = .failed
+            return false
+        }
     }
     
     private func fetchCurrentKotoba() {
         do {
             let result = try getAllKotobaUseCase.execute().mapToKotobas()
+            state.savedCatalogIDs = Set(result.compactMap(\.catalogID))
+            state.savedLegacyIDs = Set(result.filter { $0.catalogID == nil }.map(\.id))
             state.currentKotobas = result
                 .filter { $0.dateAdded.map { Calendar.current.isDateInToday($0) } ?? false }
                 .sorted(by: { ($0.addedIndex ?? 0) > ($1.addedIndex ?? 0) })
             state.loadState = state.allKotobas.isEmpty ? .failed : .loaded
+            state.hasFinished = fetchNextKotoba().0 == nil
         } catch {
             state.loadState = .failed
         }
@@ -116,7 +127,7 @@ extension HomeKotobaViewModel {
     }
     
     private func addKotoba() {
-        guard let progress = state.progress else {
+        guard state.loadState == .loaded, let progress = state.progress else {
             state.errorMessage = "Your progress couldn't be read, so no word was added. Try again."
             return
         }
@@ -138,13 +149,14 @@ extension HomeKotobaViewModel {
         }
         
         let kotobaParam = KotobaParam(
-            id: kotoba.id,
+            id: UUID().uuidString,
             kanji: kotoba.kanji,
             furigana: kotoba.furigana,
             english: kotoba.english,
             jlptLevel: .init(rawValue: kotoba.jlptLevel.rawValue) ?? .n5,
             dateAdded: Date(),
-            addedIndex: progressIndex
+            addedIndex: progressIndex,
+            catalogID: kotoba.catalogID
         )
         let level: WordsProgressParam.Level = .init(rawValue: min(progress.getKotobaProgress, WordsProgressParam.Level(rawValue: kotoba.jlptLevel.rawValue)?.rawValue ?? "N5")) ?? .n5
         let progressParam: WordsProgressParam = .init(
@@ -162,16 +174,16 @@ extension HomeKotobaViewModel {
         return (kotobaParam, progressParam)
     }
     
-    /// Skips words that were already added today, starting from the saved index.
+    // Saved learner IDs differ from catalog identities, and membership includes previous days.
     private func fetchNextKotoba() -> (Kotoba?, Int) {
-        guard let progress = state.progress, progress.kotobaIndex < state.allKotobas.count else {
+        guard let progress = state.progress, progress.kotobaIndex >= 0, progress.kotobaIndex < state.allKotobas.count else {
             return (nil, state.progress?.kotobaIndex ?? 0)
         }
         for index in progress.kotobaIndex..<state.allKotobas.count {
             let candidate = state.allKotobas[index]
-            if !state.currentKotobas.contains(where: { $0.id == candidate.id }) {
-                return (candidate, max(index, progress.kotobaIndex))
-            }
+            let alreadySaved = candidate.catalogID.map { state.savedCatalogIDs.contains($0) }
+                ?? state.savedLegacyIDs.contains(candidate.id)
+            if !alreadySaved { return (candidate, index) }
         }
         return (nil, progress.kotobaIndex)
     }
@@ -183,6 +195,8 @@ extension HomeKotobaViewModel {
         var dueLoadState: TodayLoadState = .loading
         var progress: WordsProgress?
         var allKotobas: [Kotoba] = []
+        var savedCatalogIDs: Set<String> = []
+        var savedLegacyIDs: Set<String> = []
         var currentKotobas: [Kotoba] = []
         var loadState: TodayLoadState = .loading
         var hasFinished = false
@@ -191,8 +205,10 @@ extension HomeKotobaViewModel {
         var entries: [StudyEntry] { currentKotobas.map(\.studyEntry) }
         
         var nextLevel: String? {
-            guard let index = progress?.kotobaIndex, index < allKotobas.count else { return nil }
-            return allKotobas[index].jlptLevel.rawValue
+            guard let index = progress?.kotobaIndex, index >= 0, index < allKotobas.count else { return nil }
+            return allKotobas[index...].first { candidate in
+                !(candidate.catalogID.map { savedCatalogIDs.contains($0) } ?? savedLegacyIDs.contains(candidate.id))
+            }?.jlptLevel.rawValue
         }
     }
     

@@ -35,9 +35,11 @@
 		81B5D390471709AFBC5AA13B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4C6C949132A982351E3479 /* HomeView.swift */; };
 		8D835D82EEC1903E27AA42E5 /* KotobaWordsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0678BB87734B6D56D1633 /* KotobaWordsCollectionView.swift */; };
 		8E60861A5D67C44E3AE2B398 /* BackupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E3DF5D63A8257A04CD183 /* BackupViewModel.swift */; };
+		946C73E17FD1A42DB59D150F /* DictionaryLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33228474C9562B4D2949AAE2 /* DictionaryLink.swift */; };
 		97A43F2EDB42E645C44F2D64 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F879680835C8B15B6792139C /* ReviewView.swift */; };
 		97B9AB8BF922155D1A160A5A /* WordsCollectionComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F45FE469469A77D661D1A0 /* WordsCollectionComposer.swift */; };
 		99D75FFBC93129F0AC066796 /* SwiftUIApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6742001A6CF8BA673F59032 /* SwiftUIApps.framework */; };
+		A5083E737F41D056C745202B /* DictionaryDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420E046A6A65DA9EC94A462 /* DictionaryDetailCard.swift */; };
 		A5C99C2A4CE2DEDB06E6BC01 /* AppNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403747D5C7948A848E7B186 /* AppNavigationStack.swift */; };
 		A6E79A6077A4F5AE2726D218 /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4F56643C685A5E990B9B2F /* BackupView.swift */; };
 		A6FCD90BDB11D7A6165FE8F3 /* AppsOnboardingComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78AC1087D801EEE8E6658EC /* AppsOnboardingComposer.swift */; };
@@ -47,6 +49,7 @@
 		ADB7CE649739343951343E53 /* ReviewSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CCF9B18E9DBE0B4F9A7C97 /* ReviewSelectionTests.swift */; };
 		AE501503D5CAFEA5DB82E445 /* SourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA71F40726E8CEC953BBC1E /* SourcesView.swift */; };
 		B195C46B534D67B20962D7F9 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B075D6A93FB2EC1AA4943 /* AppRouter.swift */; };
+		B4E744BCBA91AFEA05C97B9E /* DictionaryDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D77A7DB3A6835BA24948605 /* DictionaryDetailTests.swift */; };
 		B691590F89841BDF7A238E82 /* HomeKotobaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB4A8563248609B2C2D16 /* HomeKotobaView.swift */; };
 		BA19C19C0EC7FCB7E7BE2D95 /* MemoryAidCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14617845BBC5B5741803DB3 /* MemoryAidCard.swift */; };
 		BF98AA28E679A61FE3AA692A /* AppComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402194BEE69F5DCB174AD337 /* AppComposer.swift */; };
@@ -106,11 +109,13 @@
 		0B4B07D61FF3669B8089CCAE /* Kotoba.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kotoba.swift; sourceTree = "<group>"; };
 		0DB21F93DF29A7338329C7B6 /* Forest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forest.swift; sourceTree = "<group>"; };
 		1CC641CB2C333014E505EAA0 /* HomeKotobaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKotobaViewModel.swift; sourceTree = "<group>"; };
+		1D77A7DB3A6835BA24948605 /* DictionaryDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDetailTests.swift; sourceTree = "<group>"; };
 		29CD15AE860A52F9C68D9A56 /* ProfileComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposer.swift; sourceTree = "<group>"; };
 		2CD586A4D98613053F196A62 /* DetailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailComposer.swift; sourceTree = "<group>"; };
 		2E7E3DF5D63A8257A04CD183 /* BackupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewModel.swift; sourceTree = "<group>"; };
 		2FC8D2BBF13458D153E71740 /* ReviewSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSetupView.swift; sourceTree = "<group>"; };
 		30E597F32E699A545EEE18A8 /* ForestComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestComponents.swift; sourceTree = "<group>"; };
+		33228474C9562B4D2949AAE2 /* DictionaryLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryLink.swift; sourceTree = "<group>"; };
 		402194BEE69F5DCB174AD337 /* AppComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComposer.swift; sourceTree = "<group>"; };
 		40DA2C01017655EA53A83748 /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
 		443D5BF526A1F65E67CAC7B2 /* KanjiWordsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiWordsCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -142,6 +147,7 @@
 		B2CDDD57161E05ED309A694C /* SwiftUIAppsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUIAppsTests-Info.plist"; sourceTree = "<group>"; };
 		BCD5F083F7CA6F3EC1090EEB /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		C15A3514B14271BAF7F1ECF2 /* SwiftUIApps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUIApps-Info.plist"; sourceTree = "<group>"; };
+		C420E046A6A65DA9EC94A462 /* DictionaryDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDetailCard.swift; sourceTree = "<group>"; };
 		C503190D9D059842194B7FC9 /* SwiftUIAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAppsTests.swift; sourceTree = "<group>"; };
 		C6CCF9B18E9DBE0B4F9A7C97 /* ReviewSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSelectionTests.swift; sourceTree = "<group>"; };
 		D2C2DBE83D474FA121B011B2 /* HomeKanjiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKanjiView.swift; sourceTree = "<group>"; };
@@ -296,6 +302,7 @@
 				7CF2C97A4EEE511794A99FEF /* Composer */,
 				A908F7A01AAFBC995536E88E /* Dashboard */,
 				4CB1ECB33BAB3C1BF75C03B6 /* Details */,
+				B7A9AD61A010076E3CDE3339 /* Dictionary */,
 				B275DC75D0F5F511B47F0383 /* Home */,
 				04C303326E39E6CD4B3C02EA /* MemoryAid */,
 				5BD080A2E00A9EA8A8975D10 /* Onboarding */,
@@ -383,6 +390,15 @@
 			path = Backup;
 			sourceTree = "<group>";
 		};
+		B7A9AD61A010076E3CDE3339 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				C420E046A6A65DA9EC94A462 /* DictionaryDetailCard.swift */,
+				33228474C9562B4D2949AAE2 /* DictionaryLink.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
 		B8E76F3C41286296C26038DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				01E06014EF52489A7CAC9ED6 /* BackupViewModelTests.swift */,
+				1D77A7DB3A6835BA24948605 /* DictionaryDetailTests.swift */,
 				57EB23D9F87552CE52D68D47 /* FoundationMemoryAidGeneratorTests.swift */,
 				ACD6F4553541BCF608C888E5 /* MemoryAidViewModelTests.swift */,
 				C6CCF9B18E9DBE0B4F9A7C97 /* ReviewSelectionTests.swift */,
@@ -591,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52CE2D10F017C0D99D844FC4 /* BackupViewModelTests.swift in Sources */,
+				B4E744BCBA91AFEA05C97B9E /* DictionaryDetailTests.swift in Sources */,
 				3E303B8D3BBEEA9FB4C17D9F /* FoundationMemoryAidGeneratorTests.swift in Sources */,
 				A7F5AD73B88FFAD6B8B2C570 /* MemoryAidViewModelTests.swift in Sources */,
 				ADB7CE649739343951343E53 /* ReviewSelectionTests.swift in Sources */,
@@ -617,6 +635,8 @@
 				28B2DF8EE105981E5F80D6C3 /* DetailComposer.swift in Sources */,
 				4A383590E659A9613E5F6848 /* DetailView.swift in Sources */,
 				18E6297952ED5B7A943BE47B /* DetailViewModel.swift in Sources */,
+				A5083E737F41D056C745202B /* DictionaryDetailCard.swift in Sources */,
+				946C73E17FD1A42DB59D150F /* DictionaryLink.swift in Sources */,
 				E5D5F34B5D061EEF25B06CED /* HomeKanjiView.swift in Sources */,
 				D873029FAE54B44D51D78EF7 /* HomeKanjiViewModel.swift in Sources */,
 				B691590F89841BDF7A238E82 /* HomeKotobaView.swift in Sources */,

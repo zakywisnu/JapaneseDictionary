@@ -5,15 +5,20 @@ public struct CatalogSnapshot {
     public let fingerprint: String
     public let wordCount: Int
     public let kanjiCount: Int
+    public let version: Int
+    public let wordIdentities: [String?]
 
     // The caller supplies the exact Add next order; bundle UUIDs are regenerated.
-    public init(words: [KotobaDataModel], kanjis: [KanjiDataModel]) {
+    public init(words: [KotobaDataModel], kanjis: [KanjiDataModel], version: Int = 1) {
+        self.version = version
+        wordIdentities = words.map(\.catalogID)
         wordCount = words.count
         kanjiCount = kanjis.count
         let semanticWords = words.map { model -> BackupWord in
             var value = BackupWord(model)
             value.id = ""; value.dateAdded = nil; value.addedIndex = nil
             value.memoryAid = nil
+            if version == 1 { value.catalogID = nil }
             return value
         }
         let semanticKanjis = kanjis.map { model -> BackupKanji in
@@ -40,7 +45,7 @@ public enum BackupError: LocalizedError {
         switch self {
         case .tooLarge: return "This backup exceeds the 20 MiB limit. Choose a smaller backup file."
         case .corrupt: return "This file is not a readable study backup. Choose another JSON backup."
-        case .unsupportedVersion: return "This backup uses an unsupported format. Choose a version 1 backup."
+        case .unsupportedVersion: return "This backup uses an unsupported format. Choose a backup compatible with this vocabulary catalog."
         case .foreignCatalog: return "This backup uses a different dictionary order. Restore it with the matching app catalog."
         case .invalid(let field): return "This backup contains invalid \(field). Choose another backup."
         case .multipleProgress: return "The store contains multiple progress records. Resolve them before exporting."
@@ -61,7 +66,7 @@ public enum BackupValidator {
     }
 
     public static func validate(_ backup: StudyBackup, catalog: CatalogSnapshot) throws {
-        guard backup.formatVersion == 1 else { throw BackupError.unsupportedVersion }
+        guard backup.formatVersion == catalog.version else { throw BackupError.unsupportedVersion }
         guard backup.catalogFingerprint == catalog.fingerprint else { throw BackupError.foreignCatalog }
         try date(backup.createdAt)
         // Saved content requires its original Add next indexes and cumulative counters.
@@ -72,6 +77,12 @@ public enum BackupValidator {
         try unique(backup.kanjis.map(\.id), field: "kanji IDs")
         try unique(backup.reviews.map { $0.id.key }, field: "review IDs")
         for word in backup.words {
+            if catalog.version == 2 {
+                if let identity = word.catalogID {
+                    guard let index = word.addedIndex, index >= 0, index < catalog.wordCount,
+                          catalog.wordIdentities[index] == identity else { throw BackupError.invalid("word catalog anchors") }
+                } else if word.addedIndex != nil { throw BackupError.invalid("retired word catalog anchors") }
+            }
             if let advice = word.memoryAid {
                 guard advice.explanation.count <= 600, advice.mnemonic.count <= 600,
                       (try? advice.validated()) != nil else { throw BackupError.invalid("memory suggestions") }
@@ -85,6 +96,10 @@ public enum BackupValidator {
             if let added = kanji.dateAdded { try date(added) }
         }
         if let progress = backup.progress {
+            if catalog.version == 2 && progress.catalogVersion != 2 { throw BackupError.invalid("catalog version") }
+            if catalog.version == 1 && progress.catalogVersion != nil && progress.catalogVersion != 1 {
+                throw BackupError.invalid("legacy catalog version")
+            }
             guard !progress.id.isEmpty, progress.kanjiProgress >= 0, progress.kotobaProgress >= 0 else { throw BackupError.invalid("progress counters") }
             try index(progress.kanjiIndex, count: catalog.kanjiCount, endAllowed: true)
             try index(progress.kotobaIndex, count: catalog.wordCount, endAllowed: true)

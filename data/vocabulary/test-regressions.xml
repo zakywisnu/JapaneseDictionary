@@ -1,0 +1,319 @@
+<JMdict><entry>
+<ent_seq>1000920</ent_seq>
+<r_ele>
+<reb>いらっしゃい</reb>
+<re_pri>spec1</re_pri>
+</r_ele>
+<r_ele>
+<reb>いらしゃい</reb>
+<re_inf>word containing irregular kana usage</re_inf>
+</r_ele>
+<sense>
+<pos>interjection (kandoushi)</pos>
+<xref>いらっしゃる・1</xref>
+<misc>honorific or respectful (sonkeigo) language</misc>
+<s_inf>used as a polite imperative</s_inf>
+<gloss xml:lang="eng">come</gloss>
+<gloss xml:lang="eng">go</gloss>
+<gloss xml:lang="eng">stay</gloss>
+</sense>
+<sense>
+<pos>interjection (kandoushi)</pos>
+<xref>いらっしゃいませ</xref>
+<gloss xml:lang="eng">welcome</gloss>
+</sense>
+</entry><entry>
+<ent_seq>1046430</ent_seq>
+<r_ele>
+<reb>グラス</reb>
+<re_pri>gai1</re_pri>
+<re_pri>ichi1</re_pri>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">glass (drinking vessel)</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<xref>ガラス</xref>
+<gloss xml:lang="eng">glass (material)</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">glasses (eyewear)</gloss>
+</sense>
+</entry><entry>
+<ent_seq>1099230</ent_seq>
+<r_ele>
+<reb>バット</reb>
+<re_pri>gai1</re_pri>
+<re_pri>ichi1</re_pri>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<field>sports</field>
+<gloss xml:lang="eng">bat (in baseball, cricket, etc.)</gloss>
+</sense>
+</entry><entry>
+<ent_seq>1106010</ent_seq>
+<r_ele>
+<reb>ビル</reb>
+<re_pri>gai1</re_pri>
+<re_pri>ichi1</re_pri>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<xref>ビルディング</xref>
+<misc>abbreviation</misc>
+<gloss xml:lang="eng">multi-floor building</gloss>
+<gloss xml:lang="eng">multi-storey building</gloss>
+</sense>
+</entry><entry>
+<ent_seq>1165670</ent_seq>
+<k_ele>
+<keb>一杯</keb>
+<ke_pri>ichi1</ke_pri>
+<ke_pri>news1</ke_pri>
+<ke_pri>nf15</ke_pri>
+</k_ele>
+<k_ele>
+<keb>１杯</keb>
+</k_ele>
+<k_ele>
+<keb>一盃</keb>
+<ke_inf>word containing out-dated kanji or kanji usage</ke_inf>
+</k_ele>
+<k_ele>
+<keb>一ぱい</keb>
+<ke_inf>search-only kanji form</ke_inf>
+</k_ele>
+<k_ele>
+<keb>１ぱい</keb>
+<ke_inf>search-only kanji form</ke_inf>
+</k_ele>
+<r_ele>
+<reb>いっぱい</reb>
+<re_pri>ichi1</re_pri>
+<re_pri>news1</re_pri>
+<re_pri>nf15</re_pri>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<pos>nouns which may take the genitive case particle 'no'</pos>
+<gloss xml:lang="eng">one cup (of)</gloss>
+<gloss xml:lang="eng">one glass (of)</gloss>
+<gloss xml:lang="eng">one bowl (of)</gloss>
+<gloss xml:lang="eng">cupful</gloss>
+<gloss xml:lang="eng">glassful</gloss>
+<gloss xml:lang="eng">bowlful</gloss>
+<gloss xml:lang="eng">spoonful</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">one drink (of alcohol)</gloss>
+</sense>
+<sense>
+<pos>adjectival nouns or quasi-adjectives (keiyodoshi)</pos>
+<pos>nouns which may take the genitive case particle 'no'</pos>
+<pos>noun, used as a suffix</pos>
+<misc>word usually written using kana alone</misc>
+<gloss xml:lang="eng">full</gloss>
+<gloss xml:lang="eng">filled (with)</gloss>
+<gloss xml:lang="eng">brimming (with)</gloss>
+<gloss xml:lang="eng">crowded</gloss>
+<gloss xml:lang="eng">packed</gloss>
+</sense>
+<sense>
+<pos>adverb (fukushi)</pos>
+<pos>noun, used as a suffix</pos>
+<misc>word usually written using kana alone</misc>
+<gloss xml:lang="eng">fully</gloss>
+<gloss xml:lang="eng">to capacity</gloss>
+<gloss xml:lang="eng">to the maximum</gloss>
+<gloss xml:lang="eng">as much as possible</gloss>
+</sense>
+<sense>
+<pos>adverb (fukushi)</pos>
+<misc>word usually written using kana alone</misc>
+<gloss xml:lang="eng">a lot</gloss>
+<gloss xml:lang="eng">much</gloss>
+<gloss xml:lang="eng">many</gloss>
+</sense>
+<sense>
+<pos>noun, used as a suffix</pos>
+<pos>adverb (fukushi)</pos>
+<misc>word usually written using kana alone</misc>
+<gloss xml:lang="eng">all of ...</gloss>
+<gloss xml:lang="eng">the entire ...</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">one (squid, octopus, crab, etc.)</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">one (boat)</gloss>
+</sense>
+</entry><entry>
+<ent_seq>1202450</ent_seq>
+<k_ele>
+<keb>開ける</keb>
+<ke_pri>ichi1</ke_pri>
+</k_ele>
+<k_ele>
+<keb>空ける</keb>
+<ke_pri>ichi1</ke_pri>
+</k_ele>
+<k_ele>
+<keb>明ける</keb>
+<ke_pri>ichi1</ke_pri>
+</k_ele>
+<r_ele>
+<reb>あける</reb>
+<re_pri>ichi1</re_pri>
+</r_ele>
+<sense>
+<stagk>開ける</stagk>
+<pos>Ichidan verb</pos>
+<pos>transitive verb</pos>
+<gloss xml:lang="eng">to open (a door, etc.)</gloss>
+<gloss xml:lang="eng">to unwrap (e.g. parcel, package)</gloss>
+<gloss xml:lang="eng">to unlock</gloss>
+</sense>
+<sense>
+<stagk>開ける</stagk>
+<pos>Ichidan verb</pos>
+<pos>transitive verb</pos>
+<gloss xml:lang="eng">to open (for business, etc.)</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>transitive verb</pos>
+<s_inf>esp. 空ける</s_inf>
+<gloss xml:lang="eng">to empty</gloss>
+<gloss xml:lang="eng">to remove</gloss>
+<gloss xml:lang="eng">to make space</gloss>
+<gloss xml:lang="eng">to make room</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>transitive verb</pos>
+<s_inf>esp. 空ける</s_inf>
+<gloss xml:lang="eng">to move out</gloss>
+<gloss xml:lang="eng">to clear out</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>transitive verb</pos>
+<s_inf>esp. 空ける</s_inf>
+<gloss xml:lang="eng">to be away from (e.g. one's house)</gloss>
+<gloss xml:lang="eng">to leave (temporarily)</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>intransitive verb</pos>
+<s_inf>esp. 明ける</s_inf>
+<gloss xml:lang="eng">to dawn</gloss>
+<gloss xml:lang="eng">to grow light</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>intransitive verb</pos>
+<s_inf>esp. 明ける</s_inf>
+<gloss xml:lang="eng">to end (of a period, season)</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>intransitive verb</pos>
+<s_inf>esp. 明ける</s_inf>
+<gloss xml:lang="eng">to begin (of the New Year)</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>intransitive verb</pos>
+<s_inf>esp. 明ける</s_inf>
+<gloss xml:lang="eng">to leave (one's schedule) open</gloss>
+<gloss xml:lang="eng">to make time (for)</gloss>
+</sense>
+<sense>
+<pos>Ichidan verb</pos>
+<pos>intransitive verb</pos>
+<gloss xml:lang="eng">to make (a hole)</gloss>
+<gloss xml:lang="eng">to open up (a hole)</gloss>
+</sense>
+</entry><entry>
+<ent_seq>2478630</ent_seq>
+<r_ele>
+<reb>バッド</reb>
+</r_ele>
+<r_ele>
+<reb>バット</reb>
+<re_inf>search-only kana form</re_inf>
+</r_ele>
+<sense>
+<pos>noun or verb acting prenominally</pos>
+<gloss xml:lang="eng">bad</gloss>
+</sense>
+</entry><entry>
+<ent_seq>2843630</ent_seq>
+<r_ele>
+<reb>バット</reb>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<lsource xml:lang="eng">vat</lsource>
+<gloss xml:lang="eng">shallow tray (usu. steel or plastic)</gloss>
+</sense>
+</entry><entry>
+<ent_seq>2847461</ent_seq>
+<r_ele>
+<reb>グラス</reb>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">grass</gloss>
+</sense>
+</entry><entry>
+<ent_seq>2856006</ent_seq>
+<r_ele>
+<reb>ビル</reb>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">bill</gloss>
+<gloss xml:lang="eng">check</gloss>
+<gloss xml:lang="eng">invoice</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<gloss xml:lang="eng">bill</gloss>
+<gloss xml:lang="eng">promissory note</gloss>
+</sense>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<field>law</field>
+<gloss xml:lang="eng">bill</gloss>
+<gloss xml:lang="eng">measure</gloss>
+</sense>
+</entry><entry>
+<ent_seq>2864894</ent_seq>
+<k_ele>
+<keb>ＶＡＴ</keb>
+</k_ele>
+<r_ele>
+<reb>ブイ・エー・ティー</reb>
+</r_ele>
+<r_ele>
+<reb>バット</reb>
+</r_ele>
+<r_ele>
+<reb>ブイエーティー</reb>
+<re_inf>search-only kana form</re_inf>
+</r_ele>
+<sense>
+<pos>noun (common) (futsuumeishi)</pos>
+<xref>付加価値税</xref>
+<gloss xml:lang="eng">value-added tax</gloss>
+<gloss xml:lang="eng">VAT</gloss>
+</sense>
+</entry></JMdict>

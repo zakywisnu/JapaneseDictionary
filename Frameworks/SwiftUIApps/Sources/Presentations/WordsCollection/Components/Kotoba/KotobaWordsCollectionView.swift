@@ -20,6 +20,7 @@ struct KotobaWordsCollectionView: View {
             entries: viewModel.state.kotobas.map(\.studyEntry),
             loadState: viewModel.state.loadState,
             query: query,
+            alternateSearchTerms: viewModel.state.alternateSearchTerms,
             onDelete: { viewModel.send(.didTapDelete($0.id)) },
             onSelect: { entry in
                 guard let kotoba = viewModel.state.kotobas.first(where: { $0.id == entry.id }) else { return }

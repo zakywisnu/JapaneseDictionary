@@ -22,16 +22,18 @@ private struct DetailCompositionView: View {
         let viewModel = DetailViewModel(
             config,
             deleteKanjiUseCase: composer.useCase.deleteKanjiUseCase,
-            deleteKotobaUseCase: composer.useCase.deleteKotobaUseCase
+            deleteKotobaUseCase: composer.useCase.deleteKotobaUseCase,
+            updateKotobaUseCase: composer.useCase.updateKotobaUseCase
         )
-        let memoryAid = config.kanji == nil ? config.kotoba.map { kotoba in
+        let factory: (Kotoba) -> MemoryAidViewModel = { kotoba in
             MemoryAidViewModel(
                 word: MemoryAidWord(id: kotoba.id, headword: kotoba.kanji, reading: kotoba.furigana,
                                     meanings: kotoba.english, level: kotoba.jlptLevel.rawValue),
                 repository: StandardMemoryAidRepository(store: composer.store),
                 generator: MemoryAidGeneratorFactory.make()
             )
-        } : nil
-        DetailView(viewModel: viewModel, examples: composer.examples, memoryAid: memoryAid)
+        }
+        let memoryAid = config.kanji == nil ? config.kotoba.map(factory) : nil
+        DetailView(viewModel: viewModel, examples: composer.examples, memoryAid: memoryAid, makeMemoryAid: factory)
     }
 }

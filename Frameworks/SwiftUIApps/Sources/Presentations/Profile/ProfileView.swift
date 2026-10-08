@@ -105,7 +105,7 @@ public struct ProfileView: View {
             lastAdded: progress.kanjiProgress > 0 ? progress.lastKanjiUpdated : nil
         )
         
-        Text("Counts show items in your collection. Progress is saved on this iPhone only. Deleting the app deletes it.")
+        Text("Counts include preserved words from older lists. The current study list size is shown separately. Progress is saved on this iPhone only. Deleting the app deletes it.")
             .font(.footnote)
             .foregroundStyle(Forest.inkMuted)
     }
@@ -120,13 +120,18 @@ public struct ProfileView: View {
                 Text(added.formatted())
                     .font(.system(.largeTitle, design: .rounded).weight(.semibold))
                     .foregroundStyle(Forest.ink)
-                Text("of \(total.formatted())")
+                Text(noun == "Words" ? "collected" : "of \(total.formatted())")
                     .font(.subheadline)
                     .foregroundStyle(Forest.inkMuted)
             }
             .accessibilityElement(children: .combine)
             
-            ProgressTrack(value: total > 0 ? Double(added) / Double(total) : 0)
+            if noun == "Words" {
+                labeled("Current study list", value: "\(total.formatted()) words")
+            }
+            if noun != "Words" {
+                ProgressTrack(value: total > 0 ? Double(added) / Double(total) : 0)
+            }
             
             let layout = dynamicTypeSize.isAccessibilitySize
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.m))

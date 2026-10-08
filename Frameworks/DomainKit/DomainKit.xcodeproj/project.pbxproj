@@ -20,8 +20,10 @@
 		5D0B411984FD94F4068C564C /* ReviewSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385DC1A8E6C7C636D3837DD5 /* ReviewSchedulerTests.swift */; };
 		61EB31AE6B403CC7152C7308 /* ExportBackupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BA49BABA249603DC5C0D84 /* ExportBackupUseCase.swift */; };
 		67F85A613785C61439C971E1 /* GetKanjiDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCABEA77221A99635C88804 /* GetKanjiDataUseCase.swift */; };
+		77BD3E30DF4F9B7DBE25B800 /* MemoryAidPromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B227E6B71C8B93C6F894E /* MemoryAidPromptTests.swift */; };
 		816C8683135AB3F7E9B2936C /* UpdateProgressUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D1854968FDAA6EFC9C14F /* UpdateProgressUserDefaults.swift */; };
 		8AF8423673BE38C4FD88B819 /* AddKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83A18C3D057529AD8686F8E /* AddKotobaUseCase.swift */; };
+		8BC5971C1C8F0EB1AFCBB049 /* MemoryAidGenerating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C089FFB24476CC11299E6C /* MemoryAidGenerating.swift */; };
 		906468BBD38EE42396A3A771 /* BackupUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC0AA0DB4698CB8941593C3 /* BackupUseCaseTests.swift */; };
 		90BD892F4F17EC07D1682A49 /* UpdateWordsProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */; };
 		9294605A11D651383A8497F5 /* StudyDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945A5DE39455D9FE70B05A09 /* StudyDeletionTests.swift */; };
@@ -36,6 +38,7 @@
 		BDD3E85FA7828FC80C232C21 /* ReviewScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2E165617AE5CB6E96B4A6 /* ReviewScheduler.swift */; };
 		C81461CD8AEFF04FA42E3CEB /* GetDueReviewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7C6E576FEF326F416C52BC /* GetDueReviewsUseCase.swift */; };
 		DF6B54F43BED24A8D4D7E358 /* UpdateKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */; };
+		E555179AAC7214125234E12C /* MemoryAidPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064CCBEB185A35FA6915C0E /* MemoryAidPrompt.swift */; };
 		E84F3B2C9B11AAD7633A5FFC /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BB86EFCCE3EB19685E0DD8 /* DataKit.framework */; };
 		F0F05127479E2FFA49FCB139 /* GetKotobaDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */; };
 		FFA612976E12CD4F166F0F31 /* AddKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B9BA6310A23F16C5788BF8 /* AddKanjiUseCase.swift */; };
@@ -77,6 +80,7 @@
 /* Begin PBXFileReference section */
 		0071615F2DF3A6CC4A8CD62D /* GetAllKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKotobaUseCase.swift; sourceTree = "<group>"; };
 		0CA14204CCA1AC1BE6039D52 /* UpdateKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKanjiUseCase.swift; sourceTree = "<group>"; };
+		13C089FFB24476CC11299E6C /* MemoryAidGenerating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidGenerating.swift; sourceTree = "<group>"; };
 		14E2E165617AE5CB6E96B4A6 /* ReviewScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScheduler.swift; sourceTree = "<group>"; };
 		20EF01DBE45DD99259AE4251 /* RecallRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallRating.swift; sourceTree = "<group>"; };
 		289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKanjiUseCase.swift; sourceTree = "<group>"; };
@@ -100,9 +104,11 @@
 		A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKotobaUseCase.swift; sourceTree = "<group>"; };
 		A12D08EBF5524A9DC58E9157 /* UpdateWordsProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWordsProgressUseCase.swift; sourceTree = "<group>"; };
 		AC3E2D2828F2F105BCA4AB8E /* DomainKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B12B227E6B71C8B93C6F894E /* MemoryAidPromptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidPromptTests.swift; sourceTree = "<group>"; };
 		B6B51F9648A40FAEAD424B00 /* GetKanjiWaniKaniUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKanjiWaniKaniUseCase.swift; sourceTree = "<group>"; };
 		C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteKanjiUseCase.swift; sourceTree = "<group>"; };
 		D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDetailUseCase.swift; sourceTree = "<group>"; };
+		D064CCBEB185A35FA6915C0E /* MemoryAidPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAidPrompt.swift; sourceTree = "<group>"; };
 		D32EFBBA61E5FE244C57DFF7 /* RecordReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReviewUseCase.swift; sourceTree = "<group>"; };
 		DD64E77F305A0797D38EC789 /* DomainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DomainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C39837DA9C0326522F1EB7 /* GetWordsProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWordsProgressUseCase.swift; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 			children = (
 				4DC0AA0DB4698CB8941593C3 /* BackupUseCaseTests.swift */,
 				7AB85F1344950023F05DFAA7 /* DomainKitTests.swift */,
+				B12B227E6B71C8B93C6F894E /* MemoryAidPromptTests.swift */,
 				7605A3B922BB0E97348D3841 /* PracticeQueueTests.swift */,
 				385DC1A8E6C7C636D3837DD5 /* ReviewSchedulerTests.swift */,
 				945A5DE39455D9FE70B05A09 /* StudyDeletionTests.swift */,
@@ -202,10 +209,20 @@
 			path = Backup;
 			sourceTree = "<group>";
 		};
+		956F063F64A046CFAF8CCBDC /* MemoryAid */ = {
+			isa = PBXGroup;
+			children = (
+				13C089FFB24476CC11299E6C /* MemoryAidGenerating.swift */,
+				D064CCBEB185A35FA6915C0E /* MemoryAidPrompt.swift */,
+			);
+			path = MemoryAid;
+			sourceTree = "<group>";
+		};
 		AB0E4ACB98106CB0A1FC0D01 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				9103164EF0D7219CD4AE81E4 /* Backup */,
+				956F063F64A046CFAF8CCBDC /* MemoryAid */,
 				6C7A5754EE473C71EBDDD5B2 /* Review */,
 				B1D325C5B0D1CAE56EEF1071 /* UseCase */,
 			);
@@ -375,6 +392,8 @@
 			files = (
 				61EB31AE6B403CC7152C7308 /* ExportBackupUseCase.swift in Sources */,
 				3F413F02D585A64BF3D254C7 /* RestoreBackupUseCase.swift in Sources */,
+				8BC5971C1C8F0EB1AFCBB049 /* MemoryAidGenerating.swift in Sources */,
+				E555179AAC7214125234E12C /* MemoryAidPrompt.swift in Sources */,
 				C81461CD8AEFF04FA42E3CEB /* GetDueReviewsUseCase.swift in Sources */,
 				49C081D6CB0759C0A24815D0 /* PracticeQueue.swift in Sources */,
 				1BAA6469A0DF986BC362571C /* RecallRating.swift in Sources */,
@@ -406,6 +425,7 @@
 			files = (
 				906468BBD38EE42396A3A771 /* BackupUseCaseTests.swift in Sources */,
 				0F54E3717B6E4EEED3D53FCA /* DomainKitTests.swift in Sources */,
+				77BD3E30DF4F9B7DBE25B800 /* MemoryAidPromptTests.swift in Sources */,
 				AEB2988166800F826430FF58 /* PracticeQueueTests.swift in Sources */,
 				5D0B411984FD94F4068C564C /* ReviewSchedulerTests.swift in Sources */,
 				9294605A11D651383A8497F5 /* StudyDeletionTests.swift in Sources */,

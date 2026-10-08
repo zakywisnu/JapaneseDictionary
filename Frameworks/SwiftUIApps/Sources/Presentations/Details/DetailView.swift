@@ -10,13 +10,16 @@ import DataKit
 
 public struct DetailView: View {
     @EnvironmentObject var router: AppRouter
+    @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel: DetailViewModel
+    @State private var memoryAid: MemoryAidViewModel?
     @State private var isConfirmingDelete = false
     private let examples: ExampleRepository
     
-    public init(viewModel: DetailViewModel, examples: ExampleRepository = .bundled()) {
+    public init(viewModel: DetailViewModel, examples: ExampleRepository = .bundled(), memoryAid: MemoryAidViewModel? = nil) {
         self.examples = examples
         self.viewModel = viewModel
+        _memoryAid = State(initialValue: memoryAid)
     }
     
     public var body: some View {
@@ -39,6 +42,9 @@ public struct DetailView: View {
                     )) {
                         ExampleSentenceCard(example: example)
                     }
+                    if let memoryAid {
+                        MemoryAidCard(viewModel: memoryAid)
+                    }
                 }
             }
             .padding(Forest.Space.l)
@@ -46,6 +52,12 @@ public struct DetailView: View {
         .background(Forest.canvas)
         .navigationTitle(viewModel.state.type.title)
         .navigationBarTitleDisplayMode(.inline)
+        .task { await memoryAid?.send(.load) }
+        .onAppear { Task { await memoryAid?.send(.refreshAvailability) } }
+        .onDisappear { memoryAid?.cancel() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await memoryAid?.send(.refreshAvailability) } }
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Remove from collection", systemImage: "trash", role: .destructive) {

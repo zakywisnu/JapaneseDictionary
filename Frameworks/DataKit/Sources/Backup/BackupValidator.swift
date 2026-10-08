@@ -13,6 +13,7 @@ public struct CatalogSnapshot {
         let semanticWords = words.map { model -> BackupWord in
             var value = BackupWord(model)
             value.id = ""; value.dateAdded = nil; value.addedIndex = nil
+            value.memoryAid = nil
             return value
         }
         let semanticKanjis = kanjis.map { model -> BackupKanji in
@@ -71,6 +72,10 @@ public enum BackupValidator {
         try unique(backup.kanjis.map(\.id), field: "kanji IDs")
         try unique(backup.reviews.map { $0.id.key }, field: "review IDs")
         for word in backup.words {
+            if let advice = word.memoryAid {
+                guard advice.explanation.count <= 600, advice.mnemonic.count <= 600,
+                      (try? advice.validated()) != nil else { throw BackupError.invalid("memory suggestions") }
+            }
             try index(word.addedIndex, count: catalog.wordCount, endAllowed: false)
             if let added = word.dateAdded { try date(added) }
         }

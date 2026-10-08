@@ -49,6 +49,11 @@ public final class StandardKotobaRepository: KotobaRepository {
     public func update(_ param: KotobaDataModel) throws {
         let descriptor = getDescriptor(with: param.id)
         if let data = try context.fetch(descriptor).first {
+            if data.kanji != param.kanji || data.furigana != param.furigana ||
+               data.english.map(\.value) != param.english.map(\.value) || data.jlptLevel != param.jlptLevel {
+                data.memoryExplanation = nil
+                data.memoryMnemonic = nil
+            }
             data.english = param.english
             data.furigana = param.furigana
             data.kanji = param.kanji

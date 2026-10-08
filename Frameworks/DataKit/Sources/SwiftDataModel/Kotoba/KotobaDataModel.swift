@@ -20,6 +20,8 @@ public final class KotobaDataModel: Identifiable, CSVMappable {
     public var jlptLevel: Level
     public var dateAdded: Date?
     public var addedIndex: Int?
+    public var memoryExplanation: String? = nil
+    public var memoryMnemonic: String? = nil
     
     public init(
         id: String,
@@ -28,7 +30,9 @@ public final class KotobaDataModel: Identifiable, CSVMappable {
         english: [ArrayString],
         jlptLevel: Level,
         dateAdded: Date?,
-        addedIndex: Int?
+        addedIndex: Int?,
+        memoryExplanation: String? = nil,
+        memoryMnemonic: String? = nil
     ) {
         self.id = id
         self.kanji = kanji
@@ -37,6 +41,8 @@ public final class KotobaDataModel: Identifiable, CSVMappable {
         self.jlptLevel = jlptLevel
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
+        self.memoryExplanation = memoryExplanation
+        self.memoryMnemonic = memoryMnemonic
     }
     
     public convenience init?(csvRow: [String]) {

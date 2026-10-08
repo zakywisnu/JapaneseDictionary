@@ -37,14 +37,14 @@
 
 Preserve the previously chosen phase-by-phase execution with scoped orchestration where helpful. Coordinator owns shared StudyStore/BackupRepository/BackupValidator/AppComposer/routing and all generation/builds; workers receive non-overlapping model/repository/UI/tooling responsibilities. A focused reviewer checks each phase’s persistence/recall/backup risks before proceeding. Do not run competing xcodebuild/Tuist operations.
 
-- [ ] Execute list phase and its store preservation/backup gate.
-- [ ] Execute pronunciation phase and record actual audio availability/runtime checks.
-- [ ] Execute daily goals and due/practice retry/idempotence gate.
-- [ ] Execute sentence preparation and deliver the pending human worksheet.
+- [x] Execute list phase and its store preservation/backup gate.
+- [x] Execute pronunciation phase and record actual audio availability/runtime checks.
+- [x] Execute daily goals and due/practice retry/idempotence gate.
+- [x] Execute sentence preparation and deliver the pending human worksheet.
 - [ ] Publish sentences only if human decisions arrive; otherwise mark the publication dependency explicitly.
-- [ ] Whole-branch review, full workspace suite, all Python data regressions and Release build.
-- [ ] Record evidence in docs/implementation/study-features-expansion-verification.md, including light/dark/XXXL and simulator automation limits.
-- [ ] Keep tested commits local; Git push/PR/merge is a subsequent delivery step.
+- [x] Whole-branch review, full workspace suite, all Python data regressions and Release build.
+- [x] Record evidence in docs/implementation/study-features-expansion-verification.md, including light/dark/XXXL and simulator automation limits.
+- [x] Keep tested commits local; Git push/PR/merge is a subsequent delivery step.
 
 ## Final preservation gate
 
@@ -54,7 +54,7 @@ Compare an existing disk store before/after schema upgrade, list assignment, a l
 
 All four approved phases have exact files, interfaces, failure-first examples and verification gates. Shared-format fields are introduced together, preventing phase-local exporters from dropping later goal/history data. Word-only lists, explicit kanji readings, default goal 10, local-day semantics and human publication requirements are preserved. No new tab, backend, notification, artificial refresh delay or mastery statistic is planned.
 
-Status: written and self-reviewed; awaiting user review of this execution plan before product implementation.
+Status: implemented and verified. Sentence publication remains dependent on fluent human decisions; pending worksheet and publication tooling delivered. Evidence: ../../implementation/study-features-expansion-verification.md.
 
 ## Verification command convention
 

@@ -68,6 +68,29 @@ final class BackupUseCaseTests: XCTestCase {
         XCTAssertEqual(shadow.lastKotobaUpdated, date)
     }
 
+    func testLegacyRestoreShadowUsesConvertedCatalogCursor() throws {
+        let suite = UUID().uuidString
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let store = try StudyStore(inMemory: true)
+        let catalog = CatalogSnapshot(words: [], kanjis: [], version: 2)
+        let repository = BackupRepository(store: store, catalog: catalog, recoveryURL: recoveryURL(),
+            legacyConverter: { original in
+                var converted = original
+                converted.formatVersion = 2; converted.catalogFingerprint = catalog.fingerprint
+                converted.progress?.kotobaIndex = 0; converted.progress?.kotobaLevel = .n5
+                converted.progress?.catalogVersion = 2
+                return converted
+            })
+        let backup = StudyBackup(createdAt: Date(), catalogFingerprint: "old", words: [], kanjis: [],
+            progress: .init(id: "progress", kanjiProgress: 0, kotobaProgress: 0, kanjiLevel: .n5,
+                kotobaLevel: .n2, kanjiIndex: 0, kotobaIndex: 99, lastKotobaUpdated: Date(), lastKanjiUpdated: Date()),
+            reviews: [], preferences: .init())
+        try RestoreBackupUseCase(repository: repository, defaults: defaults).execute(backup)
+        let shadow = try JSONDecoder().decode(WordsProgressParam.self, from: XCTUnwrap(defaults.data(forKey: "wordsProgress")))
+        XCTAssertEqual(shadow.kotobaIndex, 0); XCTAssertEqual(shadow.kotobaLevel.rawValue, "N5")
+    }
+
     private enum Failure: Error { case injected }
     private func recoveryURL() -> URL { FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + ".json") }
 }

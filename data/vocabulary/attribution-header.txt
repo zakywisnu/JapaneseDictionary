@@ -1,0 +1,36 @@
+言葉の森 offline vocabulary catalog, version 2
+
+Dictionary facts: JMdict English, created 2026-10-07.
+Copyright Electronic Dictionary Research and Development Group (EDRDG).
+JMdict is the property of the EDRDG and is used in conformance with its licence.
+Dictionary project: https://www.edrdg.org/jmdict/j_jmdict.html
+EDRDG licence: https://www.edrdg.org/edrdg/licence.html
+
+Community JLPT placements: OpenJLPT contributors, commit
+0d1d3410bec90bd4098a7c72de820543cb4f707c, incorporating Jonathan Waller's
+JLPT Resources (CC BY), https://www.tanos.co.uk/jlpt/.
+OpenJLPT: https://github.com/evanclan/OpenJLPT
+
+Changes by 言葉の森: merged spelling/reading candidates from the original
+study list and OpenJLPT, verified pairs and intended English senses against
+JMdict, corrected reviewed mappings, excluded unresolved candidates, removed
+duplicate lexical sense identities, selected the intended matched study sense,
+and retained full dictionary senses.
+The original study list's source and licence were undocumented in this repo;
+its English definitions are not included as definitions in this new catalog.
+Dictionary definitions in this catalog come from the pinned JMdict snapshot.
+Original list placement estimates are retained only for verified candidates
+without an OpenJLPT placement. Reviewed overrides take precedence.
+
+JLPT levels are community estimates, not official exam vocabulary coverage.
+Priority labels are source dictionary markers, not app-measured frequency.
+No OpenJLPT/Tatoeba example sentences or KANJIDIC2 data are included here.
+
+This derived vocabulary dataset is distributed under CC BY-SA 4.0.
+License: https://creativecommons.org/licenses/by-sa/4.0/
+This data licence applies to the vocabulary dataset, not to application code.
+Source snapshot SHA-256 hashes, per-entry placement and matching decisions,
+and exclusions are recorded in data/vocabulary in the source distribution.
+
+Full CC BY-SA 4.0 licence text follows.
+

@@ -12,6 +12,7 @@ import SwiftData
 public final class WordsProgressModel: Identifiable {
     @Attribute(.unique)
     public var id: String
+    public var catalogVersion: Int? = nil
     public var kanjiProgress: Int
     public var kanjiIndex: Int
     public var kanjiLevel: Level
@@ -30,9 +31,11 @@ public final class WordsProgressModel: Identifiable {
         kanjiIndex: Int,
         kotobaIndex: Int,
         lastKotobaUpdated: Date,
-        lastKanjiUpdated: Date
+        lastKanjiUpdated: Date,
+        catalogVersion: Int? = nil
     ) {
         self.id = id
+        self.catalogVersion = catalogVersion
         self.kanjiProgress = kanjiProgress
         self.kotobaProgress = kotobaProgress
         self.kanjiLevel = kanjiLevel

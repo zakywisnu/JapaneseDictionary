@@ -30,19 +30,26 @@ public protocol StudyMutationRepository {
 }
 
 public final class StandardStudyMutationRepository: StudyMutationRepository {
+    private let catalogLevel: (String) throws -> String?
+    private let prepare: () throws -> Void
     private let contextProvider: () -> ModelContext
     private let saveContext: (ModelContext) throws -> Void
 
-    public init(context: ModelContext, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
+    public init(context: ModelContext, prepare: @escaping () throws -> Void = {}, catalogLevel: @escaping (String) throws -> String? = { try VocabularyCatalogRepository.bundled().word(id: $0)?.level }, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
+        self.prepare = prepare
+        self.catalogLevel = catalogLevel
         contextProvider = { context }
         saveContext = save
     }
-    public init(store: StudyStore, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
+    public init(store: StudyStore, prepare: @escaping () throws -> Void = {}, catalogLevel: @escaping (String) throws -> String? = { try VocabularyCatalogRepository.bundled().word(id: $0)?.level }, save: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
+        self.prepare = prepare
+        self.catalogLevel = catalogLevel
         contextProvider = { store.context }
         saveContext = save
     }
 
     public func delete(id: SavedStudyID) throws -> StudyProgress {
+        try prepare()
         let context = contextProvider()
         let previousAutosave = context.autosaveEnabled
         context.autosaveEnabled = false
@@ -54,8 +61,20 @@ public final class StandardStudyMutationRepository: StudyMutationRepository {
             case .word:
                 guard let word = try context.fetch(FetchDescriptor<KotobaDataModel>(predicate: #Predicate { $0.id == savedID })).first else { throw DataError.dataNotFound }
                 progress.kotobaProgress -= 1
-                progress.kotobaIndex = word.addedIndex ?? 0
-                progress.kotobaLevel = .init(rawValue: max(progress.kotobaLevel.rawValue, word.jlptLevel.rawValue)) ?? .n5
+                if let index = word.addedIndex {
+                    progress.kotobaIndex = index
+                    if progress.catalogVersion == 2 {
+                        guard let id = word.catalogID, let level = try catalogLevel(id),
+                              let currentLevel = WordsProgressModel.Level(rawValue: level) else {
+                            throw BackupError.invalid("word catalog anchor")
+                        }
+                        progress.kotobaLevel = currentLevel
+                    } else {
+                        progress.kotobaLevel = .init(rawValue: max(progress.kotobaLevel.rawValue, word.jlptLevel.rawValue)) ?? .n5
+                    }
+                } else if progress.catalogVersion != 2 {
+                    progress.kotobaIndex = 0
+                }
                 context.delete(word)
             case .kanji:
                 guard let kanji = try context.fetch(FetchDescriptor<KanjiDataModel>(predicate: #Predicate { $0.id == savedID })).first else { throw DataError.dataNotFound }

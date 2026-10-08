@@ -10,6 +10,7 @@ struct CollectionListView: View {
     let entries: [StudyEntry]
     let loadState: TodayLoadState
     let query: String
+    var alternateSearchTerms: [String: [String]] = [:]
     let onDelete: (StudyEntry) -> Void
     let onSelect: (StudyEntry) -> Void
     let onRetry: () -> Void
@@ -53,6 +54,7 @@ struct CollectionListView: View {
             entry.headword.localizedCaseInsensitiveContains(trimmed)
                 || (entry.reading?.localizedCaseInsensitiveContains(trimmed) ?? false)
                 || entry.meaning.localizedCaseInsensitiveContains(trimmed)
+                || (alternateSearchTerms[entry.id]?.contains { $0.localizedCaseInsensitiveContains(trimmed) } ?? false)
         }
     }
 

@@ -14,10 +14,17 @@ public struct DetailView: View {
     @State private var viewModel: DetailViewModel
     @State private var memoryAid: MemoryAidViewModel?
     @State private var isConfirmingDelete = false
+    @State private var isConfirmingUpdate = false
+    private let makeMemoryAid: ((Kotoba) -> MemoryAidViewModel)?
     private let examples: ExampleRepository
     
     public init(viewModel: DetailViewModel, examples: ExampleRepository = .bundled(), memoryAid: MemoryAidViewModel? = nil) {
+        self.init(viewModel: viewModel, examples: examples, memoryAid: memoryAid, makeMemoryAid: nil)
+    }
+
+    init(viewModel: DetailViewModel, examples: ExampleRepository, memoryAid: MemoryAidViewModel?, makeMemoryAid: ((Kotoba) -> MemoryAidViewModel)?) {
         self.examples = examples
+        self.makeMemoryAid = makeMemoryAid
         self.viewModel = viewModel
         _memoryAid = State(initialValue: memoryAid)
     }
@@ -36,7 +43,21 @@ public struct DetailView: View {
                 } else if let kotoba = viewModel.state.kotoba {
                     let entry = kotoba.studyEntry
                     specimen(headword: entry.headword, reading: entry.reading, level: kotoba.jlptLevel.rawValue)
-                    definitionCard([("Meanings", kotoba.english)])
+                    Text("Vocabulary JLPT levels are community estimates.")
+                        .font(.footnote)
+                        .foregroundStyle(Forest.inkMuted)
+                    definitionCard([("Study meaning", kotoba.english)])
+                    dictionaryContent
+                    if viewModel.canUpdateStudyWord {
+                        Button("Update study word") { isConfirmingUpdate = true }
+                            .buttonStyle(.bordered)
+                            .tint(Forest.moss)
+                            .frame(minHeight: 44)
+                    }
+                    if viewModel.state.didUpdateStudyWord {
+                        Text("Study word updated. Review uses the study meaning above.")
+                            .font(.footnote).foregroundStyle(Forest.inkMuted)
+                    }
                     if let example = examples.example(for: .init(
                         headword: kotoba.kanji, reading: kotoba.furigana, level: kotoba.jlptLevel.rawValue
                     )) {
@@ -45,6 +66,10 @@ public struct DetailView: View {
                     if let memoryAid {
                         MemoryAidCard(viewModel: memoryAid)
                     }
+                    Button("Sources") { router.push(.sources, hideNavBar: false) }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Forest.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                 }
             }
             .padding(Forest.Space.l)
@@ -52,7 +77,19 @@ public struct DetailView: View {
         .background(Forest.canvas)
         .navigationTitle(viewModel.state.type.title)
         .navigationBarTitleDisplayMode(.inline)
-        .task { await memoryAid?.send(.load) }
+        .task {
+            viewModel.send(.loadDictionary)
+            await memoryAid?.send(.load)
+        }
+        .onChange(of: viewModel.state.kotoba) { old, updated in
+            guard old != updated, let updated else { return }
+            memoryAid?.cancel()
+            memoryAid = makeMemoryAid?(updated)
+            Task { await memoryAid?.send(.load) }
+        }
+        .sheet(isPresented: $isConfirmingUpdate) {
+            studyUpdatePreview
+        }
         .onAppear { Task { await memoryAid?.send(.refreshAvailability) } }
         .onDisappear { memoryAid?.cancel() }
         .onChange(of: scenePhase) { _, phase in
@@ -73,7 +110,7 @@ public struct DetailView: View {
                         viewModel.send(.didConfirmDelete({ router.pop() }))
                     }
                 } message: {
-                    Text("This \(viewModel.state.type.noun) will be removed from your collection and progress, then offered next on Today.")
+                    Text(viewModel.state.kotoba != nil ? "This word will be removed from your collection and progress." : "This kanji will be removed from your collection and progress, then offered next on Today.")
                 }
             }
         }
@@ -87,6 +124,54 @@ public struct DetailView: View {
         }
     }
     
+    @ViewBuilder
+    private var dictionaryContent: some View {
+        switch viewModel.state.dictionary {
+        case .loading:
+            ProgressView("Loading dictionary meanings")
+        case let .linked(word):
+            DictionaryDetailCard(word: word)
+        case .unavailable:
+            StateMessage(title: "Dictionary entry unavailable", message: "This saved word has no verified entry in the current dictionary. Your study meaning remains available.")
+        case .ambiguous:
+            StateMessage(title: "Dictionary match needs review", message: "More than one entry matches this spelling and reading. Your saved meaning is kept; no dictionary entry was chosen.")
+        case .failed:
+            StateMessage(title: "Couldn't open the dictionary", message: "The bundled vocabulary details couldn't be read. Your saved study word is still available.", actionTitle: "Try again", action: { viewModel.send(.loadDictionary) })
+        }
+    }
+
+    private var studyUpdatePreview: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: Forest.Space.l) {
+                    if let replacement = viewModel.state.studyUpdate {
+                        Text("Update your saved study word to these dictionary values?").font(.body)
+                        Text(replacement.kanji).font(.headword(32, relativeTo: .largeTitle))
+                        definitionCard([("Reading", [replacement.furigana]), ("Study meaning", replacement.english), ("Community JLPT level", [replacement.jlptLevel.rawValue])])
+                        Text("Your added date and review schedule are kept. Any AI suggestion based on changed readings or meanings will be cleared.")
+                            .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        Button("Update study word") {
+                            viewModel.send(.confirmStudyUpdate)
+                            isConfirmingUpdate = false
+                        }
+                        .buttonStyle(PrimaryButtonStyle())
+                    }
+                }
+                .foregroundStyle(Forest.ink)
+                .padding(Forest.Space.l)
+            }
+            .background(Forest.canvas)
+            .navigationTitle("Update study word")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { isConfirmingUpdate = false }
+                }
+            }
+        }
+        .tint(Forest.moss)
+    }
+
     private func specimen(headword: String, reading: String?, level: String) -> some View {
         VStack(spacing: Forest.Space.m) {
             ViewThatFits(in: .horizontal) {

@@ -1,0 +1,70 @@
+{
+  "analysis_date": "2026-10-07",
+  "openjlpt_commit": "0d1d3410bec90bd4098a7c72de820543cb4f707c",
+  "openjlpt_commit_date": "2026-10-02",
+  "openjlpt_jmdict_source_date": "2026-09-29",
+  "jmdict_download_url": "https://www.edrdg.org/pub/Nihongo/JMdict_e.gz",
+  "jmdict_created": "2026-10-07",
+  "ours_rows": 8130,
+  "ours_unique_pairs": 8033,
+  "openjlpt_rows": 7811,
+  "openjlpt_unique_pairs": 7811,
+  "ours_by_level": {
+    "N1": 2699,
+    "N2": 1906,
+    "N3": 2139,
+    "N4": 668,
+    "N5": 718
+  },
+  "openjlpt_by_level": {
+    "N1": 3070,
+    "N2": 1778,
+    "N3": 1659,
+    "N4": 630,
+    "N5": 674
+  },
+  "same_pair": 7012,
+  "only_ours_pairs": 1021,
+  "only_openjlpt_pairs": 799,
+  "ours_only_pairs_matched_by_openjlpt_aliases": 140,
+  "same_pair_with_different_level_sets": 464,
+  "same_pair_with_different_normalized_gloss_text": 2648,
+  "ours_extra_duplicate_pair_rows": 97,
+  "ours_pairs_with_conflicting_levels": 96,
+  "ours_exact_full_row_repeats": 1,
+  "ours_blank_readings": 2,
+  "openjlpt_blank_readings": 0,
+  "jmdict_entries": 218869,
+  "ours_jmdict_pair_status": {
+    "exact": 7186,
+    "unmatched": 408,
+    "kana_lookup": 439
+  },
+  "openjlpt_jmdict_pair_status": {
+    "exact": 7330,
+    "kana_lookup": 460,
+    "unmatched": 21
+  },
+  "openjlpt_with_jmdict_id": 7800,
+  "openjlpt_strict_link_pair_review_flags": 12,
+  "openjlpt_with_examples": 7245,
+  "hashes_sha256": {
+    "jlpt_vocab.csv": "0d77e8bc14e8788d6f8279f9b885009f57f845c88177d8222fea1615a6685f72",
+    "n1.json": "09325eb676ec26044e9019afb5ddd460a394a0d8cb51b0b34d30d03124c131ff",
+    "n2.json": "4c7053d1b61f71ca4004252cafdf89439c65531900e7bab6c53078802acf3c5b",
+    "n3.json": "17ca6bcbba9d212c3c9d38c38cecc2adef0fd8718cb7157bb48dd9d3a1724948",
+    "n4.json": "b38512a6dc1e06a3615f377b3e58184c4a85b6f769c2e3f58f2a4ef0e1810927",
+    "n5.json": "cbb221c9a3a92108fcd02fb088d9afacc70bc8c96570d5730425de0a49dad5f3",
+    "JMdict_e.gz": "a84c95984295173c4a6dff2d37c16697aa7b42b469146bb0a55578d940076c5f",
+    "meta.json": "9d4cc0f17ed9ad6c3a1a10fdae19472f898f7b2a690c9962049657e49e2b64d2",
+    "NOTICE.md": "a2e6f45517bb1a1c047628991832244916888a4ced3aa26adeafb89705588557"
+  },
+  "matching_method": "NFC and trim for exact spelling/reading pairs; JMdict reading restrictions respected; kana lookup union retains all homographs; unmatched is a review flag, not an error verdict.",
+  "limitations": [
+    "No authoritative post-2010 JLPT list exists. Level disagreements do not prove either assignment is wrong.",
+    "Alternate spellings, compound forms, and distinct senses mean exact-pair differences are not word losses.",
+    "JMdict linking is not proof that a selected gloss or example teaches the intended sense.",
+    "Dictionary dates differ: October 7 download vs September 29 upstream snapshot.",
+    "Sense and example review sampled targeted anomalies; no fluent-reviewer approval or full accuracy rate is claimed."
+  ]
+}

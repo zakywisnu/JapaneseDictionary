@@ -16,6 +16,7 @@ public struct KotobaParam {
     public var jlptLevel: Level
     public var dateAdded: Date
     public var addedIndex: Int
+    public var catalogID: String?
     
     public init(
         id: String,
@@ -24,7 +25,8 @@ public struct KotobaParam {
         english: [String],
         jlptLevel: Level,
         dateAdded: Date,
-        addedIndex: Int
+        addedIndex: Int,
+        catalogID: String? = nil
     ) {
         self.id = id
         self.kanji = kanji
@@ -33,6 +35,7 @@ public struct KotobaParam {
         self.jlptLevel = jlptLevel
         self.dateAdded = dateAdded
         self.addedIndex = addedIndex
+        self.catalogID = catalogID
     }
     
     public enum Level: String {
@@ -51,7 +54,8 @@ public struct KotobaParam {
             english: english.map { ArrayString(value: $0) },
             jlptLevel: KotobaDataModel.Level(rawValue: jlptLevel.rawValue) ?? .n5,
             dateAdded: dateAdded,
-            addedIndex: addedIndex
+            addedIndex: addedIndex,
+            catalogID: catalogID
         )
     }
 }

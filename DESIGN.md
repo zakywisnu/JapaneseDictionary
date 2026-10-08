@@ -127,7 +127,7 @@ Every list screen has all three. Each says why and what to do next.
 ## Interaction
 
 - Add is instant; the new row appears at the top of Today.
-- Remove: swipe action or long-press menu in lists, toolbar trash in Detail. Every entry point asks for confirmation, naming the headword and explaining that it becomes the next item offered. Full-swipe removal is disabled.
+- Remove: swipe action or long-press menu in lists, toolbar trash in Detail. Every entry point asks for confirmation, naming the headword and explaining removal from the collection and progress. Kanji confirmation also explains that it becomes the next item offered. Full-swipe removal is disabled.
 - Screens reload on appear. No "pull to refresh" or "please refresh" messages.
 - Search dismisses the keyboard on scroll and has a clear button.
 - Clear search has its own 44pt touch target. Onboarding pages scroll at accessibility text sizes, with smaller fixed artwork and persistent Next / Start learning controls.
@@ -168,7 +168,7 @@ Before replacement, save a recovery backup of the current collection locally. Fa
 
 ## Word memory helper
 
-Word Detail offers a neutral Help me remember action after the bundled definition and optional reviewed example. The headword remains the focal point. Generation produces a short Explanation and Memory tip card, with the caption "AI-generated suggestion. Check it against the meanings above." It never replaces dictionary content or presents a mnemonic as a kanji's historical origin. Kanji Detail has no helper.
+Word Detail offers a neutral Help me remember action after the saved study meaning, bundled dictionary details and optional reviewed example. The headword remains the focal point. Generation produces a short Explanation and Memory tip card, with the caption "AI-generated suggestion. Check it against your study meaning." It never replaces dictionary content or presents a mnemonic as a kanji's historical origin. Kanji Detail has no helper.
 
 Generate only on request. Show a named loading indicator and Cancel while generating. Regenerate keeps the previous suggestion visible; failure keeps it available and offers retry. Save suggestion is explicit; success says Saved on this iPhone. Unsaved results say Not saved. Persisted advice remains readable when the model is unavailable. Unsupported OS/device, disabled Apple Intelligence, preparing model and unsupported language each explain why generation is unavailable, with Check availability where useful. Native back cancels pending work without saving. Use existing Forest colors/spacing/card radius and system text styles; no decorative AI icon or badge.
 
@@ -178,3 +178,11 @@ Generate only on request. Show a named loading indicator and Cancel while genera
 - Sentence case everywhere. No em dashes, no emoji, no exclamation-heavy cheerleading.
 - "word" and "kanji" are the nouns. "kanji" has no plural "s".
 - Errors name the item and the next step: "The next word couldn't be added. Try again."
+
+## Full vocabulary dictionary
+
+Word Detail keeps the saved headword, reading and Study meaning first. Dictionary meanings follow as numbered sense groups, with part of speech, usage labels, source notes and spelling/reading restrictions attached to each affected sense. All readings and written forms are visible immediately, including their restrictions, common-word markers and source notes; no disclosure controls hide dictionary content. JLPT vocabulary levels are community estimates, not official exam coverage. Kanji Detail keeps its existing layout.
+
+Saved study meanings continue to ground review and the memory helper. A uniquely linked current entry may offer a neutral Update study word action. Its confirmation previews the current dictionary headword, reading, level and study meanings, explains that existing AI advice will be cleared if its context changes, and preserves the learner's identity, date and review schedule. Failed or ambiguous dictionary lookup leaves saved study content usable with a concrete explanation; failed resource loading offers retry. Sources opens offline dictionary attribution and license notices.
+
+Collection search includes alternate dictionary forms and readings only for confidently linked entries. Progress distinguishes Words in collection from Current study list size, because preserved legacy words may lie outside the refreshed catalog. Words have no coverage bar; the collection count can include duplicates and retired entries. Kanji retains its progress track.

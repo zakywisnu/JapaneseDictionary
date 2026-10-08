@@ -18,6 +18,7 @@ struct Kotoba: Hashable {
     var jlptLevel: Level
     var dateAdded: Date?
     var addedIndex: Int?
+    var catalogID: String? = nil
     
     enum Level: String, CaseIterable {
         case n1 = "N1"
@@ -35,7 +36,8 @@ struct Kotoba: Hashable {
             english: english,
             jlptLevel: .init(rawValue: jlptLevel.rawValue) ?? .n5,
             dateAdded: dateAdded ?? Date(),
-            addedIndex: addedIndex ?? 0
+            addedIndex: addedIndex ?? 0,
+            catalogID: catalogID
         )
     }
 }
@@ -49,7 +51,8 @@ extension KotobaDataModel {
             english: english.map { $0.value } ,
             jlptLevel: .init(rawValue: jlptLevel.rawValue) ?? .n5,
             dateAdded: dateAdded,
-            addedIndex: addedIndex
+            addedIndex: addedIndex,
+            catalogID: catalogID
         )
     }
 }

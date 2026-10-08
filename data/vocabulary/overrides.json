@@ -1,0 +1,56 @@
+[
+  {
+    "source": "legacy",
+    "word": "中腹",
+    "reading": "ちゅうふく",
+    "jmdictID": 1425440,
+    "reason": "Original mountain-side meaning matches 中腹ちゅうふく, not the unrelated irritated ちゅうっぱら community candidate.",
+    "senseIndex": 0
+  },
+  {
+    "source": "open",
+    "word": "せっけん",
+    "reading": "せっけん",
+    "jmdictID": 1382590,
+    "reason": "Teaching-list soap entry was incorrectly linked to economy/節倹1386220. Use verified 石鹸 soap; replace incorrect upstream gloss.",
+    "senseIndex": 0
+  },
+  {
+    "source": "open",
+    "word": "しいんと",
+    "reading": "しいんと",
+    "jmdictID": 1631970,
+    "headword": "しいん",
+    "newReading": "しいん",
+    "reason": "The quiet onomatopoeia しいん1631970 takes the と particle. Death-cause死因1310740 is unrelated; primary reading omits the grammatical particle.",
+    "senseIndex": 0
+  },
+  {
+    "source": "legacy",
+    "word": "ああ",
+    "reading": "ああ",
+    "jmdictID": 1565440,
+    "reason": "Original Ah!/Oh! is the interjection, separate from the community like-that adverb2085080.",
+    "level": "N5",
+    "senseIndex": 0
+  },
+  {
+    "source": "legacy",
+    "word": "いただく",
+    "reading": "頂く",
+    "jmdictID": 1587290,
+    "headword": "いただく",
+    "newReading": "いただく",
+    "reason": "Original columns have kana/spelling reversed. Humble receive/eat/drink senses belong to 頂くいただく1587290.",
+    "senseIndex": 0
+  },
+  {
+    "source": "legacy",
+    "word": "副",
+    "reading": "とりわけ",
+    "jmdictID": 1599150,
+    "headword": "取り分け",
+    "reason": "Original headword副 is a transcription error; とりわけ especially/above-all matches 取り分け1599150.",
+    "senseIndex": 0
+  }
+]

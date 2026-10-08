@@ -8,19 +8,23 @@
 import Foundation
 import Observation
 import DomainKit
+import DataKit
 
 @Observable
 public class KotobaWordsCollectionViewModel {
     var state: State
     
+    private let catalog: VocabularyCatalogRepository?
     private let getAllKotobaUseCase: GetAllKotobaUseCase
     private let deleteKotobaUseCase: DeleteKotobaUseCase
     
     public init(
         getAllKotobaUseCase: GetAllKotobaUseCase,
-        deleteKotobaUseCase: DeleteKotobaUseCase
+        deleteKotobaUseCase: DeleteKotobaUseCase,
+        catalog: VocabularyCatalogRepository? = try? .bundled()
     ) {
         self.state = .init()
+        self.catalog = catalog
         self.getAllKotobaUseCase = getAllKotobaUseCase
         self.deleteKotobaUseCase = deleteKotobaUseCase
     }
@@ -47,6 +51,13 @@ public class KotobaWordsCollectionViewModel {
             state.kotobas = try getAllKotobaUseCase.execute()
                 .mapToKotobas()
                 .sorted(by: { ($0.dateAdded ?? .distantPast) > ($1.dateAdded ?? .distantPast) })
+            state.alternateSearchTerms = [:]
+            if let catalog {
+                for saved in state.kotobas {
+                    guard case let .linked(word) = DictionaryLink.resolve(saved, in: catalog) else { continue }
+                    state.alternateSearchTerms[saved.id] = word.forms.map(\.text) + word.readings.map(\.text)
+                }
+            }
             state.loadState = .loaded
         } catch {
             state.loadState = .failed
@@ -56,6 +67,7 @@ public class KotobaWordsCollectionViewModel {
 
 public extension KotobaWordsCollectionViewModel {
     struct State {
+        var alternateSearchTerms: [String: [String]] = [:]
         var kotobas: [Kotoba] = []
         var loadState: TodayLoadState = .loading
         var errorMessage: String?

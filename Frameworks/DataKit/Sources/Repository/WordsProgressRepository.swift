@@ -16,19 +16,24 @@ public protocol WordsProgressRepository {
 
 public final class StandardWordsProgressRepository: WordsProgressRepository {
 
+    private let prepare: () throws -> Void
+    private let catalogVersion: Int?
     private let contextProvider: () -> ModelContext
     private var context: ModelContext { contextProvider() }
 
-    public init(context: ModelContext) {
+    public init(context: ModelContext, prepare: @escaping () throws -> Void = {}, catalogVersion: Int? = nil) {
+        self.prepare = prepare; self.catalogVersion = catalogVersion
         self.contextProvider = { context }
         try? setup()
     }
 
-    public init(store: StudyStore) {
+    public init(store: StudyStore, prepare: @escaping () throws -> Void = {}, catalogVersion: Int? = nil) {
+        self.prepare = prepare; self.catalogVersion = catalogVersion
         contextProvider = { store.context }
     }
 
     public func setup() throws {
+        try prepare()
         guard try context.fetch(getDescriptor()).isEmpty else { return }
         do {
             let data = WordsProgressModel(
@@ -40,7 +45,8 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
                 kanjiIndex: 0,
                 kotobaIndex: 0,
                 lastKotobaUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
-                lastKanjiUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+                lastKanjiUpdated: Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
+                catalogVersion: catalogVersion
             )
 
             context.insert(data)
@@ -62,6 +68,7 @@ public final class StandardWordsProgressRepository: WordsProgressRepository {
     }
 
     public func updateProgress(_ progress: WordsProgressModel) throws {
+        try prepare()
         let descriptor = getDescriptor()
         if let data = try context.fetch(descriptor).first {
             data.kanjiLevel = progress.kanjiLevel

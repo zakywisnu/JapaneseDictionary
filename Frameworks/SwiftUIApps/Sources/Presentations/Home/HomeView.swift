@@ -20,7 +20,7 @@ struct HomeView: View {
                 )
                 AppComposer.shared.makeDailyGoalSummaryView()
                 StudyKindPicker(selection: $kind)
-                Button("Practice difficult items") { router.push(.difficult, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
+                Button("Daily study plan") { router.push(.dailyStudyPlan, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)

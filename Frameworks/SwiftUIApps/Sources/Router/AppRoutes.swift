@@ -23,12 +23,36 @@ public enum AppRoutes: Routable {
     case difficult
     case dictionary
     case dictionaryEntry(String)
+    case learningPractice
+    case kanaPractice
+    case grammarExercises
+    case readingPractice
+    case readingPassage(String)
+    case readingVocabulary(String)
+    case readingQuestions(String)
+    case dailyStudyPlan
     case lessons
     case material(StudyMaterial, saved: Bool)
     
     @ViewBuilder
     public func view() -> some View {
         switch self {
+        case .learningPractice:
+            LearningPracticeView()
+        case .kanaPractice:
+            AppComposer.shared.makeKanaPracticeView()
+        case .grammarExercises:
+            AppComposer.shared.makeGrammarExercisesView()
+        case .readingPassage(let id):
+            AppComposer.shared.makeReadingPassageView(id: id)
+        case .readingVocabulary(let query):
+            AppComposer.shared.makeReadingVocabularyView(query: query)
+        case .readingQuestions(let id):
+            AppComposer.shared.makeReadingQuestionsView(id: id)
+        case .readingPractice:
+            AppComposer.shared.makeReadingPracticeView()
+        case .dailyStudyPlan:
+            AppComposer.shared.makeDailyStudyPlanView()
         case .lessons:
             AppComposer.shared.makeLessonsView()
         case let .material(material, saved):

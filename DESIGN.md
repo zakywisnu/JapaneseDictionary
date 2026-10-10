@@ -228,3 +228,11 @@ Review preserves the reveal/Again/Got it interaction for every saved kind and mi
 Practice difficult items is a neutral entry in Today and Collection. Its native setup filters material type, JLPT level including Unspecified, list, and 10/20/All. Show the matching count and disable Start for an empty selection. Most-missed items come first, then latest miss, then stable identity. Empty guidance explains using Again during review; no matching filters offers Clear filters. Extra practice preserves due dates and claims no mastery.
 
 Format 4 adds custom cards, saved lesson snapshots, mixed memberships and difficult records. Backup previews name counts by kind and replace all learner data only after validation and recovery export. Older supported backups migrate word memberships explicitly and supply empty new material/difficulty arrays.
+
+## Learning practice and daily guidance
+
+Learning practice is a native pushed list of Kana, Grammar exercises and Reading practice. Today offers a neutral Daily study plan action. Collection uses a native Study options menu to avoid a tall fixed header. All screens retain Forest ENERGY 2 / RHYTHM 2 / MOTION 1, moss only for the current primary action, system text styles and scrollable content.
+
+Kana uses practice cells, native script/group filters, supplied pronunciation and explicit Save and practice; saving creates ordinary local kana-category cards, preserving existing review and backup behavior. Exercises show choices, then an explanation after answering, followed by Next. Answers never auto-advance. Reading keeps the passage first, with optional reading/translation, tappable vocabulary and comprehension questions. Starter exercises and passages are labeled original beginner practice, without JLPT coverage claims.
+
+Daily guidance shows actual due, difficult and unreviewed saved-item counts, limited batches and reasons. Due reviews retain scheduling semantics; other practice leaves schedules unchanged. Empty guidance offers kana or lessons, and load failures name the collection or schedules and offer retry. No invented achievement counts or estimated mastery.

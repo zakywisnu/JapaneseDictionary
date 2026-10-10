@@ -6,6 +6,8 @@ public struct ReviewSession: Hashable {
     let items: [ReviewItem]
     var origin: ReviewOrigin = .today
     var id: UUID = UUID()
+    var returnTitle: String? = nil
+    var backTitle: String { returnTitle ?? origin.backTitle }
 
     var noun: String {
         let kinds = Set(items.map { $0.compositeID.kind })

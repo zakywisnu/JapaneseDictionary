@@ -144,7 +144,7 @@ struct ReviewView: View {
     private var actions: some View {
         VStack(spacing: Forest.Space.s) {
             if session.items.isEmpty || viewModel.state.isComplete {
-                Button(session.origin.backTitle) { pronunciation.stop(); router.pop() }
+                Button(session.backTitle) { pronunciation.stop(); router.pop() }
                     .buttonStyle(PrimaryButtonStyle())
                 if viewModel.state.isComplete && session.origin != .due {
                     Button("Review again") { pronunciation.stop(); viewModel.send(.restart) }

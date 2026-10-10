@@ -18,20 +18,18 @@ struct WordsCollectionView: View {
                 ScreenHeader(title: "Collection")
                 if kind == .words || kind == .kanji { searchField }
                 StudyKindPicker(selection: $kind)
-                Group {
+                Menu("Study options") {
+                    Button("Learning practice") { router.push(.learningPractice, hideNavBar: false) }
                     Button("Study lists") { router.push(.studyLists, hideNavBar: false) }
-                        .buttonStyle(.plain)
-                        .foregroundStyle(Forest.ink)
-                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                    Button("Practice difficult items") { router.push(.difficult, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
-                    Button("Lessons") { router.push(.lessons, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
+                    Button("Practice difficult items") { router.push(.difficult, hideNavBar: false) }
+                    Button("Lessons") { router.push(.lessons, hideNavBar: false) }
                     if kind == .words {
-                    Button("Browse dictionary") { router.push(.dictionary, hideNavBar: false) }
-                        .buttonStyle(.plain)
-                        .foregroundStyle(Forest.ink)
-                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                }
+                        Button("Browse dictionary") { router.push(.dictionary, hideNavBar: false) }
                     }
+                }
+                .foregroundStyle(Forest.ink)
+                .frame(minHeight: 44)
+
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)

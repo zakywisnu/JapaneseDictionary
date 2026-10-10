@@ -4,10 +4,12 @@ import DataKit
 struct SourcesView: View {
     private let vocabularyCredits: String
     private let credits: String
+    private let lessonCredits: String
 
-    init(credits: String = ExampleRepository.bundled().attributionText, vocabularyCredits: String = VocabularyCatalogRepository.attributionText) {
+    init(credits: String = ExampleRepository.bundled().attributionText, vocabularyCredits: String = VocabularyCatalogRepository.attributionText, lessonCredits: String = LessonCatalogRepository().attributionText) {
         self.vocabularyCredits = vocabularyCredits
         self.credits = credits
+        self.lessonCredits = lessonCredits
     }
 
     var body: some View {
@@ -20,6 +22,14 @@ struct SourcesView: View {
                     .font(.body)
                     .foregroundStyle(Forest.ink)
                 Text(vocabularyCredits)
+                    .font(.body)
+                    .foregroundStyle(Forest.ink)
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("Grammar and sentence lessons")
+                    .font(.headline)
+                    .foregroundStyle(Forest.ink)
+                Text(lessonCredits)
                     .font(.body)
                     .foregroundStyle(Forest.ink)
                     .textSelection(.enabled)

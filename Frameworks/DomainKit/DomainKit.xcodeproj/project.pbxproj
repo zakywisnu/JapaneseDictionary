@@ -36,6 +36,7 @@
 		99CC99E1B3BC08C580B4E3CE /* DomainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD64E77F305A0797D38EC789 /* DomainKit.framework */; };
 		9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC1246B4F77A43D691833 /* DeleteKanjiUseCase.swift */; };
 		A1A0BAD69F1BD97E0A12C704 /* GetKanjiWaniKaniUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F9648A40FAEAD424B00 /* GetKanjiWaniKaniUseCase.swift */; };
+		A1A97E6F69B6DF7995C814A4 /* RecordStudyRatingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279EE4DC2DA4261DD8F9D923 /* RecordStudyRatingUseCase.swift */; };
 		AEB2988166800F826430FF58 /* PracticeQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7605A3B922BB0E97348D3841 /* PracticeQueueTests.swift */; };
 		AF19C214C830F8E5BEB95003 /* GetKotobaDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0316F64E1C5725F5540CEAB /* GetKotobaDetailUseCase.swift */; };
 		B0B8D42172B4FA18B99E1BCA /* DeleteKotobaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122B035FE1DD184DCF36FDC /* DeleteKotobaUseCase.swift */; };
@@ -90,6 +91,7 @@
 		14E2E165617AE5CB6E96B4A6 /* ReviewScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScheduler.swift; sourceTree = "<group>"; };
 		1B6BAF8D66B12B12C43763E4 /* DailyStudyGoalUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStudyGoalUseCases.swift; sourceTree = "<group>"; };
 		20EF01DBE45DD99259AE4251 /* RecallRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallRating.swift; sourceTree = "<group>"; };
+		279EE4DC2DA4261DD8F9D923 /* RecordStudyRatingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStudyRatingUseCase.swift; sourceTree = "<group>"; };
 		289706FD11BC59976ABBADCB /* GetAllKanjiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllKanjiUseCase.swift; sourceTree = "<group>"; };
 		2A1A5F503D045ED6EDFCB2D5 /* ZeroDesignKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZeroDesignKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1A5A014AD03388062C2661 /* GetKotobaDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKotobaDataUseCase.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				3E8D38DBCA386B7880E81766 /* PracticeQueue.swift */,
 				20EF01DBE45DD99259AE4251 /* RecallRating.swift */,
 				D32EFBBA61E5FE244C57DFF7 /* RecordReviewUseCase.swift */,
+				279EE4DC2DA4261DD8F9D923 /* RecordStudyRatingUseCase.swift */,
 				14E2E165617AE5CB6E96B4A6 /* ReviewScheduler.swift */,
 			);
 			path = Review;
@@ -431,6 +434,7 @@
 				49C081D6CB0759C0A24815D0 /* PracticeQueue.swift in Sources */,
 				1BAA6469A0DF986BC362571C /* RecallRating.swift in Sources */,
 				4DCF1D21506D12DE9C010026 /* RecordReviewUseCase.swift in Sources */,
+				A1A97E6F69B6DF7995C814A4 /* RecordStudyRatingUseCase.swift in Sources */,
 				BDD3E85FA7828FC80C232C21 /* ReviewScheduler.swift in Sources */,
 				FFA612976E12CD4F166F0F31 /* AddKanjiUseCase.swift in Sources */,
 				9B17A7DEE8620E6A500A198D /* DeleteKanjiUseCase.swift in Sources */,

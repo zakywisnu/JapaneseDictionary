@@ -41,13 +41,13 @@ struct ReviewView: View {
                         answer(item)
                             .transition(.opacity)
                         ForEach(Array(viewModel.state.pronunciationReadings.enumerated()), id: \.offset) { _, reading in
-                            PronunciationControl(reading: reading, service: pronunciation, showsReading: session.kind == .kanji)
+                            PronunciationControl(reading: reading, service: pronunciation, showsReading: item.compositeID.kind == .kanji)
                         }
                         if let key = item.exampleWordKey, let example = examples.example(for: key) {
                             ExampleSentenceCard(example: example)
                         }
                     } else {
-                        Text("Try the reading and meaning.")
+                        Text("Recall the answer before revealing it.")
                             .font(.subheadline)
                             .foregroundStyle(Forest.inkMuted)
                             .multilineTextAlignment(.center)
@@ -79,6 +79,9 @@ struct ReviewView: View {
 
     private func specimen(_ item: ReviewItem) -> some View {
         VStack(spacing: Forest.Space.m) {
+            if item.material != nil {
+                MaterialPrompt(text: item.headword)
+            } else {
             ViewThatFits(in: .horizontal) {
                 ForEach([120, 96, 72, 56, 44] as [CGFloat], id: \.self) { size in
                     PracticeCells(text: item.headword, cellSize: size)
@@ -89,7 +92,11 @@ struct ReviewView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            LevelTag(level: item.level)
+            }
+            if !item.level.isEmpty {
+                if item.compositeID.kind == .sentence { Text("From an \(item.level) lesson").font(.caption).foregroundStyle(Forest.inkMuted) }
+                else { LevelTag(level: item.level) }
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, Forest.Space.xl)
@@ -105,6 +112,9 @@ struct ReviewView: View {
                     .foregroundStyle(Forest.inkMuted)
                     .textSelection(.enabled)
             }
+            if let material = item.material {
+                MaterialAnswer(material: material)
+            } else {
             VStack(alignment: .leading, spacing: Forest.Space.l) {
                 definition("Meanings", values: item.meanings.isEmpty ? ["No meaning is available for this item."] : item.meanings)
                 if !item.onyomi.isEmpty { definition("On'yomi", values: item.onyomi) }
@@ -114,6 +124,7 @@ struct ReviewView: View {
             .padding(Forest.Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+            }
         }
     }
 
@@ -154,7 +165,7 @@ struct ReviewView: View {
                     .frame(minHeight: 44)
             } else {
                 if viewModel.state.isAnswerVisible {
-                    Text("Again repeats this item in this session.")
+                    Text("Again repeats this item and saves it for difficult practice.")
                         .font(.footnote)
                         .foregroundStyle(Forest.inkMuted)
                         .multilineTextAlignment(.center)

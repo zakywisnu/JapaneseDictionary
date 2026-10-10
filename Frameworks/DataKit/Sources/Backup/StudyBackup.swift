@@ -95,7 +95,7 @@ public struct BackupProgress: Codable, Equatable {
 }
 
 public enum BackupStudyKind: String, Codable, Equatable {
-    case words, kanji
+    case words, kanji, grammar, sentence, customCard
 }
 
 public struct BackupPreferences: Codable, Equatable {
@@ -134,16 +134,20 @@ public struct StudyBackup: Codable, Equatable {
     public var memberships: [BackupListMembership]
     public var dailyGoal: Int?
     public var activities: [PracticeActivity]
+    public var materials: [StudyMaterial]
+    public var difficulties: [DifficultyRecord]
+    public var itemMemberships: [StudyItemMembership]
 
     public init(formatVersion: Int = 1, createdAt: Date, catalogFingerprint: String, words: [BackupWord], kanjis: [BackupKanji], progress: BackupProgress?, reviews: [ReviewRecord], preferences: BackupPreferences,
-                lists: [BackupStudyList] = [], memberships: [BackupListMembership] = [], dailyGoal: Int? = 10, activities: [PracticeActivity] = []) {
+                lists: [BackupStudyList] = [], memberships: [BackupListMembership] = [], dailyGoal: Int? = 10, activities: [PracticeActivity] = [], materials: [StudyMaterial] = [], difficulties: [DifficultyRecord] = [], itemMemberships: [StudyItemMembership] = []) {
         self.formatVersion = formatVersion; self.createdAt = createdAt; self.catalogFingerprint = catalogFingerprint
         self.words = words; self.kanjis = kanjis; self.progress = progress; self.reviews = reviews; self.preferences = preferences
         self.lists = lists; self.memberships = memberships; self.dailyGoal = dailyGoal; self.activities = activities
+        self.materials = materials; self.difficulties = difficulties; self.itemMemberships = itemMemberships
     }
 
     private enum CodingKeys: String, CodingKey {
-        case formatVersion, createdAt, catalogFingerprint, words, kanjis, progress, reviews, preferences, lists, memberships, dailyGoal, activities
+        case formatVersion, createdAt, catalogFingerprint, words, kanjis, progress, reviews, preferences, lists, memberships, dailyGoal, activities, materials, difficulties, itemMemberships
     }
 
     public init(from decoder: Decoder) throws {
@@ -156,6 +160,15 @@ public struct StudyBackup: Codable, Equatable {
         progress = try c.decodeIfPresent(BackupProgress.self, forKey: .progress)
         reviews = try c.decode([ReviewRecord].self, forKey: .reviews)
         preferences = try c.decode(BackupPreferences.self, forKey: .preferences)
+        if formatVersion >= 4 {
+            materials = try c.decode([StudyMaterial].self, forKey: .materials)
+            difficulties = try c.decode([DifficultyRecord].self, forKey: .difficulties)
+            itemMemberships = try c.decode([StudyItemMembership].self, forKey: .itemMemberships)
+        } else {
+            materials = try c.decodeIfPresent([StudyMaterial].self, forKey: .materials) ?? []
+            difficulties = try c.decodeIfPresent([DifficultyRecord].self, forKey: .difficulties) ?? []
+            itemMemberships = try c.decodeIfPresent([StudyItemMembership].self, forKey: .itemMemberships) ?? []
+        }
         if formatVersion >= 3 {
             lists = try c.decode([BackupStudyList].self, forKey: .lists)
             memberships = try c.decode([BackupListMembership].self, forKey: .memberships)
@@ -176,6 +189,11 @@ public struct StudyBackup: Codable, Equatable {
         try c.encode(catalogFingerprint, forKey: .catalogFingerprint); try c.encode(words, forKey: .words)
         try c.encode(kanjis, forKey: .kanjis); try c.encodeIfPresent(progress, forKey: .progress)
         try c.encode(reviews, forKey: .reviews); try c.encode(preferences, forKey: .preferences)
+        if formatVersion >= 4 {
+            try c.encode(materials, forKey: .materials)
+            try c.encode(difficulties, forKey: .difficulties)
+            try c.encode(itemMemberships, forKey: .itemMemberships)
+        }
         if formatVersion >= 3 {
             try c.encode(lists, forKey: .lists); try c.encode(memberships, forKey: .memberships)
             try c.encode(dailyGoal, forKey: .dailyGoal); try c.encode(activities, forKey: .activities)

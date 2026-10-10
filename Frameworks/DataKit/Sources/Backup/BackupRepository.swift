@@ -26,6 +26,7 @@ public final class BackupRepository {
     public func export(preferences: BackupPreferences) throws -> Data {
         try prepare()
         let context = store.makeContext()
+        if try migrateStudyMemberships(context: context) { try context.save(); store.refreshContext() }
         let progress = try context.fetch(FetchDescriptor<WordsProgressModel>())
         guard progress.count <= 1 else { throw BackupError.multipleProgress }
         let goals = try context.fetch(FetchDescriptor<DailyGoalSettingsModel>())
@@ -34,12 +35,27 @@ public final class BackupRepository {
         let memberships = try context.fetch(FetchDescriptor<StudyListMembershipModel>()).map { BackupListMembership(listID: $0.listID, wordID: $0.wordID) }.sorted { $0.key < $1.key }
         let activities = try context.fetch(FetchDescriptor<PracticeActivityModel>()).map(\.value).sorted { $0.key < $1.key }
         let target: Int? = goals.isEmpty ? 10 : goals[0].target
-        let backup = StudyBackup(formatVersion: catalog.version == 2 ? 3 : catalog.version, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
+        let backup = StudyBackup(formatVersion: 4, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
             words: try context.fetch(FetchDescriptor<KotobaDataModel>()).map(BackupWord.init).sorted { $0.id < $1.id },
             kanjis: try context.fetch(FetchDescriptor<KanjiDataModel>()).map(BackupKanji.init).sorted { $0.id < $1.id },
             progress: progress.first.map(BackupProgress.init),
             reviews: try context.fetch(FetchDescriptor<ReviewRecordModel>()).map(\.value).sorted { $0.id.key < $1.id.key },
-            preferences: preferences, lists: lists, memberships: memberships, dailyGoal: target, activities: activities)
+            preferences: preferences, lists: lists, memberships: memberships, dailyGoal: target, activities: activities,
+            materials: try context.fetch(FetchDescriptor<StudyMaterialModel>()).map { model in
+                guard let value = try? JSONDecoder().decode(StudyMaterial.self, from: model.payload),
+                      model.key == SavedStudyID(kind: value.kind, id: value.id).key,
+                      model.savedID == value.id, model.kind == value.kind,
+                      model.sourceKey == value.source.map({ value.kind.rawValue + ":" + $0.provider + ":" + $0.sourceID }) else { throw BackupError.invalid("stored material identity") }
+                return value
+            }.sorted { SavedStudyID(kind: $0.kind, id: $0.id).key < SavedStudyID(kind: $1.kind, id: $1.id).key },
+            difficulties: try context.fetch(FetchDescriptor<DifficultyRecordModel>()).map { model in
+                guard model.key == model.value.id.key else { throw BackupError.invalid("stored difficult identity") }
+                return model.value
+            }.sorted { $0.id.key < $1.id.key },
+            itemMemberships: try context.fetch(FetchDescriptor<StudyItemMembershipModel>()).map { model in
+                guard model.key == model.value.key else { throw BackupError.invalid("stored membership identity") }
+                return model.value
+            }.sorted { $0.key < $1.key })
         try BackupValidator.validate(backup, catalog: catalog)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -77,6 +93,9 @@ public final class BackupRepository {
         try writeRecovery(export(preferences: currentPreferences), recoveryURL)
         let context = store.makeContext()
         do {
+            for model in try context.fetch(FetchDescriptor<StudyMaterialModel>()) { context.delete(model) }
+            for model in try context.fetch(FetchDescriptor<DifficultyRecordModel>()) { context.delete(model) }
+            for model in try context.fetch(FetchDescriptor<StudyItemMembershipModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<StudyListMembershipModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<StudyListModel>()) { context.delete(model) }
             for model in try context.fetch(FetchDescriptor<DailyGoalSettingsModel>()) { context.delete(model) }
@@ -90,7 +109,13 @@ public final class BackupRepository {
             if let progress = backup.progress { context.insert(progress.model) }
             for review in backup.reviews { context.insert(ReviewRecordModel(record: review)) }
             for list in backup.lists { context.insert(StudyListModel(id: list.id, name: list.name, createdAt: list.createdAt)) }
-            for member in backup.memberships { context.insert(StudyListMembershipModel(listID: member.listID, wordID: member.wordID)) }
+            for material in backup.materials { context.insert(try StudyMaterialModel(value: material)) }
+            for difficulty in backup.difficulties { context.insert(DifficultyRecordModel(value: difficulty)) }
+            var membershipKeys = Set<String>()
+            let migrated = backup.memberships.map { StudyItemMembership(listID: $0.listID, id: .init(kind: .word, id: $0.wordID)) }
+            for member in backup.itemMemberships + migrated where membershipKeys.insert(member.key).inserted {
+                context.insert(StudyItemMembershipModel(listID: member.listID, id: member.id))
+            }
             context.insert(DailyGoalSettingsModel(settings: .init(target: backup.dailyGoal)))
             for activity in backup.activities { context.insert(PracticeActivityModel(activity: activity)) }
             try save(context)

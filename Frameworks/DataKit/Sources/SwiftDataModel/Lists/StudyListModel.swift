@@ -6,6 +6,7 @@ public struct StudyList: Codable, Equatable, Identifiable {
     public let name: String
     public let createdAt: Date
     public let wordCount: Int
+    public var itemCount: Int { wordCount }
 
     public init(id: String, name: String, createdAt: Date, wordCount: Int) {
         self.id = id

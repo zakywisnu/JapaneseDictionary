@@ -147,10 +147,9 @@ public final class AppComposer {
     }
 
     public func makeReviewView(_ session: ReviewSession) -> some View {
-        ReviewView(viewModel: ReviewViewModel(session: session, recordRating: { [recordReview] id, sessionID, rating, now in
-            try recordReview.execute(id: id, sessionID: sessionID, rating: rating, now: now)
-        }, recordPractice: { [practiceCompletion] id, now in
-            try practiceCompletion.execute(id: id, now: now)
+        let rating = DefaultRecordStudyRatingUseCase(reviewRepository: StandardReviewRepository(store: store), ratingRepository: StandardStudyRatingRepository(store: store))
+        return ReviewView(viewModel: ReviewViewModel(session: session, recordAction: { id, sessionID, actionID, recall, now, isDue in
+            try rating.execute(id: id, sessionID: sessionID, actionID: actionID, rating: recall, now: now, isDue: isDue)
         }), examples: examples)
     }
 }

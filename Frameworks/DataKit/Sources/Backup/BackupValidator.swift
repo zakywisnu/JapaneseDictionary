@@ -66,11 +66,11 @@ public enum BackupValidator {
     }
 
     public static func validate(_ backup: StudyBackup, catalog: CatalogSnapshot) throws {
-        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) else { throw BackupError.unsupportedVersion }
+        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) || backup.formatVersion == 4 else { throw BackupError.unsupportedVersion }
         guard backup.catalogFingerprint == catalog.fingerprint else { throw BackupError.foreignCatalog }
         try date(backup.createdAt)
         // Saved content requires its original Add next indexes and cumulative counters.
-        guard backup.progress != nil || (backup.words.isEmpty && backup.kanjis.isEmpty && backup.reviews.isEmpty) else {
+        guard backup.progress != nil || (backup.words.isEmpty && backup.kanjis.isEmpty && !backup.reviews.contains(where: { [.word, .kanji].contains($0.id.kind) })) else {
             throw BackupError.invalid("missing collection progress")
         }
         try unique(backup.words.map(\.id), field: "word IDs")
@@ -78,6 +78,32 @@ public enum BackupValidator {
         try unique(backup.reviews.map { $0.id.key }, field: "review IDs")
         if backup.formatVersion < 3 {
             guard backup.lists.isEmpty, backup.memberships.isEmpty, backup.activities.isEmpty, backup.dailyGoal == 10 else { throw BackupError.invalid("study data in an older backup format") }
+        }
+        if backup.formatVersion < 4 {
+            guard backup.materials.isEmpty, backup.difficulties.isEmpty, backup.itemMemberships.isEmpty,
+                  [.words, .kanji].contains(backup.preferences.todayKind), [.words, .kanji].contains(backup.preferences.collectionKind),
+                  backup.reviews.allSatisfy({ [.word, .kanji].contains($0.id.kind) }),
+                  backup.activities.allSatisfy({ [.word, .kanji].contains($0.studyID.kind) }) else { throw BackupError.invalid("expanded study data in an older backup format") }
+        }
+        try unique(backup.materials.map { SavedStudyID(kind: $0.kind, id: $0.id).key }, field: "material identities")
+        try unique(backup.materials.compactMap { value in value.source.map { value.kind.rawValue + ":" + $0.provider + ":" + $0.sourceID } }, field: "material sources")
+        let savedIDs = Set(backup.words.map { SavedStudyID(kind: .word, id: $0.id) } + backup.kanjis.map { SavedStudyID(kind: .kanji, id: $0.id) } + backup.materials.map { SavedStudyID(kind: $0.kind, id: $0.id) })
+        for material in backup.materials {
+            guard UUID(uuidString: material.id) != nil,
+                  let checked = try? StudyMaterialValidator.validate(material), checked == material else { throw BackupError.invalid("study materials") }
+            try date(material.createdAt); try date(material.updatedAt)
+        }
+        try unique(backup.difficulties.map { $0.id.key }, field: "difficult identities")
+        for record in backup.difficulties {
+            guard savedIDs.contains(record.id), record.missCount >= 0,
+                  (record.missCount == 0 || record.lastMissDate != nil),
+                  !record.sessionHadAgain || record.missCount > 0 else { throw BackupError.invalid("difficult records") }
+            if let value = record.lastMissDate { try date(value) }
+        }
+        let migratedMembershipKeys = backup.memberships.map { StudyItemMembership(listID: $0.listID, id: .init(kind: .word, id: $0.wordID)).key }
+        try unique(backup.itemMemberships.map(\.key) + migratedMembershipKeys, field: "mixed memberships")
+        for member in backup.itemMemberships {
+            guard backup.lists.contains(where: { $0.id == member.listID }), savedIDs.contains(member.id) else { throw BackupError.invalid("orphan mixed membership") }
         }
         guard backup.dailyGoal.map({ [5, 10, 20, 30].contains($0) }) ?? true else { throw BackupError.invalid("daily goal") }
         try unique(backup.lists.map(\.id), field: "study list IDs")
@@ -123,9 +149,8 @@ public enum BackupValidator {
             try index(progress.kotobaIndex, count: catalog.wordCount, endAllowed: true)
             try date(progress.lastKanjiUpdated); try date(progress.lastKotobaUpdated)
         }
-        let words = Set(backup.words.map(\.id)), kanjis = Set(backup.kanjis.map(\.id))
         for review in backup.reviews {
-            guard (review.id.kind == .word ? words : kanjis).contains(review.id.id) else { throw BackupError.invalid("orphan review records") }
+            guard savedIDs.contains(review.id) else { throw BackupError.invalid("orphan review records") }
             guard (0...4).contains(review.stage), review.sessionBaselineStage.map({ (0...4).contains($0) }) ?? true else { throw BackupError.invalid("review stages") }
             try date(review.dueDate); try date(review.lastReviewedAt)
         }
@@ -146,7 +171,7 @@ public enum BackupValidator {
     }
 
     private static func unique(_ ids: [String], field: String) throws {
-        guard ids.allSatisfy({ !$0.isEmpty }), Set(ids).count == ids.count else { throw BackupError.invalid(field) }
+        guard ids.allSatisfy({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }), Set(ids).count == ids.count else { throw BackupError.invalid(field) }
     }
 
     private static func index(_ value: Int?, count: Int, endAllowed: Bool) throws {

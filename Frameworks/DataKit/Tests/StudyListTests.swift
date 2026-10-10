@@ -3,6 +3,23 @@ import SwiftData
 @testable import DataKit
 
 final class StudyListTests: XCTestCase {
+    func testMixedMembershipIdentityAndLegacyConversion() throws {
+        let store = try fixture()
+        let repository = StandardStudyListRepository(store: store)
+        let list = try repository.create(name: "Mixed")
+        let context = store.makeContext()
+        context.insert(StudyListMembershipModel(listID: list.id, wordID: "word"))
+        context.insert(KanjiDataModel(id: "word", kanji: "木", stroke: 4, onyomi: [], kunyomi: [], jlptLevel: .n5, meanings: [], dateAdded: nil, addedIndex: nil))
+        try context.save()
+        try repository.setLists(id: .init(kind: .kanji, id: "word"), listIDs: [list.id])
+        XCTAssertEqual(Set(try repository.items(listID: list.id).map(\.id)), [.init(kind: .word, id: "word"), .init(kind: .kanji, id: "word")])
+        XCTAssertEqual(try repository.lists().first?.itemCount, 2)
+        _ = try repository.items(listID: list.id)
+        XCTAssertEqual(try store.makeContext().fetch(FetchDescriptor<StudyItemMembershipModel>()).count, 2)
+        XCTAssertTrue(try store.makeContext().fetch(FetchDescriptor<StudyListMembershipModel>()).isEmpty)
+        try repository.removeItem(listID: list.id, id: .init(kind: .kanji, id: "word"))
+        XCTAssertEqual(try repository.items(listID: list.id).map(\.id.kind), [.word])
+    }
     private func fixture() throws -> StudyStore {
         let store = try StudyStore(inMemory: true)
         store.context.insert(KotobaDataModel(id: "word", kanji: "森", furigana: "もり", english: [], jlptLevel: .n5, dateAdded: Date(), addedIndex: 0))

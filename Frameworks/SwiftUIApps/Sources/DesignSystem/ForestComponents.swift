@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import DataKit
 
 /// One character per square with dashed center guides, like kanji practice paper.
 struct PracticeCells: View {
@@ -260,6 +261,13 @@ extension String {
 enum StudyKind: String, CaseIterable, Identifiable {
     case words = "Words"
     case kanji = "Kanji"
+    case grammar = "Grammar"
+    case sentences = "Sentences"
+    case cards = "Your cards"
+
+    var savedKind: SavedStudyKind {
+        switch self { case .words: return .word; case .kanji: return .kanji; case .grammar: return .grammar; case .sentences: return .sentence; case .cards: return .customCard }
+    }
 
     var id: Self { self }
 }
@@ -273,7 +281,7 @@ struct StudyKindPicker: View {
                 Text(kind.rawValue).tag(kind)
             }
         }
-        .pickerStyle(.segmented)
+        .pickerStyle(.menu)
     }
 }
 

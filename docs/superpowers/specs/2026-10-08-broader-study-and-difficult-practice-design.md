@@ -1,7 +1,7 @@
 # Broader study material and difficult-item practice
 
 Date: 2026-10-08
-Status: proposed design for written review; product implementation has not started.
+Status: implemented and verified on 2026-10-10. See docs/implementation/broader-study-verification.md.
 
 ## User intent
 

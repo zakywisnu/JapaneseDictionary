@@ -1,0 +1,49 @@
+{
+  "snapshot": "2026-10-08",
+  "commit": "ec0ba4a0ce1611c568b0e4f8a223eb8029249a25",
+  "repository": "https://github.com/stndaru/nihongo-mono",
+  "files": [
+    {
+      "file": "raw/LICENSE",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/LICENSE",
+      "bytes": 1342,
+      "sha256": "04715c5b4ae9c2cd25f0c8a06061ea5546be49623fb4a2a9032d3c49dd6b7edb"
+    },
+    {
+      "file": "raw/LICENSE-DATA.md",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/LICENSE-DATA.md",
+      "bytes": 4035,
+      "sha256": "ad37214ab0e82dc497194a4d3adcd6bdebd9b2da3aa3b05383289ee5b45ea0e7"
+    },
+    {
+      "file": "raw/n1.json",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/src/data/grammar/n1.json",
+      "bytes": 607317,
+      "sha256": "860b9292509729f968d8f561c3129a960bdb6335a53269932b0687ee5bdd732d"
+    },
+    {
+      "file": "raw/n2.json",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/src/data/grammar/n2.json",
+      "bytes": 440232,
+      "sha256": "47204ec9710c8a7f8ce27b688c08ecd40a3e5470471479a257bcb15ab43c1331"
+    },
+    {
+      "file": "raw/n3.json",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/src/data/grammar/n3.json",
+      "bytes": 492892,
+      "sha256": "1608290c5f984b98bbbde8908ee10c7ff6042815b0a0c89d833005b09a45cff5"
+    },
+    {
+      "file": "raw/n4.json",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/src/data/grammar/n4.json",
+      "bytes": 368108,
+      "sha256": "607149d3b8b64a4d9291f5700383902da5d249cbd4b146b5f4e7e65750d6a7a6"
+    },
+    {
+      "file": "raw/n5.json",
+      "url": "https://github.com/stndaru/nihongo-mono/blob/ec0ba4a0ce1611c568b0e4f8a223eb8029249a25/src/data/grammar/n5.json",
+      "bytes": 204411,
+      "sha256": "e441b22a21f65b7257ef7d888a619a108cf24d86eea6fe3ab92cbc837b087218"
+    }
+  ]
+}

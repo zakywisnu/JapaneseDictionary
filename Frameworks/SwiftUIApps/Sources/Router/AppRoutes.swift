@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DataKit
 import ZeroCoreKit
 
 public enum AppRoutes: Routable {
@@ -19,12 +20,19 @@ public enum AppRoutes: Routable {
     case studyLists
     case studyList(String)
     case dailyGoal
+    case difficult
     case dictionary
     case dictionaryEntry(String)
+    case lessons
+    case material(StudyMaterial, saved: Bool)
     
     @ViewBuilder
     public func view() -> some View {
         switch self {
+        case .lessons:
+            AppComposer.shared.makeLessonsView()
+        case let .material(material, saved):
+            AppComposer.shared.makeMaterialDetailView(material, saved: saved)
         case .onboarding:
             AppComposer.shared.makeOnboardingView()
         case .splashScreen:
@@ -43,6 +51,8 @@ public enum AppRoutes: Routable {
             AppComposer.shared.makeStudyListsView()
         case let .studyList(id):
             AppComposer.shared.makeStudyListView(id)
+        case .difficult:
+            AppComposer.shared.makeDifficultPracticeView()
         case .dailyGoal:
             AppComposer.shared.makeDailyGoalSettingsView()
         case .dictionary:

@@ -8,6 +8,17 @@ final class MaterialPresentationTests: XCTestCase {
         .init(id: "card", kind: .customCard, prompt: "猫", answer: "cat", reading: "ねこ", category: "other", createdAt: .distantPast, updatedAt: .distantPast)
     }
 
+    @MainActor func testSpeakingUsesOnlySuppliedSentenceAndCardReadings() {
+        XCTAssertEqual(MaterialDetailView.speakingTarget(for: card)?.suppliedReading, "ねこ")
+        var value = card; value.reading = nil
+        XCTAssertNil(MaterialDetailView.speakingTarget(for: value))
+        value.reading = "cat"
+        XCTAssertNil(MaterialDetailView.speakingTarget(for: value))
+        value.reading = "ねこ"; value.kind = .grammar
+        XCTAssertNil(MaterialDetailView.speakingTarget(for: value))
+        value.kind = .sentence; value.prompt = "猫です。"; value.reading = "ねこです。"
+        XCTAssertEqual(MaterialDetailView.speakingTarget(for: value)?.prompt, "猫です。")
+    }
     func testFailedSaveRetainsDraftAndAllowsRetry() {
         var fails = true
         let model = CustomCardEditorViewModel(material: nil, save: { value in

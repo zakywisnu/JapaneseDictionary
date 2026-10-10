@@ -3,9 +3,10 @@ import Foundation
 
 @MainActor
 final class SystemPronunciationEngine: NSObject, PronunciationEngine, AVSpeechSynthesizerDelegate {
-    private let activateAudio: () throws -> Void
-    private let deactivateAudio: () -> Void
-    private var ownsAudioSession = false
+    private let activateAudio: (() throws -> Void)?
+    private let deactivateAudio: (() -> Void)?
+    private var lease: UUID?
+    private let coordinator: AudioSessionCoordinator
     private let synthesizer = AVSpeechSynthesizer()
     private var active: (utterance: AVSpeechUtterance, id: UUID, completion: (UUID) -> Void)?
 
@@ -22,13 +23,8 @@ final class SystemPronunciationEngine: NSObject, PronunciationEngine, AVSpeechSy
             .first
     }
 
-    init(activateAudio: @escaping () throws -> Void = {
-        let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
-        try session.setActive(true)
-    }, deactivateAudio: @escaping () -> Void = {
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-    }) {
+    init(coordinator: AudioSessionCoordinator? = nil, activateAudio: (() throws -> Void)? = nil, deactivateAudio: (() -> Void)? = nil) {
+        self.coordinator = coordinator ?? .shared
         self.activateAudio = activateAudio
         self.deactivateAudio = deactivateAudio
         super.init()
@@ -39,8 +35,12 @@ final class SystemPronunciationEngine: NSObject, PronunciationEngine, AVSpeechSy
         stop()
         guard let voice = japaneseVoice else { throw SpeechError.voiceUnavailable }
         // Listen is explicit playback; the default ambient session obeys the Silent switch.
-        try activateAudio()
-        ownsAudioSession = true
+        lease = try coordinator.acquire(.playback, activate: activateAudio, deactivate: deactivateAudio) { [weak self] in
+            guard let self else { return }
+            let previous = self.active
+            self.stop()
+            if let previous { previous.completion(previous.id) }
+        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice
         active = (utterance, id, completion)
@@ -66,9 +66,9 @@ final class SystemPronunciationEngine: NSObject, PronunciationEngine, AVSpeechSy
     private enum SpeechError: Error { case voiceUnavailable }
 
     private func releaseAudioSession() {
-        guard ownsAudioSession else { return }
-        ownsAudioSession = false
-        deactivateAudio()
+        guard let lease else { return }
+        self.lease = nil
+        coordinator.release(lease)
     }
 
     private func finished(_ utterance: AVSpeechUtterance) {

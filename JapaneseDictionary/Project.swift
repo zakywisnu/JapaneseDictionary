@@ -12,7 +12,9 @@ let infoPlist: [String: Plist.Value] = [
     "UILaunchStoryboardName": "LaunchScreen",
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
-    "NSSupportsLiveActivities": true
+    "NSSupportsLiveActivities": true,
+    "NSMicrophoneUsageDescription": "Record Japanese phrases to replay and practice speaking.",
+    "NSSpeechRecognitionUsageDescription": "Compare your Japanese recording with on-device speech recognition."
 ]
 
 func targets() -> [Target] {

@@ -18,7 +18,7 @@ final class ExpandedStudyBackupTests: XCTestCase {
         try store.context.save()
         let repo = repository(store)
         let backup = try repo.validate(repo.export(preferences: .init(todayKind: .customCard)))
-        XCTAssertEqual(backup.formatVersion, 4)
+        XCTAssertEqual(backup.formatVersion, 6)
         XCTAssertEqual(backup.materials, [card])
         let restored = try StudyStore(inMemory: true)
         try repository(restored).restore(backup, currentPreferences: .init())

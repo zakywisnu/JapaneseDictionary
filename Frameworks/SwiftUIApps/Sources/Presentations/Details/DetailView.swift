@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DataKit
+import DomainKit
 
 public struct DetailView: View {
     @EnvironmentObject var router: AppRouter
@@ -49,6 +50,12 @@ public struct DetailView: View {
                 } else if let kotoba = viewModel.state.kotoba {
                     let entry = kotoba.studyEntry
                     specimen(headword: entry.headword, reading: entry.reading, level: kotoba.jlptLevel.rawValue, spokenReading: kotoba.furigana)
+                    if PronunciationService.normalizedReading(kotoba.furigana) != nil {
+                        Button("Practice speaking") {
+                            pronunciation.stop()
+                            router.push(.speaking(.init(id: "saved:" + kotoba.id, prompt: entry.headword, suppliedReading: kotoba.furigana, acceptedWrittenForms: [entry.headword])), hideNavBar: false)
+                        }.buttonStyle(.bordered).frame(minHeight: 44)
+                    }
                     Button("Organize in lists") { isOrganizingLists = true }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.ink)

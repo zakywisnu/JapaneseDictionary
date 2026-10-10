@@ -1,5 +1,6 @@
 import SwiftUI
 import DataKit
+import DomainKit
 
 struct DictionaryBrowseDetailView: View {
     @EnvironmentObject private var router: AppRouter
@@ -52,7 +53,7 @@ struct DictionaryBrowseDetailView: View {
             if phase == .active { pronunciation.refreshAvailability() }
             else { pronunciation.stop() }
         }
-        .alert("Word couldn't be added", isPresented: Binding(get: { viewModel.state.errorMessage != nil }, set: { _ in viewModel.send(.dismissError) })) {
+        .alert("Word couldn't be saved", isPresented: Binding(get: { viewModel.state.errorMessage != nil }, set: { _ in viewModel.send(.dismissError) })) {
             Button("OK", role: .cancel) {}
         } message: { Text(viewModel.state.errorMessage ?? "") }
     }
@@ -61,7 +62,20 @@ struct DictionaryBrowseDetailView: View {
     private var collectionAction: some View {
         if viewModel.state.loadState == .loaded, viewModel.state.word != nil {
             VStack(spacing: Forest.Space.s) {
-                if let saved = viewModel.state.savedWord {
+                if let passage = viewModel.passageContext {
+                    if viewModel.state.didSaveToPassage {
+                        Text("Saved to \(passage.title)").font(.footnote).foregroundStyle(Forest.inkMuted)
+                    } else {
+                        Text("Save this study meaning to the passage list for \(passage.title).")
+                            .font(.footnote).foregroundStyle(Forest.inkMuted)
+                        Button("Save to passage list") { viewModel.send(.saveToPassage) }
+                            .buttonStyle(PrimaryButtonStyle()).disabled(!viewModel.canSaveToPassage)
+                    }
+                    if let saved = viewModel.state.savedWord {
+                        Button("View saved word") { router.push(.detail(.init(kotoba: saved, kanji: nil)), hideNavBar: false) }
+                            .buttonStyle(.bordered)
+                    }
+                } else if let saved = viewModel.state.savedWord {
                     Text(viewModel.state.didAdd ? "Added to your collection" : "Already in your collection")
                         .font(.footnote).foregroundStyle(Forest.inkMuted)
                     Button("View saved word") { router.push(.detail(.init(kotoba: saved, kanji: nil)), hideNavBar: false) }
@@ -90,6 +104,10 @@ struct DictionaryBrowseDetailView: View {
             }
             if PronunciationService.normalizedReading(word.reading) != nil {
                 PronunciationControl(reading: word.reading, service: pronunciation)
+                Button("Practice speaking") {
+                    pronunciation.stop()
+                    router.push(.speaking(.init(id: word.id, prompt: word.headword, suppliedReading: word.reading, acceptedWrittenForms: [word.headword])), hideNavBar: false)
+                }.buttonStyle(.bordered).frame(minHeight: 44)
             }
             LevelTag(level: word.level)
         }

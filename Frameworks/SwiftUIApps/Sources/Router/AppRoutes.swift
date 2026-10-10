@@ -7,9 +7,10 @@
 
 import SwiftUI
 import DataKit
+import DomainKit
 import ZeroCoreKit
 
-public enum AppRoutes: Routable {
+public enum AppRoutes: @preconcurrency Routable {
     case onboarding
     case splashScreen
     case dashboard
@@ -22,31 +23,58 @@ public enum AppRoutes: Routable {
     case dailyGoal
     case difficult
     case dictionary
-    case dictionaryEntry(String)
+    case dictionaryEntry(String, PassageContext? = nil)
     case learningPractice
     case kanaPractice
+    case speaking(SpeakingTarget)
+    case speakingPractice
+    case typedPractice
+    case listeningPractice
+    case exerciseResume(String)
+    case learningPath
+    case learningStep(String)
+    case exerciseHistory
+    case mistakeReview
     case grammarExercises
     case readingPractice
     case readingPassage(String)
-    case readingVocabulary(String)
+    case readingVocabulary(String, PassageContext? = nil)
     case readingQuestions(String)
     case dailyStudyPlan
     case lessons
     case material(StudyMaterial, saved: Bool)
     
-    @ViewBuilder
+    @MainActor @ViewBuilder
     public func view() -> some View {
         switch self {
         case .learningPractice:
             LearningPracticeView()
         case .kanaPractice:
             AppComposer.shared.makeKanaPracticeView()
+        case .speaking(let target):
+            AppComposer.shared.makeSpeakingView(target: target)
+        case .speakingPractice:
+            AppComposer.shared.makeSpeakingPracticeView()
+        case .typedPractice:
+            AppComposer.shared.makeTypedPracticeView()
+        case .listeningPractice:
+            AppComposer.shared.makeListeningPracticeView()
+        case .exerciseResume(let key):
+            AppComposer.shared.makeExerciseResumeView(activityKey: key)
+        case .learningPath:
+            AppComposer.shared.makeLearningPathView()
+        case .learningStep(let id):
+            AppComposer.shared.makeLearningStepView(id: id)
+        case .exerciseHistory:
+            AppComposer.shared.makeExerciseHistoryView()
+        case .mistakeReview:
+            AppComposer.shared.makeMistakeReviewView()
         case .grammarExercises:
             AppComposer.shared.makeGrammarExercisesView()
         case .readingPassage(let id):
             AppComposer.shared.makeReadingPassageView(id: id)
-        case .readingVocabulary(let query):
-            AppComposer.shared.makeReadingVocabularyView(query: query)
+        case .readingVocabulary(let query, let context):
+            AppComposer.shared.makeReadingVocabularyView(query: query, passageContext: context)
         case .readingQuestions(let id):
             AppComposer.shared.makeReadingQuestionsView(id: id)
         case .readingPractice:
@@ -81,8 +109,8 @@ public enum AppRoutes: Routable {
             AppComposer.shared.makeDailyGoalSettingsView()
         case .dictionary:
             AppComposer.shared.makeDictionaryBrowseView()
-        case let .dictionaryEntry(id):
-            AppComposer.shared.makeDictionaryBrowseDetailView(catalogID: id)
+        case let .dictionaryEntry(id, context):
+            AppComposer.shared.makeDictionaryBrowseDetailView(catalogID: id, passageContext: context)
         }
     }
 }

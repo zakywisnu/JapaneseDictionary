@@ -17,7 +17,7 @@ final class StudyFeaturesBackupTests: XCTestCase {
         try store.context.save()
         let repo = repository(store)
         let original = try repo.validate(repo.export(preferences: .init()))
-        XCTAssertEqual(original.formatVersion, 4)
+        XCTAssertEqual(original.formatVersion, 6)
         XCTAssertEqual(original.lists.map(\.name), ["Travel"])
         XCTAssertEqual(original.itemMemberships.map { $0.id.id }, ["word"])
         XCTAssertNil(original.dailyGoal)

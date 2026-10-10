@@ -15,14 +15,23 @@ public final class StandardStudyRatingRepository: StudyRatingRepository {
     public func records() throws -> [DifficultyRecord] {
         try store.makeContext().fetch(FetchDescriptor<DifficultyRecordModel>()).map(\.value).sorted { $0.id.key < $1.id.key }
     }
+    public func events() throws -> [ReviewRatingEvent] {
+        try store.makeContext().fetch(FetchDescriptor<ReviewRatingEventModel>()).map { try $0.value() }.sorted { $0.submittedAt == $1.submittedAt ? $0.actionID.uuidString < $1.actionID.uuidString : $0.submittedAt < $1.submittedAt }
+    }
     public func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord? = nil, activity: PracticeActivity? = nil) throws {
         guard !id.id.isEmpty, now.timeIntervalSince1970.isFinite else { throw ReviewStoreError.invalidRecord }
         let context = store.makeContext()
         do {
+            let event = ReviewRatingEvent(actionID: actionID, sessionID: sessionID, id: id, again: again, submittedAt: now)
+            try ExerciseHistoryValidator.validateReviewRatingEvent(event)
+            let events = try context.fetch(FetchDescriptor<ReviewRatingEventModel>())
+            if let existing = try events.first(where: { $0.actionID == actionID })?.value() {
+                guard existing == event else { throw ExerciseHistoryError.conflictingID }
+                return
+            }
             try requireSavedItem(id, context: context)
             let key = id.key
             let model = try context.fetch(FetchDescriptor<DifficultyRecordModel>(predicate: #Predicate { $0.key == key })).first
-            if model?.lastActionID == actionID { return }
             if let review {
                 try validateReviewRecord(review)
                 guard review.id == id, review.lastSessionID == sessionID else { throw ReviewStoreError.invalidRecord }
@@ -43,6 +52,24 @@ public final class StandardStudyRatingRepository: StudyRatingRepository {
                 else { context.insert(ReviewRecordModel(record: review)) }
             }
             if let activity { try insertPracticeActivityIfNeeded(activity, context: context) }
+            if events.count >= 10_000 {
+                let values: [(ReviewRatingEventModel, ReviewRatingEvent)] = try events.map { model in (model, try model.value()) }
+                let ordered = values.sorted { left, right in
+                    if left.1.submittedAt != right.1.submittedAt { return left.1.submittedAt < right.1.submittedAt }
+                    return left.1.actionID.uuidString < right.1.actionID.uuidString
+                }
+                // Keep complete sessions so retention cannot turn a later Got it into a first response.
+                var removedSessions = Set<UUID>()
+                var retainedCount = events.count
+                for (_, oldEvent) in ordered where retainedCount >= 10_000 && oldEvent.sessionID != sessionID {
+                    if removedSessions.insert(oldEvent.sessionID).inserted {
+                        retainedCount -= values.filter { $0.1.sessionID == oldEvent.sessionID }.count
+                    }
+                }
+                guard retainedCount < 10_000 else { throw ExerciseHistoryError.historyFull }
+                for (model, oldEvent) in values where removedSessions.contains(oldEvent.sessionID) { context.delete(model) }
+            }
+            context.insert(try ReviewRatingEventModel(value: event))
             try saveContext(context); store.refreshContext()
         } catch { context.rollback(); throw error }
     }

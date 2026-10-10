@@ -28,6 +28,7 @@ public final class AppComposer {
     let examples = ExampleRepository.bundled()
     
     private init() {
+        _ = SpeakingTemporaryFiles.cleanupAtLaunch
         do { store = try StudyStore() }
         catch { fatalError("Failed to create study store: \(error)") }
         let vocabularyUpgrade = VocabularyUpgradeService(store: store)

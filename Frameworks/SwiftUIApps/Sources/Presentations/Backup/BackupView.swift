@@ -42,6 +42,7 @@ struct BackupView: View {
                         Text("\(backup.materials.filter { $0.kind == .grammar }.count) grammar lessons · \(backup.materials.filter { $0.kind == .sentence }.count) sentences · \(backup.materials.filter { $0.kind == .customCard }.count) your cards")
                         Text("\(backup.difficulties.filter { $0.missCount > 0 }.count) difficult items")
                         Text("\(backup.lists.count) study lists · \(backup.activities.count) practiced items\nDaily goal: \(backup.dailyGoal.map { String($0) + " items" } ?? "Off")")
+                        Text("\(backup.attempts.count) exercise answers · \(backup.checkpoints.count) unfinished sessions · \(backup.reviewRatingEvents.count) review ratings · \(backup.pathProgress.count) learning paths")
                         Text("Restoring replaces your current collection, saved lessons, your cards, difficult items, study lists, progress, review dates, daily goal and practice history. A recovery backup of your current collection will be kept on this iPhone.")
                             .foregroundStyle(Forest.inkMuted)
                         Button("Replace current collection", role: .destructive) { isConfirming = true }

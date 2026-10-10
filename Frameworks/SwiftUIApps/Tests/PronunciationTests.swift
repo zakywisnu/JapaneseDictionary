@@ -111,7 +111,7 @@ final class PronunciationTests: XCTestCase {
         XCTAssertNil(service.activeID)
         XCTAssertEqual(engine.requests.count, 1)
         XCTAssertEqual(engine.stopCount, 1)
-        for reading in ["", "   ", String(repeating: "あ", count: 201), "いち、に", "abc", "ー", "."] {
+        for reading in ["", "   ", String(repeating: "あ", count: 201), "abc", "ー", "."] {
             XCTAssertNil(PronunciationService.normalizedReading(reading), reading)
         }
     }
@@ -125,6 +125,7 @@ final class PronunciationTests: XCTestCase {
         XCTAssertEqual(engine.requests.first?.text, "たべる")
         XCTAssertEqual(PronunciationService.normalizedReading("-ショク"), "ショク")
         XCTAssertEqual(PronunciationService.normalizedReading("コーヒー"), "コーヒー")
+        XCTAssertEqual(PronunciationService.normalizedReading("いち、に。"), "いち、に。")
         XCTAssertNil(PronunciationService.normalizedReading("ねこ/いぬ"))
     }
 

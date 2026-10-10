@@ -42,6 +42,7 @@ private struct MaterialLibraryScreen: View {
 }
 
 private struct MaterialsTodayView: View {
+    @Environment(\.showsTodayHeader) private var showsTodayHeader
     @EnvironmentObject private var router: AppRouter
     let kind: SavedStudyKind
     let repository: StandardStudyMaterialRepository
@@ -53,6 +54,7 @@ private struct MaterialsTodayView: View {
     @State private var creating = false
     var body: some View {
         List {
+            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
             Section {
                 if kind == .customCard { Button("Create card") { creating = true }.foregroundStyle(Forest.ink) }
                 else { Button("Browse lessons") { router.push(.lessons, hideNavBar: false) }.foregroundStyle(Forest.ink) }

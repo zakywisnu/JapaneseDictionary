@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ExerciseSessionView: View {
+    @Environment(\.dismiss) private var dismiss
     @State var viewModel: ExerciseSessionViewModel
     let title: String
 
@@ -10,7 +11,11 @@ struct ExerciseSessionView: View {
                 VStack(alignment: .leading, spacing: Forest.Space.xl) {
                     Text("Original beginner practice. Not official exam material or independently reviewed.")
                         .font(.footnote).foregroundStyle(Forest.inkMuted)
-                    if viewModel.state.hasInvalidContent {
+                    if viewModel.state.isLoading {
+                        ProgressView("Opening your practice")
+                    } else if viewModel.state.contentChanged {
+                        StateMessage(title: "These questions have changed", message: "Your submitted answers remain in History. Start a new session to use the current questions.", actionTitle: "Start new session", action: { viewModel.send(.restart) })
+                    } else if viewModel.state.hasInvalidContent {
                         StateMessage(title: "Couldn't open these exercises", message: "The bundled questions are incomplete. Return to Learning practice and choose another activity.")
                     } else if viewModel.state.total == 0 {
                         StateMessage(title: "No questions here", message: "Return to Learning practice and choose another activity.")
@@ -44,7 +49,7 @@ struct ExerciseSessionView: View {
                                 .accessibilityAddTraits(viewModel.state.selectedIndex == index ? .isSelected : [])
                             }
                         }
-                        if let selected = viewModel.state.selectedIndex {
+                        if viewModel.state.isRevealed, let selected = viewModel.state.selectedIndex {
                             VStack(alignment: .leading, spacing: Forest.Space.s) {
                                 Text(selected == question.correctIndex ? "Correct" : "Answer: \(question.choices[question.correctIndex])")
                                     .font(.headline)
@@ -56,6 +61,10 @@ struct ExerciseSessionView: View {
                             }.buttonStyle(PrimaryButtonStyle())
                         }
                     }
+                    if let message = viewModel.state.errorMessage {
+                        StateMessage(title: "Practice unavailable", message: message, actionTitle: "Retry", action: { viewModel.send(.retry) })
+                        Button("Exit practice") { dismiss() }.buttonStyle(.bordered)
+                    }
                 }
                 .foregroundStyle(Forest.ink).padding(Forest.Space.l)
             }
@@ -64,15 +73,10 @@ struct ExerciseSessionView: View {
                 if !complete { proxy.scrollTo("question", anchor: .top) }
             }
         }
+        .onAppear { viewModel.send(.load) }
         .background(Forest.canvas)
         .toolbar(.visible, for: .navigationBar)
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-extension AppComposer {
-    func makeGrammarExercisesView() -> some View {
-        ExerciseSessionView(viewModel: .init(exercises: ExerciseCatalog.grammar), title: "Grammar exercises")
     }
 }

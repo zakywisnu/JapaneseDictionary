@@ -49,6 +49,8 @@ private struct ReadingDetailView: View {
     let passage: ReadingPassage
     @EnvironmentObject private var router: AppRouter
     @State private var viewModel = ReadingDetailViewModel()
+    @State var vocabularyModel: PassageVocabularyViewModel
+    private var passageContext: PassageContext { PassageContext(id: passage.id, title: passage.title) }
 
     var body: some View {
         ScrollView {
@@ -58,17 +60,33 @@ private struct ReadingDetailView: View {
                     .lineSpacing(Forest.Space.s).fixedSize(horizontal: false, vertical: true)
                     .environment(\.openURL, OpenURLAction { url in
                         guard url.scheme == "reading-word", let index = Int(url.lastPathComponent), passage.vocabulary.indices.contains(index) else { return .discarded }
-                        router.push(.readingVocabulary(passage.vocabulary[index]), hideNavBar: false)
+                        router.push(.readingVocabulary(passage.vocabulary[index], passageContext), hideNavBar: false)
                         return .handled
                     })
                 Text("Tap an underlined word to search the bundled dictionary.")
                     .font(.footnote).foregroundStyle(Forest.inkMuted)
                 Menu("Vocabulary") {
                     ForEach(passage.vocabulary, id: \.self) { word in
-                        Button(word) { router.push(.readingVocabulary(word), hideNavBar: false) }
+                        Button(word) { router.push(.readingVocabulary(word, passageContext), hideNavBar: false) }
                     }
                 }
                 .frame(minHeight: 44)
+                if vocabularyModel.state.isLoading {
+                    ProgressView("Opening saved passage vocabulary")
+                } else if let error = vocabularyModel.state.error {
+                    StateMessage(title: "Couldn't open passage vocabulary", message: error, actionTitle: "Try again", action: { vocabularyModel.send(.load) })
+                } else if vocabularyModel.state.savedCount == 0 {
+                    Text("No vocabulary saved for this passage. Tap a word, choose its study meaning, then Save to passage list.")
+                        .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else if let list = vocabularyModel.state.list {
+                    Text("\(vocabularyModel.state.savedCount) items in \(list.name)")
+                        .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    Button("Review passage vocabulary") { router.push(.studyList(list.id), hideNavBar: false) }
+                        .buttonStyle(.bordered)
+                    Text("Choose Review list on the saved list to practice its current members. Review dates stay unchanged.")
+                        .font(.footnote).foregroundStyle(Forest.inkMuted)
+                }
                 Toggle("Show kana reading", isOn: Binding(get: { viewModel.state.showsReading }, set: { viewModel.send(.readingChanged($0)) }))
                 if viewModel.state.showsReading {
                     Text(passage.reading).fixedSize(horizontal: false, vertical: true)
@@ -88,7 +106,7 @@ private struct ReadingDetailView: View {
             .foregroundStyle(Forest.ink).tint(Forest.moss).padding(Forest.Space.l)
         }
         .background(Forest.canvas).toolbar(.visible, for: .navigationBar).navigationTitle(passage.title).navigationBarTitleDisplayMode(.inline)
-
+        .onAppear { vocabularyModel.send(.load) }
     }
 
     private var linkedPassage: AttributedString {
@@ -111,25 +129,27 @@ extension AppComposer {
     @ViewBuilder
     func makeReadingPassageView(id: String) -> some View {
         if let passage = ReadingCatalog.passages.first(where: { $0.id == id }) {
-            ReadingDetailView(passage: passage)
+            ReadingDetailView(passage: passage, vocabularyModel: .init(load: { [self] in
+                try passageWordRepository().list(passageID: id)
+            }))
         } else {
             missingReadingPassage
         }
     }
 
-    func makeReadingVocabularyView(query: String) -> some View {
+    func makeReadingVocabularyView(query: String, passageContext: PassageContext? = nil) -> some View {
         let model = DictionaryBrowseViewModel(loadSavedWords: { [self] in
             _ = try useCase.getWordsProgressUseCase.execute()
             return try useCase.getAllKotobaUseCase.execute().mapToKotobas()
         })
         model.send(.queryChanged(query))
-        return DictionaryBrowseView(viewModel: model)
+        return DictionaryBrowseView(passageContext: passageContext, viewModel: model)
     }
 
     @ViewBuilder
     func makeReadingQuestionsView(id: String) -> some View {
         if let passage = ReadingCatalog.passages.first(where: { $0.id == id }) {
-            ExerciseSessionView(viewModel: .init(exercises: passage.questions), title: "Comprehension")
+            makeExerciseSessionView(exercises: passage.questions, activityKey: "reading:" + id, title: "Comprehension")
         } else {
             missingReadingPassage
         }

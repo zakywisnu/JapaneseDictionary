@@ -3,11 +3,17 @@ import DataKit
 
 struct DictionaryBrowseView: View {
     @EnvironmentObject private var router: AppRouter
+    var passageContext: PassageContext? = nil
     @State var viewModel: DictionaryBrowseViewModel
 
     var body: some View {
         VStack(spacing: Forest.Space.m) {
             VStack(alignment: .leading, spacing: Forest.Space.s) {
+                if let passageContext {
+                    Text("Choose the study meaning to save to \(passageContext.title).")
+                        .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 searchField
                 Picker("Community JLPT level", selection: Binding(get: { viewModel.state.level }, set: { viewModel.send(.levelChanged($0)) })) {
                     Text("All levels").tag(String?.none)
@@ -52,7 +58,7 @@ struct DictionaryBrowseView: View {
             List {
                 Section {
                     ForEach(viewModel.state.results, id: \.id) { word in
-                        Button { router.push(.dictionaryEntry(word.id), hideNavBar: false) } label: {
+                        Button { router.push(.dictionaryEntry(word.id, passageContext), hideNavBar: false) } label: {
                             VStack(alignment: .leading, spacing: Forest.Space.s) {
                                 StudyRow(entry: word.browseEntry)
                                 if viewModel.state.savedWordsByCatalogID[word.id] != nil {

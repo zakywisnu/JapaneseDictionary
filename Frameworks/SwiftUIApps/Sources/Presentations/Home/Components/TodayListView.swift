@@ -25,6 +25,7 @@ enum TodayLoadState {
 }
 
 struct TodayListView: View {
+    @Environment(\.showsTodayHeader) private var showsTodayHeader
     let dueCount: Int
     let dueLoadState: TodayLoadState
     let onRetryDue: () -> Void
@@ -62,6 +63,7 @@ struct TodayListView: View {
 
     private var loadedList: some View {
         List {
+            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
             Section {
                 addCard
                     .listRowBackground(Forest.surface)

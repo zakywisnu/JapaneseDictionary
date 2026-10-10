@@ -9,7 +9,7 @@ public final class StudyStore {
     public private(set) var context: ModelContext
 
     public init(url: URL = StudyStore.defaultURL, inMemory: Bool = false) throws {
-        let schema = Schema([KanjiDataModel.self, KotobaDataModel.self, WordsProgressModel.self, ReviewRecordModel.self, StudyListModel.self, StudyListMembershipModel.self, DailyGoalSettingsModel.self, PracticeActivityModel.self, StudyMaterialModel.self, DifficultyRecordModel.self, StudyItemMembershipModel.self])
+        let schema = Schema([KanjiDataModel.self, KotobaDataModel.self, WordsProgressModel.self, ReviewRecordModel.self, StudyListModel.self, StudyListMembershipModel.self, DailyGoalSettingsModel.self, PracticeActivityModel.self, StudyMaterialModel.self, DifficultyRecordModel.self, StudyItemMembershipModel.self, ExerciseAttemptModel.self, ExerciseCheckpointModel.self, ReviewRatingEventModel.self, LearningPathProgressModel.self])
         let configuration = inMemory
             ? ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
             : ModelConfiguration(schema: schema, url: url)

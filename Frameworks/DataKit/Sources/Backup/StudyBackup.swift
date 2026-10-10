@@ -111,7 +111,8 @@ public struct BackupStudyList: Codable, Equatable {
     public var id: String
     public var name: String
     public var createdAt: Date
-    public init(id: String, name: String, createdAt: Date) { self.id = id; self.name = name; self.createdAt = createdAt }
+    public var sourceKey: String?
+    public init(id: String, name: String, createdAt: Date, sourceKey: String? = nil) { self.id = id; self.name = name; self.createdAt = createdAt; self.sourceKey = sourceKey }
 }
 
 public struct BackupListMembership: Codable, Equatable {
@@ -137,17 +138,23 @@ public struct StudyBackup: Codable, Equatable {
     public var materials: [StudyMaterial]
     public var difficulties: [DifficultyRecord]
     public var itemMemberships: [StudyItemMembership]
+    public var pathProgress: [LearningPathProgress]
+    public var attempts: [ExerciseAttempt]
+    public var checkpoints: [ExerciseCheckpoint]
+    public var reviewRatingEvents: [ReviewRatingEvent]
 
     public init(formatVersion: Int = 1, createdAt: Date, catalogFingerprint: String, words: [BackupWord], kanjis: [BackupKanji], progress: BackupProgress?, reviews: [ReviewRecord], preferences: BackupPreferences,
-                lists: [BackupStudyList] = [], memberships: [BackupListMembership] = [], dailyGoal: Int? = 10, activities: [PracticeActivity] = [], materials: [StudyMaterial] = [], difficulties: [DifficultyRecord] = [], itemMemberships: [StudyItemMembership] = []) {
+                lists: [BackupStudyList] = [], memberships: [BackupListMembership] = [], dailyGoal: Int? = 10, activities: [PracticeActivity] = [], materials: [StudyMaterial] = [], difficulties: [DifficultyRecord] = [], itemMemberships: [StudyItemMembership] = [], attempts: [ExerciseAttempt] = [], checkpoints: [ExerciseCheckpoint] = [], reviewRatingEvents: [ReviewRatingEvent] = [], pathProgress: [LearningPathProgress] = []) {
         self.formatVersion = formatVersion; self.createdAt = createdAt; self.catalogFingerprint = catalogFingerprint
         self.words = words; self.kanjis = kanjis; self.progress = progress; self.reviews = reviews; self.preferences = preferences
         self.lists = lists; self.memberships = memberships; self.dailyGoal = dailyGoal; self.activities = activities
         self.materials = materials; self.difficulties = difficulties; self.itemMemberships = itemMemberships
+        self.pathProgress = pathProgress
+        self.attempts = attempts; self.checkpoints = checkpoints; self.reviewRatingEvents = reviewRatingEvents
     }
 
     private enum CodingKeys: String, CodingKey {
-        case formatVersion, createdAt, catalogFingerprint, words, kanjis, progress, reviews, preferences, lists, memberships, dailyGoal, activities, materials, difficulties, itemMemberships
+        case formatVersion, createdAt, catalogFingerprint, words, kanjis, progress, reviews, preferences, lists, memberships, dailyGoal, activities, materials, difficulties, itemMemberships, attempts, checkpoints, reviewRatingEvents, pathProgress
     }
 
     public init(from decoder: Decoder) throws {
@@ -160,6 +167,20 @@ public struct StudyBackup: Codable, Equatable {
         progress = try c.decodeIfPresent(BackupProgress.self, forKey: .progress)
         reviews = try c.decode([ReviewRecord].self, forKey: .reviews)
         preferences = try c.decode(BackupPreferences.self, forKey: .preferences)
+        if formatVersion >= 6 {
+            pathProgress = try c.decode([LearningPathProgress].self, forKey: .pathProgress)
+        } else {
+            pathProgress = try c.decodeIfPresent([LearningPathProgress].self, forKey: .pathProgress) ?? []
+        }
+        if formatVersion >= 5 {
+            attempts = try c.decode([ExerciseAttempt].self, forKey: .attempts)
+            checkpoints = try c.decode([ExerciseCheckpoint].self, forKey: .checkpoints)
+            reviewRatingEvents = try c.decode([ReviewRatingEvent].self, forKey: .reviewRatingEvents)
+        } else {
+            attempts = try c.decodeIfPresent([ExerciseAttempt].self, forKey: .attempts) ?? []
+            checkpoints = try c.decodeIfPresent([ExerciseCheckpoint].self, forKey: .checkpoints) ?? []
+            reviewRatingEvents = try c.decodeIfPresent([ReviewRatingEvent].self, forKey: .reviewRatingEvents) ?? []
+        }
         if formatVersion >= 4 {
             materials = try c.decode([StudyMaterial].self, forKey: .materials)
             difficulties = try c.decode([DifficultyRecord].self, forKey: .difficulties)
@@ -189,6 +210,12 @@ public struct StudyBackup: Codable, Equatable {
         try c.encode(catalogFingerprint, forKey: .catalogFingerprint); try c.encode(words, forKey: .words)
         try c.encode(kanjis, forKey: .kanjis); try c.encodeIfPresent(progress, forKey: .progress)
         try c.encode(reviews, forKey: .reviews); try c.encode(preferences, forKey: .preferences)
+        if formatVersion >= 6 { try c.encode(pathProgress, forKey: .pathProgress) }
+        if formatVersion >= 5 {
+            try c.encode(attempts, forKey: .attempts)
+            try c.encode(checkpoints, forKey: .checkpoints)
+            try c.encode(reviewRatingEvents, forKey: .reviewRatingEvents)
+        }
         if formatVersion >= 4 {
             try c.encode(materials, forKey: .materials)
             try c.encode(difficulties, forKey: .difficulties)

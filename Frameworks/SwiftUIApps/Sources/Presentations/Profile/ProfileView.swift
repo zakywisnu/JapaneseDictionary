@@ -39,6 +39,7 @@ public struct ProfileView: View {
                         loaded(progress)
                     }
                 }
+                AppComposer.shared.makeLearningProgressView()
                 if let recovery = AppComposer.shared.backupRestoreStatus.recoveryURL {
                     VStack(alignment: .leading, spacing: Forest.Space.m) {
                         Text("Backup restored")

@@ -1,5 +1,6 @@
 import SwiftUI
 import DataKit
+import DomainKit
 
 struct MaterialDetailView: View {
     @EnvironmentObject private var router: AppRouter
@@ -12,6 +13,12 @@ struct MaterialDetailView: View {
     @State private var showingSource = false
     let related: (String) -> StudyMaterial?
 
+    var speakingTarget: SpeakingTarget? { Self.speakingTarget(for: material) }
+    static func speakingTarget(for material: StudyMaterial) -> SpeakingTarget? {
+        guard [.sentence, .customCard].contains(material.kind), let reading = material.reading,
+              let supplied = SpeechTextValidator.normalizedReading(reading) else { return nil }
+        return .init(id: SavedStudyID(kind: material.kind, id: material.id).key, prompt: material.prompt, suppliedReading: supplied, acceptedWrittenForms: [material.prompt])
+    }
     private var material: StudyMaterial { viewModel.state.material }
     var body: some View {
         ScrollView {
@@ -24,6 +31,12 @@ struct MaterialDetailView: View {
                 if let reading = material.reading {
                     Text(reading).foregroundStyle(Forest.inkMuted)
                     PronunciationControl(reading: reading, service: pronunciation)
+                }
+                if let target = speakingTarget {
+                    Button("Practice speaking") {
+                        pronunciation.stop()
+                        router.push(.speaking(target), hideNavBar: false)
+                    }.buttonStyle(.bordered).frame(minHeight: 44)
                 }
                 MaterialAnswer(material: material)
                 let references = Array(Set(material.relatedSourceIDs + (material.source?.parentIDs ?? []))).sorted()

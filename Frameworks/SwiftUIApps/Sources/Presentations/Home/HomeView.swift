@@ -12,19 +12,7 @@ struct HomeView: View {
     @AppStorage("todayStudyKind") private var kind: StudyKind = .words
     
     var body: some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: Forest.Space.l) {
-                ScreenHeader(
-                    title: "Today",
-                    caption: Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide))
-                )
-                AppComposer.shared.makeDailyGoalSummaryView()
-                StudyKindPicker(selection: $kind)
-                Button("Daily study plan") { router.push(.dailyStudyPlan, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
-            }
-            .padding(.horizontal, Forest.Space.l)
-            .padding(.top, Forest.Space.s)
-            
+        Group {
             switch kind {
             case .words:
                 AppComposer.shared.makeKanaView()
@@ -34,6 +22,7 @@ struct HomeView: View {
                 AppComposer.shared.makeMaterialsTodayView(kind: kind.savedKind).id(kind)
             }
         }
+        .environment(\.showsTodayHeader, true)
         .background(Forest.canvas)
     }
 }

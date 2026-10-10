@@ -1,5 +1,6 @@
 import SwiftUI
 import DataKit
+import DomainKit
 
 struct KanaPracticeView: View {
     @EnvironmentObject private var router: AppRouter
@@ -38,7 +39,13 @@ struct KanaPracticeView: View {
                                 }
                             }.toggleStyle(.checkboxKana)
                             Text(entry.note).font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true)
-                            if let reading = entry.reading { PronunciationControl(reading: reading, service: pronunciation) }
+                            if let reading = entry.reading {
+                                PronunciationControl(reading: reading, service: pronunciation)
+                                Button("Record and replay") {
+                                    pronunciation.stop()
+                                    router.push(.speaking(.init(id: entry.id, prompt: entry.kana, suppliedReading: reading, isIsolatedSound: true)), hideNavBar: false)
+                                }.buttonStyle(.bordered).frame(minHeight: 44)
+                            }
                         }.padding(.vertical, Forest.Space.xs)
                     }
                 }.listRowBackground(Forest.surface)

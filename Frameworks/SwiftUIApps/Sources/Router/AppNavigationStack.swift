@@ -40,7 +40,7 @@ public struct AppNavigationStack<Content: View>: View {
 extension AppRoutes {
     var isPushed: Bool {
         switch self {
-        case .learningPractice, .kanaPractice, .grammarExercises, .readingPractice, .readingPassage, .readingVocabulary, .readingQuestions, .dailyStudyPlan, .difficult, .lessons, .material, .detail, .review, .sources, .backup, .dictionary, .dictionaryEntry, .studyLists, .studyList, .dailyGoal: return true
+        case .speaking, .speakingPractice, .typedPractice, .listeningPractice, .exerciseResume, .learningPath, .learningStep, .exerciseHistory, .mistakeReview, .learningPractice, .kanaPractice, .grammarExercises, .readingPractice, .readingPassage, .readingVocabulary, .readingQuestions, .dailyStudyPlan, .difficult, .lessons, .material, .detail, .review, .sources, .backup, .dictionary, .dictionaryEntry, .studyLists, .studyList, .dailyGoal: return true
         default: return false
         }
     }

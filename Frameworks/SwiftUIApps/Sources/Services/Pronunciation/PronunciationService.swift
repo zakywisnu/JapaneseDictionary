@@ -45,6 +45,11 @@ final class PronunciationService {
                   AVAudioSession.InterruptionType(rawValue: rawValue) == .began else { return }
             MainActor.assumeIsolated { self?.playbackInterrupted() }
         })
+        observers.append(center.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main) { [weak self] notification in
+            MainActor.assumeIsolated {
+                if AudioSessionCoordinator.isExternalRouteChange(notification) { self?.playbackInterrupted() }
+            }
+        })
     }
 
     convenience init() {
@@ -110,22 +115,7 @@ final class PronunciationService {
     func willEnterForeground() { refreshAvailability() }
 
     static func normalizedReading(_ reading: String) -> String? {
-        let trimmed = reading.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty, trimmed.count <= 200 else { return nil }
-        let text = trimmed.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: "-", with: "")
-            .precomposedStringWithCanonicalMapping
-        var hasKana = false
-        for scalar in text.unicodeScalars {
-            switch scalar.value {
-            case 0x3041...0x3096, 0x30A1...0x30FA:
-                hasKana = true
-            case 0x30FC, 0x309D...0x309E, 0x30FD...0x30FE:
-                break
-            default:
-                return nil
-            }
-        }
-        return hasKana ? text : nil
+        SpeechTextValidator.normalizedReading(reading)
     }
 
     private func clearPlayback() {

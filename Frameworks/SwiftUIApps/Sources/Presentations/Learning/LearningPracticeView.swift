@@ -5,11 +5,17 @@ struct LearningPracticeView: View {
     var body: some View {
         List {
             Section {
+                destination("Starter path", caption: "Eight steps connecting kana, grammar and reading", route: .learningPath)
+                destination("Typed practice", caption: "Recall supplied readings and kana romanization", route: .typedPractice)
+                destination("Listening practice", caption: "Listen first, then type the supplied reading", route: .listeningPractice)
+                destination("Speaking practice", caption: "Record, replay and compare recognized phrases", route: .speakingPractice)
                 destination("Kana", caption: "Hiragana, katakana and combination sounds", route: .kanaPractice)
                 destination("Grammar exercises", caption: "Choose a pattern and check its explanation", route: .grammarExercises)
                 destination("Reading practice", caption: "Short passages with vocabulary and questions", route: .readingPractice)
             }.listRowBackground(Forest.surface)
             Section {
+                destination("Exercise history", caption: "Your saved answers and explanations", route: .exerciseHistory)
+                destination("Practice mistakes", caption: "Retry questions you last answered incorrectly", route: .mistakeReview)
                 destination("Daily study plan", caption: "A short plan from your collection and review dates", route: .dailyStudyPlan)
             }.listRowBackground(Forest.surface)
         }

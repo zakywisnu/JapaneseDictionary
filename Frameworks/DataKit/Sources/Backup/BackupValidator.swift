@@ -66,13 +66,23 @@ public enum BackupValidator {
     }
 
     public static func validate(_ backup: StudyBackup, catalog: CatalogSnapshot) throws {
-        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) || backup.formatVersion == 4 else { throw BackupError.unsupportedVersion }
+        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) || [4, 5, 6].contains(backup.formatVersion) else { throw BackupError.unsupportedVersion }
         guard backup.catalogFingerprint == catalog.fingerprint else { throw BackupError.foreignCatalog }
         try date(backup.createdAt)
+        if backup.formatVersion < 6 { guard backup.pathProgress.isEmpty else { throw BackupError.invalid("path data in an older backup format") } }
+        guard backup.pathProgress.count <= 100 else { throw BackupError.invalid("path progress") }
+        try unique(backup.pathProgress.map(\.pathID), field: "path identities")
+        try backup.pathProgress.forEach(LearningPathValidator.validate)
+        if backup.formatVersion < 5 {
+            guard backup.attempts.isEmpty, backup.checkpoints.isEmpty, backup.reviewRatingEvents.isEmpty else { throw BackupError.invalid("exercise history in an older backup format") }
+        }
+        try ExerciseHistoryValidator.validate(attempts: backup.attempts, checkpoints: backup.checkpoints, reviewRatingEvents: backup.reviewRatingEvents)
         // Saved content requires its original Add next indexes and cumulative counters.
         guard backup.progress != nil || (backup.words.isEmpty && backup.kanjis.isEmpty && !backup.reviews.contains(where: { [.word, .kanji].contains($0.id.kind) })) else {
             throw BackupError.invalid("missing collection progress")
         }
+        try unique(backup.lists.compactMap(\.sourceKey), field: "list source keys")
+        guard backup.lists.allSatisfy({ $0.sourceKey == nil || ($0.sourceKey!.hasPrefix("passage:") && !String($0.sourceKey!.dropFirst(8)).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && $0.sourceKey!.count <= 256) }) else { throw BackupError.invalid("list source key") }
         try unique(backup.words.map(\.id), field: "word IDs")
         try unique(backup.kanjis.map(\.id), field: "kanji IDs")
         try unique(backup.reviews.map { $0.id.key }, field: "review IDs")

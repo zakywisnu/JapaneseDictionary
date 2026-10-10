@@ -8,10 +8,14 @@ final class DictionaryBrowseDetailViewModel {
     private let catalogID: String
     private let loadCatalog: () throws -> VocabularyCatalogRepository
     private let loadSavedWords: () throws -> [Kotoba]
+    let passageContext: PassageContext?
+    private let savePassageWord: ((String, PassageContext) throws -> Void)?
     private let addWord: (String) throws -> Void
 
     init(catalogID: String, loadCatalog: @escaping () throws -> VocabularyCatalogRepository = { try .bundled() },
-         loadSavedWords: @escaping () throws -> [Kotoba], addWord: @escaping (String) throws -> Void) {
+         loadSavedWords: @escaping () throws -> [Kotoba], addWord: @escaping (String) throws -> Void, passageContext: PassageContext? = nil, savePassageWord: ((String, PassageContext) throws -> Void)? = nil) {
+        self.passageContext = passageContext
+        self.savePassageWord = savePassageWord
         self.catalogID = catalogID
         self.loadCatalog = loadCatalog
         self.loadSavedWords = loadSavedWords
@@ -20,6 +24,10 @@ final class DictionaryBrowseDetailViewModel {
 
     var canAdd: Bool {
         state.loadState == .loaded && state.word != nil && state.savedWord == nil && !state.isAdding
+    }
+
+    var canSaveToPassage: Bool {
+        state.loadState == .loaded && state.word != nil && passageContext != nil && savePassageWord != nil && !state.isAdding && !state.didSaveToPassage
     }
 
     func send(_ action: Action) {
@@ -38,6 +46,17 @@ final class DictionaryBrowseDetailViewModel {
                 reload()
             } catch {
                 state.errorMessage = "This word couldn't be added to your collection. Try again."
+            }
+        case .saveToPassage:
+            guard canSaveToPassage, let passageContext, let savePassageWord else { return }
+            state.isAdding = true; state.errorMessage = nil
+            defer { state.isAdding = false }
+            do {
+                try savePassageWord(catalogID, passageContext)
+                state.didSaveToPassage = true; state.didAdd = true
+                reload()
+            } catch {
+                state.errorMessage = "This word couldn't be saved to \(passageContext.title). Try Save to passage list again."
             }
         case .dismissError:
             state.errorMessage = nil
@@ -75,7 +94,8 @@ final class DictionaryBrowseDetailViewModel {
         var errorMessage: String?
         var isAdding = false
         var didAdd = false
+        var didSaveToPassage = false
     }
 
-    enum Action { case load, add, dismissError }
+    enum Action { case load, add, saveToPassage, dismissError }
 }

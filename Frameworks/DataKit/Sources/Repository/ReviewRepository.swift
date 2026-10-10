@@ -13,8 +13,10 @@ public struct SavedStudyItem: Hashable {
     public let dateAdded: Date?
     public let addedIndex: Int?
     public let exampleWordKey: ExampleWordKey?
+    public let material: StudyMaterial?
 
     init(word: KotobaDataModel) {
+        material = nil
         exampleWordKey = ExampleWordKey(headword: word.kanji.isEmpty ? word.furigana : word.kanji, reading: word.furigana, level: word.jlptLevel.rawValue)
         id = SavedStudyID(kind: .word, id: word.id)
         headword = word.kanji.isEmpty ? word.furigana : word.kanji
@@ -28,6 +30,7 @@ public struct SavedStudyItem: Hashable {
         addedIndex = word.addedIndex
     }
     init(kanji: KanjiDataModel) {
+        material = nil
         exampleWordKey = nil
         id = SavedStudyID(kind: .kanji, id: kanji.id)
         headword = kanji.kanji
@@ -40,6 +43,14 @@ public struct SavedStudyItem: Hashable {
         dateAdded = kanji.dateAdded
         addedIndex = kanji.addedIndex
     }
+    public init(material: StudyMaterial) {
+        self.material = material
+        id = SavedStudyID(kind: material.kind, id: material.id)
+        headword = material.prompt; reading = material.reading; meanings = [material.answer]
+        level = material.level ?? ""; onyomi = []; kunyomi = []; strokes = nil
+        dateAdded = material.createdAt; addedIndex = nil; exampleWordKey = nil
+    }
+
 }
 
 public enum ReviewStoreError: Error {
@@ -74,6 +85,8 @@ public final class StandardReviewRepository: ReviewRepository {
         switch kind {
         case .word: return try context.fetch(FetchDescriptor<KotobaDataModel>()).map(SavedStudyItem.init(word:))
         case .kanji: return try context.fetch(FetchDescriptor<KanjiDataModel>()).map(SavedStudyItem.init(kanji:))
+        case .grammar, .sentence, .customCard:
+            return try context.fetch(FetchDescriptor<StudyMaterialModel>()).filter { $0.kind == kind }.map { SavedStudyItem(material: try $0.decodedValue()) }
         }
     }
 
@@ -123,6 +136,9 @@ func requireSavedItem(_ id: SavedStudyID, context: ModelContext) throws {
     switch id.kind {
     case .word: exists = try !context.fetch(FetchDescriptor<KotobaDataModel>(predicate: #Predicate { $0.id == savedID })).isEmpty
     case .kanji: exists = try !context.fetch(FetchDescriptor<KanjiDataModel>(predicate: #Predicate { $0.id == savedID })).isEmpty
+    case .grammar, .sentence, .customCard:
+        let key = id.key
+        exists = try !context.fetch(FetchDescriptor<StudyMaterialModel>(predicate: #Predicate { $0.key == key })).isEmpty
     }
     if !exists { throw DataError.dataNotFound }
 }

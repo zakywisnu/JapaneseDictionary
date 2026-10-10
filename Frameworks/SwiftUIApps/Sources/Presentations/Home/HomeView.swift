@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var router: AppRouter
     @AppStorage("todayStudyKind") private var kind: StudyKind = .words
     
     var body: some View {
@@ -19,6 +20,7 @@ struct HomeView: View {
                 )
                 AppComposer.shared.makeDailyGoalSummaryView()
                 StudyKindPicker(selection: $kind)
+                Button("Practice difficult items") { router.push(.difficult, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)
@@ -28,6 +30,8 @@ struct HomeView: View {
                 AppComposer.shared.makeKanaView()
             case .kanji:
                 AppComposer.shared.makeKanjiView()
+            case .grammar, .sentences, .cards:
+                AppComposer.shared.makeMaterialsTodayView(kind: kind.savedKind).id(kind)
             }
         }
         .background(Forest.canvas)

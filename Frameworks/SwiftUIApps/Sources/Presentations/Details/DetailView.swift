@@ -36,6 +36,10 @@ public struct DetailView: View {
             VStack(spacing: Forest.Space.xl) {
                 if let kanji = viewModel.state.kanji {
                     specimen(headword: kanji.kanji, reading: nil, level: kanji.jlptLevel.rawValue)
+                    Button("Organize in lists") { isOrganizingLists = true }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Forest.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                     definitionCard([
                         ("Meanings", kanji.meanings),
                         ("On'yomi", kanji.onyomi),
@@ -98,6 +102,8 @@ public struct DetailView: View {
         .sheet(isPresented: $isOrganizingLists) {
             if let word = viewModel.state.kotoba {
                 AppComposer.shared.makeWordListMembershipView(wordID: word.id)
+            } else if let kanji = viewModel.state.kanji {
+                AppComposer.shared.makeItemListMembershipView(id: .init(kind: .kanji, id: kanji.id))
             }
         }
         .sheet(isPresented: $isConfirmingUpdate) {

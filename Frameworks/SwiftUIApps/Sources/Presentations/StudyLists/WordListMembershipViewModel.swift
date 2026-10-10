@@ -15,18 +15,19 @@ final class WordListMembershipViewModel {
     }
     enum Action { case load, refreshLists, toggle(String), save, cancel }
     var state = State()
-    private let wordID: String
+    private let id: SavedStudyID
     private let useCases: StudyListUseCases
-    init(wordID: String, useCases: StudyListUseCases) { self.wordID = wordID; self.useCases = useCases }
+    init(wordID: String, useCases: StudyListUseCases) { self.id = .init(kind: .word, id: wordID); self.useCases = useCases }
+    init(id: SavedStudyID, useCases: StudyListUseCases) { self.id = id; self.useCases = useCases }
     func send(_ action: Action) {
         switch action {
         case .load:
             state.isLoading = true; state.error = nil
             do {
                 let lists = try useCases.lists()
-                let selected = try useCases.listIDs(wordID: wordID)
+                let selected = try useCases.listIDs(id: id)
                 state.lists = lists; state.original = selected; state.selected = selected
-            } catch { state.error = (error as? StudyListError)?.errorDescription ?? "This word's lists couldn't be opened. Try again." }
+            } catch { state.error = (error as? StudyListError)?.errorDescription ?? "This item's lists couldn't be opened. Try again." }
             state.isLoading = false
         case .refreshLists:
             do {
@@ -42,8 +43,8 @@ final class WordListMembershipViewModel {
         case .cancel: state.selected = state.original; state.didSave = false
         case .save:
             state.didSave = false
-            do { try useCases.setLists(wordID: wordID, listIDs: state.selected); state.original = state.selected; state.didSave = true; state.saveError = nil }
-            catch { state.saveError = "This word's lists couldn't be saved. Try again. Your choices are still here." }
+            do { try useCases.setLists(id: id, listIDs: state.selected); state.original = state.selected; state.didSave = true; state.saveError = nil }
+            catch { state.saveError = "This item's lists couldn't be saved. Try again. Your choices are still here." }
         }
     }
 }

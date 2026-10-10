@@ -8,9 +8,9 @@ struct WordListMembershipView: View {
         NavigationStack {
             List {
                 if viewModel.state.isLoading {
-                    ProgressView("Loading this word's lists")
+                    ProgressView("Loading this item's lists")
                 } else if let error = viewModel.state.error {
-                    StateMessage(title: "Couldn't open word lists", message: error, actionTitle: "Try again") { viewModel.send(.load) }
+                    StateMessage(title: "Couldn't open item lists", message: error, actionTitle: "Try again") { viewModel.send(.load) }
                 } else {
                     if viewModel.state.lists.isEmpty {
                         StateMessage(title: "No study lists yet", message: "Create a list, then return here to select it.")

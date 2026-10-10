@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 public enum SavedStudyKind: String, Codable, Hashable, CaseIterable {
-    case word, kanji
+    case word, kanji, grammar, sentence, customCard
 }
 
 public struct SavedStudyID: Codable, Hashable {

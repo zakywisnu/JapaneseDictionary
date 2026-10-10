@@ -4,6 +4,16 @@ import DataKit
 
 @MainActor
 final class StudyFeaturesReviewTests: XCTestCase {
+    func testMixedKindsWithSameRawIDRemainSeparateQueueItems() {
+        let word = ReviewItem(word: .init(id: "same", kanji: "森", furigana: "もり", english: ["forest"], jlptLevel: .n5))
+        let kanji = ReviewItem(kanji: .init(id: "same", kanji: "木", stroke: 4, onyomi: ["もく"], kunyomi: ["き"], jlptLevel: .n5, meanings: ["tree"]))
+        let model = ReviewViewModel(session: .init(kind: .words, items: [word, kanji]))
+        XCTAssertEqual(model.state.distinctItemCount, 2)
+        model.send(.reveal)
+        model.send(.rate(.gotIt))
+        XCTAssertEqual(model.state.currentItem?.headword, "木")
+        XCTAssertFalse(model.state.isComplete)
+    }
     func testFailedCompletionKeepsAnswerAndRetriesOriginalDateAcrossMidnight() {
         var date = Date(timeIntervalSince1970: 100)
         var attempts: [Date] = []

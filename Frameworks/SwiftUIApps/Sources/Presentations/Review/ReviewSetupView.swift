@@ -2,13 +2,13 @@ import SwiftUI
 
 struct ReviewSetupView: View {
     @Environment(\.dismiss) private var dismiss
-    let kind: StudyKind
+    var kind: StudyKind? = nil
     let items: [ReviewItem]
     var origin: ReviewOrigin = .collection
     let onStart: (ReviewSession) -> Void
     @State private var selection = ReviewSelection(level: nil, limit: 20)
 
-    private var noun: String { kind == .words ? "word" : "kanji" }
+    private var noun: String { kind == .words ? "word" : kind == .kanji ? "kanji" : "item" }
     private var selected: [ReviewItem] { selection.selected(items) }
 
     var body: some View {
@@ -16,11 +16,12 @@ struct ReviewSetupView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Forest.Space.xl) {
                     VStack(alignment: .leading, spacing: Forest.Space.s) {
-                        Text("JLPT level").font(.headline)
-                        Picker("JLPT level", selection: $selection.level) {
+                        Text("Study level").font(.headline)
+                        Picker("Study level", selection: $selection.level) {
                             Text("All levels").tag(String?.none)
+                            Text("Unspecified").tag(String?.some(""))
                             ForEach(["N5", "N4", "N3", "N2", "N1"], id: \.self) { level in
-                                Text("JLPT \(level)").tag(String?.some(level))
+                                Text(level).tag(String?.some(level))
                             }
                         }
                         .pickerStyle(.menu)
@@ -38,11 +39,11 @@ struct ReviewSetupView: View {
                     }
                     Text("\(selected.count) \(selected.count == 1 ? noun : noun.pluralNoun) selected")
                         .font(.headline)
-                    Text("Review starts with your newest collected items. Search does not change this selection.")
+                    Text("Review starts with your newest collected items. Sentence levels come from their parent lessons. Search does not change this selection.")
                         .font(.subheadline)
                         .foregroundStyle(Forest.inkMuted)
                     if selected.isEmpty {
-                        StateMessage(title: "No \(noun.pluralNoun) at this level", message: "Choose another JLPT level. \(origin.emptyMessage)")
+                        StateMessage(title: "No \(noun.pluralNoun) at this level", message: "Choose another study level. \(origin.emptyMessage)")
                     }
                 }
                 .foregroundStyle(Forest.ink)

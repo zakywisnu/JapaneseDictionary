@@ -4,11 +4,15 @@ Design direction and system for the app. Read this before any UI work, then appl
 
 ## Identity
 
-- **Product:** a JLPT vocabulary and kanji trainer that runs entirely on the phone. No account, no sync, no network.
+- **Product:** a Japanese study app for vocabulary, kanji, grammar, sentences and learner-created cards that runs entirely on the phone. No account, no sync, no network.
 - **Audience:** self-studying learners who open the app for a few minutes a day.
 - **Personality:** Forest (言葉の森, "forest of words"). Calm, gentle, encouraging. Words are added one at a time and grow into a collection.
 - **Dial:** ENERGY 2 / RHYTHM 2 / MOTION 1
 - **Design Read:** a local-only JLPT trainer for self-study learners, in a calm forest-green study style with Mincho headwords.
+
+## App icon
+
+An ivory 森 (forest) in a square writing cell on moss green carries the Forest identity onto the Home Screen. Use a flat opaque square master; iOS supplies the outer corner mask. The brand field applies to the app icon only; screen accent rules remain unchanged. Generated source: docs/design/assets/app-icon-source-v1.png. App asset: AppIcon.appiconset/AppIcon.png, exported at 1024×1024 without alpha.
 
 ## Principles
 
@@ -210,3 +214,17 @@ Today shows a compact X of Y items practiced today summary; default target is 10
 ## Expanded backup
 
 Backups include study lists, memberships, daily goal and practice activity alongside existing collection/progress/reviews/advice. Format 3 separates backup compatibility from dictionary catalog version. Restore previews lists and practice data as well as saved items; confirmation explains replacement and recovery. Older supported backups supply empty lists/activity and the default goal.
+
+## Broader study material
+
+Today and Collection select Words, Kanji, Grammar, Sentences or Your cards through a native menu, preserving the existing remembered Words/Kanji values. Study lists accept mixed saved items. Collection offers Lessons for the bundled grammar/sentence catalog, and Create card for Your cards. Bundled browsing never counts as saved study or daily practice. Saving a lesson stores its content and source locally; updates never silently change saved answers.
+
+Grammar detail shows meaning, formation, explanation, examples and usage notes immediately. Sentence detail shows its translation and parent lesson references; its level caption says From an N5 lesson rather than independently grading the whole sentence. Community source information and license notices are readable offline. Related lessons use native navigation. The existing pending Tatoeba word examples remain unpublished.
+
+Custom cards have a required prompt/answer, optional supplied kana reading, notes, optional JLPT level and Grammar/Sentence/Kana/Other category. Native Save/Cancel retains the draft on failure. A meaningful prompt/answer/reading edit asks before resetting that card's review dates and difficult status. Notes/category/level edits retain them. Long Japanese prompts use wrapping Mincho text; other prompts use system text styles, without forcing prose into practice squares.
+
+Review preserves the reveal/Again/Got it interaction for every saved kind and mixed lists. Answers and answer-bearing lesson metadata appear only after reveal. Mixed counts say items. Again repeats and also saves the item for difficult practice; Got it after a miss in the same session does not clear that status. First-try Got it in a later session clears it. Save failures retain the revealed item and stable pending action/date for Retry/Exit. Daily goals count each composite saved identity once per local day.
+
+Practice difficult items is a neutral entry in Today and Collection. Its native setup filters material type, JLPT level including Unspecified, list, and 10/20/All. Show the matching count and disable Start for an empty selection. Most-missed items come first, then latest miss, then stable identity. Empty guidance explains using Again during review; no matching filters offers Clear filters. Extra practice preserves due dates and claims no mastery.
+
+Format 4 adds custom cards, saved lesson snapshots, mixed memberships and difficult records. Backup previews name counts by kind and replace all learner data only after validation and recovery export. Older supported backups migrate word memberships explicitly and supply empty new material/difficulty arrays.

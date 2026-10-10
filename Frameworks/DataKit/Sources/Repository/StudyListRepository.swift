@@ -24,6 +24,10 @@ public protocol StudyListRepository {
     func listIDs(wordID: String) throws -> Set<String>
     func setLists(wordID: String, listIDs: Set<String>) throws
     func removeWord(listID: String, wordID: String) throws
+    func items(listID: String) throws -> [SavedStudyItem]
+    func listIDs(id: SavedStudyID) throws -> Set<String>
+    func setLists(id: SavedStudyID, listIDs: Set<String>) throws
+    func removeItem(listID: String, id: SavedStudyID) throws
 }
 
 public final class StandardStudyListRepository: StudyListRepository {
@@ -43,11 +47,11 @@ public final class StandardStudyListRepository: StudyListRepository {
 
     public func lists() throws -> [StudyList] {
         let context = try context()
-        let memberships = try context.fetch(FetchDescriptor<StudyListMembershipModel>())
+        let memberships = try context.fetch(FetchDescriptor<StudyItemMembershipModel>())
         return try context.fetch(FetchDescriptor<StudyListModel>()).sorted {
             $0.normalizedName == $1.normalizedName ? $0.id < $1.id : $0.normalizedName < $1.normalizedName
         }.map { list in
-            list.value(wordCount: Set(memberships.filter { $0.listID == list.id }.map(\.wordID)).count)
+            list.value(wordCount: Set(memberships.filter { $0.listID == list.id }.map { $0.value.id }).count)
         }
     }
 
@@ -78,7 +82,7 @@ public final class StandardStudyListRepository: StudyListRepository {
     public func delete(id: String) throws {
         try mutate { context in
             let list = try requireList(id, context: context)
-            for membership in try context.fetch(FetchDescriptor<StudyListMembershipModel>()) where membership.listID == id {
+            for membership in try context.fetch(FetchDescriptor<StudyItemMembershipModel>()) where membership.listID == id {
                 context.delete(membership)
             }
             context.delete(list)
@@ -86,48 +90,52 @@ public final class StandardStudyListRepository: StudyListRepository {
     }
 
     public func words(listID: String) throws -> [SavedStudyItem] {
+        try items(listID: listID).filter { $0.id.kind == .word }
+    }
+    public func listIDs(wordID: String) throws -> Set<String> { try listIDs(id: .init(kind: .word, id: wordID)) }
+    public func setLists(wordID: String, listIDs: Set<String>) throws { try setLists(id: .init(kind: .word, id: wordID), listIDs: listIDs) }
+    public func removeWord(listID: String, wordID: String) throws { try removeItem(listID: listID, id: .init(kind: .word, id: wordID)) }
+
+    public func items(listID: String) throws -> [SavedStudyItem] {
         let context = try context()
         _ = try requireList(listID, context: context)
-        let ids = Set(try context.fetch(FetchDescriptor<StudyListMembershipModel>()).filter { $0.listID == listID }.map(\.wordID))
-        return try context.fetch(FetchDescriptor<KotobaDataModel>()).filter { ids.contains($0.id) }.map(SavedStudyItem.init(word:)).sorted {
-            let lhs = $0.dateAdded ?? .distantPast
-            let rhs = $1.dateAdded ?? .distantPast
-            return lhs == rhs ? $0.id.id < $1.id.id : lhs > rhs
+        let ids = Set(try context.fetch(FetchDescriptor<StudyItemMembershipModel>()).filter { $0.listID == listID }.map { $0.value.id })
+        let review = StandardReviewRepository(store: store)
+        return try SavedStudyKind.allCases.flatMap { try review.savedItems(kind: $0) }.filter { ids.contains($0.id) }.sorted {
+            let lhs = $0.dateAdded ?? .distantPast, rhs = $1.dateAdded ?? .distantPast
+            return lhs == rhs ? $0.id.key < $1.id.key : lhs > rhs
         }
     }
-
-    public func listIDs(wordID: String) throws -> Set<String> {
+    public func listIDs(id: SavedStudyID) throws -> Set<String> {
         let context = try context()
-        try requireWord(wordID, context: context)
-        return Set(try context.fetch(FetchDescriptor<StudyListMembershipModel>()).filter { $0.wordID == wordID }.map(\.listID))
+        try requireSavedItem(id, context: context)
+        return Set(try context.fetch(FetchDescriptor<StudyItemMembershipModel>()).filter { $0.value.id == id }.map(\.listID))
     }
-
-    public func setLists(wordID: String, listIDs: Set<String>) throws {
+    public func setLists(id: SavedStudyID, listIDs: Set<String>) throws {
         try mutate { context in
-            try requireWord(wordID, context: context)
-            for id in listIDs { _ = try requireList(id, context: context) }
-            let memberships = try context.fetch(FetchDescriptor<StudyListMembershipModel>()).filter { $0.wordID == wordID }
+            try requireSavedItem(id, context: context)
+            for list in listIDs { _ = try requireList(list, context: context) }
+            let memberships = try context.fetch(FetchDescriptor<StudyItemMembershipModel>()).filter { $0.value.id == id }
             let existing = Set(memberships.map(\.listID))
             for membership in memberships where !listIDs.contains(membership.listID) { context.delete(membership) }
-            for id in listIDs.subtracting(existing) {
-                context.insert(StudyListMembershipModel(listID: id, wordID: wordID))
-            }
+            for list in listIDs.subtracting(existing) { context.insert(StudyItemMembershipModel(listID: list, id: id)) }
         }
     }
-
-    public func removeWord(listID: String, wordID: String) throws {
+    public func removeItem(listID: String, id: SavedStudyID) throws {
         try mutate { context in
             _ = try requireList(listID, context: context)
-            try requireWord(wordID, context: context)
-            for membership in try context.fetch(FetchDescriptor<StudyListMembershipModel>()) where membership.listID == listID && membership.wordID == wordID {
-                context.delete(membership)
-            }
+            try requireSavedItem(id, context: context)
+            for row in try context.fetch(FetchDescriptor<StudyItemMembershipModel>()) where row.listID == listID && row.value.id == id { context.delete(row) }
         }
     }
 
     private func context() throws -> ModelContext {
         try prepare()
-        return store.makeContext()
+        let context = store.makeContext()
+        do {
+            if try migrateStudyMemberships(context: context) { try saveContext(context); store.refreshContext() }
+            return context
+        } catch { context.rollback(); throw error }
     }
 
     private func mutate<T>(_ action: (ModelContext) throws -> T) throws -> T {
@@ -164,5 +172,21 @@ public final class StandardStudyListRepository: StudyListRepository {
         guard try !context.fetch(FetchDescriptor<KotobaDataModel>(predicate: #Predicate { $0.id == id })).isEmpty else {
             throw StudyListError.missingWord
         }
+    }
+}
+
+public extension StudyListRepository {
+    func items(listID: String) throws -> [SavedStudyItem] { try words(listID: listID) }
+    func listIDs(id: SavedStudyID) throws -> Set<String> {
+        guard id.kind == .word else { throw StudyListError.missingWord }
+        return try listIDs(wordID: id.id)
+    }
+    func setLists(id: SavedStudyID, listIDs: Set<String>) throws {
+        guard id.kind == .word else { throw StudyListError.missingWord }
+        try setLists(wordID: id.id, listIDs: listIDs)
+    }
+    func removeItem(listID: String, id: SavedStudyID) throws {
+        guard id.kind == .word else { throw StudyListError.missingWord }
+        try removeWord(listID: listID, wordID: id.id)
     }
 }

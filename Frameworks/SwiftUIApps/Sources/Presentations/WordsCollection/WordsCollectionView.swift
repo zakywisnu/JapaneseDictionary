@@ -16,18 +16,22 @@ struct WordsCollectionView: View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: Forest.Space.l) {
                 ScreenHeader(title: "Collection")
-                searchField
+                if kind == .words || kind == .kanji { searchField }
                 StudyKindPicker(selection: $kind)
-                if kind == .words {
+                Group {
                     Button("Study lists") { router.push(.studyLists, hideNavBar: false) }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.ink)
                         .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    Button("Practice difficult items") { router.push(.difficult, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
+                    Button("Lessons") { router.push(.lessons, hideNavBar: false) }.buttonStyle(.plain).foregroundStyle(Forest.ink).frame(minHeight: 44)
+                    if kind == .words {
                     Button("Browse dictionary") { router.push(.dictionary, hideNavBar: false) }
                         .buttonStyle(.plain)
                         .foregroundStyle(Forest.ink)
                         .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                 }
+                    }
             }
             .padding(.horizontal, Forest.Space.l)
             .padding(.top, Forest.Space.s)
@@ -37,6 +41,8 @@ struct WordsCollectionView: View {
                 AppComposer.shared.makeCollectionKotobaView(query: query)
             case .kanji:
                 AppComposer.shared.makeCollectionKanjiView(query: query)
+            case .grammar, .sentences, .cards:
+                AppComposer.shared.makeMaterialLibraryView(kind: kind.savedKind).id(kind)
             }
         }
         .background(Forest.canvas)

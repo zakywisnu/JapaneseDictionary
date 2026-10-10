@@ -13,13 +13,13 @@ struct StudyListsView: View {
             } else if let error = viewModel.state.error {
                 StateMessage(title: "Couldn't open study lists", message: error, actionTitle: "Try again") { viewModel.send(.load) }
             } else if viewModel.state.lists.isEmpty {
-                StateMessage(title: "No study lists yet", message: "Create a list, then organize saved words from Word Detail.", actionTitle: "Create list") { creating = true }
+                StateMessage(title: "No study lists yet", message: "Create a list, then organize saved items from their detail screen.", actionTitle: "Create list") { creating = true }
             } else {
                 ForEach(viewModel.state.lists) { list in
                     Button { if opensDetails { router.push(.studyList(list.id), hideNavBar: false) } } label: {
                         VStack(alignment: .leading, spacing: Forest.Space.xs) {
                             Text(list.name).font(.headline).foregroundStyle(Forest.ink)
-                            Text("\(list.wordCount) \(list.wordCount == 1 ? "word" : "words")").font(.subheadline).foregroundStyle(Forest.inkMuted)
+                            Text("\(list.itemCount) \(list.itemCount == 1 ? "item" : "items")").font(.subheadline).foregroundStyle(Forest.inkMuted)
                         }.frame(minHeight: 44)
                     }
                     .disabled(!opensDetails)

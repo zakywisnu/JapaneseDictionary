@@ -58,6 +58,8 @@ public final class StandardStudyMutationRepository: StudyMutationRepository {
             guard let progress = try context.fetch(FetchDescriptor<WordsProgressModel>()).first else { throw DataError.dataNotFound }
             let savedID = id.id
             switch id.kind {
+            case .grammar, .sentence, .customCard:
+                throw StudyMaterialError.invalid("deletion repository")
             case .word:
                 guard let word = try context.fetch(FetchDescriptor<KotobaDataModel>(predicate: #Predicate { $0.id == savedID })).first else { throw DataError.dataNotFound }
                 progress.kotobaProgress -= 1
@@ -86,7 +88,13 @@ public final class StandardStudyMutationRepository: StudyMutationRepository {
                 progress.kanjiLevel = .init(rawValue: max(progress.kanjiLevel.rawValue, kanji.jlptLevel.rawValue)) ?? .n5
                 context.delete(kanji)
             }
+            for membership in try context.fetch(FetchDescriptor<StudyItemMembershipModel>()) where membership.value.id == id {
+                context.delete(membership)
+            }
             let key = id.key
+            for record in try context.fetch(FetchDescriptor<DifficultyRecordModel>(predicate: #Predicate { $0.key == key })) {
+                context.delete(record)
+            }
             for record in try context.fetch(FetchDescriptor<ReviewRecordModel>(predicate: #Predicate { $0.key == key })) {
                 context.delete(record)
             }

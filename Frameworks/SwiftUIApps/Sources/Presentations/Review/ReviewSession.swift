@@ -2,12 +2,17 @@ import Foundation
 import DataKit
 
 public struct ReviewSession: Hashable {
+    var useSentenceContext = false
     var kind: StudyKind? = nil
     let items: [ReviewItem]
     var origin: ReviewOrigin = .today
     var id: UUID = UUID()
     var returnTitle: String? = nil
     var backTitle: String { returnTitle ?? origin.backTitle }
+
+    var supportsSentenceContext: Bool {
+        !items.isEmpty && items.allSatisfy { $0.compositeID.kind == .word }
+    }
 
     var noun: String {
         let kinds = Set(items.map { $0.compositeID.kind })
@@ -68,6 +73,7 @@ struct ReviewSelection {
 }
 
 struct ReviewItem: Hashable {
+    var context: ReviewedContext? = nil
     let compositeID: SavedStudyID
     let material: StudyMaterial?
     var savedID: String { compositeID.id }

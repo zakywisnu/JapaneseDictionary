@@ -7,8 +7,9 @@ public struct ReviewRatingEvent: Codable, Equatable {
     public var id: SavedStudyID
     public var again: Bool
     public var submittedAt: Date
-    public init(actionID: UUID, sessionID: UUID, id: SavedStudyID, again: Bool, submittedAt: Date) {
-        self.actionID = actionID; self.sessionID = sessionID; self.id = id; self.again = again; self.submittedAt = submittedAt
+    public var contextID: String?
+    public init(actionID: UUID, sessionID: UUID, id: SavedStudyID, again: Bool, submittedAt: Date, contextID: String? = nil) {
+        self.actionID = actionID; self.sessionID = sessionID; self.id = id; self.again = again; self.submittedAt = submittedAt; self.contextID = contextID
     }
 }
 @Model public final class ReviewRatingEventModel {

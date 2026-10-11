@@ -26,6 +26,9 @@ public struct LearningProgressSummary: Equatable {
     public var kanaReading = LearningActivityCounts()
     public var romanization = LearningActivityCounts()
     public var listeningReading = LearningActivityCounts()
+    public var conjugation = LearningActivityCounts()
+    public var sentenceOrder = LearningActivityCounts()
+    public var listeningComprehension = LearningActivityCounts()
     public var meaningSelfRatedSubmitted = 0
     public var meaningSelfRatedRemembered = 0
     public var distinctAttemptedContent = 0
@@ -68,6 +71,7 @@ public struct LearningProgressSummary: Equatable {
         }
         result.choice = counts(.choice); result.kanaReading = counts(.kanaReading)
         result.romanization = counts(.romanization); result.listeningReading = counts(.listeningReading)
+        result.conjugation = counts(.conjugation); result.sentenceOrder = counts(.sentenceOrder); result.listeningComprehension = counts(.listeningComprehension)
         let meaning = submitted.filter { $0.snapshot.questionKind == .meaningSelfRated && $0.outcome == .selfRated }
         result.meaningSelfRatedSubmitted = meaning.count
         result.meaningSelfRatedRemembered = meaning.filter { $0.response == .selfRating(true) }.count

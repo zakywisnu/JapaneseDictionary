@@ -148,9 +148,16 @@ public final class AppComposer {
     }
 
     public func makeReviewView(_ session: ReviewSession) -> some View {
+        var session = session
+        if session.origin == .due { session.useSentenceContext = UserDefaults.standard.bool(forKey: "contextualWordReviews") }
+        if session.useSentenceContext, let catalog = try? AppliedPracticeCatalogRepository.bundled() {
+            let context = ContextReviewUseCase(contexts: catalog.contexts)
+            session = enrichedContextSession(session, useCase: context)
+        }
+        let contexts = Dictionary(session.items.compactMap { item in item.context.map { (item.compositeID.key, $0.stableID) } }, uniquingKeysWith: { first, _ in first })
         let rating = DefaultRecordStudyRatingUseCase(reviewRepository: StandardReviewRepository(store: store), ratingRepository: StandardStudyRatingRepository(store: store))
         return ReviewView(viewModel: ReviewViewModel(session: session, recordAction: { id, sessionID, actionID, recall, now, isDue in
-            try rating.execute(id: id, sessionID: sessionID, actionID: actionID, rating: recall, now: now, isDue: isDue)
+            try rating.execute(id: id, sessionID: sessionID, actionID: actionID, rating: recall, now: now, isDue: isDue, contextID: contexts[id.key])
         }), examples: examples)
     }
 }

@@ -101,9 +101,11 @@ public enum BackupStudyKind: String, Codable, Equatable {
 public struct BackupPreferences: Codable, Equatable {
     public var todayKind: BackupStudyKind
     public var collectionKind: BackupStudyKind
-    public init(todayKind: BackupStudyKind = .words, collectionKind: BackupStudyKind = .words) {
+    public var contextualWordReviews: Bool?
+    public init(todayKind: BackupStudyKind = .words, collectionKind: BackupStudyKind = .words, contextualWordReviews: Bool? = nil) {
         self.todayKind = todayKind
         self.collectionKind = collectionKind
+        self.contextualWordReviews = contextualWordReviews
     }
 }
 

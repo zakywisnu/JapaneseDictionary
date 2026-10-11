@@ -32,7 +32,7 @@ final class ExerciseBackupTests: XCTestCase {
         try store.context.save()
         let repo = BackupRepository(store: store, catalog: .init(words: [], kanjis: []), recoveryURL: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString))
         var backup = try repo.validate(repo.export(preferences: .init()))
-        XCTAssertEqual(backup.formatVersion, 6)
+        XCTAssertEqual(backup.formatVersion, 7)
         XCTAssertEqual(backup.pathProgress, [path])
         XCTAssertEqual(backup.lists.first?.sourceKey, "passage:morning")
         try repo.restore(backup, currentPreferences: .init())

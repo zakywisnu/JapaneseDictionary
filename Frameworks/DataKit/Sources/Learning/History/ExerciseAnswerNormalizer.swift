@@ -6,7 +6,7 @@ public enum ExerciseAnswerNormalizer {
         let composed = width.precomposedStringWithCanonicalMapping
         let spaced = composed.split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
         switch kind {
-        case .kanaReading, .listeningReading:
+        case .kanaReading, .listeningReading, .conjugation:
             return (spaced.applyingTransform(.hiraganaToKatakana, reverse: true) ?? spaced).precomposedStringWithCanonicalMapping
         default: return spaced.lowercased()
         }

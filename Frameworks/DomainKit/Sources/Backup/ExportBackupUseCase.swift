@@ -18,7 +18,7 @@ public struct ExportBackupUseCase {
 extension BackupPreferences {
     static func read(from defaults: UserDefaults) -> BackupPreferences {
         .init(todayKind: BackupStudyKind(rawValue: defaults.string(forKey: "todayStudyKind") ?? "") ?? .words,
-              collectionKind: BackupStudyKind(rawValue: defaults.string(forKey: "collectionStudyKind") ?? "") ?? .words)
+              collectionKind: BackupStudyKind(rawValue: defaults.string(forKey: "collectionStudyKind") ?? "") ?? .words, contextualWordReviews: defaults.bool(forKey: "contextualWordReviews") ? true : nil)
     }
 }
 

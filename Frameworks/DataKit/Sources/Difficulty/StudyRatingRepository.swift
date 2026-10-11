@@ -4,6 +4,7 @@ import SwiftData
 public protocol StudyRatingRepository {
     func records() throws -> [DifficultyRecord]
     func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord?, activity: PracticeActivity?) throws
+    func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord?, activity: PracticeActivity?, contextID: String?) throws
 }
 
 public final class StandardStudyRatingRepository: StudyRatingRepository {
@@ -19,10 +20,13 @@ public final class StandardStudyRatingRepository: StudyRatingRepository {
         try store.makeContext().fetch(FetchDescriptor<ReviewRatingEventModel>()).map { try $0.value() }.sorted { $0.submittedAt == $1.submittedAt ? $0.actionID.uuidString < $1.actionID.uuidString : $0.submittedAt < $1.submittedAt }
     }
     public func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord? = nil, activity: PracticeActivity? = nil) throws {
+        try record(id: id, sessionID: sessionID, actionID: actionID, again: again, now: now, review: review, activity: activity, contextID: nil)
+    }
+    public func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord? = nil, activity: PracticeActivity? = nil, contextID: String?) throws {
         guard !id.id.isEmpty, now.timeIntervalSince1970.isFinite else { throw ReviewStoreError.invalidRecord }
         let context = store.makeContext()
         do {
-            let event = ReviewRatingEvent(actionID: actionID, sessionID: sessionID, id: id, again: again, submittedAt: now)
+            let event = ReviewRatingEvent(actionID: actionID, sessionID: sessionID, id: id, again: again, submittedAt: now, contextID: contextID)
             try ExerciseHistoryValidator.validateReviewRatingEvent(event)
             let events = try context.fetch(FetchDescriptor<ReviewRatingEventModel>())
             if let existing = try events.first(where: { $0.actionID == actionID })?.value() {
@@ -79,4 +83,10 @@ func validateReviewRecord(_ record: ReviewRecord) throws {
     guard (0...4).contains(record.stage), record.sessionBaselineStage.map({ (0...4).contains($0) }) ?? true,
           !record.id.id.isEmpty, record.dueDate.timeIntervalSince1970.isFinite,
           record.lastReviewedAt.timeIntervalSince1970.isFinite else { throw ReviewStoreError.invalidRecord }
+}
+
+public extension StudyRatingRepository {
+    func record(id: SavedStudyID, sessionID: UUID, actionID: UUID, again: Bool, now: Date, review: ReviewRecord?, activity: PracticeActivity?, contextID: String?) throws {
+        try record(id: id, sessionID: sessionID, actionID: actionID, again: again, now: now, review: review, activity: activity)
+    }
 }

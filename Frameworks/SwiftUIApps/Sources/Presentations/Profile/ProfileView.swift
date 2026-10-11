@@ -11,6 +11,7 @@ public struct ProfileView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @EnvironmentObject var appTabs: AppTabsViewModel
     @EnvironmentObject private var router: AppRouter
+    @AppStorage("contextualWordReviews") private var contextualWordReviews = false
     @State private var viewModel: ProfileViewModel
     
     public init(viewModel: ProfileViewModel) {
@@ -52,6 +53,8 @@ public struct ProfileView: View {
                     .padding(Forest.Space.l)
                     .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
                 }
+                Toggle("Use sentence context in word reviews", isOn: $contextualWordReviews)
+                Text("Applies to due, collection and list word reviews when a matching original sentence is available.").font(.footnote).foregroundStyle(Forest.inkMuted)
                 Button("Daily practice goal") { router.push(.dailyGoal, hideNavBar: false) }
                     .buttonStyle(.plain)
                     .foregroundStyle(Forest.ink)

@@ -1,0 +1,5944 @@
+{
+  "formatVersion": 1,
+  "activities": [
+    {
+      "id": "conjugation-01-polite",
+      "title": "買う · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-01-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "買う (buy) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "買います",
+            "かいます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "買う",
+            "suppliedReading": "かう",
+            "translation": "buy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-01-politeNegative",
+      "title": "買う · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-01-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "買う (buy) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "買いません",
+            "かいません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "買う",
+            "suppliedReading": "かう",
+            "translation": "buy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-01-plainNegative",
+      "title": "買う · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-01-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "買う (buy) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "買わない",
+            "かわない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "買う",
+            "suppliedReading": "かう",
+            "translation": "buy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-01-plainPast",
+      "title": "買う · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-01-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "買う (buy) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "買った",
+            "かった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "買う",
+            "suppliedReading": "かう",
+            "translation": "buy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-01-te",
+      "title": "買う · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-01-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "買う (buy) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "買って",
+            "かって"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "買う",
+            "suppliedReading": "かう",
+            "translation": "buy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-02-polite",
+      "title": "待つ · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-02-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "待つ (wait) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "待ちます",
+            "まちます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "待つ",
+            "suppliedReading": "まつ",
+            "translation": "wait",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-02-politeNegative",
+      "title": "待つ · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-02-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "待つ (wait) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "待ちません",
+            "まちません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "待つ",
+            "suppliedReading": "まつ",
+            "translation": "wait",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-02-plainNegative",
+      "title": "待つ · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-02-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "待つ (wait) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "待たない",
+            "またない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "待つ",
+            "suppliedReading": "まつ",
+            "translation": "wait",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-02-plainPast",
+      "title": "待つ · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-02-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "待つ (wait) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "待った",
+            "まった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "待つ",
+            "suppliedReading": "まつ",
+            "translation": "wait",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-02-te",
+      "title": "待つ · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-02-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "待つ (wait) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "待って",
+            "まって"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "待つ",
+            "suppliedReading": "まつ",
+            "translation": "wait",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-03-polite",
+      "title": "帰る · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-03-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "帰る (return home) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "帰ります",
+            "かえります"
+          ],
+          "explanation": "Use the polite affirmative ending. 帰る is godan despite its える ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "帰る",
+            "suppliedReading": "かえる",
+            "translation": "return home",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-03-politeNegative",
+      "title": "帰る · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-03-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "帰る (return home) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "帰りません",
+            "かえりません"
+          ],
+          "explanation": "Use the polite negative ending ません. 帰る is godan despite its える ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "帰る",
+            "suppliedReading": "かえる",
+            "translation": "return home",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-03-plainNegative",
+      "title": "帰る · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-03-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "帰る (return home) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "帰らない",
+            "かえらない"
+          ],
+          "explanation": "Use the plain negative form. 帰る is godan despite its える ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "帰る",
+            "suppliedReading": "かえる",
+            "translation": "return home",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-03-plainPast",
+      "title": "帰る · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-03-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "帰る (return home) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "帰った",
+            "かえった"
+          ],
+          "explanation": "Use the plain past form. 帰る is godan despite its える ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "帰る",
+            "suppliedReading": "かえる",
+            "translation": "return home",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-03-te",
+      "title": "帰る · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-03-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "帰る (return home) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "帰って",
+            "かえって"
+          ],
+          "explanation": "Use the verb て form. 帰る is godan despite its える ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "帰る",
+            "suppliedReading": "かえる",
+            "translation": "return home",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-04-polite",
+      "title": "読む · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-04-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "読む (read) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "読みます",
+            "よみます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "読む",
+            "suppliedReading": "よむ",
+            "translation": "read",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-04-politeNegative",
+      "title": "読む · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-04-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "読む (read) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "読みません",
+            "よみません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "読む",
+            "suppliedReading": "よむ",
+            "translation": "read",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-04-plainNegative",
+      "title": "読む · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-04-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "読む (read) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "読まない",
+            "よまない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "読む",
+            "suppliedReading": "よむ",
+            "translation": "read",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-04-plainPast",
+      "title": "読む · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-04-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "読む (read) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "読んだ",
+            "よんだ"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "読む",
+            "suppliedReading": "よむ",
+            "translation": "read",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-04-te",
+      "title": "読む · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-04-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "読む (read) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "読んで",
+            "よんで"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "読む",
+            "suppliedReading": "よむ",
+            "translation": "read",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-05-polite",
+      "title": "遊ぶ · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-05-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "遊ぶ (play) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "遊びます",
+            "あそびます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "遊ぶ",
+            "suppliedReading": "あそぶ",
+            "translation": "play",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-05-politeNegative",
+      "title": "遊ぶ · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-05-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "遊ぶ (play) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "遊びません",
+            "あそびません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "遊ぶ",
+            "suppliedReading": "あそぶ",
+            "translation": "play",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-05-plainNegative",
+      "title": "遊ぶ · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-05-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "遊ぶ (play) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "遊ばない",
+            "あそばない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "遊ぶ",
+            "suppliedReading": "あそぶ",
+            "translation": "play",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-05-plainPast",
+      "title": "遊ぶ · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-05-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "遊ぶ (play) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "遊んだ",
+            "あそんだ"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "遊ぶ",
+            "suppliedReading": "あそぶ",
+            "translation": "play",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-05-te",
+      "title": "遊ぶ · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-05-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "遊ぶ (play) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "遊んで",
+            "あそんで"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "遊ぶ",
+            "suppliedReading": "あそぶ",
+            "translation": "play",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-06-polite",
+      "title": "死ぬ · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-06-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "死ぬ (die) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "死にます",
+            "しにます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "死ぬ",
+            "suppliedReading": "しぬ",
+            "translation": "die",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-06-politeNegative",
+      "title": "死ぬ · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-06-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "死ぬ (die) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "死にません",
+            "しにません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "死ぬ",
+            "suppliedReading": "しぬ",
+            "translation": "die",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-06-plainNegative",
+      "title": "死ぬ · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-06-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "死ぬ (die) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "死なない",
+            "しなない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "死ぬ",
+            "suppliedReading": "しぬ",
+            "translation": "die",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-06-plainPast",
+      "title": "死ぬ · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-06-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "死ぬ (die) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "死んだ",
+            "しんだ"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "死ぬ",
+            "suppliedReading": "しぬ",
+            "translation": "die",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-06-te",
+      "title": "死ぬ · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-06-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "死ぬ (die) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "死んで",
+            "しんで"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "死ぬ",
+            "suppliedReading": "しぬ",
+            "translation": "die",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-07-polite",
+      "title": "書く · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-07-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "書く (write) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "書きます",
+            "かきます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "書く",
+            "suppliedReading": "かく",
+            "translation": "write",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-07-politeNegative",
+      "title": "書く · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-07-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "書く (write) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "書きません",
+            "かきません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "書く",
+            "suppliedReading": "かく",
+            "translation": "write",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-07-plainNegative",
+      "title": "書く · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-07-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "書く (write) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "書かない",
+            "かかない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "書く",
+            "suppliedReading": "かく",
+            "translation": "write",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-07-plainPast",
+      "title": "書く · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-07-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "書く (write) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "書いた",
+            "かいた"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "書く",
+            "suppliedReading": "かく",
+            "translation": "write",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-07-te",
+      "title": "書く · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-07-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "書く (write) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "書いて",
+            "かいて"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "書く",
+            "suppliedReading": "かく",
+            "translation": "write",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-08-polite",
+      "title": "泳ぐ · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-08-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "泳ぐ (swim) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "泳ぎます",
+            "およぎます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "泳ぐ",
+            "suppliedReading": "およぐ",
+            "translation": "swim",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-08-politeNegative",
+      "title": "泳ぐ · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-08-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "泳ぐ (swim) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "泳ぎません",
+            "およぎません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "泳ぐ",
+            "suppliedReading": "およぐ",
+            "translation": "swim",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-08-plainNegative",
+      "title": "泳ぐ · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-08-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "泳ぐ (swim) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "泳がない",
+            "およがない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "泳ぐ",
+            "suppliedReading": "およぐ",
+            "translation": "swim",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-08-plainPast",
+      "title": "泳ぐ · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-08-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "泳ぐ (swim) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "泳いだ",
+            "およいだ"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "泳ぐ",
+            "suppliedReading": "およぐ",
+            "translation": "swim",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-08-te",
+      "title": "泳ぐ · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-08-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "泳ぐ (swim) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "泳いで",
+            "およいで"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "泳ぐ",
+            "suppliedReading": "およぐ",
+            "translation": "swim",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-09-polite",
+      "title": "話す · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-09-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "話す (speak) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "話します",
+            "はなします"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "話す",
+            "suppliedReading": "はなす",
+            "translation": "speak",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-09-politeNegative",
+      "title": "話す · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-09-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "話す (speak) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "話しません",
+            "はなしません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "話す",
+            "suppliedReading": "はなす",
+            "translation": "speak",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-09-plainNegative",
+      "title": "話す · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-09-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "話す (speak) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "話さない",
+            "はなさない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "話す",
+            "suppliedReading": "はなす",
+            "translation": "speak",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-09-plainPast",
+      "title": "話す · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-09-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "話す (speak) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "話した",
+            "はなした"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "話す",
+            "suppliedReading": "はなす",
+            "translation": "speak",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-09-te",
+      "title": "話す · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-09-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "話す (speak) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "話して",
+            "はなして"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "話す",
+            "suppliedReading": "はなす",
+            "translation": "speak",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-10-polite",
+      "title": "行く · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-10-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "行く (go) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "行きます",
+            "いきます"
+          ],
+          "explanation": "Use the polite affirmative ending. 行く exceptionally uses 行った and 行って.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "行く",
+            "suppliedReading": "いく",
+            "translation": "go",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-10-politeNegative",
+      "title": "行く · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-10-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "行く (go) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "行きません",
+            "いきません"
+          ],
+          "explanation": "Use the polite negative ending ません. 行く exceptionally uses 行った and 行って.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "行く",
+            "suppliedReading": "いく",
+            "translation": "go",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-10-plainNegative",
+      "title": "行く · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-10-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "行く (go) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "行かない",
+            "いかない"
+          ],
+          "explanation": "Use the plain negative form. 行く exceptionally uses 行った and 行って.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "行く",
+            "suppliedReading": "いく",
+            "translation": "go",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-10-plainPast",
+      "title": "行く · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-10-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "行く (go) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "行った",
+            "いった"
+          ],
+          "explanation": "Use the plain past form. 行く exceptionally uses 行った and 行って.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "行く",
+            "suppliedReading": "いく",
+            "translation": "go",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-10-te",
+      "title": "行く · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-10-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "行く (go) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "行って",
+            "いって"
+          ],
+          "explanation": "Use the verb て form. 行く exceptionally uses 行った and 行って.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "行く",
+            "suppliedReading": "いく",
+            "translation": "go",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-11-polite",
+      "title": "ある · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-11-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "ある (exist (inanimate)) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "あります"
+          ],
+          "explanation": "Use the polite affirmative ending. The plain negative of ある is ない.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "ある",
+            "suppliedReading": "ある",
+            "translation": "exist (inanimate)",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-11-politeNegative",
+      "title": "ある · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-11-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "ある (exist (inanimate)) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "ありません"
+          ],
+          "explanation": "Use the polite negative ending ません. The plain negative of ある is ない.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "ある",
+            "suppliedReading": "ある",
+            "translation": "exist (inanimate)",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-11-plainNegative",
+      "title": "ある · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-11-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "ある (exist (inanimate)) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "ない"
+          ],
+          "explanation": "Use the plain negative form. The plain negative of ある is ない.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "ある",
+            "suppliedReading": "ある",
+            "translation": "exist (inanimate)",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-11-plainPast",
+      "title": "ある · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-11-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "ある (exist (inanimate)) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "あった"
+          ],
+          "explanation": "Use the plain past form. The plain negative of ある is ない.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "ある",
+            "suppliedReading": "ある",
+            "translation": "exist (inanimate)",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-11-te",
+      "title": "ある · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-11-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "ある (exist (inanimate)) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "あって"
+          ],
+          "explanation": "Use the verb て form. The plain negative of ある is ない.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "ある",
+            "suppliedReading": "ある",
+            "translation": "exist (inanimate)",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-12-polite",
+      "title": "飲む · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-12-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "飲む (drink) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "飲みます",
+            "のみます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "飲む",
+            "suppliedReading": "のむ",
+            "translation": "drink",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-12-politeNegative",
+      "title": "飲む · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-12-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "飲む (drink) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "飲みません",
+            "のみません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "飲む",
+            "suppliedReading": "のむ",
+            "translation": "drink",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-12-plainNegative",
+      "title": "飲む · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-12-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "飲む (drink) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "飲まない",
+            "のまない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "飲む",
+            "suppliedReading": "のむ",
+            "translation": "drink",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-12-plainPast",
+      "title": "飲む · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-12-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "飲む (drink) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "飲んだ",
+            "のんだ"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "飲む",
+            "suppliedReading": "のむ",
+            "translation": "drink",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-12-te",
+      "title": "飲む · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-12-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "飲む (drink) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "飲んで",
+            "のんで"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "飲む",
+            "suppliedReading": "のむ",
+            "translation": "drink",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-13-polite",
+      "title": "聞く · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-13-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "聞く (listen) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "聞きます",
+            "ききます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "聞く",
+            "suppliedReading": "きく",
+            "translation": "listen",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-13-politeNegative",
+      "title": "聞く · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-13-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "聞く (listen) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "聞きません",
+            "ききません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "聞く",
+            "suppliedReading": "きく",
+            "translation": "listen",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-13-plainNegative",
+      "title": "聞く · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-13-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "聞く (listen) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "聞かない",
+            "きかない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "聞く",
+            "suppliedReading": "きく",
+            "translation": "listen",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-13-plainPast",
+      "title": "聞く · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-13-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "聞く (listen) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "聞いた",
+            "きいた"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "聞く",
+            "suppliedReading": "きく",
+            "translation": "listen",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-13-te",
+      "title": "聞く · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-13-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "聞く (listen) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "聞いて",
+            "きいて"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "聞く",
+            "suppliedReading": "きく",
+            "translation": "listen",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-14-polite",
+      "title": "会う · polite",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-14-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "会う (meet) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "会います",
+            "あいます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:polite",
+            "stimulus": "会う",
+            "suppliedReading": "あう",
+            "translation": "meet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-14-politeNegative",
+      "title": "会う · politeNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-14-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "会う (meet) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "会いません",
+            "あいません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:politeNegative",
+            "stimulus": "会う",
+            "suppliedReading": "あう",
+            "translation": "meet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-14-plainNegative",
+      "title": "会う · plainNegative",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-14-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "会う (meet) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "会わない",
+            "あわない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainNegative",
+            "stimulus": "会う",
+            "suppliedReading": "あう",
+            "translation": "meet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-14-plainPast",
+      "title": "会う · plainPast",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-14-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "会う (meet) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "会った",
+            "あった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:plainPast",
+            "stimulus": "会う",
+            "suppliedReading": "あう",
+            "translation": "meet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-14-te",
+      "title": "会う · te",
+      "kind": "conjugation",
+      "classID": "godan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-14-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "会う (meet) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "会って",
+            "あって"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:godan:te",
+            "stimulus": "会う",
+            "suppliedReading": "あう",
+            "translation": "meet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-15-polite",
+      "title": "食べる · polite",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-15-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "食べる (eat) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "食べます",
+            "たべます"
+          ],
+          "explanation": "Use the polite affirmative ending. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:polite",
+            "stimulus": "食べる",
+            "suppliedReading": "たべる",
+            "translation": "eat",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-15-politeNegative",
+      "title": "食べる · politeNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-15-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "食べる (eat) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "食べません",
+            "たべません"
+          ],
+          "explanation": "Use the polite negative ending ません. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:politeNegative",
+            "stimulus": "食べる",
+            "suppliedReading": "たべる",
+            "translation": "eat",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-15-plainNegative",
+      "title": "食べる · plainNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-15-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "食べる (eat) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "食べない",
+            "たべない"
+          ],
+          "explanation": "Use the plain negative form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainNegative",
+            "stimulus": "食べる",
+            "suppliedReading": "たべる",
+            "translation": "eat",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-15-plainPast",
+      "title": "食べる · plainPast",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-15-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "食べる (eat) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "食べた",
+            "たべた"
+          ],
+          "explanation": "Use the plain past form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainPast",
+            "stimulus": "食べる",
+            "suppliedReading": "たべる",
+            "translation": "eat",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-15-te",
+      "title": "食べる · te",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-15-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "食べる (eat) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "食べて",
+            "たべて"
+          ],
+          "explanation": "Use the verb て form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:te",
+            "stimulus": "食べる",
+            "suppliedReading": "たべる",
+            "translation": "eat",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-16-polite",
+      "title": "見る · polite",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-16-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "見る (see) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "見ます",
+            "みます"
+          ],
+          "explanation": "Use the polite affirmative ending. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:polite",
+            "stimulus": "見る",
+            "suppliedReading": "みる",
+            "translation": "see",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-16-politeNegative",
+      "title": "見る · politeNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-16-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "見る (see) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "見ません",
+            "みません"
+          ],
+          "explanation": "Use the polite negative ending ません. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:politeNegative",
+            "stimulus": "見る",
+            "suppliedReading": "みる",
+            "translation": "see",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-16-plainNegative",
+      "title": "見る · plainNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-16-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "見る (see) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "見ない",
+            "みない"
+          ],
+          "explanation": "Use the plain negative form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainNegative",
+            "stimulus": "見る",
+            "suppliedReading": "みる",
+            "translation": "see",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-16-plainPast",
+      "title": "見る · plainPast",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-16-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "見る (see) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "見た",
+            "みた"
+          ],
+          "explanation": "Use the plain past form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainPast",
+            "stimulus": "見る",
+            "suppliedReading": "みる",
+            "translation": "see",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-16-te",
+      "title": "見る · te",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-16-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "見る (see) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "見て",
+            "みて"
+          ],
+          "explanation": "Use the verb て form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:te",
+            "stimulus": "見る",
+            "suppliedReading": "みる",
+            "translation": "see",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-17-polite",
+      "title": "起きる · polite",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-17-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "起きる (get up) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "起きます",
+            "おきます"
+          ],
+          "explanation": "Use the polite affirmative ending. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:polite",
+            "stimulus": "起きる",
+            "suppliedReading": "おきる",
+            "translation": "get up",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-17-politeNegative",
+      "title": "起きる · politeNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-17-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "起きる (get up) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "起きません",
+            "おきません"
+          ],
+          "explanation": "Use the polite negative ending ません. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:politeNegative",
+            "stimulus": "起きる",
+            "suppliedReading": "おきる",
+            "translation": "get up",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-17-plainNegative",
+      "title": "起きる · plainNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-17-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "起きる (get up) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "起きない",
+            "おきない"
+          ],
+          "explanation": "Use the plain negative form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainNegative",
+            "stimulus": "起きる",
+            "suppliedReading": "おきる",
+            "translation": "get up",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-17-plainPast",
+      "title": "起きる · plainPast",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-17-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "起きる (get up) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "起きた",
+            "おきた"
+          ],
+          "explanation": "Use the plain past form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainPast",
+            "stimulus": "起きる",
+            "suppliedReading": "おきる",
+            "translation": "get up",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-17-te",
+      "title": "起きる · te",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-17-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "起きる (get up) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "起きて",
+            "おきて"
+          ],
+          "explanation": "Use the verb て form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:te",
+            "stimulus": "起きる",
+            "suppliedReading": "おきる",
+            "translation": "get up",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-18-polite",
+      "title": "寝る · polite",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-18-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "寝る (sleep) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "寝ます",
+            "ねます"
+          ],
+          "explanation": "Use the polite affirmative ending. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:polite",
+            "stimulus": "寝る",
+            "suppliedReading": "ねる",
+            "translation": "sleep",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-18-politeNegative",
+      "title": "寝る · politeNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-18-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "寝る (sleep) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "寝ません",
+            "ねません"
+          ],
+          "explanation": "Use the polite negative ending ません. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:politeNegative",
+            "stimulus": "寝る",
+            "suppliedReading": "ねる",
+            "translation": "sleep",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-18-plainNegative",
+      "title": "寝る · plainNegative",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-18-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "寝る (sleep) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "寝ない",
+            "ねない"
+          ],
+          "explanation": "Use the plain negative form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainNegative",
+            "stimulus": "寝る",
+            "suppliedReading": "ねる",
+            "translation": "sleep",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-18-plainPast",
+      "title": "寝る · plainPast",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-18-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "寝る (sleep) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "寝た",
+            "ねた"
+          ],
+          "explanation": "Use the plain past form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:plainPast",
+            "stimulus": "寝る",
+            "suppliedReading": "ねる",
+            "translation": "sleep",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-18-te",
+      "title": "寝る · te",
+      "kind": "conjugation",
+      "classID": "ichidan",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-18-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "寝る (sleep) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "寝て",
+            "ねて"
+          ],
+          "explanation": "Use the verb て form. Remove る before adding the ending; classify the lemma explicitly.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:ichidan:te",
+            "stimulus": "寝る",
+            "suppliedReading": "ねる",
+            "translation": "sleep",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-19-polite",
+      "title": "する · polite",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-19-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "する (do) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "します"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:polite",
+            "stimulus": "する",
+            "suppliedReading": "する",
+            "translation": "do",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-19-politeNegative",
+      "title": "する · politeNegative",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-19-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "する (do) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "しません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:politeNegative",
+            "stimulus": "する",
+            "suppliedReading": "する",
+            "translation": "do",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-19-plainNegative",
+      "title": "する · plainNegative",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-19-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "する (do) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "しない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:plainNegative",
+            "stimulus": "する",
+            "suppliedReading": "する",
+            "translation": "do",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-19-plainPast",
+      "title": "する · plainPast",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-19-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "する (do) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "した"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:plainPast",
+            "stimulus": "する",
+            "suppliedReading": "する",
+            "translation": "do",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-19-te",
+      "title": "する · te",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-19-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "する (do) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "して"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:te",
+            "stimulus": "する",
+            "suppliedReading": "する",
+            "translation": "do",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-20-polite",
+      "title": "来る · polite",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-20-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "来る (come) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "来ます",
+            "きます"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:polite",
+            "stimulus": "来る",
+            "suppliedReading": "くる",
+            "translation": "come",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-20-politeNegative",
+      "title": "来る · politeNegative",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "politeNegative",
+      "questions": [
+        {
+          "id": "conjugation-20-politeNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "来る (come) — politeNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "来ません",
+            "きません"
+          ],
+          "explanation": "Use the polite negative ending ません.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:politeNegative",
+            "stimulus": "来る",
+            "suppliedReading": "くる",
+            "translation": "come",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-20-plainNegative",
+      "title": "来る · plainNegative",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-20-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "来る (come) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "来ない",
+            "こない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:plainNegative",
+            "stimulus": "来る",
+            "suppliedReading": "くる",
+            "translation": "come",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-20-plainPast",
+      "title": "来る · plainPast",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-20-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "来る (come) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "来た",
+            "きた"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:plainPast",
+            "stimulus": "来る",
+            "suppliedReading": "くる",
+            "translation": "come",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-20-te",
+      "title": "来る · te",
+      "kind": "conjugation",
+      "classID": "irregular",
+      "formID": "te",
+      "questions": [
+        {
+          "id": "conjugation-20-te",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "来る (come) — te",
+          "choices": [],
+          "acceptedAnswers": [
+            "来て",
+            "きて"
+          ],
+          "explanation": "Use the verb て form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:irregular:te",
+            "stimulus": "来る",
+            "suppliedReading": "くる",
+            "translation": "come",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-21-polite",
+      "title": "高い · polite",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-21-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "高い (expensive) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "高いです",
+            "たかいです"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:polite",
+            "stimulus": "高い",
+            "suppliedReading": "たかい",
+            "translation": "expensive",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-21-plainNegative",
+      "title": "高い · plainNegative",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-21-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "高い (expensive) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "高くない",
+            "たかくない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:plainNegative",
+            "stimulus": "高い",
+            "suppliedReading": "たかい",
+            "translation": "expensive",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-21-plainPast",
+      "title": "高い · plainPast",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-21-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "高い (expensive) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "高かった",
+            "たかかった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:plainPast",
+            "stimulus": "高い",
+            "suppliedReading": "たかい",
+            "translation": "expensive",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-21-connective",
+      "title": "高い · connective",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "connective",
+      "questions": [
+        {
+          "id": "conjugation-21-connective",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "高い (expensive) — connective",
+          "choices": [],
+          "acceptedAnswers": [
+            "高くて",
+            "たかくて"
+          ],
+          "explanation": "Use the adjective connective form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:connective",
+            "stimulus": "高い",
+            "suppliedReading": "たかい",
+            "translation": "expensive",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-22-polite",
+      "title": "いい · polite",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-22-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "いい (good) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "いいです"
+          ],
+          "explanation": "Use the polite affirmative ending. Inflected forms use よい as their base.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:polite",
+            "stimulus": "いい",
+            "suppliedReading": "いい",
+            "translation": "good",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-22-plainNegative",
+      "title": "いい · plainNegative",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-22-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "いい (good) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "よくない"
+          ],
+          "explanation": "Use the plain negative form. Inflected forms use よい as their base.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:plainNegative",
+            "stimulus": "いい",
+            "suppliedReading": "いい",
+            "translation": "good",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-22-plainPast",
+      "title": "いい · plainPast",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-22-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "いい (good) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "よかった"
+          ],
+          "explanation": "Use the plain past form. Inflected forms use よい as their base.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:plainPast",
+            "stimulus": "いい",
+            "suppliedReading": "いい",
+            "translation": "good",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-22-connective",
+      "title": "いい · connective",
+      "kind": "conjugation",
+      "classID": "iAdjective",
+      "formID": "connective",
+      "questions": [
+        {
+          "id": "conjugation-22-connective",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "いい (good) — connective",
+          "choices": [],
+          "acceptedAnswers": [
+            "よくて"
+          ],
+          "explanation": "Use the adjective connective form. Inflected forms use よい as their base.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:iAdjective:connective",
+            "stimulus": "いい",
+            "suppliedReading": "いい",
+            "translation": "good",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-23-polite",
+      "title": "静か · polite",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-23-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "静か (quiet) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "静かです",
+            "しずかです"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:polite",
+            "stimulus": "静か",
+            "suppliedReading": "しずか",
+            "translation": "quiet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-23-plainNegative",
+      "title": "静か · plainNegative",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-23-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "静か (quiet) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "静かではない",
+            "しずかではない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:plainNegative",
+            "stimulus": "静か",
+            "suppliedReading": "しずか",
+            "translation": "quiet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-23-plainPast",
+      "title": "静か · plainPast",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-23-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "静か (quiet) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "静かだった",
+            "しずかだった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:plainPast",
+            "stimulus": "静か",
+            "suppliedReading": "しずか",
+            "translation": "quiet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-23-connective",
+      "title": "静か · connective",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "connective",
+      "questions": [
+        {
+          "id": "conjugation-23-connective",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "静か (quiet) — connective",
+          "choices": [],
+          "acceptedAnswers": [
+            "静かで",
+            "しずかで"
+          ],
+          "explanation": "Use the adjective connective form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:connective",
+            "stimulus": "静か",
+            "suppliedReading": "しずか",
+            "translation": "quiet",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-24-polite",
+      "title": "元気 · polite",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "polite",
+      "questions": [
+        {
+          "id": "conjugation-24-polite",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "元気 (healthy) — polite",
+          "choices": [],
+          "acceptedAnswers": [
+            "元気です",
+            "げんきです"
+          ],
+          "explanation": "Use the polite affirmative ending.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:polite",
+            "stimulus": "元気",
+            "suppliedReading": "げんき",
+            "translation": "healthy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-24-plainNegative",
+      "title": "元気 · plainNegative",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "plainNegative",
+      "questions": [
+        {
+          "id": "conjugation-24-plainNegative",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "元気 (healthy) — plainNegative",
+          "choices": [],
+          "acceptedAnswers": [
+            "元気ではない",
+            "げんきではない"
+          ],
+          "explanation": "Use the plain negative form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:plainNegative",
+            "stimulus": "元気",
+            "suppliedReading": "げんき",
+            "translation": "healthy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-24-plainPast",
+      "title": "元気 · plainPast",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "plainPast",
+      "questions": [
+        {
+          "id": "conjugation-24-plainPast",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "元気 (healthy) — plainPast",
+          "choices": [],
+          "acceptedAnswers": [
+            "元気だった",
+            "げんきだった"
+          ],
+          "explanation": "Use the plain past form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:plainPast",
+            "stimulus": "元気",
+            "suppliedReading": "げんき",
+            "translation": "healthy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "conjugation-24-connective",
+      "title": "元気 · connective",
+      "kind": "conjugation",
+      "classID": "naAdjective",
+      "formID": "connective",
+      "questions": [
+        {
+          "id": "conjugation-24-connective",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "conjugation",
+          "prompt": "元気 (healthy) — connective",
+          "choices": [],
+          "acceptedAnswers": [
+            "元気で",
+            "げんきで"
+          ],
+          "explanation": "Use the adjective connective form.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "conjugation",
+            "topicID": "form:naAdjective:connective",
+            "stimulus": "元気",
+            "suppliedReading": "げんき",
+            "translation": "healthy",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-01",
+      "title": "I drink water.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-01",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I drink water.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "は marks the topic; を marks the object.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I drink water.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "わたし"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "水"
+              },
+              {
+                "id": "t4",
+                "text": "を"
+              },
+              {
+                "id": "t5",
+                "text": "飲みます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-02",
+      "title": "The cat is here.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-02",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "The cat is here.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "が marks the cat; に marks its location.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "The cat is here.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "猫"
+              },
+              {
+                "id": "t2",
+                "text": "が"
+              },
+              {
+                "id": "t3",
+                "text": "ここ"
+              },
+              {
+                "id": "t4",
+                "text": "に"
+              },
+              {
+                "id": "t5",
+                "text": "います"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-03",
+      "title": "I go to school.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-03",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I go to school.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "へ marks the destination.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I go to school.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "わたし"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "学校"
+              },
+              {
+                "id": "t4",
+                "text": "へ"
+              },
+              {
+                "id": "t5",
+                "text": "行きます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-04",
+      "title": "I read a book at home.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-04",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I read a book at home.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "で marks where the reading happens.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I read a book at home.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "わたし"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "家"
+              },
+              {
+                "id": "t4",
+                "text": "で"
+              },
+              {
+                "id": "t5",
+                "text": "本"
+              },
+              {
+                "id": "t6",
+                "text": "を"
+              },
+              {
+                "id": "t7",
+                "text": "読みます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5",
+                "t6",
+                "t7"
+              ],
+              [
+                "t1",
+                "t2",
+                "t5",
+                "t6",
+                "t3",
+                "t4",
+                "t7"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5",
+                "t6",
+                "t7"
+              ],
+              [
+                "t3",
+                "t4",
+                "t5",
+                "t6",
+                "t1",
+                "t2",
+                "t7"
+              ],
+              [
+                "t5",
+                "t6",
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t7"
+              ],
+              [
+                "t5",
+                "t6",
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t7"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-05",
+      "title": "This is my book.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-05",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "This is my book.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "の connects the owner and the book.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "This is my book.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "これ"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "わたし"
+              },
+              {
+                "id": "t4",
+                "text": "の"
+              },
+              {
+                "id": "t5",
+                "text": "本"
+              },
+              {
+                "id": "t6",
+                "text": "です"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5",
+                "t6"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-06",
+      "title": "I do not drink tea.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-06",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I do not drink tea.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "ません gives the polite negative.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I do not drink tea.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "わたし"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "お茶"
+              },
+              {
+                "id": "t4",
+                "text": "を"
+              },
+              {
+                "id": "t5",
+                "text": "飲みません"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-07",
+      "title": "I get up at seven.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-07",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I get up at seven.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "に marks a specific time.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I get up at seven.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "わたし"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "七時"
+              },
+              {
+                "id": "t4",
+                "text": "に"
+              },
+              {
+                "id": "t5",
+                "text": "起きます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-08",
+      "title": "Tomorrow I meet a friend.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-08",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "Tomorrow I meet a friend.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "に marks the person met; 明日 needs no time particle.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "Tomorrow I meet a friend.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "明日"
+              },
+              {
+                "id": "t2",
+                "text": "友達"
+              },
+              {
+                "id": "t3",
+                "text": "に"
+              },
+              {
+                "id": "t4",
+                "text": "会います"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+              ],
+              [
+                "t2",
+                "t3",
+                "t1",
+                "t4"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-09",
+      "title": "My mother buys eggs.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-09",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "My mother buys eggs.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "は marks the topic; を marks what is bought.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "My mother buys eggs.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "母"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "卵"
+              },
+              {
+                "id": "t4",
+                "text": "を"
+              },
+              {
+                "id": "t5",
+                "text": "買います"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-10",
+      "title": "My father goes to the station.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-10",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "My father goes to the station.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "へ indicates a destination.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "My father goes to the station.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "父"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "駅"
+              },
+              {
+                "id": "t4",
+                "text": "へ"
+              },
+              {
+                "id": "t5",
+                "text": "行きます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-11",
+      "title": "I listen to music at home.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-11",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I listen to music at home.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "で marks the place and を the object.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I listen to music at home.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "家"
+              },
+              {
+                "id": "t2",
+                "text": "で"
+              },
+              {
+                "id": "t3",
+                "text": "音楽"
+              },
+              {
+                "id": "t4",
+                "text": "を"
+              },
+              {
+                "id": "t5",
+                "text": "聞きます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-12",
+      "title": "The library is quiet.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-12",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "The library is quiet.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "静か is followed by です here.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "The library is quiet.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "図書館"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "静か"
+              },
+              {
+                "id": "t4",
+                "text": "です"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-13",
+      "title": "I do homework today.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-13",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I do homework today.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "今日 sets the time; を marks the task.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I do homework today.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "今日"
+              },
+              {
+                "id": "t2",
+                "text": "宿題"
+              },
+              {
+                "id": "t3",
+                "text": "を"
+              },
+              {
+                "id": "t4",
+                "text": "します"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+              ],
+              [
+                "t2",
+                "t3",
+                "t1",
+                "t4"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-14",
+      "title": "I go by train.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-14",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I go by train.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "で marks the means of transport.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I go by train.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "電車"
+              },
+              {
+                "id": "t2",
+                "text": "で"
+              },
+              {
+                "id": "t3",
+                "text": "行きます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-15",
+      "title": "The book is on the chair.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-15",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "The book is on the chair.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "の links chair to above; に marks location.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "The book is on the chair.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "本"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "椅子"
+              },
+              {
+                "id": "t4",
+                "text": "の"
+              },
+              {
+                "id": "t5",
+                "text": "上"
+              },
+              {
+                "id": "t6",
+                "text": "に"
+              },
+              {
+                "id": "t7",
+                "text": "あります"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5",
+                "t6",
+                "t7"
+              ],
+              [
+                "t3",
+                "t4",
+                "t5",
+                "t6",
+                "t1",
+                "t2",
+                "t7"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-16",
+      "title": "I watch a movie with a friend.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-16",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I watch a movie with a friend.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "と marks the companion.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I watch a movie with a friend.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "友達"
+              },
+              {
+                "id": "t2",
+                "text": "と"
+              },
+              {
+                "id": "t3",
+                "text": "映画"
+              },
+              {
+                "id": "t4",
+                "text": "を"
+              },
+              {
+                "id": "t5",
+                "text": "見ます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-17",
+      "title": "It is not raining today.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-17",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "It is not raining today.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "ではありません negates the noun predicate politely.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "It is not raining today.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "今日"
+              },
+              {
+                "id": "t2",
+                "text": "は"
+              },
+              {
+                "id": "t3",
+                "text": "雨"
+              },
+              {
+                "id": "t4",
+                "text": "ではありません"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-18",
+      "title": "There is a cat in the park.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-18",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "There is a cat in the park.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "に marks the location; が marks what exists.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "There is a cat in the park.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "公園"
+              },
+              {
+                "id": "t2",
+                "text": "に"
+              },
+              {
+                "id": "t3",
+                "text": "猫"
+              },
+              {
+                "id": "t4",
+                "text": "が"
+              },
+              {
+                "id": "t5",
+                "text": "います"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5"
+              ],
+              [
+                "t3",
+                "t4",
+                "t1",
+                "t2",
+                "t5"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-19",
+      "title": "I ate breakfast.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-19",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I ate breakfast.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "ました expresses the polite past.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I ate breakfast.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "朝ご飯"
+              },
+              {
+                "id": "t2",
+                "text": "を"
+              },
+              {
+                "id": "t3",
+                "text": "食べました"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-20",
+      "title": "The name of the shop is Mori.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-20",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "The name of the shop is Mori.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "の links the shop and its name.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "The name of the shop is Mori.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "店"
+              },
+              {
+                "id": "t2",
+                "text": "の"
+              },
+              {
+                "id": "t3",
+                "text": "名前"
+              },
+              {
+                "id": "t4",
+                "text": "は"
+              },
+              {
+                "id": "t5",
+                "text": "モリ"
+              },
+              {
+                "id": "t6",
+                "text": "です"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5",
+                "t6"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sentence-21",
+      "title": "I read this book and that book.",
+      "kind": "sentenceOrder",
+      "questions": [
+        {
+          "id": "sentence-21",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "sentenceOrder",
+          "prompt": "I read this book and that book.",
+          "choices": [],
+          "acceptedAnswers": [],
+          "explanation": "と joins the two books. Repeated 本 tokens have separate IDs.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "sentenceOrder",
+            "topicID": "sentence:beginner",
+            "stimulus": "I read this book and that book.",
+            "tokens": [
+              {
+                "id": "t1",
+                "text": "この"
+              },
+              {
+                "id": "t2",
+                "text": "本"
+              },
+              {
+                "id": "t3",
+                "text": "と"
+              },
+              {
+                "id": "t4",
+                "text": "あの"
+              },
+              {
+                "id": "t5",
+                "text": "本"
+              },
+              {
+                "id": "t6",
+                "text": "を"
+              },
+              {
+                "id": "t7",
+                "text": "読みます"
+              }
+            ],
+            "acceptedOrders": [
+              [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "t5",
+                "t6",
+                "t7"
+              ],
+              [
+                "t4",
+                "t5",
+                "t3",
+                "t1",
+                "t2",
+                "t6",
+                "t7"
+              ]
+            ],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:morning",
+      "title": "A quiet morning",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-morning-time",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "When does the speaker get up?",
+          "choices": [
+            "At seven",
+            "At eight",
+            "At nine"
+          ],
+          "correctIndex": 0,
+          "acceptedAnswers": [],
+          "explanation": "七時に起きます says that the speaker gets up at seven. Eight is the time for going to school.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:morning",
+            "stimulus": "毎朝、わたしは七時に起きます。朝ご飯はパンと卵です。お茶を飲んで、八時に学校へ行きます。",
+            "suppliedReading": "まいあさ、わたしはしちじにおきます。あさごはんはパンとたまごです。おちゃをのんで、はちじにがっこうへいきます。",
+            "translation": "Every morning, I get up at seven. Breakfast is bread and eggs. I drink tea and go to school at eight.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-morning-food",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "What does the speaker eat for breakfast?",
+          "choices": [
+            "Rice and fish",
+            "Bread and eggs",
+            "Only tea"
+          ],
+          "correctIndex": 1,
+          "acceptedAnswers": [],
+          "explanation": "朝ご飯はパンと卵です names bread and eggs as breakfast.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:morning",
+            "stimulus": "毎朝、わたしは七時に起きます。朝ご飯はパンと卵です。お茶を飲んで、八時に学校へ行きます。",
+            "suppliedReading": "まいあさ、わたしはしちじにおきます。あさごはんはパンとたまごです。おちゃをのんで、はちじにがっこうへいきます。",
+            "translation": "Every morning, I get up at seven. Breakfast is bread and eggs. I drink tea and go to school at eight.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:library",
+      "title": "At the library",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-library-day",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "On which day did they go to the library?",
+          "choices": [
+            "Monday",
+            "Sunday",
+            "Saturday"
+          ],
+          "correctIndex": 2,
+          "acceptedAnswers": [],
+          "explanation": "The opening word 土曜日 means Saturday.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:library",
+            "stimulus": "土曜日、友だちと図書館へ行きました。わたしは日本語の本を読みました。友だちは宿題をしました。図書館は静かでした。",
+            "suppliedReading": "どようび、ともだちととしょかんへいきました。わたしはにほんごのほんをよみました。ともだちはしゅくだいをしました。としょかんはしずかでした。",
+            "translation": "On Saturday, I went to the library with a friend. I read a Japanese-language book. My friend did homework. The library was quiet.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-library-friend",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "What did the friend do?",
+          "choices": [
+            "Homework",
+            "Read a newspaper",
+            "Drink tea"
+          ],
+          "correctIndex": 0,
+          "acceptedAnswers": [],
+          "explanation": "友だちは宿題をしました says that the friend did homework.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:library",
+            "stimulus": "土曜日、友だちと図書館へ行きました。わたしは日本語の本を読みました。友だちは宿題をしました。図書館は静かでした。",
+            "suppliedReading": "どようび、ともだちととしょかんへいきました。わたしはにほんごのほんをよみました。ともだちはしゅくだいをしました。としょかんはしずかでした。",
+            "translation": "On Saturday, I went to the library with a friend. I read a Japanese-language book. My friend did homework. The library was quiet.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:shopping",
+      "title": "Buying fruit",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-shopping-count",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "How many apples will they buy?",
+          "choices": [
+            "Two",
+            "Three",
+            "Four"
+          ],
+          "correctIndex": 1,
+          "acceptedAnswers": [],
+          "explanation": "りんごを三つ買います says they will buy three apples. 三つ is read みっつ.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:shopping",
+            "stimulus": "今日は母と店へ行きます。りんごを三つ買います。バナナも買います。家で果物を食べます。",
+            "suppliedReading": "きょうはははとみせへいきます。りんごをみっつかいます。バナナもかいます。いえでくだものをたべます。",
+            "translation": "Today I am going to the shop with my mother. We will buy three apples. We will also buy bananas. We will eat fruit at home.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-shopping-place",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "Where will they eat the fruit?",
+          "choices": [
+            "At the shop",
+            "At school",
+            "At home"
+          ],
+          "correctIndex": 2,
+          "acceptedAnswers": [],
+          "explanation": "家で果物を食べます gives the location: at home.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:shopping",
+            "stimulus": "今日は母と店へ行きます。りんごを三つ買います。バナナも買います。家で果物を食べます。",
+            "suppliedReading": "きょうはははとみせへいきます。りんごをみっつかいます。バナナもかいます。いえでくだものをたべます。",
+            "translation": "Today I am going to the shop with my mother. We will buy three apples. We will also buy bananas. We will eat fruit at home.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:cat",
+      "title": "The cat and the chair",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-cat-location",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "Where is Momo now?",
+          "choices": [
+            "Under the chair",
+            "On the chair",
+            "Under a book"
+          ],
+          "correctIndex": 0,
+          "acceptedAnswers": [],
+          "explanation": "椅子の下にいます places Momo under the chair. The book is on it.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:cat",
+            "stimulus": "わたしの家に小さい猫がいます。名前はモモです。今、モモは椅子の下にいます。椅子の上には本があります。",
+            "suppliedReading": "わたしのいえにちいさいねこがいます。なまえはモモです。いま、モモはいすのしたにいます。いすのうえにはほんがあります。",
+            "translation": "There is a small cat in my home. Its name is Momo. Right now, Momo is under the chair. There is a book on the chair.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-cat-name",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "What is the cat's name?",
+          "choices": [
+            "Mimi",
+            "Momo",
+            "Hana"
+          ],
+          "correctIndex": 1,
+          "acceptedAnswers": [],
+          "explanation": "名前はモモです explicitly gives the name Momo.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:cat",
+            "stimulus": "わたしの家に小さい猫がいます。名前はモモです。今、モモは椅子の下にいます。椅子の上には本があります。",
+            "suppliedReading": "わたしのいえにちいさいねこがいます。なまえはモモです。いま、モモはいすのしたにいます。いすのうえにはほんがあります。",
+            "translation": "There is a small cat in my home. Its name is Momo. Right now, Momo is under the chair. There is a book on the chair.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:rain",
+      "title": "A rainy Sunday",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-rain-park",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "Did the speaker go to the park?",
+          "choices": [
+            "Yes, in the morning",
+            "Yes, in the afternoon",
+            "No"
+          ],
+          "correctIndex": 2,
+          "acceptedAnswers": [],
+          "explanation": "行きませんでした is a polite past negative: the speaker did not go.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:rain",
+            "stimulus": "日曜日は雨でした。公園へ行きませんでした。家で音楽を聞きました。午後、妹と映画を見ました。",
+            "suppliedReading": "にちようびはあめでした。こうえんへいきませんでした。いえでおんがくをききました。ごご、いもうととえいがをみました。",
+            "translation": "It rained on Sunday. I did not go to the park. I listened to music at home. In the afternoon, I watched a movie with my younger sister.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-rain-company",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "Who watched the movie with the speaker?",
+          "choices": [
+            "Their younger sister",
+            "Their mother",
+            "Their friend"
+          ],
+          "correctIndex": 0,
+          "acceptedAnswers": [],
+          "explanation": "妹と means 'with my younger sister.'",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:rain",
+            "stimulus": "日曜日は雨でした。公園へ行きませんでした。家で音楽を聞きました。午後、妹と映画を見ました。",
+            "suppliedReading": "にちようびはあめでした。こうえんへいきませんでした。いえでおんがくをききました。ごご、いもうととえいがをみました。",
+            "translation": "It rained on Sunday. I did not go to the park. I listened to music at home. In the afternoon, I watched a movie with my younger sister.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening:train",
+      "title": "Meeting a friend",
+      "kind": "listeningComprehension",
+      "questions": [
+        {
+          "id": "listening-train-transport",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "How will the speaker get to the station?",
+          "choices": [
+            "By bus",
+            "By train",
+            "On foot"
+          ],
+          "correctIndex": 1,
+          "acceptedAnswers": [],
+          "explanation": "電車で describes the means of travel: by train.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:train",
+            "stimulus": "明日、友だちに会います。電車で駅へ行きます。十時に駅の前で会います。それから、一緒に昼ご飯を食べます。",
+            "suppliedReading": "あした、ともだちにあいます。でんしゃでえきへいきます。じゅうじにえきのまえであいます。それから、いっしょにひるごはんをたべます。",
+            "translation": "Tomorrow, I will meet a friend. I will go to the station by train. We will meet in front of the station at ten. After that, we will eat lunch together.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        },
+        {
+          "id": "listening-train-plan",
+          "revision": 1,
+          "fingerprint": "",
+          "questionKind": "listeningComprehension",
+          "prompt": "What will they do after meeting?",
+          "choices": [
+            "Study at the library",
+            "Watch a movie",
+            "Eat lunch together"
+          ],
+          "correctIndex": 2,
+          "acceptedAnswers": [],
+          "explanation": "それから means 'after that.' The next sentence says they will eat lunch together.",
+          "metadata": {
+            "schemaVersion": 1,
+            "activityKind": "listeningComprehension",
+            "topicID": "listening:train",
+            "stimulus": "明日、友だちに会います。電車で駅へ行きます。十時に駅の前で会います。それから、一緒に昼ご飯を食べます。",
+            "suppliedReading": "あした、ともだちにあいます。でんしゃでえきへいきます。じゅうじにえきのまえであいます。それから、いっしょにひるごはんをたべます。",
+            "translation": "Tomorrow, I will meet a friend. I will go to the station by train. We will meet in front of the station at ten. After that, we will eat lunch together.",
+            "tokens": [],
+            "acceptedOrders": [],
+            "source": "Original beginner practice. AI-authored; independent language review pending.",
+            "assisted": false
+          }
+        }
+      ]
+    }
+  ],
+  "contexts": [
+    {
+      "stableID": "context-01",
+      "word": {
+        "headword": "学校",
+        "reading": "がっこう",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "a school"
+      ],
+      "cloze": "＿＿へ行きます。",
+      "japanese": "学校へ行きます。",
+      "reading": "がっこうへいきます。",
+      "translation": "I go to school.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-02",
+      "word": {
+        "headword": "猫",
+        "reading": "ねこ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "cat"
+      ],
+      "cloze": "＿＿がいます。",
+      "japanese": "猫がいます。",
+      "reading": "ねこがいます。",
+      "translation": "There is a cat.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-03",
+      "word": {
+        "headword": "本",
+        "reading": "ほん",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "book"
+      ],
+      "cloze": "＿＿を読みます。",
+      "japanese": "本を読みます。",
+      "reading": "ほんをよみます。",
+      "translation": "I read a book.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-04",
+      "word": {
+        "headword": "水",
+        "reading": "みず",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "water"
+      ],
+      "cloze": "＿＿を飲みます。",
+      "japanese": "水を飲みます。",
+      "reading": "みずをのみます。",
+      "translation": "I drink water.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-05",
+      "word": {
+        "headword": "駅",
+        "reading": "えき",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "station"
+      ],
+      "cloze": "＿＿へ行きます。",
+      "japanese": "駅へ行きます。",
+      "reading": "えきへいきます。",
+      "translation": "I go to the station.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-06",
+      "word": {
+        "headword": "友達",
+        "reading": "ともだち",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "friend"
+      ],
+      "cloze": "＿＿と話します。",
+      "japanese": "友達と話します。",
+      "reading": "ともだちとはなします。",
+      "translation": "I talk with a friend.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-07",
+      "word": {
+        "headword": "母",
+        "reading": "はは",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "(my) mother"
+      ],
+      "cloze": "＿＿は家にいます。",
+      "japanese": "母は家にいます。",
+      "reading": "はははいえにいます。",
+      "translation": "My mother is at home.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-08",
+      "word": {
+        "headword": "父",
+        "reading": "ちち",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "(my) father"
+      ],
+      "cloze": "＿＿は本を読みます。",
+      "japanese": "父は本を読みます。",
+      "reading": "ちちはほんをよみます。",
+      "translation": "My father reads a book.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-09",
+      "word": {
+        "headword": "卵",
+        "reading": "たまご",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "egg"
+      ],
+      "cloze": "＿＿を食べます。",
+      "japanese": "卵を食べます。",
+      "reading": "たまごをたべます。",
+      "translation": "I eat an egg.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-10",
+      "word": {
+        "headword": "店",
+        "reading": "みせ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "store, shop"
+      ],
+      "cloze": "＿＿へ行きます。",
+      "japanese": "店へ行きます。",
+      "reading": "みせへいきます。",
+      "translation": "I go to the shop.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-11",
+      "word": {
+        "headword": "雨",
+        "reading": "あめ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "rain"
+      ],
+      "cloze": "今日は＿＿です。",
+      "japanese": "今日は雨です。",
+      "reading": "きょうはあめです。",
+      "translation": "It is raining today.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-12",
+      "word": {
+        "headword": "公園",
+        "reading": "こうえん",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "a park"
+      ],
+      "cloze": "＿＿で遊びます。",
+      "japanese": "公園で遊びます。",
+      "reading": "こうえんであそびます。",
+      "translation": "I play in the park.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-13",
+      "word": {
+        "headword": "映画",
+        "reading": "えいが",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "movie, film"
+      ],
+      "cloze": "＿＿を見ます。",
+      "japanese": "映画を見ます。",
+      "reading": "えいがをみます。",
+      "translation": "I watch a movie.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-14",
+      "word": {
+        "headword": "電車",
+        "reading": "でんしゃ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "electric train"
+      ],
+      "cloze": "＿＿で行きます。",
+      "japanese": "電車で行きます。",
+      "reading": "でんしゃでいきます。",
+      "translation": "I go by train.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-15",
+      "word": {
+        "headword": "図書館",
+        "reading": "としょかん",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "library"
+      ],
+      "cloze": "＿＿で勉強します。",
+      "japanese": "図書館で勉強します。",
+      "reading": "としょかんでべんきょうします。",
+      "translation": "I study at the library.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-16",
+      "word": {
+        "headword": "宿題",
+        "reading": "しゅくだい",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "homework"
+      ],
+      "cloze": "＿＿をします。",
+      "japanese": "宿題をします。",
+      "reading": "しゅくだいをします。",
+      "translation": "I do homework.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-17",
+      "word": {
+        "headword": "音楽",
+        "reading": "おんがく",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "Music"
+      ],
+      "cloze": "＿＿を聞きます。",
+      "japanese": "音楽を聞きます。",
+      "reading": "おんがくをききます。",
+      "translation": "I listen to music.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-18",
+      "word": {
+        "headword": "家",
+        "reading": "いえ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "house, home"
+      ],
+      "cloze": "＿＿で食べます。",
+      "japanese": "家で食べます。",
+      "reading": "いえでたべます。",
+      "translation": "I eat at home.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-19",
+      "word": {
+        "headword": "椅子",
+        "reading": "いす",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "chair"
+      ],
+      "cloze": "＿＿に座ります。",
+      "japanese": "椅子に座ります。",
+      "reading": "いすにすわります。",
+      "translation": "I sit on a chair.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    },
+    {
+      "stableID": "context-20",
+      "word": {
+        "headword": "名前",
+        "reading": "なまえ",
+        "level": "N5"
+      },
+      "verifiedMeanings": [
+        "name"
+      ],
+      "cloze": "＿＿を書きます。",
+      "japanese": "名前を書きます。",
+      "reading": "なまえをかきます。",
+      "translation": "I write my name.",
+      "source": "Original beginner practice. AI-authored; independent language review pending."
+    }
+  ]
+}

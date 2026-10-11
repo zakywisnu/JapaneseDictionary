@@ -18,6 +18,7 @@ public struct DetailView: View {
     @State private var isConfirmingDelete = false
     @State private var isConfirmingUpdate = false
     @State private var isOrganizingLists = false
+    @State private var conjugationEntries: Set<String> = []
     private let makeMemoryAid: ((Kotoba) -> MemoryAidViewModel)?
     private let examples: ExampleRepository
     
@@ -63,6 +64,10 @@ public struct DetailView: View {
                     Text("Vocabulary JLPT levels are community estimates.")
                         .font(.footnote)
                         .foregroundStyle(Forest.inkMuted)
+                    if conjugationEntries.contains(entry.headword + "|" + kotoba.furigana) {
+                        Button("Practice conjugation") { pronunciation.stop(); router.push(.conjugationWord(entry.headword), hideNavBar: false) }
+                            .buttonStyle(.plain).frame(maxWidth: .infinity, minHeight: 44, alignment: .leading).foregroundStyle(Forest.ink)
+                    }
                     definitionCard([("Study meaning", kotoba.english)])
                     dictionaryContent
                     if viewModel.canUpdateStudyWord {
@@ -95,6 +100,11 @@ public struct DetailView: View {
         .navigationTitle(viewModel.state.type.title)
         .navigationBarTitleDisplayMode(.inline)
         .task {
+            let questions = (try? AppliedPracticeCatalogRepository.bundled().activities.filter { $0.kind == .conjugation }.flatMap(\.questions)) ?? []
+            conjugationEntries = Set(questions.compactMap { question in
+                guard let form = question.metadata?.stimulus, let reading = question.metadata?.suppliedReading else { return nil }
+                return form + "|" + reading
+            })
             viewModel.send(.loadDictionary)
             await memoryAid?.send(.load)
         }

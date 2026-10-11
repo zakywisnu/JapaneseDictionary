@@ -48,6 +48,7 @@ struct TodayLearningHeader: View {
             } else { Text("Starter path completed. Revisit a step or choose more practice.").font(.subheadline).foregroundStyle(Forest.inkMuted) }
             AppComposer.shared.makeDailyGoalSummaryView()
             AppComposer.shared.makeDailyStudyPlanSummaryView()
+            AppComposer.shared.makeWeeklyRecapSummaryView { router.push(.weeklyRecap, hideNavBar: false) }
             StudyKindPicker(selection: $kind)
         }.onAppear { viewModel.send(.load) }
     }

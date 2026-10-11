@@ -24,6 +24,13 @@ public enum AppRoutes: @preconcurrency Routable {
     case difficult
     case dictionary
     case dictionaryEntry(String, PassageContext? = nil)
+    case conjugationPractice(String? = nil)
+    case conjugationWord(String)
+    case sentenceBuilding(String? = nil)
+    case sentenceBuildingSession([ExerciseSnapshot], String, String)
+    case listeningComprehension(String? = nil)
+    case listeningComprehensionSession([ExerciseSnapshot], String, String)
+    case weeklyRecap
     case learningPractice
     case kanaPractice
     case speaking(SpeakingTarget)
@@ -47,6 +54,20 @@ public enum AppRoutes: @preconcurrency Routable {
     @MainActor @ViewBuilder
     public func view() -> some View {
         switch self {
+        case .conjugationWord(let lemma):
+            AppComposer.shared.makeConjugationPracticeView(lemma: lemma)
+        case .conjugationPractice(let topic):
+            AppComposer.shared.makeConjugationPracticeView(topicID: topic)
+        case .sentenceBuilding(let topic):
+            AppComposer.shared.makeSentenceBuildingView(topicID: topic)
+        case let .sentenceBuildingSession(snapshots, key, title):
+            AppComposer.shared.makeSentenceBuildingSessionView(snapshots: snapshots, activityKey: key, title: title)
+        case .listeningComprehension(let topic):
+            AppComposer.shared.makeListeningComprehensionView(topicID: topic)
+        case let .listeningComprehensionSession(snapshots, key, title):
+            AppComposer.shared.makeListeningComprehensionSessionView(snapshots: snapshots, activityKey: key, title: title)
+        case .weeklyRecap:
+            WeeklyRecapRouteView()
         case .learningPractice:
             LearningPracticeView()
         case .kanaPractice:

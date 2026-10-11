@@ -34,8 +34,11 @@ struct ExerciseHistoryView: View {
                     if mistakesOnly {
                         Text("Each session practices up to 1,000 mistakes. Only the latest checked answer for each version of a question is used. Practice leaves review dates unchanged.")
                             .font(.subheadline).foregroundStyle(Forest.inkMuted)
-                        Button("Practice these mistakes") { viewModel.send(.startMistakes) }
-                            .buttonStyle(.bordered)
+                        ForEach(mistakeKinds, id: \.0) { kind, title in
+                            if viewModel.state.mistakes.contains(where: { $0.snapshot.questionKind == kind }) {
+                                Button("Practice " + title) { viewModel.send(.startMistakesKind(kind)) }.buttonStyle(.bordered)
+                            }
+                        }
                         if let error = viewModel.state.startError { Text(error).font(.subheadline) }
                     }
                 }
@@ -65,6 +68,9 @@ struct ExerciseHistoryView: View {
         .onAppear { viewModel.send(.load) }
         .onChange(of: viewModel.state.startedKey) { _, key in if let key { router.push(.exerciseResume(key), hideNavBar: false) } }
     }
+    private var mistakeKinds: [(ExerciseQuestionKind, String)] {
+        [(.choice, "choices"), (.kanaReading, "kana readings"), (.romanization, "romanization"), (.listeningReading, "listening recall"), (.conjugation, "conjugation"), (.sentenceOrder, "sentence building"), (.listeningComprehension, "listening comprehension")]
+    }
     private func outcome(_ attempt: ExerciseAttempt) -> String {
         switch attempt.outcome { case .correct: return "Correct"; case .incorrect: return "Incorrect"; case .selfRated: return "Self-rated recall" }
     }
@@ -72,6 +78,9 @@ struct ExerciseHistoryView: View {
         switch attempt.response {
         case .choice(let index): return attempt.snapshot.choices.indices.contains(index) ? attempt.snapshot.choices[index] : "Unavailable"
         case .text(let text): return text
+        case .orderedTokens(let ids):
+            let tokens = attempt.snapshot.metadata?.tokens ?? []
+            return ids.compactMap { id in tokens.first { $0.id == id }?.text }.joined()
         case .selfRating(let remembered): return remembered ? "Remembered" : "Didn't remember"
         }
     }

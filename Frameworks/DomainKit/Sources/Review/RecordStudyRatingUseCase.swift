@@ -13,6 +13,9 @@ public struct DefaultRecordStudyRatingUseCase: RecordStudyRatingUseCase {
         self.reviewRepository = reviewRepository; self.ratingRepository = ratingRepository; self.calendar = calendar
     }
     public func execute(id: SavedStudyID, sessionID: UUID, actionID: UUID, rating: RecallRating, now: Date, isDue: Bool) throws {
+        try execute(id: id, sessionID: sessionID, actionID: actionID, rating: rating, now: now, isDue: isDue, contextID: nil)
+    }
+    public func execute(id: SavedStudyID, sessionID: UUID, actionID: UUID, rating: RecallRating, now: Date, isDue: Bool, contextID: String?) throws {
         var review: ReviewRecord?
         if isDue {
             let previous = try reviewRepository.records().first { $0.id == id }
@@ -25,6 +28,6 @@ public struct DefaultRecordStudyRatingUseCase: RecordStudyRatingUseCase {
             review = ReviewRecord(id: id, stage: stage, dueDate: try scheduler.dueDate(stage: stage, now: reviewedAt, calendar: calendar), lastReviewedAt: reviewedAt, lastSessionID: sessionID, sessionBaselineStage: baseline, sessionHadAgain: hadAgain)
         }
         let activity = rating == .gotIt ? PracticeActivity(id: id, completedAt: now, calendar: calendar) : nil
-        try ratingRepository.record(id: id, sessionID: sessionID, actionID: actionID, again: rating == .again, now: now, review: review, activity: activity)
+        try ratingRepository.record(id: id, sessionID: sessionID, actionID: actionID, again: rating == .again, now: now, review: review, activity: activity, contextID: contextID)
     }
 }

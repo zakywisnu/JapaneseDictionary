@@ -2,7 +2,7 @@ import Foundation
 import CryptoKit
 import SwiftData
 
-public enum ExerciseQuestionKind: String, Codable, Hashable { case choice, kanaReading, romanization, listeningReading, meaningSelfRated }
+public enum ExerciseQuestionKind: String, Codable, Hashable { case choice, kanaReading, romanization, listeningReading, meaningSelfRated, conjugation, sentenceOrder, listeningComprehension }
 public struct ExerciseSnapshot: Codable, Hashable {
     public var id: String
     public var revision: Int
@@ -13,10 +13,16 @@ public struct ExerciseSnapshot: Codable, Hashable {
     public var correctIndex: Int?
     public var acceptedAnswers: [String]
     public var explanation: String
-    public init(id: String, revision: Int, questionKind: ExerciseQuestionKind, prompt: String, choices: [String] = [], correctIndex: Int? = nil, acceptedAnswers: [String] = [], explanation: String) {
+    public var metadata: PracticeMetadata?
+    public init(id: String, revision: Int, questionKind: ExerciseQuestionKind, prompt: String, choices: [String] = [], correctIndex: Int? = nil, acceptedAnswers: [String] = [], explanation: String, metadata: PracticeMetadata? = nil) {
         self.id = id; self.revision = revision; self.questionKind = questionKind; self.prompt = prompt
         self.choices = choices; self.correctIndex = correctIndex; self.acceptedAnswers = acceptedAnswers; self.explanation = explanation
+        self.metadata = metadata
         fingerprint = ""; fingerprint = computedFingerprint
+    }
+    public var computedReviewHash: String {
+        var copy = self; copy.fingerprint = ""; copy.metadata?.review = nil; copy.metadata?.assisted = false
+        return practiceHash(copy)
     }
     public var computedFingerprint: String {
         var copy = self; copy.fingerprint = ""
@@ -24,7 +30,7 @@ public struct ExerciseSnapshot: Codable, Hashable {
         return SHA256.hash(data: (try? encoder.encode(copy)) ?? Data()).map { String(format: "%02x", $0) }.joined()
     }
 }
-public enum ExerciseResponse: Codable, Hashable { case choice(Int), text(String), selfRating(Bool) }
+public enum ExerciseResponse: Codable, Hashable { case choice(Int), text(String), selfRating(Bool), orderedTokens([String]) }
 public enum ExerciseOutcome: String, Codable, Hashable { case correct, incorrect, selfRated }
 public struct ExerciseAttempt: Codable, Hashable {
     public var id: UUID

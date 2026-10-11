@@ -1,5 +1,6 @@
 import SwiftUI
 import DataKit
+import DomainKit
 
 struct RecallSessionView: View {
     @State var viewModel: RecallSessionViewModel
@@ -27,7 +28,15 @@ struct RecallSessionView: View {
                     Text("Question \(viewModel.state.position + 1) of \(viewModel.state.total)")
                         .font(.subheadline).foregroundStyle(Forest.inkMuted)
                     if viewModel.promptVisible {
+                        if question.snapshot.questionKind == .conjugation, let metadata = question.snapshot.metadata {
+                            Text(metadata.stimulus ?? question.snapshot.prompt).font(.headword(32, relativeTo: .title))
+                            Text(metadata.translation ?? "")
+                            Text("Target: " + ConjugationPolicy.formLabel(metadata.topicID.split(separator: ":").last.map(String.init) ?? ""))
+                                .font(.headline)
+                            Text(metadata.source).font(.footnote).foregroundStyle(Forest.inkMuted)
+                        } else {
                         Text(question.snapshot.prompt).font(.headword(32, relativeTo: .title)).fixedSize(horizontal: false, vertical: true)
+                        }
                     } else {
                         Text(question.snapshot.questionKind == .meaningSelfRated ? "Listen, then recall the meaning." : "Listen, then type the supplied kana reading.").font(.headline)
                     }
@@ -59,7 +68,7 @@ struct RecallSessionView: View {
                                 .buttonStyle(.bordered).disabled(viewModel.state.selectedIndex != nil)
                         }
                     } else if !viewModel.state.isAnswerShown {
-                        TextField(question.snapshot.questionKind == .romanization ? "Romanization" : "Kana answer", text: Binding(get: { viewModel.state.draft }, set: { viewModel.send(.draft($0)) }))
+                        TextField(question.snapshot.questionKind == .romanization ? "Romanization" : question.snapshot.questionKind == .conjugation ? "Japanese form" : "Kana answer", text: Binding(get: { viewModel.state.draft }, set: { viewModel.send(.draft($0)) }))
                             .textFieldStyle(.roundedBorder).autocorrectionDisabled().textInputAutocapitalization(.never)
                             .focused($answerFocused).disabled(viewModel.state.error != nil)
                         Text("Enter your answer, then tap Check.")

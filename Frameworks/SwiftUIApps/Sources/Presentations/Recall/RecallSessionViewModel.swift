@@ -55,7 +55,7 @@ final class RecallSessionViewModel {
                     state.selfRatedCount = attempts.filter { $0.outcome == .selfRated }.count
                     if let id = saved.revealedAttemptID, let attempt = attempts.first(where: { $0.id == id }) {
                         state.isRevealed = true; state.isAnswerShown = true; state.outcome = attempt.outcome
-                        switch attempt.response { case .text(let value): state.draft = value; case .choice(let index): state.selectedIndex = index; case .selfRating(let value): state.remembered = value }
+                        switch attempt.response { case .text(let value): state.draft = value; case .choice(let index): state.selectedIndex = index; case .selfRating(let value): state.remembered = value; case .orderedTokens: break }
                     }
                 } else if !questions.isEmpty { try persistence.save(checkpoint(position: 0)) }
                 state.isLoading = false; loaded = true
@@ -82,7 +82,7 @@ final class RecallSessionViewModel {
             case .submit:
                 guard let question = current, pendingAttempt != nil || canSubmit, !state.isAnswerShown else { return }
                 let kind = question.snapshot.questionKind
-                guard kind == .kanaReading || kind == .romanization || kind == .listeningReading else { return }
+                guard kind == .kanaReading || kind == .romanization || kind == .listeningReading || kind == .conjugation else { return }
                 try record(response: .text(state.draft), outcome: ExerciseAnswerNormalizer.matches(state.draft, accepted: question.snapshot.acceptedAnswers, kind: kind) ? .correct : .incorrect)
             case .choose(let index):
                 guard loaded, !state.contentChanged, !state.isRevealed, let question = current, question.snapshot.questionKind == .choice, question.snapshot.choices.indices.contains(index), pendingAttempt == nil || state.selectedIndex == index else { return }

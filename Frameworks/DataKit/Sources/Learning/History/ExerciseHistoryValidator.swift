@@ -7,28 +7,62 @@ public enum ExerciseHistoryValidator {
               snapshot.choices.count <= 100, snapshot.acceptedAnswers.count <= 100,
               snapshot.choices.allSatisfy({ validText($0) }), snapshot.acceptedAnswers.allSatisfy({ validText($0, max: 500) }),
               snapshot.fingerprint == snapshot.computedFingerprint else { throw ExerciseHistoryError.invalidRecord }
+        if let metadata = snapshot.metadata {
+            try validateMetadata(metadata, kind: snapshot.questionKind)
+            if let review = metadata.review { try validatePracticeReview(review, hash: snapshot.computedReviewHash) }
+        }
         switch snapshot.questionKind {
-        case .choice:
+        case .choice, .listeningComprehension:
             guard snapshot.choices.count >= 2, let index = snapshot.correctIndex, snapshot.choices.indices.contains(index), snapshot.acceptedAnswers.isEmpty else { throw ExerciseHistoryError.invalidRecord }
         case .meaningSelfRated:
             guard snapshot.correctIndex == nil, snapshot.choices.isEmpty, snapshot.acceptedAnswers.isEmpty else { throw ExerciseHistoryError.invalidRecord }
-        case .kanaReading, .romanization, .listeningReading:
+        case .kanaReading, .romanization, .listeningReading, .conjugation:
             guard snapshot.correctIndex == nil, snapshot.choices.isEmpty, !snapshot.acceptedAnswers.isEmpty else { throw ExerciseHistoryError.invalidRecord }
+        case .sentenceOrder:
+            guard let metadata = snapshot.metadata, !metadata.tokens.isEmpty, !metadata.acceptedOrders.isEmpty,
+                  snapshot.correctIndex == nil, snapshot.choices.isEmpty, snapshot.acceptedAnswers.isEmpty else { throw ExerciseHistoryError.invalidRecord }
         }
+        if snapshot.questionKind == .listeningComprehension {
+            guard let metadata = snapshot.metadata, let stimulus = metadata.stimulus, let reading = metadata.suppliedReading,
+                  validText(stimulus), validText(reading) else { throw ExerciseHistoryError.invalidRecord }
+        }
+        if [.conjugation, .listeningComprehension].contains(snapshot.questionKind), snapshot.metadata == nil { throw ExerciseHistoryError.invalidRecord }
+    }
+    private static func validateMetadata(_ metadata: PracticeMetadata, kind: ExerciseQuestionKind) throws {
+        guard metadata.schemaVersion == 1, metadata.activityKind == kind.rawValue, validText(metadata.topicID, max: 256),
+              validText(metadata.source), [metadata.stimulus, metadata.suppliedReading, metadata.translation].compactMap({ $0 }).allSatisfy({ validText($0) }),
+              metadata.tokens.count <= 40, metadata.acceptedOrders.count <= 20,
+              Set(metadata.tokens.map(\.id)).count == metadata.tokens.count,
+              metadata.tokens.allSatisfy({ validText($0.id, max: 256) && validText($0.text, max: 500) }) else { throw ExerciseHistoryError.invalidRecord }
+        let ids = Set(metadata.tokens.map(\.id))
+        guard metadata.acceptedOrders.allSatisfy({ $0.count == ids.count && Set($0) == ids }),
+              kind == .sentenceOrder || (metadata.tokens.isEmpty && metadata.acceptedOrders.isEmpty) else { throw ExerciseHistoryError.invalidRecord }
+    }
+    public static func matchesOrderedTokens(_ response: [String], metadata: PracticeMetadata) -> Bool {
+        guard response.count == metadata.tokens.count,
+              Set(response) == Set(metadata.tokens.map(\.id)),
+              Set(metadata.tokens.map(\.id)).count == metadata.tokens.count else { return false }
+        let text = Dictionary(uniqueKeysWithValues: metadata.tokens.map { ($0.id, $0.text) })
+        let rendered = response.compactMap { text[$0] }
+        return metadata.acceptedOrders.contains { $0.compactMap { text[$0] } == rendered }
     }
     public static func validateAttempt(_ attempt: ExerciseAttempt) throws {
         try validateSnapshot(attempt.snapshot)
-        guard attempt.submittedAt.timeIntervalSince1970.isFinite else { throw ExerciseHistoryError.invalidRecord }
+        guard attempt.snapshot.metadata?.assisted != true, attempt.submittedAt.timeIntervalSince1970.isFinite else { throw ExerciseHistoryError.invalidRecord }
         let correct: Bool
         switch (attempt.snapshot.questionKind, attempt.response) {
-        case (.choice, .choice(let index)):
+        case (.choice, .choice(let index)), (.listeningComprehension, .choice(let index)):
             guard attempt.snapshot.choices.indices.contains(index) else { throw ExerciseHistoryError.invalidRecord }
             correct = index == attempt.snapshot.correctIndex
         case (.meaningSelfRated, .selfRating):
             guard attempt.outcome == .selfRated else { throw ExerciseHistoryError.invalidRecord }; return
-        case (.kanaReading, .text(let text)), (.romanization, .text(let text)), (.listeningReading, .text(let text)):
+        case (.kanaReading, .text(let text)), (.romanization, .text(let text)), (.listeningReading, .text(let text)), (.conjugation, .text(let text)):
             guard validText(text, max: 500) else { throw ExerciseHistoryError.invalidRecord }
             correct = ExerciseAnswerNormalizer.matches(text, accepted: attempt.snapshot.acceptedAnswers, kind: attempt.snapshot.questionKind)
+        case (.sentenceOrder, .orderedTokens(let ids)):
+            guard let metadata = attempt.snapshot.metadata, ids.count == metadata.tokens.count,
+                  Set(ids) == Set(metadata.tokens.map(\.id)) else { throw ExerciseHistoryError.invalidRecord }
+            correct = matchesOrderedTokens(ids, metadata: metadata)
         default: throw ExerciseHistoryError.invalidRecord
         }
         guard attempt.outcome == (correct ? .correct : .incorrect) else { throw ExerciseHistoryError.invalidRecord }
@@ -53,7 +87,7 @@ public enum ExerciseHistoryValidator {
         try reviewRatingEvents.forEach(validateReviewRatingEvent)
     }
     public static func validateReviewRatingEvent(_ event: ReviewRatingEvent) throws {
-        guard validText(event.id.id, max: 256), event.submittedAt.timeIntervalSince1970.isFinite else { throw ExerciseHistoryError.invalidRecord }
+        guard validText(event.id.id, max: 256), event.contextID.map({ validText($0, max: 256) }) ?? true, event.submittedAt.timeIntervalSince1970.isFinite else { throw ExerciseHistoryError.invalidRecord }
     }
     private static func validText(_ text: String, max: Int = 20_000) -> Bool { !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && text.count <= max }
 }

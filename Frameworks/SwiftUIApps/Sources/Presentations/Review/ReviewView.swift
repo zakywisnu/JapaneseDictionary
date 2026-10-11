@@ -1,5 +1,6 @@
 import SwiftUI
 import DataKit
+import DomainKit
 
 struct ReviewView: View {
     @EnvironmentObject private var router: AppRouter
@@ -38,6 +39,15 @@ struct ReviewView: View {
                         .foregroundStyle(Forest.inkMuted)
                     specimen(item)
                     if viewModel.state.isAnswerVisible {
+                        if let context = item.context {
+                            VStack(alignment: .leading, spacing: Forest.Space.m) {
+                                Text(context.japanese).font(.headword(24, relativeTo: .title2))
+                                Text(context.translation)
+                                Text(context.source).font(.footnote).foregroundStyle(Forest.inkMuted)
+                                Text("Original model-checked practice sentence. Independent language review pending.")
+                                    .font(.footnote).foregroundStyle(Forest.inkMuted)
+                            }.frame(maxWidth: .infinity, alignment: .leading)
+                        }
                         answer(item)
                             .transition(.opacity)
                         ForEach(Array(viewModel.state.pronunciationReadings.enumerated()), id: \.offset) { _, reading in
@@ -79,7 +89,9 @@ struct ReviewView: View {
 
     private func specimen(_ item: ReviewItem) -> some View {
         VStack(spacing: Forest.Space.m) {
-            if item.material != nil {
+            if let context = item.context, !viewModel.state.isAnswerVisible {
+                Text(context.cloze).font(.headword(28, relativeTo: .title)).fixedSize(horizontal: false, vertical: true)
+            } else if item.material != nil {
                 MaterialPrompt(text: item.headword)
             } else {
             ViewThatFits(in: .horizontal) {
@@ -189,4 +201,19 @@ struct ReviewView: View {
         .background(Forest.canvas)
     }
 
+}
+
+extension AppComposer {
+    func enrichedContextSession(_ session: ReviewSession, useCase: ContextReviewUseCase) -> ReviewSession {
+        guard session.useSentenceContext, session.supportsSentenceContext else { return session }
+        var result = session
+        result = ReviewSession(useSentenceContext: session.useSentenceContext, kind: session.kind, items: session.items.map { item in
+            var item = item
+            if item.compositeID.kind == .word, let key = item.exampleWordKey {
+                item.context = useCase.context(for: key, savedMeanings: item.meanings)
+            }
+            return item
+        }, origin: session.origin, id: session.id, returnTitle: session.returnTitle)
+        return result
+    }
 }

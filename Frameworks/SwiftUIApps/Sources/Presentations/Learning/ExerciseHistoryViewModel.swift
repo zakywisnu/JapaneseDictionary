@@ -13,9 +13,17 @@ final class ExerciseHistoryViewModel {
         self.load = load; self.loadCheckpoints = loadCheckpoints; self.saveCheckpoint = saveCheckpoint
     }
     func send(_ action: Action) {
-        if case .startMistakes = action {
-            guard let saveCheckpoint, !state.mistakes.isEmpty else { return }
-            let checkpoint = pendingMistakeCheckpoint ?? ExerciseCheckpoint(activityKey: "mistakes:" + UUID().uuidString, sessionID: UUID(), orderedSnapshots: Array(state.mistakes.prefix(1_000)).map(\.snapshot), position: 0, updatedAt: Date())
+        let kind: ExerciseQuestionKind?
+        let starts: Bool
+        switch action {
+        case .startMistakes: starts = true; kind = nil
+        case .startMistakesKind(let selected): starts = true; kind = selected
+        case .load: starts = false; kind = nil
+        }
+        if starts {
+            let mistakes = state.mistakes.filter { kind == nil || $0.snapshot.questionKind == kind }
+            guard let saveCheckpoint, !mistakes.isEmpty else { return }
+            let checkpoint = pendingMistakeCheckpoint ?? ExerciseCheckpoint(activityKey: "mistakes:" + UUID().uuidString, sessionID: UUID(), orderedSnapshots: Array(mistakes.prefix(1_000)).map(\.snapshot), position: 0, updatedAt: Date())
             pendingMistakeCheckpoint = checkpoint
             do { try saveCheckpoint(checkpoint); state.startedKey = checkpoint.activityKey; state.startError = nil; pendingMistakeCheckpoint = nil }
             catch { state.startError = "Mistake practice couldn't be saved. Try Practice these mistakes again." }
@@ -41,5 +49,5 @@ final class ExerciseHistoryViewModel {
         var startedKey: String?
         var startError: String?
     }
-    enum Action { case load, startMistakes }
+    enum Action { case load, startMistakes, startMistakesKind(ExerciseQuestionKind) }
 }

@@ -32,6 +32,7 @@ public struct RestoreBackupUseCase {
         let recovery = try repository.restore(backup, currentPreferences: BackupPreferences.read(from: defaults))
         defaults.set(backup.preferences.todayKind.rawValue, forKey: "todayStudyKind")
         defaults.set(backup.preferences.collectionKind.rawValue, forKey: "collectionStudyKind")
+        defaults.set(backup.preferences.contextualWordReviews == true, forKey: "contextualWordReviews")
         defaults.set(true, forKey: "isOnboardingComplete")
         if let shadowData {
             defaults.set(shadowData, forKey: "wordsProgress")

@@ -98,7 +98,11 @@ final class ReviewViewModel {
             return session.items.first { $0.compositeID.key == id }
         }
 
-        var pronunciationReadings: [String] { isAnswerVisible ? currentItem?.spokenReadings ?? [] : [] }
+        var pronunciationReadings: [String] {
+            guard isAnswerVisible else { return [] }
+            if let context = currentItem?.context { return [context.reading] }
+            return currentItem?.spokenReadings ?? []
+        }
 
         var remainingCount: Int { queue.remainingCount }
         var repeatAttempts: Int { queue.repeatAttempts }

@@ -9,6 +9,7 @@ final class BackupUseCaseTests: XCTestCase {
         let defaults = UserDefaults(suiteName: suite)!
         defer { defaults.removePersistentDomain(forName: suite) }
         defaults.set("words", forKey: "todayStudyKind")
+        defaults.set(true, forKey: "contextualWordReviews")
         defaults.set("words", forKey: "collectionStudyKind")
         defaults.set(false, forKey: "isOnboardingComplete")
         let oldShadow = Data("old shadow".utf8)
@@ -25,6 +26,7 @@ final class BackupUseCaseTests: XCTestCase {
         XCTAssertEqual(defaults.string(forKey: "todayStudyKind"), "words")
         XCTAssertEqual(defaults.string(forKey: "collectionStudyKind"), "words")
         XCTAssertFalse(defaults.bool(forKey: "isOnboardingComplete"))
+        XCTAssertTrue(defaults.bool(forKey: "contextualWordReviews"))
         XCTAssertEqual(defaults.data(forKey: "wordsProgress"), oldShadow)
         XCTAssertFalse(notified)
     }
@@ -89,6 +91,24 @@ final class BackupUseCaseTests: XCTestCase {
         try RestoreBackupUseCase(repository: repository, defaults: defaults).execute(backup)
         let shadow = try JSONDecoder().decode(WordsProgressParam.self, from: XCTUnwrap(defaults.data(forKey: "wordsProgress")))
         XCTAssertEqual(shadow.kotobaIndex, 0); XCTAssertEqual(shadow.kotobaLevel.rawValue, "N5")
+    }
+
+    func testContextPreferenceRoundtripsAndLegacyRestoreResetsIt() throws {
+        let suite = UUID().uuidString
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let store = try StudyStore(inMemory: true)
+        let repository = BackupRepository(store: store, catalog: .init(words: [], kanjis: []), recoveryURL: recoveryURL())
+        defaults.set(true, forKey: "contextualWordReviews")
+        let backup = try repository.validate(ExportBackupUseCase(repository: repository, defaults: defaults).execute())
+        XCTAssertEqual(backup.preferences.contextualWordReviews, true)
+        defaults.set(false, forKey: "contextualWordReviews")
+        try RestoreBackupUseCase(repository: repository, defaults: defaults).execute(backup)
+        XCTAssertTrue(defaults.bool(forKey: "contextualWordReviews"))
+        var legacy = backup
+        legacy.formatVersion = 6; legacy.preferences.contextualWordReviews = nil
+        try RestoreBackupUseCase(repository: repository, defaults: defaults).execute(legacy)
+        XCTAssertFalse(defaults.bool(forKey: "contextualWordReviews"))
     }
 
     private enum Failure: Error { case injected }

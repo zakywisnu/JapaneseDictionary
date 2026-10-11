@@ -20,36 +20,43 @@ extension AppComposer {
         RecallSessionView(viewModel: .init(questions: snapshots.map(ExerciseResumePolicy.historicalQuestion), activityKey: activityKey, isListening: listening, persistence: exercisePersistence(activityKey: activityKey)), title: title)
     }
     func makeExerciseResumeView(activityKey: String) -> some View {
-        ExerciseResumeView(activityKey: activityKey, load: { [self] in
-            guard let checkpoint = try StandardExerciseHistoryRepository(store: store).checkpoint(activityKey: activityKey) else { return nil }
-            let questions = try ExerciseResumePolicy.currentQuestions(checkpoint)
-            return RecallSessionViewModel(questions: questions, activityKey: activityKey, isListening: activityKey.hasPrefix("listening:"), persistence: exercisePersistence(activityKey: activityKey))
-        })
+        AppliedExerciseResumeView(activityKey: activityKey)
     }
 }
 
-private struct ExerciseResumeView: View {
+private struct AppliedExerciseResumeView: View {
     let activityKey: String
-    let load: () throws -> RecallSessionViewModel?
-    @State private var model: RecallSessionViewModel?
-    @State private var isLoading = true
+    @State private var questions: [ExerciseSnapshot] = []
+    @State private var loading = true
     @State private var error: String?
     var body: some View {
         Group {
-            if let model { RecallSessionView(viewModel: model, title: "Continue practice") }
-            else {
+            if !questions.isEmpty {
+                let composer = AppComposer.shared
+                if questions.first?.questionKind == .sentenceOrder {
+                    composer.makeSentenceBuildingSessionView(snapshots: questions, activityKey: activityKey, title: "Sentence building")
+                } else if questions.first?.questionKind == .listeningComprehension {
+                    composer.makeListeningComprehensionSessionView(snapshots: questions, activityKey: activityKey, title: "Listening comprehension")
+                } else {
+                    composer.makeRecallSessionView(snapshots: questions, activityKey: activityKey, title: "Continue practice", listening: ExerciseResumePolicy.requiresListening(activityKey: activityKey, snapshots: questions))
+                }
+            } else {
                 ScrollView {
-                    if isLoading { ProgressView("Opening unfinished practice") }
+                    if loading { ProgressView("Opening unfinished practice") }
                     else if let error { StateMessage(title: "Couldn't open practice", message: error, actionTitle: "Try again", action: reload) }
-                    else { StateMessage(title: "This practice has finished", message: "Return to Learning practice to start another session.") }
-                }.background(Forest.canvas).navigationTitle("Continue practice")
+                    else { StateMessage(title: "This practice has finished or changed", message: "Return to Practice to start another session. Your submitted answers remain in History.") }
+                }.background(Forest.canvas).navigationTitle("Continue practice").toolbar(.visible, for: .navigationBar)
             }
-        }.onAppear { if model == nil { reload() } }
+        }.onAppear { if questions.isEmpty { reload() } }
     }
     private func reload() {
-        isLoading = true; error = nil
-        do { model = try load() }
-        catch { self.error = "Your unfinished practice couldn't be opened. Try again." }
-        isLoading = false
+        loading = true; error = nil
+        do {
+            let composer = AppComposer.shared
+            if let checkpoint = try StandardExerciseHistoryRepository(store: composer.store).checkpoint(activityKey: activityKey) {
+                questions = try ExerciseResumePolicy.currentQuestions(checkpoint).map(\.snapshot)
+            }
+        } catch { self.error = "Your unfinished practice couldn't open. Try again." }
+        loading = false
     }
 }

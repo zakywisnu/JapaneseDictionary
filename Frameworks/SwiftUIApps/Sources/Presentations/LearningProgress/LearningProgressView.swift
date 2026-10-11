@@ -8,6 +8,7 @@ struct LearningProgressView: View {
     @EnvironmentObject private var router: AppRouter
     var body: some View {
         VStack(alignment: .leading, spacing: Forest.Space.m) {
+            Button("Weekly recap") { router.push(.weeklyRecap, hideNavBar: false) }.buttonStyle(.plain).frame(minHeight: 44)
             Text("Learning activity").font(.title2.weight(.semibold))
             Picker("Time range", selection: Binding(get: { viewModel.state.days }, set: { viewModel.send(.range($0)) })) {
                 Text("Today").tag(1); Text("7 days").tag(7); Text("30 days").tag(30)
@@ -27,6 +28,9 @@ struct LearningProgressView: View {
                 if summary.kanaReading.submitted > 0 { metric("Kana readings", "\(summary.kanaReading.correct) correct / \(summary.kanaReading.submitted) answered") }
                 if summary.romanization.submitted > 0 { metric("Romanization", "\(summary.romanization.correct) correct / \(summary.romanization.submitted) answered") }
                 if summary.listeningReading.submitted > 0 { metric("Listening", "\(summary.listeningReading.correct) correct / \(summary.listeningReading.submitted) answered") }
+                if summary.conjugation.submitted > 0 { metric("Conjugation", "\(summary.conjugation.correct) correct / \(summary.conjugation.submitted) answered") }
+                if summary.sentenceOrder.submitted > 0 { metric("Sentence building", "\(summary.sentenceOrder.correct) correct / \(summary.sentenceOrder.submitted) answered") }
+                if summary.listeningComprehension.submitted > 0 { metric("Listening comprehension", "\(summary.listeningComprehension.correct) correct / \(summary.listeningComprehension.submitted) answered") }
                 if summary.meaningSelfRatedSubmitted > 0 { metric("Self-rated meanings", "\(summary.meaningSelfRatedRemembered) remembered / \(summary.meaningSelfRatedSubmitted) responses") }
                 if summary.distinctAttemptedContent > 0 { metric("Distinct questions attempted", "\(summary.distinctAttemptedContent)") }
                 if summary.distinctSavedItemsPracticed > 0 { metric("Saved items practiced", "\(summary.distinctSavedItemsPracticed) distinct items in this period") }
@@ -50,7 +54,7 @@ struct LearningProgressView: View {
             }
         }.foregroundStyle(Forest.ink).tint(Forest.moss).onAppear { viewModel.send(.load) }
     }
-    private var mistakeKinds: [(ExerciseQuestionKind, String)] { [(.choice, "Choices"), (.kanaReading, "Kana readings"), (.romanization, "Romanization"), (.listeningReading, "Listening")] }
+    private var mistakeKinds: [(ExerciseQuestionKind, String)] { [(.choice, "Choices"), (.kanaReading, "Kana readings"), (.romanization, "Romanization"), (.listeningReading, "Listening recall"), (.conjugation, "Conjugation"), (.sentenceOrder, "Sentence building"), (.listeningComprehension, "Listening comprehension")] }
     private func metric(_ title: String, _ value: String) -> some View {
         VStack(alignment: .leading, spacing: Forest.Space.xs) { Text(title).font(.headline); Text(value).font(.subheadline).fixedSize(horizontal: false, vertical: true) }
             .padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))

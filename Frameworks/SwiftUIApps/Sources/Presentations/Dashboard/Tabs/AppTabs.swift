@@ -18,6 +18,7 @@ public class AppTabsViewModel: ObservableObject {
 public enum AppTabs: Hashable, CaseIterable {
     case home
     case collection
+    case practice
     case profile
     
     public var title: String {
@@ -26,6 +27,8 @@ public enum AppTabs: Hashable, CaseIterable {
             "Today"
         case .collection:
             "Collection"
+        case .practice:
+            "Practice"
         case .profile:
             "Progress"
         }
@@ -38,6 +41,8 @@ public enum AppTabs: Hashable, CaseIterable {
             "leaf"
         case .collection:
             "books.vertical"
+        case .practice:
+            "square.grid.2x2"
         case .profile:
             "chart.bar"
         }
@@ -50,6 +55,8 @@ public enum AppTabs: Hashable, CaseIterable {
             AppComposer.shared.makeHomeView()
         case .collection:
             AppComposer.shared.makeCollectionView()
+        case .practice:
+            LearningPracticeView(isTabRoot: true)
         case .profile:
             AppComposer.shared.makeProfileView()
         }

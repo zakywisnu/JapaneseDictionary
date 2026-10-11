@@ -2,11 +2,23 @@ import Foundation
 import DataKit
 
 enum ExerciseResumePolicy {
+    static func requiresListening(activityKey: String, snapshots: [ExerciseSnapshot]) -> Bool {
+        activityKey.hasPrefix("listening:") || (!snapshots.isEmpty && snapshots.allSatisfy { $0.questionKind == .listeningReading })
+    }
     static func isCurrent(_ checkpoint: ExerciseCheckpoint) -> Bool {
         guard let current = try? currentQuestions(checkpoint) else { return false }
-        return current.map { $0.snapshot.fingerprint } == checkpoint.orderedSnapshots.map(\.fingerprint)
+        return current.map { authoredFingerprint($0.snapshot) } == checkpoint.orderedSnapshots.map(authoredFingerprint)
     }
     static func currentQuestions(_ checkpoint: ExerciseCheckpoint) throws -> [RecallQuestion] {
+        if checkpoint.activityKey.hasPrefix("conjugation:") || checkpoint.activityKey.hasPrefix("sentence-building:") || checkpoint.activityKey.hasPrefix("comprehension:") {
+            let catalog = try AppliedPracticeCatalogRepository.bundled()
+            let questions = Dictionary(catalog.activities.flatMap(\.questions).map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+            return checkpoint.orderedSnapshots.compactMap { stored in
+                guard var current = questions[stored.id] else { return nil }
+                if stored.metadata?.assisted == true { current.metadata?.assisted = true; current.fingerprint = current.computedFingerprint }
+                return historicalQuestion(current)
+            }
+        }
         if checkpoint.activityKey.hasPrefix("mistakes:") { return checkpoint.orderedSnapshots.map { historicalQuestion($0) } }
         if checkpoint.activityKey == "grammar" { return ExerciseCatalog.grammar.map { historicalQuestion($0.snapshot) } }
         if checkpoint.activityKey.hasPrefix("reading:") {
@@ -29,6 +41,11 @@ enum ExerciseResumePolicy {
         questions += items.flatMap { item in [RecallMode.reading, .meaning].flatMap { RecallSelectionViewModel.savedQuestions(item, mode: $0, listening: listening) } }
         let byID = Dictionary(questions.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
         return checkpoint.orderedSnapshots.compactMap { byID[$0.id] }
+    }
+    static func authoredFingerprint(_ snapshot: ExerciseSnapshot) -> String {
+        var copy = snapshot
+        if copy.metadata?.assisted == true { copy.metadata?.assisted = false; return copy.computedFingerprint }
+        return copy.fingerprint
     }
     static func historicalQuestion(_ snapshot: ExerciseSnapshot) -> RecallQuestion {
         RecallQuestion(snapshot: snapshot, suppliedReading: snapshot.questionKind == .listeningReading ? snapshot.acceptedAnswers.first : nil)

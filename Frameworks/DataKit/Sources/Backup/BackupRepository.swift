@@ -35,7 +35,7 @@ public final class BackupRepository {
         let memberships = try context.fetch(FetchDescriptor<StudyListMembershipModel>()).map { BackupListMembership(listID: $0.listID, wordID: $0.wordID) }.sorted { $0.key < $1.key }
         let activities = try context.fetch(FetchDescriptor<PracticeActivityModel>()).map(\.value).sorted { $0.key < $1.key }
         let target: Int? = goals.isEmpty ? 10 : goals[0].target
-        let backup = StudyBackup(formatVersion: 6, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
+        let backup = StudyBackup(formatVersion: 7, createdAt: Date(), catalogFingerprint: catalog.fingerprint,
             words: try context.fetch(FetchDescriptor<KotobaDataModel>()).map(BackupWord.init).sorted { $0.id < $1.id },
             kanjis: try context.fetch(FetchDescriptor<KanjiDataModel>()).map(BackupKanji.init).sorted { $0.id < $1.id },
             progress: progress.first.map(BackupProgress.init),

@@ -1,0 +1,15 @@
+{
+  "draftHash": "2f5c4d4133e369de10fa528f8456301580f16520d14309b17974aef7b573df6c",
+  "reviewer": "Codex content validation",
+  "date": "2026-10-11",
+  "method": "model-and-rule-check",
+  "independentLanguageReview": "pending",
+  "decisions": [
+    "Explicit written and kana forms checked against godan ending rules and exceptions.",
+    "Sentence particles, bounded alternative order, unique tokens, and intended English meanings checked.",
+    "Context selected meanings copied exactly from bundled vocabulary; clozes authored and checked.",
+    "Six existing reading passages and question text retained verbatim with separate listening identities.",
+    "AI-authored original beginner material; independent language review is not complete.",
+    "Independent Codex core review checked all forms and contexts; controller added intact particle-phrase permutations with predicate-final constraint, including location/subject/object/time and coordinated noun alternatives. This is model review, not human approval."
+  ]
+}

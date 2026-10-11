@@ -66,7 +66,7 @@ public enum BackupValidator {
     }
 
     public static func validate(_ backup: StudyBackup, catalog: CatalogSnapshot) throws {
-        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) || [4, 5, 6].contains(backup.formatVersion) else { throw BackupError.unsupportedVersion }
+        guard backup.formatVersion == catalog.version || (catalog.version == 2 && backup.formatVersion == 3) || [4, 5, 6, 7].contains(backup.formatVersion) else { throw BackupError.unsupportedVersion }
         guard backup.catalogFingerprint == catalog.fingerprint else { throw BackupError.foreignCatalog }
         try date(backup.createdAt)
         if backup.formatVersion < 6 { guard backup.pathProgress.isEmpty else { throw BackupError.invalid("path data in an older backup format") } }
@@ -75,6 +75,13 @@ public enum BackupValidator {
         try backup.pathProgress.forEach(LearningPathValidator.validate)
         if backup.formatVersion < 5 {
             guard backup.attempts.isEmpty, backup.checkpoints.isEmpty, backup.reviewRatingEvents.isEmpty else { throw BackupError.invalid("exercise history in an older backup format") }
+        }
+        if backup.formatVersion < 7 {
+            guard backup.preferences.contextualWordReviews != true else { throw BackupError.invalid("context review preference in an older backup") }
+            let snapshots = backup.attempts.map(\.snapshot) + backup.checkpoints.flatMap(\.orderedSnapshots)
+            guard snapshots.allSatisfy({ $0.metadata == nil && ![ExerciseQuestionKind.conjugation, .sentenceOrder, .listeningComprehension].contains($0.questionKind) }), backup.reviewRatingEvents.allSatisfy({ $0.contextID == nil }) else {
+                throw BackupError.invalid("applied practice data in an older backup format")
+            }
         }
         try ExerciseHistoryValidator.validate(attempts: backup.attempts, checkpoints: backup.checkpoints, reviewRatingEvents: backup.reviewRatingEvents)
         // Saved content requires its original Add next indexes and cumulative counters.

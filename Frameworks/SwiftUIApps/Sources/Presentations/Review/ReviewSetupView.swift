@@ -6,6 +6,7 @@ struct ReviewSetupView: View {
     let items: [ReviewItem]
     var origin: ReviewOrigin = .collection
     let onStart: (ReviewSession) -> Void
+    @AppStorage("contextualWordReviews") private var useSentenceContext = false
     @State private var selection = ReviewSelection(level: nil, limit: 20)
 
     private var noun: String { kind == .words ? "word" : kind == .kanji ? "kanji" : "item" }
@@ -37,6 +38,11 @@ struct ReviewSetupView: View {
                         .pickerStyle(.segmented)
                         .frame(minHeight: 44)
                     }
+                    if !items.isEmpty && items.allSatisfy({ $0.compositeID.kind == .word }) {
+                        Toggle("Use sentence context", isOn: $useSentenceContext)
+                        Text("Matching words use an original sentence prompt. Answers are self-rated.")
+                            .font(.footnote).foregroundStyle(Forest.inkMuted)
+                    }
                     Text("\(selected.count) \(selected.count == 1 ? noun : noun.pluralNoun) selected")
                         .font(.headline)
                     Text("Review starts with your newest collected items. Sentence levels come from their parent lessons. Search does not change this selection.")
@@ -53,7 +59,7 @@ struct ReviewSetupView: View {
             .background(Forest.canvas)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Button("Start review") {
-                    let session = ReviewSession(kind: kind, items: selected, origin: origin)
+                    let session = ReviewSession(useSentenceContext: useSentenceContext, kind: kind, items: selected, origin: origin)
                     dismiss()
                     onStart(session)
                 }

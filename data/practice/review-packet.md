@@ -2444,4 +2444,3 @@ Reading: なまえをかきます。
 Translation: I write my name.
 
 Review: ☐ accepted ☐ corrections needed
-

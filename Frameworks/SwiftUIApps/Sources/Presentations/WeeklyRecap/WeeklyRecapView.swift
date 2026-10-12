@@ -11,9 +11,15 @@ struct WeeklyRecapView: View {
                 else if let error = viewModel.state.error { StateMessage(title: "Couldn't load recap", message: error, actionTitle: "Try again", action: { viewModel.send(.retry) }) }
                 else if let recap = viewModel.state.recap {
                     Text(recap.rangeCaption).font(.subheadline).foregroundStyle(Forest.inkMuted)
-                    Text("Comparison period: " + recap.priorRangeCaption).font(.footnote).foregroundStyle(Forest.inkMuted)
-                    Text("\(recap.practiceDays) days practiced · \(recap.currentMistakes) outstanding mistakes").font(.subheadline)
+                    if recap.hasCurrentActivity { Text("\(recap.practiceDays) days practiced").font(.title2.weight(.semibold)) }
                     if !recap.hasCurrentActivity { StateMessage(title: "No practice recorded this week", message: "Answer a question or review a saved item to build your local history.") }
+                    if let focus = recap.focus {
+                        VStack(alignment: .leading, spacing: Forest.Space.m) {
+                            Text("Next focus").font(.headline)
+                            Text(focus.reason)
+                            Button("Open next focus") { viewModel.send(.openFocus) }.buttonStyle(PrimaryButtonStyle())
+                        }
+                    }
                     ForEach(recap.firstAttemptCounts.keys.sorted { $0.rawValue < $1.rawValue }, id: \.self) { kind in
                         if let count = recap.firstAttemptCounts[kind] {
                             VStack(alignment: .leading, spacing: Forest.Space.s) {
@@ -22,14 +28,16 @@ struct WeeklyRecapView: View {
                                 if let delta = recap.comparableDelta[kind] {
                                     Text(String(format: "%+.1f percentage points", delta.percentagePoints))
                                     Text("Unchanged questions: \(delta.current.correct)/\(delta.current.submitted) this week; \(delta.prior.correct)/\(delta.prior.submitted) in the preceding seven days.").font(.footnote).foregroundStyle(Forest.inkMuted)
-                                } else { Text("No comparison: each period needs at least 10 first attempts on the same unchanged questions.").font(.footnote).foregroundStyle(Forest.inkMuted) }
+                                }
                             }
                         }
                     }
+                    if recap.selfRatedCurrent.submitted > 0 {
                     VStack(alignment: .leading, spacing: Forest.Space.s) {
                         Text("Self-rated responses").font(.headline)
                         Text("\(recap.selfRatedCurrent.correct) remembered / \(recap.selfRatedCurrent.submitted) first responses")
                         Text("Self-ratings are separate from graded accuracy.").font(.footnote).foregroundStyle(Forest.inkMuted)
+                    }
                     }
                     if !recap.recurringTopics.isEmpty {
                         VStack(alignment: .leading, spacing: Forest.Space.s) {
@@ -39,11 +47,13 @@ struct WeeklyRecapView: View {
                             }
                         }
                     }
-                    if let focus = recap.focus {
-                        Text(focus.reason)
-                        Button("Open next focus") { viewModel.send(.openFocus) }.buttonStyle(PrimaryButtonStyle())
+                    DisclosureGroup("About this recap") {
+                        VStack(alignment: .leading, spacing: Forest.Space.m) {
+                            Text("Comparison period: " + recap.priorRangeCaption)
+                            Text("Comparisons need at least 10 first attempts in each period on the same unchanged questions.")
+                            Text(WeeklyRecap.historyDisclosure)
+                        }.font(.footnote).foregroundStyle(Forest.inkMuted).padding(.top, Forest.Space.m)
                     }
-                    Text(WeeklyRecap.historyDisclosure).font(.footnote).foregroundStyle(Forest.inkMuted)
                 }
             }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
         }.background(Forest.canvas).foregroundStyle(Forest.ink).tint(Forest.moss).navigationTitle("Weekly recap").toolbar(.visible, for: .navigationBar).onAppear { viewModel.send(.load) }

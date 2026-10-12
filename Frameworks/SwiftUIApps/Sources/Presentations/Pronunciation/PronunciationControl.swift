@@ -4,6 +4,7 @@ struct PronunciationControl: View {
     let reading: String
     let service: PronunciationService
     var showsReading = false
+    var showsAttribution = true
     @State private var requestedID: UUID?
 
     private var isPlaying: Bool {
@@ -45,8 +46,9 @@ struct PronunciationControl: View {
                 .foregroundStyle(Forest.ink)
                 .frame(minHeight: 44)
             }
-            Text("Synthesized speech")
-                .font(.footnote).foregroundStyle(Forest.inkMuted)
+            if showsAttribution {
+                Text("Synthesized speech").font(.footnote).foregroundStyle(Forest.inkMuted)
+            }
         }
         .onChange(of: reading) { _, _ in
             if isPlaying { service.stop() }

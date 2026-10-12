@@ -18,12 +18,15 @@ struct RecallSessionView: View {
                 } else if viewModel.questions.isEmpty {
                     StateMessage(title: "No questions available", message: "Return to practice setup and choose items with supplied readings.")
                 } else if viewModel.state.isComplete {
-                    Text("Practice complete").font(.title2.bold())
-                    Text("\(viewModel.state.correctCount) of \(viewModel.state.checkedCount) checked answers matched.")
-                    if viewModel.state.selfRatedCount > 0 { Text("\(viewModel.state.selfRatedCount) self-rated recalls. These are your own ratings.") }
-                    Text("Saved items, review dates and your daily saved-item goal stay unchanged.")
-                        .font(.subheadline).foregroundStyle(Forest.inkMuted)
-                    Button("Practice again") { viewModel.send(.restart) }.buttonStyle(PrimaryButtonStyle())
+                    VStack(alignment: .leading, spacing: Forest.Space.m) {
+                        Text("Practice complete").font(.title2.bold())
+                        if viewModel.state.checkedCount > 0 {
+                            Text("\(viewModel.state.correctCount) of \(viewModel.state.checkedCount) checked answers matched.")
+                        }
+                        if viewModel.state.selfRatedCount > 0 { Text("\(viewModel.state.selfRatedCount) self-rated recalls. These are your own ratings.") }
+                        Text("Saved items, review dates and your daily saved-item goal stay unchanged.")
+                            .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    }.forestStudyCard()
                 } else if let question = viewModel.current {
                     Text("Question \(viewModel.state.position + 1) of \(viewModel.state.total)")
                         .font(.subheadline).foregroundStyle(Forest.inkMuted)
@@ -94,7 +97,7 @@ struct RecallSessionView: View {
                                 if let index = question.snapshot.correctIndex, question.snapshot.choices.indices.contains(index) { Text("Answer: \(question.snapshot.choices[index])") }
                                 Text(question.snapshot.explanation)
                             }
-                        }
+                        }.forestStudyCard()
                         Button(viewModel.state.position + 1 == viewModel.state.total ? "Finish practice" : "Next") {
                             answerFocused = false; viewModel.send(.next)
                         }.buttonStyle(PrimaryButtonStyle())
@@ -106,7 +109,17 @@ struct RecallSessionView: View {
                 }
             }.foregroundStyle(Forest.ink).padding(Forest.Space.l)
         }
+        .id(viewModel.state.position)
         .background(Forest.canvas).navigationTitle(title).navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if viewModel.state.isComplete && viewModel.state.error == nil {
+                VStack(spacing: Forest.Space.s) {
+                    Button("Back to practice") { viewModel.send(.cancel); dismiss() }.buttonStyle(PrimaryButtonStyle())
+                    Button("Practice again") { viewModel.send(.restart) }.buttonStyle(.plain).frame(minHeight: 44)
+                }.padding(Forest.Space.l).background(Forest.canvas)
+            }
+        }
         .onAppear { viewModel.send(.load) }
         .onDisappear { viewModel.send(.cancel) }
         .onChange(of: viewModel.pronunciation.state) { _, _ in viewModel.send(.playbackChanged) }

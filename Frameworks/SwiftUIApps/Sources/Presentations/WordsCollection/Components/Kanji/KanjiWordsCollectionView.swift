@@ -11,7 +11,7 @@ struct KanjiWordsCollectionView: View {
     @EnvironmentObject var router: AppRouter
     @EnvironmentObject var appTabs: AppTabsViewModel
     @State var viewModel: KanjiWordsCollectionViewModel
-    let query: String
+    @Binding var query: String
     @State private var isReviewSetupPresented = false
     
     var body: some View {
@@ -19,7 +19,7 @@ struct KanjiWordsCollectionView: View {
             noun: "kanji",
             entries: viewModel.state.kanjis.map(\.studyEntry),
             loadState: viewModel.state.loadState,
-            query: query,
+            query: $query,
             onDelete: { viewModel.send(.didTapDelete($0.id)) },
             onSelect: { entry in
                 guard let kanji = viewModel.state.kanjis.first(where: { $0.id == entry.id }) else { return }

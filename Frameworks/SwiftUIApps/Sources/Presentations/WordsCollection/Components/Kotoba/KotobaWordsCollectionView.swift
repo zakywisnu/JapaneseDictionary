@@ -11,7 +11,7 @@ struct KotobaWordsCollectionView: View {
     @EnvironmentObject var router: AppRouter
     @EnvironmentObject var appTabs: AppTabsViewModel
     @State var viewModel: KotobaWordsCollectionViewModel
-    let query: String
+    @Binding var query: String
     @State private var isReviewSetupPresented = false
     
     var body: some View {
@@ -19,7 +19,7 @@ struct KotobaWordsCollectionView: View {
             noun: "word",
             entries: viewModel.state.kotobas.map(\.studyEntry),
             loadState: viewModel.state.loadState,
-            query: query,
+            query: $query,
             alternateSearchTerms: viewModel.state.alternateSearchTerms,
             onDelete: { viewModel.send(.didTapDelete($0.id)) },
             onSelect: { entry in

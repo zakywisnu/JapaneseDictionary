@@ -12,8 +12,8 @@ struct DailyStudyPlanView: View {
                 StateMessage(title: "Couldn't prepare your plan", message: error, actionTitle: "Try again") { viewModel.send(.load) }
             } else {
                 Section {
-                    Text(viewModel.goalReached ? "Today's goal is complete. More practice is optional." : "A short session based on your saved items. Complete one batch, then return for an updated plan.")
-                    if let snapshot = viewModel.state.snapshot {
+                    Text(viewModel.goalReached ? "Today's goal is complete. More practice is optional." : "Choose a batch from your saved items.")
+                    if let snapshot = viewModel.state.snapshot, !snapshot.completed.isEmpty {
                         Text("\(snapshot.completed.count) distinct items completed today")
                             .font(.subheadline).foregroundStyle(Forest.inkMuted)
                     }
@@ -28,13 +28,15 @@ struct DailyStudyPlanView: View {
                     ForEach(viewModel.batches) { batch in
                         Section(batch.title) {
                             Text(batch.explanation).foregroundStyle(Forest.inkMuted)
-                            ForEach(batch.items, id: \.compositeID) { item in
-                                MaterialPrompt(text: item.headword)
-                            }
                             Button("Review \(batch.items.count) items") {
                                 router.push(.review(batch.session), hideNavBar: false)
-                            }
-                            .buttonStyle(.bordered)
+                            }.buttonStyle(.bordered).frame(minHeight: 44)
+                            DisclosureGroup("Preview items") {
+                                ForEach(batch.items, id: \.compositeID) { item in
+                                    MaterialPrompt(text: item.headword).padding(.vertical, Forest.Space.xs)
+                                }
+                            }.tint(Forest.inkMuted)
+
                         }.listRowBackground(Forest.surface)
                     }
                 }
@@ -43,7 +45,7 @@ struct DailyStudyPlanView: View {
                 }.listRowBackground(Forest.surface)
             }
         }
-        .listStyle(.insetGrouped).scrollContentBackground(.hidden)
+        .forestTabList()
         .foregroundStyle(Forest.ink).background(Forest.canvas)
         .navigationTitle("Daily study plan").navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -73,23 +75,19 @@ struct DailyStudyPlanSummaryView: View {
     @State var viewModel: DailyStudyPlanViewModel
     @EnvironmentObject private var router: AppRouter
     var body: some View {
-        VStack(alignment: .leading, spacing: Forest.Space.s) {
-            Text("Daily study plan").font(.headline)
+        Group {
             if viewModel.state.isLoading { ProgressView("Preparing your plan") }
-            else if let error = viewModel.state.error { StateMessage(title: "Couldn't prepare your plan", message: error, actionTitle: "Try again", action: { viewModel.send(.load) }) }
-            else {
-                if viewModel.goalReached { Text("Today's goal is complete. More practice is optional.").font(.subheadline).foregroundStyle(Forest.inkMuted) }
-                if viewModel.batches.isEmpty {
-                    Text(viewModel.state.snapshot?.items.isEmpty == true ? "Save an item to build your review plan, or choose learning practice." : "No more reviews recommended today. You can choose learning practice.").font(.subheadline).foregroundStyle(Forest.inkMuted)
-                } else {
-                    Text("Recommended next session").font(.subheadline).foregroundStyle(Forest.inkMuted)
-                    ForEach(viewModel.batches) { batch in
-                        Text("\(batch.title): \(batch.items.count) items").font(.subheadline).fixedSize(horizontal: false, vertical: true)
-                    }
-                }
-                Button("Open plan") { router.push(.dailyStudyPlan, hideNavBar: false) }.buttonStyle(.plain).frame(minHeight: 44)
+            else if let error = viewModel.state.error {
+                StateMessage(title: "Couldn't prepare your plan", message: error, actionTitle: "Try again") { viewModel.send(.load) }
+            } else {
+                ForestNavigationRow(title: "Daily study plan", subtitle: summary) { router.push(.dailyStudyPlan, hideNavBar: false) }
+                    .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
             }
-        }.foregroundStyle(Forest.ink).padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
-            .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card)).onAppear { viewModel.send(.load) }
+        }.onAppear { viewModel.send(.load) }
+    }
+    private var summary: String {
+        if viewModel.goalReached { return "Goal complete. More practice is optional." }
+        if viewModel.batches.isEmpty { return "Choose something new to practice" }
+        return viewModel.batches.map { "\($0.title): \($0.items.count) items" }.joined(separator: " · ")
     }
 }

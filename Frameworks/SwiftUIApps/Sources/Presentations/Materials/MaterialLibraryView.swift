@@ -10,9 +10,14 @@ struct MaterialLibraryView: View {
 
     var body: some View {
         List {
+            if viewModel.mode != .bundled {
+                Section {
+                    CollectionScreenHeader(query: Binding(get: { viewModel.state.query }, set: { viewModel.send(.queryChanged($0)) }), onReview: viewModel.state.loadState == .loaded && !viewModel.reviewMaterials.isEmpty ? { onReview(viewModel.reviewMaterials) } : nil)
+                }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.s, trailing: 0))
+            }
             Section {
-                TextField("Search prompts, readings or answers", text: Binding(get: { viewModel.state.query }, set: { viewModel.send(.queryChanged($0)) }))
-                    .textInputAutocapitalization(.never).autocorrectionDisabled()
+                if viewModel.mode == .bundled { TextField("Search prompts, readings or answers", text: Binding(get: { viewModel.state.query }, set: { viewModel.send(.queryChanged($0)) }))
+                    .textInputAutocapitalization(.never).autocorrectionDisabled() }
                 Picker("Study level", selection: Binding(get: { viewModel.state.level }, set: { viewModel.send(.levelChanged($0)) })) {
                     Text("All levels").tag(String?.none)
                     Text("Unspecified").tag(String?.some(""))
@@ -33,11 +38,7 @@ struct MaterialLibraryView: View {
                     if viewModel.state.kind == .customCard {
                         Button("Create card", action: onCreate).foregroundStyle(Forest.ink)
                     }
-                    if viewModel.state.loadState == .loaded && !viewModel.reviewMaterials.isEmpty {
-                        Button("Review items") { onReview(viewModel.reviewMaterials) }.foregroundStyle(Forest.ink)
-                        Text("Review includes this material type. Search and level filters only change browsing.")
-                            .font(.footnote).foregroundStyle(Forest.inkMuted)
-                    }
+
                 }.listRowBackground(Forest.surface)
             }
             Section {
@@ -77,7 +78,7 @@ struct MaterialLibraryView: View {
                 }
             }.listRowBackground(Forest.surface)
         }
-        .listStyle(.insetGrouped).scrollContentBackground(.hidden)
+        .forestTabList()
         .background(Forest.canvas).tint(Forest.moss)
         .navigationTitle(viewModel.title)
         .scrollDismissesKeyboard(.interactively)

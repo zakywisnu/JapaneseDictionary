@@ -9,7 +9,7 @@ struct CollectionListView: View {
     let noun: String
     let entries: [StudyEntry]
     let loadState: TodayLoadState
-    let query: String
+    @Binding var query: String
     var alternateSearchTerms: [String: [String]] = [:]
     let onDelete: (StudyEntry) -> Void
     let onSelect: (StudyEntry) -> Void
@@ -22,29 +22,22 @@ struct CollectionListView: View {
     private var nouns: String { noun.pluralNoun }
 
     var body: some View {
-        switch loadState {
-        case .loading:
-            ProgressView("Loading your \(nouns)")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        case .failed:
-            StateMessage(
-                title: "Couldn't open your collection",
-                message: "Your saved \(nouns) didn't load.",
-                actionTitle: "Try again",
-                action: onRetry
-            )
-            .frame(maxHeight: .infinity)
-        case .loaded where entries.isEmpty:
-            StateMessage(
-                title: "No \(nouns) yet",
-                message: "Every \(noun) you add on Today is kept here, grouped by JLPT level.",
-                actionTitle: "Go to Today",
-                action: onGoToToday
-            )
-            .frame(maxHeight: .infinity)
-        case .loaded:
-            list
-        }
+        List {
+            Section {
+                CollectionScreenHeader(query: $query, onReview: loadState == .loaded && !entries.isEmpty ? onReview : nil)
+            }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.s, trailing: 0))
+            switch loadState {
+            case .loading:
+                ProgressView("Loading your \(nouns)").listRowBackground(Forest.surface)
+            case .failed:
+                StateMessage(title: "Couldn't open your collection", message: "Your saved \(nouns) didn't load.", actionTitle: "Try again", action: onRetry).listRowBackground(Forest.surface)
+            case .loaded where entries.isEmpty:
+                StateMessage(title: "No \(nouns) yet", message: "Add a \(noun) on Today or browse the bundled lessons.", actionTitle: "Go to Today", action: onGoToToday).listRowBackground(Forest.surface)
+            case .loaded:
+                collectionSections
+            }
+        }.forestTabList().scrollDismissesKeyboard(.immediately)
+            .contentMargins(.top, Forest.Space.s, for: .scrollContent)
     }
 
     private var filtered: [StudyEntry] {
@@ -58,20 +51,9 @@ struct CollectionListView: View {
         }
     }
 
-    private var list: some View {
+    private var collectionSections: some View {
         let groups = Dictionary(grouping: filtered, by: \.level)
-        return List {
-            Section {
-                Button(action: onReview) {
-                    Text("Review \(nouns)")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(Forest.ink)
-                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .listRowBackground(Forest.surface)
-            }
+        return Group {
             if filtered.isEmpty {
                 StateMessage(
                     title: "No matches for \"\(query)\"",
@@ -103,9 +85,5 @@ struct CollectionListView: View {
                 }
             }
         }
-        .listStyle(.insetGrouped)
-        .scrollContentBackground(.hidden)
-        .scrollDismissesKeyboard(.immediately)
-        .contentMargins(.top, Forest.Space.s, for: .scrollContent)
     }
 }

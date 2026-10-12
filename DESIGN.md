@@ -16,7 +16,7 @@ An ivory 森 (forest) in a square writing cell on moss green carries the Forest 
 
 ## Principles
 
-1. **One focal action per screen.** Today's focus is "Add next word/kanji". Detail's focus is the headword. Everything else defers.
+1. **One focal action per screen.** Today's focus is "Continue learning". Detail's focus is the headword. Everything else defers.
 2. **Real data only.** Counts, levels, and dates come from the bundled lists and the learner's saved progress. No invented stats, streaks, or placeholder people.
 3. **Honest about being local.** Copy never implies accounts, sync, or online features.
 4. **The character is the hero.** Japanese text is set large, in Mincho, inside a practice square. Chrome stays quiet.
@@ -96,7 +96,8 @@ Every headword sits in practice squares (`PracticeCells`): one square per charac
 | `StudyRow` | One word or kanji in a list | Practice squares, reading, meaning (2 lines max), optional `LevelTag`, and a neutral disclosure chevron. Combined into one VoiceOver element |
 | `LevelTag` | JLPT level | Hidden inside Collection, where the section header already says the level. VoiceOver reads "JLPT N5" |
 | `PracticeCells` / `Headword` | The motif | See above |
-| `PrimaryButtonStyle` | The screen's single focal action | Moss capsule, `onMoss` text, min height 50, full width, 0.98 press scale, 50% opacity when disabled |
+| `PrimaryButtonStyle` | The screen's single focal action | Moss capsule, `onMoss` text, min height 50, content-driven height with 16pt horizontal / 12pt vertical padding, full width, 0.98 press scale, 50% opacity when disabled |
+| `ForestNavigationRow` | Neutral navigation or action row | Wrapping title and optional subtitle, disclosure chevron, 16pt horizontal / 12pt vertical padding |
 | `ProgressTrack` | Learned vs total | 6pt capsule, `sunken` track, moss fill, minimum visible fill when value > 0. Hidden from VoiceOver; the number beside it is read instead |
 | `StateMessage` | Empty, error, and no-results states | Title, explanation, optional bordered moss action |
 
@@ -108,12 +109,13 @@ Lists use `.insetGrouped` with hidden scroll background, `surface` row backgroun
 |---|---|---|
 | Splash | 言葉の森 in practice squares | Tagline below. Moves on after 0.6s |
 | Onboarding | Character in a large square | 3 pages (言, 漢, 森), Skip top right, page dots, Next / Start learning. Finishing saves `isOnboardingComplete` |
-| Today | Add next word/kanji | Date caption, picker, compact add card (headline count, next JLPT level), list of today's items, newest first. Count supports the action without competing with the headwords |
-| Collection | The list | Search field (Japanese, reading, or English), picker, neutral Review action, sections by JLPT level N5 → N1 with counts |
+| Today | Continue learning | Date, compact goal track, continuation, one daily-plan row, material picker, grouped due review and neutral Add next, then today's items |
+| Collection | The list | Scrollable title with Options, material picker beside neutral Review, search, and JLPT sections. Controls stack at accessibility sizes |
+| Practice | Starter path and skills | One primary starter-path action, grouped Kana and recall, Grammar, Reading, Listening and Speaking rows, then expandable Practice options |
 | Detail | The headword | Specimen card (squares, reading, level), definition card (Meanings, On'yomi, Kun'yomi, Strokes). Native back. Trash in toolbar opens a confirmation anchored to it |
-| Progress | Words and Kanji cards | Words/Kanji in collection "of" bundled total, progress track, Current level, Last added. Metadata stacks at accessibility text sizes. Footnotes explain collection counts and local storage |
+| Progress | This week | Compact practice summary, expandable collection rows, and neutral Weekly recap / Activity details links. Settings opens from the header. Detailed metrics and data controls live on separate native screens |
 
-Tabs are the system `TabView`: **Today** (`leaf`, the daily word grows the forest), **Collection** (`books.vertical`), **Progress** (`chart.bar`).
+Tabs are the unchanged system `TabView`: **Today** (`leaf`), **Collection** (`books.vertical`), **Practice** (`square.grid.2x2`), **Progress** (`chart.bar`).
 
 ## States
 
@@ -150,7 +152,7 @@ MOTION 1. System push/pop and tab transitions, button press scale, list insert/r
 
 ## Review flow
 
-Today offers a neutral Review today's words / kanji action when the selected list has loaded with at least one item. Add next remains the moss primary action. Review snapshots the saved items in their current order and does not change collection progress.
+Today offers a neutral Review today's words / kanji action when the selected list has loaded with at least one item. Continue learning remains the moss primary action. Review snapshots the saved items in their current order and does not change collection progress.
 
 Collection offers a neutral Review words / kanji action after successful loading with saved items, including when browsing search has no matches. Its setup sheet independently selects All levels or N5–N1 and 10, 20 (default), or All items. Show the selected count; disable Start review for empty selections and explain how to choose another level. Start snapshots saved content, newest first with saved ID as the date tie-break. Search never silently filters review. Cancel returns without starting a session.
 
@@ -160,7 +162,7 @@ Completion says how many distinct items were practiced, reports repeat attempts 
 
 ## Due review and optional examples
 
-Today separates Due for review from Added today for the selected Words / Kanji kind. Its neutral action shows the due count; Add next remains the moss primary action. Loading names the due list, empty explains adding or returning later, and failures name the saved collection or schedule with Try again. Ratings in this mode save before changing the queue. A save failure keeps the revealed item and offers Retry / Exit review. Retry preserves the pending rating and session identity. Successful reviews use 1, 3, 7, 14 and 30 calendar-day intervals; Again resets to 1 day. Today and Collection practice leave schedules unchanged. Completion says these items were due for review without claiming mastery. Completed due sessions offer only Back to Today; the next session must load a fresh due list rather than repeat the stale snapshot.
+Today separates Due for review from Added today for the selected Words / Kanji kind. Its neutral action shows the due count; Continue learning remains the moss primary action. Loading names the due list, empty explains adding or returning later, and failures name the saved collection or schedule with Try again. Ratings in this mode save before changing the queue. A save failure keeps the revealed item and offers Retry / Exit review. Retry preserves the pending rating and session identity. Successful reviews use 1, 3, 7, 14 and 30 calendar-day intervals; Again resets to 1 day. Today and Collection practice leave schedules unchanged. Completion says these items were due for review without claiming mastery. Completed due sessions offer only Back to Today; the next session must load a fresh due list rather than repeat the stale snapshot.
 
 Approved vocabulary examples appear as an optional answer card only after reveal, matched by the original headword, reading and level. Kana-only words retain their original reading for matching while omitting its duplicate display. Missing or unreadable optional examples do not interrupt review. Sources is a pushed screen with native back navigation. The current release has zero approved examples, so no example cards appear.
 
@@ -193,7 +195,7 @@ Collection search includes alternate dictionary forms and readings only for conf
 
 ## Offline dictionary browsing
 
-Collection's Words view offers a neutral Browse dictionary action below the picker. It opens a separate native Dictionary screen; Collection search still searches saved items. Dictionary search covers supplied Japanese forms, readings and English meanings, with a native menu for All levels or community N5–N1. Blank search shows catalog order. Results use StudyRow with level and a neutral In collection caption for the exact study identity. Distinct study senses remain separate rows. Loading names the dictionary; resource or saved-collection errors offer Try again. No matches explains the search and offers Clear filters.
+Collection's Words view offers Browse dictionary in Options. It opens a separate native Dictionary screen; Collection search still searches saved items. Dictionary search covers supplied Japanese forms, readings and English meanings, with a native menu for All levels or community N5–N1. Blank search shows catalog order. Results use StudyRow with level and a neutral In collection caption for the exact study identity. Distinct study senses remain separate rows. Loading names the dictionary; resource or saved-collection errors offer Try again. No matches explains the search and offers Clear filters.
 
 Dictionary entry detail shows the headword, primary reading, community level and the chosen Study meaning, followed by all DictionaryDetailCard sections and Sources. Add to collection is the single moss action in the bottom safe area. After saving, View saved word opens the existing saved detail; saved meanings and AI advice remain there. Failed addition keeps the entry and permits retry. Selecting a word leaves the next sequential word on Today unchanged. Dictionary browsing has no trash, review rating or AI action before saving.
 
@@ -253,3 +255,21 @@ Connected learning follow-through: sentence and personal-card details offer spea
 Native tabs are Today, Collection, Practice and Progress. Practice is a first-class scrollable activity hub; Today keeps continuation and daily guidance. Progress holds the weekly recap. Existing Learning practice routes still work. No fifth tab is required for this release.
 
 Conjugation shows a supplied dictionary form and requested target, then explicit Check and a reviewed answer explanation. Sentence building uses wrapping token buttons, a selected sequence, Undo/Clear and Check; duplicate token labels retain separate identities. Contextual word reviews are optional and hide full sentences, translations and audio until Reveal. Listening comprehension hides transcripts until explicit reveal; revealing a transcript makes remaining questions assisted, with no checked score. Weekly recap shows exact local date ranges, retained-history limits, separate checked/self-rated counts and a reason for the next focus. New modes use original beginner content with transparent model-check provenance; human language review must never be implied.
+
+## Progress hierarchy
+
+Keep the existing native tab bar unchanged. Progress starts with This week, using real practice history and a Choose practice action when empty. Collection counts share one grouped surface; current list size and last-added dates expand on request. Weekly recap and Activity details are neutral navigation rows. Settings holds daily goal, optional sentence context, backup/recovery and sources. Activity details shows the selected period, nonempty graded and self-rated results separately, current due reviews and starter path. Hide zero-result breakdowns; explain counting and retained-history limits in a disclosure. Weekly recap keeps the date range and next focus prominent, with comparison methodology behind a disclosure. All content scrolls at accessibility sizes.
+
+## Shared tab spacing
+
+Use 16pt screen margins, 24pt section gaps and 12pt vertical row padding. Controls have at least 44pt targets. Content determines height; text wraps and horizontal control groups stack at accessibility sizes. Native scroll views clear the unchanged system tab bar and safe areas. Today keeps one primary Continue action; adding and due review are neutral. Collection headers scroll with their lists, including empty and error states.
+
+## Screen refinement
+
+Navigation rows apply their 44pt minimum after 12pt vertical padding, avoiding stacked minimum heights. Collection counts align centrally with disclosure indicators. Progress uses a quiet empty-state sentence and a plain 44pt Settings icon. Today uses muted goal text and a compact material menu beside Your study. Collection shows a compact material menu with an explicit accessibility label. Practice descriptions stay short.
+
+Word Detail places study meaning directly after the specimen, followed by grouped secondary actions and all immediately visible dictionary content. Starter path uses one title/status row per step; Skip and completion from past practice live in the opened step's Options menu. Kana places character and romanization together, with compact audio controls; shared guidance and synthesized-speech attribution appear once per group. Daily plan puts each batch action before expandable item previews. Review setup explains only the selected material, stacks explanatory copy with its associated control and uses a menu at accessibility sizes. Typed practice hides zero exclusions and puts Start practice in the bottom safe area; counting guidance expands on request.
+
+## Session refinement
+
+Questions remain the focal content. Answer feedback uses a leading-aligned surface with wrapping text and neutral labels; it never relies on color alone. Multiple-choice Next and completion actions stay in the bottom safe area. Completion summaries separate checked answers, self-ratings and repeat attempts, hide zero-only details and offer a clear return action. Content provenance appears in a disclosure below the task. New questions reset the scroll position so feedback from the previous answer cannot leave the next prompt offscreen.

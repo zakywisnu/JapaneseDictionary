@@ -1,39 +1,72 @@
 import SwiftUI
 
+public enum PracticeSkill: String, Hashable {
+    case kana = "Kana and recall", grammar = "Grammar", listening = "Listening"
+}
+
 struct LearningPracticeView: View {
     var isTabRoot = false
     @EnvironmentObject private var router: AppRouter
     var body: some View {
         List {
-            if isTabRoot { ScreenHeader(title: "Practice").listRowBackground(Forest.canvas) }
             Section {
-                destination("Starter path", caption: "Eight steps connecting kana, grammar and reading", route: .learningPath)
-                destination("Conjugation", caption: "Practice explicit verb and adjective forms", route: .conjugationPractice())
-                destination("Sentence building", caption: "Arrange words and understand their particles", route: .sentenceBuilding())
-                destination("Listening comprehension", caption: "Hear short passages and answer meaning questions", route: .listeningComprehension())
-                destination("Typed practice", caption: "Recall supplied readings and kana romanization", route: .typedPractice)
-                destination("Listening practice", caption: "Listen first, then type the supplied reading", route: .listeningPractice)
-                destination("Speaking practice", caption: "Record, replay and compare recognized phrases", route: .speakingPractice)
-                destination("Kana", caption: "Hiragana, katakana and combination sounds", route: .kanaPractice)
-                destination("Grammar exercises", caption: "Choose a pattern and check its explanation", route: .grammarExercises)
-                destination("Reading practice", caption: "Short passages with vocabulary and questions", route: .readingPractice)
-            }.listRowBackground(Forest.surface)
+                VStack(alignment: .leading, spacing: Forest.Space.xl) {
+                    if isTabRoot { ScreenHeader(title: "Practice") }
+                    VStack(alignment: .leading, spacing: Forest.Space.m) {
+                        Text("Starter path").font(.title2.weight(.semibold))
+                        Text("Eight connected steps in kana, grammar and reading.").font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        Button("Open starter path") { router.push(.learningPath, hideNavBar: false) }.buttonStyle(PrimaryButtonStyle())
+                    }
+                }
+            }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.s, trailing: 0))
+            Section("Choose a skill") {
+                row("Kana and recall", "Kana and typed recall", .practiceSkill(.kana))
+                row("Grammar", "Patterns, forms and word order", .practiceSkill(.grammar))
+                row("Reading", "Passages and questions", .readingPractice)
+                row("Listening", "Readings and short passages", .practiceSkill(.listening))
+                row("Speaking", "Record and replay phrases", .speakingPractice)
+            }.listRowBackground(Forest.surface).textCase(nil)
             Section {
-                destination("Exercise history", caption: "Your saved answers and explanations", route: .exerciseHistory)
-                destination("Practice mistakes", caption: "Retry questions you last answered incorrectly", route: .mistakeReview)
-                destination("Daily study plan", caption: "A short plan from your collection and review dates", route: .dailyStudyPlan)
+                DisclosureGroup("Practice options") {
+                    row("Practice mistakes", "Retry your latest incorrect answers", .mistakeReview)
+                    row("Exercise history", "Your saved answers and explanations", .exerciseHistory)
+                    row("Daily study plan", "Practice from your saved collection", .dailyStudyPlan)
+                }.tint(Forest.inkMuted).font(.headline)
             }.listRowBackground(Forest.surface)
         }
-        .listStyle(.insetGrouped).scrollContentBackground(.hidden).background(Forest.canvas)
-        .navigationTitle("Learning practice").navigationBarTitleDisplayMode(.inline)
+        .forestTabList()
+        .foregroundStyle(Forest.ink)
+        .navigationTitle("Practice").navigationBarTitleDisplayMode(.inline)
         .toolbar(isTabRoot ? .hidden : .visible, for: .navigationBar)
     }
-    private func destination(_ title: String, caption: String, route: AppRoutes) -> some View {
-        Button { router.push(route, hideNavBar: false) } label: {
-            VStack(alignment: .leading, spacing: Forest.Space.s) {
-                Text(title).font(.headline).foregroundStyle(Forest.ink)
-                Text(caption).font(.subheadline).foregroundStyle(Forest.inkMuted)
-            }.frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-        }.buttonStyle(.plain)
+    private func row(_ title: String, _ subtitle: String, _ route: AppRoutes) -> some View {
+        ForestNavigationRow(title: title, subtitle: subtitle) { router.push(route, hideNavBar: false) }
+            .listRowInsets(EdgeInsets())
+    }
+}
+
+struct PracticeSkillView: View {
+    let skill: PracticeSkill
+    @EnvironmentObject private var router: AppRouter
+    var body: some View {
+        List {
+            Section {
+                switch skill {
+                case .kana:
+                    row("Kana", "Hiragana, katakana and combination sounds", .kanaPractice)
+                    row("Typed practice", "Recall supplied readings and romanization", .typedPractice)
+                case .grammar:
+                    row("Grammar exercises", "Choose a pattern and check its explanation", .grammarExercises)
+                    row("Conjugation", "Practice verb and adjective forms", .conjugationPractice())
+                    row("Sentence building", "Arrange words and understand their particles", .sentenceBuilding())
+                case .listening:
+                    row("Listening practice", "Listen first, then type the reading", .listeningPractice)
+                    row("Listening comprehension", "Hear passages and answer meaning questions", .listeningComprehension())
+                }
+            }.listRowBackground(Forest.surface)
+        }.forestTabList().navigationTitle(skill.rawValue).navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+    }
+    private func row(_ title: String, _ subtitle: String, _ route: AppRoutes) -> some View {
+        ForestNavigationRow(title: title, subtitle: subtitle) { router.push(route, hideNavBar: false) }.listRowInsets(EdgeInsets())
     }
 }

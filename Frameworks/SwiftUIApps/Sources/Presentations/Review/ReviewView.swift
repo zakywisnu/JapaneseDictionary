@@ -26,13 +26,14 @@ struct ReviewView: View {
                         message: session.origin.emptyMessage
                     )
                 } else if viewModel.state.isComplete {
-                    StateMessage(
-                        title: "Review complete",
-                        message: "You've gone through \(viewModel.state.distinctItemCount) \(viewModel.state.distinctItemCount == 1 ? session.noun : session.nouns) \(session.origin.completionContext)."
-                    )
-                    Text("\(viewModel.state.repeatAttempts) \(viewModel.state.repeatAttempts == 1 ? "repeat attempt" : "repeat attempts")")
-                        .font(.subheadline)
-                        .foregroundStyle(Forest.inkMuted)
+                    VStack(alignment: .leading, spacing: Forest.Space.m) {
+                        Text("Review complete").font(.title2.bold())
+                        Text("You've gone through \(viewModel.state.distinctItemCount) \(viewModel.state.distinctItemCount == 1 ? session.noun : session.nouns) \(session.origin.completionContext).")
+                        if viewModel.state.repeatAttempts > 0 {
+                            Text("\(viewModel.state.repeatAttempts) \(viewModel.state.repeatAttempts == 1 ? "repeat attempt" : "repeat attempts")")
+                                .font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        }
+                    }.forestStudyCard()
                 } else if let item = viewModel.state.currentItem {
                     Text("\(viewModel.state.remainingCount) remaining")
                         .font(.subheadline.monospacedDigit())

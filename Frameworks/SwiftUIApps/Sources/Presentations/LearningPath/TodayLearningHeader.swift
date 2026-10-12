@@ -24,6 +24,7 @@ extension EnvironmentValues {
 
 struct TodayLearningHeader: View {
     @EnvironmentObject private var router: AppRouter
+    @Environment(\.dynamicTypeSize) private var textSize
     @AppStorage("todayStudyKind") private var kind: StudyKind = .words
     @State private var viewModel: ContinueLearningViewModel
     init() {
@@ -33,23 +34,26 @@ struct TodayLearningHeader: View {
         _viewModel = State(initialValue: .init(useCase: .init(loadCheckpoints: history.checkpoints, loadProgress: { try path.progress(pathID: StarterPathCatalog.id) }, steps: StarterPathCatalog.steps, validCheckpoint: ExerciseResumePolicy.isCurrent)))
     }
     var body: some View {
-        VStack(alignment: .leading, spacing: Forest.Space.l) {
+        VStack(alignment: .leading, spacing: Forest.Space.xl) {
             ScreenHeader(title: "Today", caption: Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide)))
+            AppComposer.shared.makeDailyGoalSummaryView()
             if viewModel.state.loading { ProgressView("Finding your next practice") }
             else if let error = viewModel.state.error { StateMessage(title: "Couldn't continue learning", message: error, actionTitle: "Try again", action: { viewModel.send(.load) }) }
             else if let destination = viewModel.state.destination {
                 VStack(alignment: .leading, spacing: Forest.Space.m) {
-                    Text(destination.sessionID == nil ? "Your next starter step" : "Pick up your unfinished practice").font(.headline)
+                    Text(destination.sessionID == nil ? "Your next starter step" : "Pick up where you left off").font(.title2.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
                     Button("Continue learning") {
                         if let id = destination.stepID { router.push(.learningStep(id), hideNavBar: false) }
                         else { router.push(.exerciseResume(destination.activityKey), hideNavBar: false) }
                     }.buttonStyle(PrimaryButtonStyle())
-                }.padding(Forest.Space.l).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                }
             } else { Text("Starter path completed. Revisit a step or choose more practice.").font(.subheadline).foregroundStyle(Forest.inkMuted) }
-            AppComposer.shared.makeDailyGoalSummaryView()
             AppComposer.shared.makeDailyStudyPlanSummaryView()
-            AppComposer.shared.makeWeeklyRecapSummaryView { router.push(.weeklyRecap, hideNavBar: false) }
-            StudyKindPicker(selection: $kind)
+            (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.s)) : AnyLayout(HStackLayout(spacing: Forest.Space.m))) {
+                Text("Your study").font(.headline)
+                if !textSize.isAccessibilitySize { Spacer(minLength: 0) }
+                StudyKindPicker(selection: $kind, compact: true)
+            }
         }.onAppear { viewModel.send(.load) }
     }
 }

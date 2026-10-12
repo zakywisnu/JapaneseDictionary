@@ -30,7 +30,10 @@ public enum AppRoutes: @preconcurrency Routable {
     case sentenceBuildingSession([ExerciseSnapshot], String, String)
     case listeningComprehension(String? = nil)
     case listeningComprehensionSession([ExerciseSnapshot], String, String)
+    case progressSettings
+    case activityDetails
     case weeklyRecap
+    case practiceSkill(PracticeSkill)
     case learningPractice
     case kanaPractice
     case speaking(SpeakingTarget)
@@ -66,8 +69,14 @@ public enum AppRoutes: @preconcurrency Routable {
             AppComposer.shared.makeListeningComprehensionView(topicID: topic)
         case let .listeningComprehensionSession(snapshots, key, title):
             AppComposer.shared.makeListeningComprehensionSessionView(snapshots: snapshots, activityKey: key, title: title)
+        case .progressSettings:
+            ProgressSettingsView()
+        case .activityDetails:
+            AppComposer.shared.makeLearningProgressView()
         case .weeklyRecap:
             WeeklyRecapRouteView()
+        case .practiceSkill(let skill):
+            PracticeSkillView(skill: skill)
         case .learningPractice:
             LearningPracticeView()
         case .kanaPractice:

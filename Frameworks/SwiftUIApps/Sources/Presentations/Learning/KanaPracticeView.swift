@@ -5,8 +5,15 @@ import DomainKit
 struct KanaPracticeView: View {
     @EnvironmentObject private var router: AppRouter
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var textSize
     @State var viewModel: KanaPracticeViewModel
     @State private var pronunciation = PronunciationService()
+    private var sharedNote: String? {
+        let notes = viewModel.visible.map(\.note).filter { !$0.isEmpty }
+        let counts = Dictionary(grouping: notes, by: { $0 }).mapValues(\.count)
+        guard let highestCount = counts.values.max(), highestCount > 1 else { return nil }
+        return notes.first { counts[$0] == highestCount }
+    }
     var body: some View {
         List {
             Section {
@@ -17,6 +24,9 @@ struct KanaPracticeView: View {
                 }
                 Picker("Group", selection: Binding(get: { viewModel.state.group }, set: { pronunciation.stop(); viewModel.send(.group($0)) })) {
                     ForEach(KanaGroup.allCases) { Text($0.rawValue).tag($0) }
+                }
+                if let sharedNote {
+                    Text(sharedNote).font(.subheadline).foregroundStyle(Forest.inkMuted)
                 }
                 Text("\(viewModel.state.selected.count) selected across all groups")
                     .font(.subheadline).foregroundStyle(Forest.inkMuted)
@@ -34,27 +44,38 @@ struct KanaPracticeView: View {
                         VStack(alignment: .leading, spacing: Forest.Space.s) {
                             Toggle(isOn: Binding(get: { viewModel.state.selected.contains(entry.id) }, set: { _ in viewModel.send(.toggle(entry.id)) })) {
                                 VStack(alignment: .leading, spacing: Forest.Space.s) {
-                                    PracticeCells(text: entry.kana, cellSize: 44)
-                                    Text(entry.romanization).font(.headline).foregroundStyle(Forest.ink).fixedSize(horizontal: false, vertical: true)
+                                    HStack(spacing: Forest.Space.m) {
+                                        Headword(text: entry.kana, cellSize: 34)
+                                        Text(entry.romanization).font(.headline).foregroundStyle(Forest.ink).fixedSize(horizontal: false, vertical: true)
+                                    }
                                 }
                             }.toggleStyle(.checkboxKana)
-                            Text(entry.note).font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true)
+                            if entry.note != sharedNote, !entry.note.isEmpty {
+                                Text(entry.note).font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true)
+                            }
                             if let reading = entry.reading {
-                                PronunciationControl(reading: reading, service: pronunciation)
-                                Button("Record and replay") {
-                                    pronunciation.stop()
-                                    router.push(.speaking(.init(id: entry.id, prompt: entry.kana, suppliedReading: reading, isIsolatedSound: true)), hideNavBar: false)
-                                }.buttonStyle(.bordered).frame(minHeight: 44)
+                                (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.s)) : AnyLayout(HStackLayout(spacing: Forest.Space.l))) {
+                                    PronunciationControl(reading: reading, service: pronunciation, showsAttribution: false)
+                                    Button("Record and replay") {
+                                        pronunciation.stop()
+                                        router.push(.speaking(.init(id: entry.id, prompt: entry.kana, suppliedReading: reading, isIsolatedSound: true)), hideNavBar: false)
+                                    }.buttonStyle(.plain).foregroundStyle(Forest.ink).font(.subheadline).frame(minHeight: 44)
+                                }
+
                             }
                         }.padding(.vertical, Forest.Space.xs)
                     }
+                } footer: {
+                    VStack(alignment: .leading, spacing: Forest.Space.s) {
+                        Text("Listen uses synthesized speech.")
+                    }.font(.footnote).foregroundStyle(Forest.inkMuted).textCase(nil)
                 }.listRowBackground(Forest.surface)
             }
             if let error = viewModel.state.saveError {
                 StateMessage(title: "Kana cards weren't all saved", message: error, actionTitle: "Try again") { start() }.listRowBackground(Forest.surface)
             }
         }
-        .listStyle(.insetGrouped).scrollContentBackground(.hidden).background(Forest.canvas).tint(Forest.moss)
+        .forestTabList().tint(Forest.moss)
         .safeAreaInset(edge: .bottom) {
             Button { start() } label: {
                 Text("Save and practice").multilineTextAlignment(.center)

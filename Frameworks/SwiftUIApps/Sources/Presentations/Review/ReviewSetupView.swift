@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ReviewSetupView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var textSize
     var kind: StudyKind? = nil
     let items: [ReviewItem]
     var origin: ReviewOrigin = .collection
@@ -11,6 +12,19 @@ struct ReviewSetupView: View {
 
     private var noun: String { kind == .words ? "word" : kind == .kanji ? "kanji" : "item" }
     private var selected: [ReviewItem] { selection.selected(items) }
+
+    private var selectionExplanation: String {
+        var text = "Newest saved items come first. Search does not change this selection."
+        if items.contains(where: { $0.compositeID.kind == .sentence }) { text += " Sentence levels come from their parent lessons." }
+        return text
+    }
+    private var sizePicker: some View {
+        Picker("Session size", selection: $selection.limit) {
+            Text("10").tag(Int?.some(10))
+            Text("20").tag(Int?.some(20))
+            Text("All").tag(Int?.none)
+        }.frame(minHeight: 44)
+    }
 
     var body: some View {
         NavigationStack {
@@ -30,22 +44,19 @@ struct ReviewSetupView: View {
                     }
                     VStack(alignment: .leading, spacing: Forest.Space.s) {
                         Text("Session size").font(.headline)
-                        Picker("Session size", selection: $selection.limit) {
-                            Text("10").tag(Int?.some(10))
-                            Text("20").tag(Int?.some(20))
-                            Text("All").tag(Int?.none)
-                        }
-                        .pickerStyle(.segmented)
-                        .frame(minHeight: 44)
+                        if textSize.isAccessibilitySize { sizePicker.pickerStyle(.menu) }
+                        else { sizePicker.pickerStyle(.segmented) }
+
                     }
                     if !items.isEmpty && items.allSatisfy({ $0.compositeID.kind == .word }) {
-                        Toggle("Use sentence context", isOn: $useSentenceContext)
-                        Text("Matching words use an original sentence prompt. Answers are self-rated.")
-                            .font(.footnote).foregroundStyle(Forest.inkMuted)
+                        VStack(alignment: .leading, spacing: Forest.Space.s) {
+                            Toggle("Use sentence context", isOn: $useSentenceContext)
+                            Text("Matching words use an original sentence prompt. Answers are self-rated.").font(.footnote).foregroundStyle(Forest.inkMuted)
+                        }
                     }
                     Text("\(selected.count) \(selected.count == 1 ? noun : noun.pluralNoun) selected")
                         .font(.headline)
-                    Text("Review starts with your newest collected items. Sentence levels come from their parent lessons. Search does not change this selection.")
+                    Text(selectionExplanation)
                         .font(.subheadline)
                         .foregroundStyle(Forest.inkMuted)
                     if selected.isEmpty {

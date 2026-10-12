@@ -229,6 +229,10 @@ struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .font(.body.weight(.semibold))
             .foregroundStyle(Forest.onMoss)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, Forest.Space.l)
+            .padding(.vertical, Forest.Space.m)
             .frame(maxWidth: .infinity, minHeight: 50)
             .background(Forest.moss.opacity(isEnabled ? 1 : 0.5), in: .capsule)
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
@@ -274,14 +278,29 @@ enum StudyKind: String, CaseIterable, Identifiable {
 
 struct StudyKindPicker: View {
     @Binding var selection: StudyKind
+    var compact = false
 
     var body: some View {
+        if compact {
+            Menu {
+                Picker("Study material", selection: $selection.animation(.easeInOut(duration: 0.2))) {
+                    ForEach(StudyKind.allCases) { Text($0.rawValue).tag($0) }
+                }
+            } label: {
+                HStack(spacing: Forest.Space.s) {
+                    Text(selection.rawValue).fixedSize(horizontal: false, vertical: true)
+                    Image(systemName: "chevron.up.chevron.down").font(.caption)
+                }.frame(minWidth: 44, minHeight: 44)
+            }.foregroundStyle(Forest.ink).accessibilityLabel("Study material, \(selection.rawValue)")
+        } else {
         Picker("Show", selection: $selection.animation(.easeInOut(duration: 0.2))) {
             ForEach(StudyKind.allCases) { kind in
                 Text(kind.rawValue).tag(kind)
             }
         }
         .pickerStyle(.menu)
+        .frame(minHeight: 44)
+        }
     }
 }
 
@@ -293,6 +312,7 @@ struct ScreenHeader: View {
         VStack(alignment: .leading, spacing: Forest.Space.xs) {
             if let caption {
                 Text(caption)
+                    .fixedSize(horizontal: false, vertical: true)
                     .font(.subheadline)
                     .foregroundStyle(Forest.inkMuted)
             }
@@ -302,5 +322,41 @@ struct ScreenHeader: View {
                 .accessibilityAddTraits(.isHeader)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct ForestNavigationRow: View {
+    let title: String
+    var subtitle: String? = nil
+    let action: () -> Void
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: Forest.Space.m) {
+                VStack(alignment: .leading, spacing: Forest.Space.xs) {
+                    Text(title).fixedSize(horizontal: false, vertical: true)
+                    if let subtitle { Text(subtitle).font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true) }
+                }
+                Spacer(minLength: Forest.Space.s)
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(Forest.inkMuted)
+            }.padding(.horizontal, Forest.Space.l).padding(.vertical, Forest.Space.m).frame(maxWidth: .infinity, minHeight: 44, alignment: .leading).contentShape(Rectangle())
+        }.buttonStyle(.plain).foregroundStyle(Forest.ink)
+    }
+}
+
+
+extension View {
+    func forestStudyCard() -> some View {
+        self.fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(Forest.Space.l)
+            .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+    }
+
+    func forestTabList() -> some View {
+        self.listStyle(.insetGrouped).scrollContentBackground(.hidden).background(Forest.canvas)
+            .contentMargins(.horizontal, Forest.Space.l, for: .scrollContent)
+            .contentMargins(.top, Forest.Space.s, for: .scrollContent)
+            .listSectionSpacing(Forest.Space.xl)
+            .listRowInsets(EdgeInsets(top: Forest.Space.m, leading: Forest.Space.l, bottom: Forest.Space.m, trailing: Forest.Space.l))
     }
 }

@@ -54,22 +54,27 @@ private struct MaterialsTodayView: View {
     @State private var creating = false
     var body: some View {
         List {
-            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
+            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
             Section {
-                if kind == .customCard { Button("Create card") { creating = true }.foregroundStyle(Forest.ink) }
-                else { Button("Browse lessons") { router.push(.lessons, hideNavBar: false) }.foregroundStyle(Forest.ink) }
-            }.listRowBackground(Forest.surface)
-            Section("Due for review") {
                 if loading { ProgressView("Loading due items") }
                 else if let error { StateMessage(title: "Couldn't open your study items", message: error, actionTitle: "Try again", action: load) }
-                else if dueItems.isEmpty { StateMessage(title: "No items due", message: "Save a lesson or create a card, or return when your next review is due.") }
-                else {
-                    Button("Review \(dueItems.count) due items") { router.push(.review(ReviewSession(items: dueItems, origin: .due)), hideNavBar: false) }.foregroundStyle(Forest.ink)
+                else if dueItems.isEmpty {
+                    VStack(alignment: .leading, spacing: Forest.Space.xs) {
+                        Text("No items due").font(.headline)
+                        Text("Save a lesson or return when your next review is due.").font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    }
+                } else {
+                    ForestNavigationRow(title: "Review \(dueItems.count) due items", subtitle: "Practice and update your review dates") { router.push(.review(ReviewSession(items: dueItems, origin: .due)), hideNavBar: false) }.listRowInsets(EdgeInsets())
+                }
+                if kind == .customCard {
+                    ForestNavigationRow(title: "Create card", subtitle: "Add something of your own to practice") { creating = true }.listRowInsets(EdgeInsets())
+                } else {
+                    ForestNavigationRow(title: "Browse lessons", subtitle: "Find grammar and sentences to study") { router.push(.lessons, hideNavBar: false) }.listRowInsets(EdgeInsets())
                 }
             }.listRowBackground(Forest.surface)
             if !loading && error == nil {
                 Section("Added today") {
-                    if items.isEmpty { StateMessage(title: "No items added today", message: kind == .customCard ? "Create a card to study something of your own." : "Browse lessons and save one to your collection.") }
+                    if items.isEmpty { Text("Nothing added yet today.").font(.subheadline).foregroundStyle(Forest.inkMuted) }
                     else {
                         Button("Review today's items") { router.push(.review(ReviewSession(items: items.map(ReviewItem.init(material:)), origin: .today)), hideNavBar: false) }.foregroundStyle(Forest.ink)
                         ForEach(items, id: \.id) { material in
@@ -78,7 +83,7 @@ private struct MaterialsTodayView: View {
                     }
                 }.listRowBackground(Forest.surface)
             }
-        }.listStyle(.insetGrouped).scrollContentBackground(.hidden).background(Forest.canvas)
+        }.forestTabList()
             .onAppear(perform: load).onChange(of: kind) { _, _ in load() }
             .sheet(isPresented: $creating) { AppComposer.shared.makeCustomCardEditor { _ in load() } }
     }

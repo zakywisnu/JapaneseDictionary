@@ -9,8 +9,6 @@ struct ExerciseSessionView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: Forest.Space.xl) {
-                    Text("Original beginner practice. Not official exam material or independently reviewed.")
-                        .font(.footnote).foregroundStyle(Forest.inkMuted)
                     if viewModel.state.isLoading {
                         ProgressView("Opening your practice")
                     } else if viewModel.state.contentChanged {
@@ -20,10 +18,11 @@ struct ExerciseSessionView: View {
                     } else if viewModel.state.total == 0 {
                         StateMessage(title: "No questions here", message: "Return to Learning practice and choose another activity.")
                     } else if viewModel.state.isComplete {
-                        Text("Practice complete").font(.title2.bold())
-                        Text("\(viewModel.state.correctCount) of \(viewModel.state.total) correct in this session.")
-                        Text("This practice doesn't change your saved items or review dates.").font(.subheadline).foregroundStyle(Forest.inkMuted)
-                        Button("Practice again") { viewModel.send(.restart) }.buttonStyle(PrimaryButtonStyle())
+                        VStack(alignment: .leading, spacing: Forest.Space.m) {
+                            Text("Practice complete").font(.title2.bold())
+                            Text("\(viewModel.state.correctCount) of \(viewModel.state.total) correct in this session.")
+                            Text("This practice doesn't change your saved items or review dates.").font(.subheadline).foregroundStyle(Forest.inkMuted)
+                        }.forestStudyCard()
                     } else if let question = viewModel.current {
                         Text("Question \(viewModel.state.position + 1) of \(viewModel.state.total)")
                             .font(.subheadline).foregroundStyle(Forest.inkMuted).id("question")
@@ -55,12 +54,14 @@ struct ExerciseSessionView: View {
                                     .font(.headline)
                                 Text(question.explanation).fixedSize(horizontal: false, vertical: true)
                             }
+                            .forestStudyCard()
                             .accessibilityElement(children: .combine)
-                            Button(viewModel.state.position + 1 == viewModel.state.total ? "Finish practice" : "Next") {
-                                viewModel.send(.next)
-                            }.buttonStyle(PrimaryButtonStyle())
                         }
                     }
+                    DisclosureGroup("About these questions") {
+                        Text("Original beginner practice. Not official exam material or independently reviewed.")
+                            .font(.footnote).foregroundStyle(Forest.inkMuted).padding(.top, Forest.Space.s)
+                    }.tint(Forest.inkMuted)
                     if let message = viewModel.state.errorMessage {
                         StateMessage(title: "Practice unavailable", message: message, actionTitle: "Retry", action: { viewModel.send(.retry) })
                         Button("Exit practice") { dismiss() }.buttonStyle(.bordered)
@@ -73,9 +74,22 @@ struct ExerciseSessionView: View {
                 if !complete { proxy.scrollTo("question", anchor: .top) }
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if viewModel.state.errorMessage == nil && (viewModel.state.isComplete || viewModel.state.isRevealed) {
+                VStack(spacing: Forest.Space.s) {
+                    if viewModel.state.isComplete {
+                        Button("Back to practice") { dismiss() }.buttonStyle(PrimaryButtonStyle())
+                        Button("Practice again") { viewModel.send(.restart) }.buttonStyle(.plain).frame(minHeight: 44)
+                    } else {
+                        Button(viewModel.state.position + 1 == viewModel.state.total ? "Finish practice" : "Next") { viewModel.send(.next) }.buttonStyle(PrimaryButtonStyle())
+                    }
+                }.padding(Forest.Space.l).background(Forest.canvas)
+            }
+        }
         .onAppear { viewModel.send(.load) }
         .background(Forest.canvas)
         .toolbar(.visible, for: .navigationBar)
+        .toolbar(.hidden, for: .tabBar)
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
     }

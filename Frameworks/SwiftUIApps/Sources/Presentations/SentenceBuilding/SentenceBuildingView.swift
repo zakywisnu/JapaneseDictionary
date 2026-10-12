@@ -9,8 +9,6 @@ struct SentenceBuildingView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Forest.Space.l) {
-                Text("Original beginner practice. Model-checked content; not independently reviewed.")
-                    .font(.footnote).foregroundStyle(Forest.inkMuted)
                 if viewModel.state.isLoading {
                     ProgressView("Opening sentence practice")
                 } else if viewModel.state.contentChanged {
@@ -20,10 +18,11 @@ struct SentenceBuildingView: View {
                 } else if viewModel.state.total == 0 {
                     StateMessage(title: "No sentences here", message: "Return to Practice and choose another activity.")
                 } else if viewModel.state.isComplete {
-                    Text("Practice complete").font(.title2.bold())
-                    Text("\(viewModel.state.correctCount) of \(viewModel.state.total) matched a reviewed order.")
-                    Text("Your collection and review dates stay the same.").foregroundStyle(Forest.inkMuted)
-                    Button("Practice again") { viewModel.send(.restart) }.buttonStyle(PrimaryButtonStyle())
+                    VStack(alignment: .leading, spacing: Forest.Space.m) {
+                        Text("Practice complete").font(.title2.bold())
+                        Text("\(viewModel.state.correctCount) of \(viewModel.state.total) matched a supplied order.")
+                        Text("Your collection and review dates stay the same.").font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    }.forestStudyCard()
                 } else if let question = viewModel.current, let metadata = question.metadata {
                     Text("Sentence \(viewModel.state.position + 1) of \(viewModel.state.total)").font(.subheadline).foregroundStyle(Forest.inkMuted)
                     Text(question.prompt).font(.title3).fixedSize(horizontal: false, vertical: true)
@@ -40,23 +39,39 @@ struct SentenceBuildingView: View {
                     Text("Available tokens").font(.headline)
                     tokenGrid(shuffledTokens(metadata.tokens, seed: question.fingerprint).filter { !viewModel.state.selectedIDs.contains($0.id) }, selected: false)
                     if viewModel.state.isRevealed {
-                        Text(viewModel.state.outcome == .correct ? "Matches a reviewed order" : "Compare with a reviewed order").font(.headline)
-                        if let order = metadata.acceptedOrders.first {
-                            Text(order.compactMap { id in metadata.tokens.first { $0.id == id }?.text }.joined()).font(.headword(24, relativeTo: .title2)).fixedSize(horizontal: false, vertical: true)
-                        }
-                        Text(question.explanation)
-                        Text("Other Japanese orders may be valid; this activity checks the supplied reviewed examples.").font(.footnote).foregroundStyle(Forest.inkMuted)
-                        Button(viewModel.state.position + 1 == viewModel.state.total ? "Finish practice" : "Next") { viewModel.send(.next) }.buttonStyle(PrimaryButtonStyle()).disabled(viewModel.state.errorMessage != nil)
-                    } else {
-                        Button("Check") { viewModel.send(.check) }.buttonStyle(PrimaryButtonStyle()).disabled(!viewModel.canCheck)
+                        VStack(alignment: .leading, spacing: Forest.Space.s) {
+                            Text(viewModel.state.outcome == .correct ? "Matches a supplied order" : "Compare with a supplied order").font(.headline)
+                            if let order = metadata.acceptedOrders.first {
+                                Text(order.compactMap { id in metadata.tokens.first { $0.id == id }?.text }.joined()).font(.headword(24, relativeTo: .title2)).fixedSize(horizontal: false, vertical: true)
+                            }
+                            Text(question.explanation)
+                            Text("Other Japanese orders may be valid; this activity checks the supplied examples.").font(.footnote).foregroundStyle(Forest.inkMuted)
+                        }.forestStudyCard()
                     }
                 }
+                DisclosureGroup("About these sentences") {
+                    Text("Original beginner practice. Model-checked content; not independently reviewed.").font(.footnote).foregroundStyle(Forest.inkMuted).padding(.top, Forest.Space.s)
+                }.tint(Forest.inkMuted)
                 if let error = viewModel.state.errorMessage {
                     StateMessage(title: "Practice unavailable", message: error, actionTitle: "Retry", action: { viewModel.send(.retry) })
                     Button("Exit practice") { dismiss() }.buttonStyle(.bordered)
                 }
             }.padding(Forest.Space.l).foregroundStyle(Forest.ink)
-        }.background(Forest.canvas).navigationTitle(title).navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar).toolbar(.hidden, for: .tabBar)
+        }.id(viewModel.state.position).background(Forest.canvas).navigationTitle(title).navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar).toolbar(.hidden, for: .tabBar)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if viewModel.state.errorMessage == nil && !viewModel.state.isLoading && !viewModel.state.contentChanged && !viewModel.state.hasInvalidContent && viewModel.state.total > 0 {
+                    VStack(spacing: Forest.Space.s) {
+                        if viewModel.state.isComplete {
+                            Button("Back to practice") { dismiss() }.buttonStyle(PrimaryButtonStyle())
+                            Button("Practice again") { viewModel.send(.restart) }.buttonStyle(.plain).frame(minHeight: 44)
+                        } else if viewModel.state.isRevealed {
+                            Button(viewModel.state.position + 1 == viewModel.state.total ? "Finish practice" : "Next") { viewModel.send(.next) }.buttonStyle(PrimaryButtonStyle())
+                        } else {
+                            Button("Check") { viewModel.send(.check) }.buttonStyle(PrimaryButtonStyle()).disabled(!viewModel.canCheck)
+                        }
+                    }.padding(Forest.Space.l).background(Forest.canvas)
+                }
+            }
             .onAppear { viewModel.send(.load) }
     }
     private func shuffledTokens(_ tokens: [PracticeToken], seed: String) -> [PracticeToken] {

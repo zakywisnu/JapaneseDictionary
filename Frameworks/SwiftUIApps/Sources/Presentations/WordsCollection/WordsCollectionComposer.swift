@@ -14,7 +14,7 @@ extension AppComposer {
     }
     
     @ViewBuilder
-    func makeCollectionKotobaView(query: String) -> some View {
+    func makeCollectionKotobaView(query: Binding<String>) -> some View {
         let viewModel = KotobaWordsCollectionViewModel(
             getAllKotobaUseCase: useCase.getAllKotobaUseCase,
             deleteKotobaUseCase: useCase.deleteKotobaUseCase
@@ -23,7 +23,7 @@ extension AppComposer {
     }
     
     @ViewBuilder
-    func makeCollectionKanjiView(query: String) -> some View {
+    func makeCollectionKanjiView(query: Binding<String>) -> some View {
         let viewModel = KanjiWordsCollectionViewModel(
             getAllKanjiUseCase: useCase.getAllKanjiUseCase,
             deleteKanjiUseCase: useCase.deleteKanjiUseCase

@@ -14,8 +14,8 @@ struct DailyGoalSummaryView: View {
             } else if let summary = viewModel.state.summary, let target = summary.target {
                 VStack(alignment: .leading, spacing: Forest.Space.s) {
                     Text("\(summary.completedCount.formatted()) of \(target.formatted()) items practiced today")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Forest.ink)
+                        .font(.subheadline)
+                        .foregroundStyle(Forest.inkMuted)
                         .fixedSize(horizontal: false, vertical: true)
                     ProgressTrack(value: Double(summary.completedCount) / Double(target))
                     if summary.isReached {
@@ -25,8 +25,7 @@ struct DailyGoalSummaryView: View {
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
-                .padding(Forest.Space.l)
-                .background(Forest.surface, in: RoundedRectangle(cornerRadius: Forest.Radius.card))
+
             }
         }
         .onAppear { viewModel.send(.load) }

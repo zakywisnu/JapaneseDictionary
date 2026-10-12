@@ -51,25 +51,25 @@ public struct DetailView: View {
                 } else if let kotoba = viewModel.state.kotoba {
                     let entry = kotoba.studyEntry
                     specimen(headword: entry.headword, reading: entry.reading, level: kotoba.jlptLevel.rawValue, spokenReading: kotoba.furigana)
-                    if PronunciationService.normalizedReading(kotoba.furigana) != nil {
-                        Button("Practice speaking") {
-                            pronunciation.stop()
-                            router.push(.speaking(.init(id: "saved:" + kotoba.id, prompt: entry.headword, suppliedReading: kotoba.furigana, acceptedWrittenForms: [entry.headword])), hideNavBar: false)
-                        }.buttonStyle(.bordered).frame(minHeight: 44)
-                    }
-                    Button("Organize in lists") { isOrganizingLists = true }
-                        .buttonStyle(.plain)
-                        .foregroundStyle(Forest.ink)
-                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                    Text("Vocabulary JLPT levels are community estimates.")
-                        .font(.footnote)
-                        .foregroundStyle(Forest.inkMuted)
-                    if conjugationEntries.contains(entry.headword + "|" + kotoba.furigana) {
-                        Button("Practice conjugation") { pronunciation.stop(); router.push(.conjugationWord(entry.headword), hideNavBar: false) }
-                            .buttonStyle(.plain).frame(maxWidth: .infinity, minHeight: 44, alignment: .leading).foregroundStyle(Forest.ink)
-                    }
                     definitionCard([("Study meaning", kotoba.english)])
-                    dictionaryContent
+                    VStack(spacing: 0) {
+                        if PronunciationService.normalizedReading(kotoba.furigana) != nil {
+                            ForestNavigationRow(title: "Practice speaking") {
+                                pronunciation.stop()
+                                router.push(.speaking(.init(id: "saved:" + kotoba.id, prompt: entry.headword, suppliedReading: kotoba.furigana, acceptedWrittenForms: [entry.headword])), hideNavBar: false)
+                            }
+                            Divider().overlay(Forest.line)
+                        }
+                        ForestNavigationRow(title: "Organize in lists") { isOrganizingLists = true }
+                        if conjugationEntries.contains(entry.headword + "|" + kotoba.furigana) {
+                            Divider().overlay(Forest.line)
+                            ForestNavigationRow(title: "Practice conjugation") { pronunciation.stop(); router.push(.conjugationWord(entry.headword), hideNavBar: false) }
+                        }
+                    }.background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    VStack(alignment: .leading, spacing: Forest.Space.s) {
+                        Text("Vocabulary JLPT levels are community estimates.").font(.footnote).foregroundStyle(Forest.inkMuted)
+                        dictionaryContent
+                    }
                     if viewModel.canUpdateStudyWord {
                         Button("Update study word") { isConfirmingUpdate = true }
                             .buttonStyle(.bordered)

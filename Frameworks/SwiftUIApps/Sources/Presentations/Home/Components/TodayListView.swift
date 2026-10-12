@@ -44,38 +44,29 @@ struct TodayListView: View {
     private var nouns: String { noun.pluralNoun }
 
     var body: some View {
-        switch loadState {
-        case .loading:
-            ProgressView("Loading today's \(nouns)")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        case .failed:
-            StateMessage(
-                title: "Couldn't open your \(noun) list",
-                message: "The bundled \(noun) data or your saved progress didn't load.",
-                actionTitle: "Try again",
-                action: onRetry
-            )
-            .frame(maxHeight: .infinity)
-        case .loaded:
+        if loadState == .loaded {
             loadedList
+        } else {
+            ScrollView {
+                VStack(alignment: .leading, spacing: Forest.Space.xl) {
+                    if showsTodayHeader { TodayLearningHeader() }
+                    if loadState == .loading {
+                        ProgressView("Loading today's \(nouns)")
+                    } else {
+                        StateMessage(title: "Couldn't open your \(noun) list", message: "The bundled \(noun) data or your saved progress didn't load.", actionTitle: "Try again", action: onRetry)
+                    }
+                }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
+            }.background(Forest.canvas)
         }
     }
 
     private var loadedList: some View {
         List {
-            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
-            Section {
-                addCard
-                    .listRowBackground(Forest.surface)
-            }
-
+            if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
             Section {
                 dueContent
-                    .listRowBackground(Forest.surface)
-            } header: {
-                Text("Due for review")
-                    .textCase(nil)
-            }
+                addCard
+            }.listRowBackground(Forest.surface)
 
             Section {
                 if entries.isEmpty {
@@ -85,7 +76,7 @@ struct TodayListView: View {
                         .padding(.vertical, Forest.Space.s)
                         .listRowBackground(Forest.surface)
                 } else {
-                    VStack(alignment: .leading, spacing: Forest.Space.s) {
+                    Group {
                         Button(action: onReview) {
                             Text("Review today's \(nouns)")
                                 .font(.body.weight(.semibold))
@@ -94,9 +85,7 @@ struct TodayListView: View {
                                 .contentShape(.rect)
                         }
                         .buttonStyle(.plain)
-                        Text("Try the reading and meaning before revealing the answer.")
-                            .font(.subheadline)
-                            .foregroundStyle(Forest.inkMuted)
+
                     }
                     .listRowBackground(Forest.surface)
                     ForEach(entries) { entry in
@@ -115,8 +104,7 @@ struct TodayListView: View {
                     .textCase(nil)
             }
         }
-        .listStyle(.insetGrouped)
-        .scrollContentBackground(.hidden)
+        .forestTabList()
         .animation(.default, value: entries)
     }
 
@@ -129,47 +117,20 @@ struct TodayListView: View {
             StateMessage(title: "Couldn't read due \(nouns)", message: "Your saved collection or review schedule didn't load.", actionTitle: "Try again", action: onRetryDue)
         case .loaded:
             if dueCount == 0 {
-                StateMessage(title: "No \(nouns) due", message: "Add a \(noun) to begin, or return when your next review is due.")
-            } else {
-                VStack(alignment: .leading, spacing: Forest.Space.s) {
-                    Button(action: onReviewDue) {
-                        Text("Review \(dueCount) due \(dueCount == 1 ? noun : nouns)")
-                            .font(.body.weight(.semibold))
-                            .foregroundStyle(Forest.ink)
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.plain)
-                    Text("Ratings save your next review date. Intervals are 1, 3, 7, 14 and 30 days; Again resets to 1 day.")
-                        .font(.subheadline)
-                        .foregroundStyle(Forest.inkMuted)
+                VStack(alignment: .leading, spacing: Forest.Space.xs) {
+                    Text("No \(nouns) due").font(.headline)
+                    Text("Add a \(noun) or return when your next review is due.").font(.subheadline).foregroundStyle(Forest.inkMuted)
                 }
+            } else {
+                ForestNavigationRow(title: "Review \(dueCount) due \(dueCount == 1 ? noun : nouns)", subtitle: "Practice and update your review dates", action: onReviewDue)
+                    .listRowInsets(EdgeInsets())
             }
         }
     }
 
     private var addCard: some View {
-        VStack(alignment: .leading, spacing: Forest.Space.m) {
-            HStack(alignment: .firstTextBaseline, spacing: Forest.Space.s) {
-                Text("\(entries.count)")
-                    .font(.headline.monospacedDigit())
-                    .foregroundStyle(Forest.ink)
-                    .contentTransition(.numericText())
-                Text(entries.count == 1 ? "\(noun) added today" : "\(nouns) added today")
-                    .font(.headline)
-                    .foregroundStyle(Forest.ink)
-            }
-            .accessibilityElement(children: .combine)
-
-            Text(caption)
-                .font(.subheadline)
-                .foregroundStyle(Forest.inkMuted)
-
-            Button("Add next \(noun)", action: onAdd)
-                .buttonStyle(PrimaryButtonStyle())
-                .disabled(hasFinished)
-        }
-        .padding(.vertical, Forest.Space.s)
+        ForestNavigationRow(title: "Add next \(noun)", subtitle: caption, action: onAdd)
+            .disabled(hasFinished).listRowInsets(EdgeInsets())
     }
 
     private var caption: String {

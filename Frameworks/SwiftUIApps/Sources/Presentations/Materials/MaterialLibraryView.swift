@@ -2,6 +2,7 @@ import SwiftUI
 import DataKit
 
 struct MaterialLibraryView: View {
+    @Environment(\.dynamicTypeSize) private var textSize
     @State var viewModel: MaterialLibraryViewModel
     let onOpen: (StudyMaterial) -> Void
     let onReview: ([StudyMaterial]) -> Void
@@ -63,7 +64,7 @@ struct MaterialLibraryView: View {
                             Button { onOpen(material) } label: {
                                 VStack(alignment: .leading, spacing: Forest.Space.s) {
                                     MaterialPrompt(text: material.prompt)
-                                    Text(material.answer).font(.body).foregroundStyle(Forest.ink).lineLimit(2)
+                                    Text(material.answer).font(.body).foregroundStyle(Forest.ink).lineLimit(textSize.isAccessibilitySize ? nil : 2).fixedSize(horizontal: false, vertical: true)
                                     if let level = material.level {
                                         Text(material.kind == .sentence ? "From an \(level) lesson" : level)
                                             .font(.caption).foregroundStyle(Forest.inkMuted)
@@ -72,7 +73,7 @@ struct MaterialLibraryView: View {
                                         Text("In collection").font(.caption).foregroundStyle(Forest.inkMuted)
                                     }
                                 }.padding(.vertical, Forest.Space.xs)
-                            }.buttonStyle(.plain)
+                            }.buttonStyle(ForestRowButtonStyle())
                         }
                     }
                 }

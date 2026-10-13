@@ -65,14 +65,14 @@ public struct DetailView: View {
                             Divider().overlay(Forest.line)
                             ForestNavigationRow(title: "Practice conjugation") { pronunciation.stop(); router.push(.conjugationWord(entry.headword), hideNavBar: false) }
                         }
-                    }.background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    }.forestSurface()
                     VStack(alignment: .leading, spacing: Forest.Space.s) {
                         Text("Vocabulary JLPT levels are community estimates.").font(.footnote).foregroundStyle(Forest.inkMuted)
                         dictionaryContent
                     }
                     if viewModel.canUpdateStudyWord {
                         Button("Update study word") { isConfirmingUpdate = true }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(SecondaryButtonStyle())
                             .tint(Forest.moss)
                             .frame(minHeight: 44)
                     }
@@ -243,7 +243,7 @@ public struct DetailView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, Forest.Space.xl)
         .padding(.horizontal, Forest.Space.l)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
     }
     
     private func definitionCard(_ rows: [(title: String, values: [String])]) -> some View {
@@ -281,7 +281,7 @@ public struct DetailView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
     }
 }
 

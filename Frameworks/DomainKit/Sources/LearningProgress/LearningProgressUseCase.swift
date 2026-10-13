@@ -14,12 +14,19 @@ public struct LearningPathStepStatus: Equatable {
     public var status: LearningPathStepState
     public init(stepID: String, title: String, status: LearningPathStepState) { self.stepID = stepID; self.title = title; self.status = status }
 }
+public struct LearningPracticeDay: Equatable, Identifiable {
+    public var date: Date
+    public var responses: Int
+    public var practiced: Bool
+    public var id: Date { date }
+}
 public struct LearningProgressSummary: Equatable {
     public var gradedCorrect = 0
     public var gradedTotal = 0
     public var selfRatedGotIt = 0
     public var selfRatedTotal = 0
     public var practiceDays = 0
+    public var dailyPractice: [LearningPracticeDay] = []
     public var remainingMistakes = 0
     public var remainingMistakesByKind: [ExerciseQuestionKind: Int] = [:]
     public var choice = LearningActivityCounts()
@@ -62,6 +69,13 @@ public struct LearningProgressSummary: Equatable {
         result.gradedCorrect = graded.filter { $0.outcome == .correct }.count; result.gradedTotal = graded.count
         result.selfRatedGotIt = firstRatings.filter { !$0.again }.count; result.selfRatedTotal = firstRatings.count
         result.practiceDays = Set(dates.map { calendar.startOfDay(for: $0) }).count
+        let responseDates = submitted.map(\.submittedAt) + allEvents.filter { inRange($0.submittedAt) }.map(\.submittedAt)
+        let responsesByDate = Dictionary(grouping: responseDates, by: { calendar.startOfDay(for: $0) }).mapValues(\.count)
+        let practicedDates = Set(dates.map { calendar.startOfDay(for: $0) })
+        result.dailyPractice = (0..<boundedDays).compactMap { offset in
+            guard let date = calendar.date(byAdding: .day, value: offset, to: start) else { return nil }
+            return .init(date: date, responses: responsesByDate[date] ?? 0, practiced: practicedDates.contains(date))
+        }
         let mistakes = ExerciseHistoryQuery.latestMistakes(allAttempts)
         result.remainingMistakes = mistakes.count
         result.remainingMistakesByKind = Dictionary(grouping: mistakes, by: { $0.snapshot.questionKind }).mapValues(\.count)

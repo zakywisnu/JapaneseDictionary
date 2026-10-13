@@ -46,7 +46,7 @@ struct TodayLearningHeader: View {
                         if let id = destination.stepID { router.push(.learningStep(id), hideNavBar: false) }
                         else { router.push(.exerciseResume(destination.activityKey), hideNavBar: false) }
                     }.buttonStyle(PrimaryButtonStyle())
-                }
+                }.forestStudyCard()
             } else { Text("Starter path completed. Revisit a step or choose more practice.").font(.subheadline).foregroundStyle(Forest.inkMuted) }
             AppComposer.shared.makeDailyStudyPlanSummaryView()
             (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.s)) : AnyLayout(HStackLayout(spacing: Forest.Space.m))) {

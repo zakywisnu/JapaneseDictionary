@@ -32,7 +32,7 @@ public struct ProfileView: View {
                                 collectionRow("Words", count: progress.kotobaProgress, total: viewModel.state.totalKotoba, level: progress.kotobaLevel.rawValue, date: progress.kotobaProgress > 0 ? progress.lastKotobaUpdated : nil)
                                 Divider().overlay(Forest.line)
                                 collectionRow("Kanji", count: progress.kanjiProgress, total: viewModel.state.totalKanji, level: progress.kanjiLevel.rawValue, date: progress.kanjiProgress > 0 ? progress.lastKanjiUpdated : nil)
-                            }.background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                            }.forestSurface()
                             if progress.kotobaProgress == 0 && progress.kanjiProgress == 0 {
                                 Button("Add your first item on Today") { appTabs.appTab = .home }
                                     .buttonStyle(.plain).frame(minHeight: 44)
@@ -44,7 +44,7 @@ public struct ProfileView: View {
                     ForestNavigationRow(title: "Weekly recap") { router.push(.weeklyRecap, hideNavBar: false) }
                     Divider().overlay(Forest.line)
                     ForestNavigationRow(title: "Activity details") { router.push(.activityDetails, hideNavBar: false) }
-                }.background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                }.forestSurface()
             }.padding(.horizontal, Forest.Space.l).padding(.top, Forest.Space.s).padding(.bottom, Forest.Space.xl)
         }.background(Forest.canvas).foregroundStyle(Forest.ink).tint(Forest.moss)
             .onAppear { viewModel.send(.onAppear) }

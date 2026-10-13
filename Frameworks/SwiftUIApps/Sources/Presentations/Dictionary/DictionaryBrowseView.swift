@@ -98,7 +98,7 @@ struct DictionaryBrowseView: View {
         }
         .padding(.horizontal, Forest.Space.m)
         .frame(minHeight: 44)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
         .overlay { RoundedRectangle(cornerRadius: Forest.Radius.card).strokeBorder(Forest.line) }
     }
 }

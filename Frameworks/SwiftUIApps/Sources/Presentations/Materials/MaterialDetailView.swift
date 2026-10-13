@@ -36,7 +36,7 @@ struct MaterialDetailView: View {
                     Button("Practice speaking") {
                         pronunciation.stop()
                         router.push(.speaking(target), hideNavBar: false)
-                    }.buttonStyle(.bordered).frame(minHeight: 44)
+                    }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
                 }
                 MaterialAnswer(material: material)
                 let references = Array(Set(material.relatedSourceIDs + (material.source?.parentIDs ?? []))).sorted()
@@ -132,7 +132,7 @@ struct MaterialAnswer: View {
                 block("Lesson context", parents.joined(separator: "\n"))
             }
         }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(Forest.ink).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+            .foregroundStyle(Forest.ink).forestSurface()
     }
     private func block(_ title: String, _ value: String) -> some View {
         VStack(alignment: .leading, spacing: Forest.Space.s) {

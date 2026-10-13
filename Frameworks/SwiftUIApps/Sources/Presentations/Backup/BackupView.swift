@@ -22,7 +22,7 @@ struct BackupView: View {
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 Button("Choose backup to restore") { isImporting = true }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(SecondaryButtonStyle())
                     .frame(minHeight: 44)
                 if viewModel.state.isBusy {
                     ProgressView("Preparing your backup")
@@ -46,7 +46,7 @@ struct BackupView: View {
                         Text("Restoring replaces your current collection, saved lessons, your cards, difficult items, study lists, progress, review dates, daily goal and practice history. A recovery backup of your current collection will be kept on this iPhone.")
                             .foregroundStyle(Forest.inkMuted)
                         Button("Replace current collection", role: .destructive) { isConfirming = true }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(SecondaryButtonStyle())
                             .tint(Forest.danger)
                             .frame(minHeight: 44)
                         Button("Cancel restore") { Task { await viewModel.send(.cancelPreview) } }
@@ -54,7 +54,7 @@ struct BackupView: View {
                     }
                     .padding(Forest.Space.l)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    .forestSurface()
                 }
                 Text("Backups are files you manage. This app has no account or automatic sync.")
                     .font(.footnote)

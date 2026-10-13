@@ -83,7 +83,7 @@ private struct ReadingDetailView: View {
                     Text("\(vocabularyModel.state.savedCount) items in \(list.name)")
                         .font(.subheadline).foregroundStyle(Forest.inkMuted)
                     Button("Review passage vocabulary") { router.push(.studyList(list.id), hideNavBar: false) }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(SecondaryButtonStyle())
                     Text("Choose Review list on the saved list to practice its current members. Review dates stay unchanged.")
                         .font(.footnote).foregroundStyle(Forest.inkMuted)
                 }

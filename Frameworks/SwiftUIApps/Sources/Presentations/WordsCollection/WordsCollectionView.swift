@@ -76,7 +76,7 @@ struct CollectionScreenHeader: View {
         .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
         .overlay {
             RoundedRectangle(cornerRadius: Forest.Radius.card)
-                .strokeBorder(Forest.line)
+                .strokeBorder(Forest.inkMuted)
         }
     }
 }

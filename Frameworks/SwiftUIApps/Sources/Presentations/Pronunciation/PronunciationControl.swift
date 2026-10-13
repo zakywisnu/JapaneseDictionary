@@ -28,20 +28,20 @@ struct PronunciationControl: View {
                     .font(.footnote).foregroundStyle(Forest.inkMuted)
                     .fixedSize(horizontal: false, vertical: true)
                 Button("Check again") { service.refreshAvailability() }
-                    .buttonStyle(.plain).foregroundStyle(Forest.ink)
+                    .buttonStyle(SecondaryButtonStyle()).foregroundStyle(Forest.ink)
                     .frame(minHeight: 44)
             case let .failed(message):
                 Text(message)
                     .font(.subheadline).foregroundStyle(Forest.ink)
                     .fixedSize(horizontal: false, vertical: true)
                 Button("Try again") { listen() }
-                    .buttonStyle(.plain).foregroundStyle(Forest.ink)
+                    .buttonStyle(SecondaryButtonStyle()).foregroundStyle(Forest.ink)
                     .frame(minHeight: 44)
             case .idle, .playing:
                 Button(isPlaying ? "Stop" : "Listen", systemImage: isPlaying ? "stop.fill" : "speaker.wave.2") {
                     if isPlaying { service.stop() } else { listen() }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(SecondaryButtonStyle())
                 .font(.subheadline)
                 .foregroundStyle(Forest.ink)
                 .frame(minHeight: 44)

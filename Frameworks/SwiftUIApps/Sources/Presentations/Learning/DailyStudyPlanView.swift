@@ -30,7 +30,7 @@ struct DailyStudyPlanView: View {
                             Text(batch.explanation).foregroundStyle(Forest.inkMuted)
                             Button("Review \(batch.items.count) items") {
                                 router.push(.review(batch.session), hideNavBar: false)
-                            }.buttonStyle(.bordered).frame(minHeight: 44)
+                            }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
                             DisclosureGroup("Preview items") {
                                 ForEach(batch.items, id: \.compositeID) { item in
                                     MaterialPrompt(text: item.headword).padding(.vertical, Forest.Space.xs)
@@ -81,7 +81,7 @@ struct DailyStudyPlanSummaryView: View {
                 StateMessage(title: "Couldn't prepare your plan", message: error, actionTitle: "Try again") { viewModel.send(.load) }
             } else {
                 ForestNavigationRow(title: "Daily study plan", subtitle: summary) { router.push(.dailyStudyPlan, hideNavBar: false) }
-                    .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    .forestSurface()
             }
         }.onAppear { viewModel.send(.load) }
     }

@@ -72,7 +72,7 @@ Moss is the brand color carried over from ZeroDesignKit (`#537D5D`), darkened to
 
 ## Identity motif: the practice square
 
-Every headword sits in practice squares (`PracticeCells`): one square per character, with a dashed cross through the center like the 田 grid on kanji writing paper. Adjacent squares share a 1pt border.
+Detail specimens and short kana study prompts use practice squares (`PracticeCells`): one square per character, with a dashed cross through the center like the 田 grid on kanji writing paper. Adjacent squares share a 1pt border. Collection rows use plain wrapping Mincho so longer headwords remain readable.
 
 - **Colors:** fill `sunken`, border and guides `line` (guides dashed 3/3), glyph `ink`.
 - **Corners:** square, on purpose. Practice paper has square cells.
@@ -83,7 +83,7 @@ Every headword sits in practice squares (`PracticeCells`): one square per charac
 ## Space, shape, depth
 
 - **Spacing scale (`Forest.Space`):** `xs 4`, `s 8`, `m 12`, `l 16`, `xl 24`, `xxl 40`. Screen side margins are `l` (16). Spacing varies by level so the screen has rhythm; don't flatten it to one value.
-- **Radius:** `12` for cards, rows, and the search field (`Forest.Radius.card`). `6` for level tags. Capsule only for the primary button and page dots. `Forest.Radius.tile` (10) is currently unused.
+- **Radius:** `12` for cards and primary actions (`Forest.Radius.card`). `8` for secondary controls, selector triggers and answer fields (`Forest.Radius.control`). `6` for level tags. Capsules remain in the unchanged native tab bar and progress tracks. `Forest.Radius.tile` (10) is currently unused.
 - **Depth:** no shadows. Separation comes from `surface` on `canvas`, hairlines, and whitespace.
 - **Forbidden:** gradients, glass, glow, background patterns, decorative icons.
 
@@ -93,15 +93,15 @@ Every headword sits in practice squares (`PracticeCells`): one square per charac
 |---|---|---|
 | `ScreenHeader` | Large title with optional caption above | Caption is the date on Today. Marked as a header for VoiceOver |
 | `StudyKindPicker` | Words / Kanji switch | System segmented picker. Choice is remembered per screen (`@AppStorage`) |
-| `StudyRow` | One word or kanji in a list | Practice squares, reading, meaning (2 lines max), optional `LevelTag`, and a neutral disclosure chevron. Combined into one VoiceOver element |
-| `LevelTag` | JLPT level | Hidden inside Collection, where the section header already says the level. VoiceOver reads "JLPT N5" |
+| `StudyRow` | One word or kanji in a list | Wrapping Mincho headword, reading and meaning (2 lines at standard sizes, unrestricted at accessibility sizes), centered trailing level/chevron group. Combined into one VoiceOver element |
+| `LevelTag` | JLPT level | Individual level remains beside the aligned disclosure group; section headers also show level totals. VoiceOver reads "JLPT N5" |
 | `PracticeCells` / `Headword` | The motif | See above |
-| `PrimaryButtonStyle` | The screen's single focal action | Moss capsule, `onMoss` text, min height 50, content-driven height with 16pt horizontal / 12pt vertical padding, full width, 0.98 press scale, 50% opacity when disabled |
+| `PrimaryButtonStyle` | The screen's single focal action | Moss rounded rectangle with 12pt corners, `onMoss` text, min height 52, wrapping label, full width. Disabled uses sunken/inkMuted rather than translucent text. Reduce Motion disables press scaling |
 | `ForestNavigationRow` | Neutral navigation or action row | Wrapping title and optional subtitle, disclosure chevron, 16pt horizontal / 12pt vertical padding |
 | `ProgressTrack` | Learned vs total | 6pt capsule, `sunken` track, moss fill, minimum visible fill when value > 0. Hidden from VoiceOver; the number beside it is read instead |
 | `StateMessage` | Empty, error, and no-results states | Title, explanation, optional bordered moss action |
 
-Lists use `.insetGrouped` with hidden scroll background, `surface` row backgrounds, and sentence-case section headers.
+Study lists use `.plain` with hidden scroll background, custom bounded `surface` row groups, and sentence-case section headers. Settings and system forms retain native grouping.
 
 ## Screens
 
@@ -273,3 +273,25 @@ Word Detail places study meaning directly after the specimen, followed by groupe
 ## Session refinement
 
 Questions remain the focal content. Answer feedback uses a leading-aligned surface with wrapping text and neutral labels; it never relies on color alone. Multiple-choice Next and completion actions stay in the bottom safe area. Completion summaries separate checked answers, self-ratings and repeat attempts, hide zero-only details and offer a clear return action. Content provenance appears in a disclosure below the task. New questions reset the scroll position so feedback from the previous answer cannot leave the next prompt offscreen.
+
+## Recall session actions
+
+Typed and listening recall use one bottom safe-area action group: Check answer before submission, Next question after feedback, and Retry saving / Exit practice after a persistence failure. Keyboard submission uses the same eligibility check as the button. The answer field has a visible label and uses the Forest surface. Feedback keeps the learner's answer and supplied answers together, with neutral text rather than color-only grading. Self-rated meaning recall and unchecked reveals remain explicitly distinct. The error state keeps the draft or revealed feedback visible and suppresses advancement until Retry succeeds.
+
+When the keyboard or text size changes the available height, recall sessions scroll the focused answer field into view while keeping the primary action above the keyboard. Opening a session does not focus the field automatically.
+
+## Defined Forest components
+
+Use selective paper surfaces with a 1pt inkMuted boundary for actionable groups, feedback and inputs. Borders identify these regions while warm canvas and open typography carry informational summaries. Shared forestSurface and forestStudyCard treatments propagate to detail, setup, review, recall, speaking, history and recovery screens. Study lists use plain native Lists so system group corner masks cannot clip custom boundaries. Rows retain swipe actions; their boundary follows the first/middle/last row of each group.
+
+Secondary buttons and compact material-selector triggers use 8pt corners, a surface fill and inkMuted outline, with at least 44pt targets. Native menus, input, confirmations, file pickers and the four-tab bar remain native. Audio uses a labeled speaker/stop control. No borders around decorative skill signs: Mincho kana/grammar/reading specimens and neutral listening/speaking symbols identify actual tasks. A whole skill row is one target.
+
+Collection rows use larger wrapping Mincho headwords. The level label and disclosure chevron share a centered trailing group; accessibility sizes stack this group beneath the study content. Group headers remain available for level counts, with the individual level shown beside each word.
+
+Progress shows the actual trailing seven calendar dates and outlined day cells. Cells report retained submitted exercise answers plus review rating events, deduplicated by their existing identities. A checkmark represents older saved-item activity with no retained response count, and a dash means no recorded activity. Label the counting basis and keep these response counts separate from graded results and distinct saved-item counts. No future dates, inferred streaks or invented activity.
+
+## Interaction and long-content polish
+
+Navigation and study rows show a sunken fill while pressed, without changing their size. Exercise choices use the same neutral fill plus a 2pt ink outline when selected, alongside a checkmark. Locked submitted answers retain their selected appearance. Selection never implies correctness and never uses the destructive color. Native navigation, explicit Next and persistence guards remain unchanged.
+
+Long headwords wrap rather than stop at two lines. Saved-material answer previews expand at accessibility sizes. Listening playback controls stack at accessibility sizes. Press feedback requires no animation; primary-button scaling is disabled with Reduce Motion.

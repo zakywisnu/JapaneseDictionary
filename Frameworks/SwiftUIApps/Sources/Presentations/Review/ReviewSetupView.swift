@@ -41,18 +41,18 @@ struct ReviewSetupView: View {
                         }
                         .pickerStyle(.menu)
                         .frame(minHeight: 44)
-                    }
+                    }.forestStudyCard()
                     VStack(alignment: .leading, spacing: Forest.Space.s) {
                         Text("Session size").font(.headline)
                         if textSize.isAccessibilitySize { sizePicker.pickerStyle(.menu) }
                         else { sizePicker.pickerStyle(.segmented) }
 
-                    }
+                    }.forestStudyCard()
                     if !items.isEmpty && items.allSatisfy({ $0.compositeID.kind == .word }) {
                         VStack(alignment: .leading, spacing: Forest.Space.s) {
                             Toggle("Use sentence context", isOn: $useSentenceContext)
                             Text("Matching words use an original sentence prompt. Answers are self-rated.").font(.footnote).foregroundStyle(Forest.inkMuted)
-                        }
+                        }.forestStudyCard()
                     }
                     Text("\(selected.count) \(selected.count == 1 ? noun : noun.pluralNoun) selected")
                         .font(.headline)

@@ -20,6 +20,7 @@ enum Forest {
 
     enum Radius {
         static let card: CGFloat = 12
+        static let control: CGFloat = 8
         static let tile: CGFloat = 10
     }
 

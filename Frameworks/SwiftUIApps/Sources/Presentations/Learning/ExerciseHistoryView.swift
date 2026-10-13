@@ -36,7 +36,7 @@ struct ExerciseHistoryView: View {
                             .font(.subheadline).foregroundStyle(Forest.inkMuted)
                         ForEach(mistakeKinds, id: \.0) { kind, title in
                             if viewModel.state.mistakes.contains(where: { $0.snapshot.questionKind == kind }) {
-                                Button("Practice " + title) { viewModel.send(.startMistakesKind(kind)) }.buttonStyle(.bordered)
+                                Button("Practice " + title) { viewModel.send(.startMistakesKind(kind)) }.buttonStyle(SecondaryButtonStyle())
                             }
                         }
                         if let error = viewModel.state.startError { Text(error).font(.subheadline) }

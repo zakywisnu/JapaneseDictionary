@@ -20,19 +20,25 @@ struct LearningPracticeView: View {
                 }
             }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.s, trailing: 0))
             Section("Choose a skill") {
-                row("Kana and recall", "Kana and typed recall", .practiceSkill(.kana))
-                row("Grammar", "Patterns, forms and word order", .practiceSkill(.grammar))
-                row("Reading", "Passages and questions", .readingPractice)
-                row("Listening", "Readings and short passages", .practiceSkill(.listening))
-                row("Speaking", "Record and replay phrases", .speakingPractice)
-            }.listRowBackground(Forest.surface).textCase(nil)
+                VStack(spacing: 0) {
+                    ForestSkillRow(title: "Kana and recall", subtitle: "Kana and typed recall", character: "あ") { router.push(.practiceSkill(.kana), hideNavBar: false) }
+                    Divider().overlay(Forest.line)
+                    ForestSkillRow(title: "Grammar", subtitle: "Patterns, forms and word order", character: "て") { router.push(.practiceSkill(.grammar), hideNavBar: false) }
+                    Divider().overlay(Forest.line)
+                    ForestSkillRow(title: "Reading", subtitle: "Passages and questions", character: "文") { router.push(.readingPractice, hideNavBar: false) }
+                    Divider().overlay(Forest.line)
+                    ForestSkillRow(title: "Listening", subtitle: "Readings and short passages", symbol: "waveform") { router.push(.practiceSkill(.listening), hideNavBar: false) }
+                    Divider().overlay(Forest.line)
+                    ForestSkillRow(title: "Speaking", subtitle: "Record and replay phrases", symbol: "mic.fill") { router.push(.speakingPractice, hideNavBar: false) }
+                }.forestSurface().listRowInsets(EdgeInsets())
+            }.listRowBackground(Forest.canvas).textCase(nil)
             Section {
                 DisclosureGroup("Practice options") {
                     row("Practice mistakes", "Retry your latest incorrect answers", .mistakeReview)
                     row("Exercise history", "Your saved answers and explanations", .exerciseHistory)
                     row("Daily study plan", "Practice from your saved collection", .dailyStudyPlan)
                 }.tint(Forest.inkMuted).font(.headline)
-            }.listRowBackground(Forest.surface)
+            }.listRowBackground(ForestListRowSurface())
         }
         .forestTabList()
         .foregroundStyle(Forest.ink)

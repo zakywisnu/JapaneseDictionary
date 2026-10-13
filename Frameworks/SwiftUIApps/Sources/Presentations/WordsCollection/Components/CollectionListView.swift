@@ -28,11 +28,11 @@ struct CollectionListView: View {
             }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.s, trailing: 0))
             switch loadState {
             case .loading:
-                ProgressView("Loading your \(nouns)").listRowBackground(Forest.surface)
+                ProgressView("Loading your \(nouns)").listRowBackground(ForestListRowSurface())
             case .failed:
-                StateMessage(title: "Couldn't open your collection", message: "Your saved \(nouns) didn't load.", actionTitle: "Try again", action: onRetry).listRowBackground(Forest.surface)
+                StateMessage(title: "Couldn't open your collection", message: "Your saved \(nouns) didn't load.", actionTitle: "Try again", action: onRetry).listRowBackground(ForestListRowSurface())
             case .loaded where entries.isEmpty:
-                StateMessage(title: "No \(nouns) yet", message: "Add a \(noun) on Today or browse the bundled lessons.", actionTitle: "Go to Today", action: onGoToToday).listRowBackground(Forest.surface)
+                StateMessage(title: "No \(nouns) yet", message: "Add a \(noun) on Today or browse the bundled lessons.", actionTitle: "Go to Today", action: onGoToToday).listRowBackground(ForestListRowSurface())
             case .loaded:
                 collectionSections
             }
@@ -64,12 +64,12 @@ struct CollectionListView: View {
             ForEach(Self.levelOrder.filter { groups[$0] != nil }, id: \.self) { level in
                 let items = groups[level] ?? []
                 Section {
-                    ForEach(items) { entry in
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, entry in
                         Button { onSelect(entry) } label: {
-                            StudyRow(entry: entry, showsLevel: false)
+                            StudyRow(entry: entry)
                         }
-                        .buttonStyle(.plain)
-                        .listRowBackground(Forest.surface)
+                        .buttonStyle(ForestRowButtonStyle())
+                        .listRowBackground(ForestListRowSurface(position: .at(index, count: items.count)))
                         .studyRemovalActions(entry: entry, noun: noun, onDelete: onDelete)
                     }
                 } header: {

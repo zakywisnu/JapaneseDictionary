@@ -64,9 +64,9 @@ struct TodayListView: View {
         List {
             if showsTodayHeader { Section { TodayLearningHeader() }.listRowBackground(Forest.canvas).listRowInsets(EdgeInsets(top: Forest.Space.m, leading: 0, bottom: Forest.Space.l, trailing: 0)) }
             Section {
-                dueContent
-                addCard
-            }.listRowBackground(Forest.surface)
+                dueContent.listRowBackground(ForestListRowSurface(position: .first))
+                addCard.listRowBackground(ForestListRowSurface(position: .last))
+            }
 
             Section {
                 if entries.isEmpty {
@@ -74,7 +74,7 @@ struct TodayListView: View {
                         .font(.subheadline)
                         .foregroundStyle(Forest.inkMuted)
                         .padding(.vertical, Forest.Space.s)
-                        .listRowBackground(Forest.surface)
+                        .listRowBackground(ForestListRowSurface())
                 } else {
                     Group {
                         Button(action: onReview) {
@@ -84,16 +84,16 @@ struct TodayListView: View {
                                 .frame(maxWidth: .infinity, minHeight: 44)
                                 .contentShape(.rect)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ForestRowButtonStyle())
 
                     }
-                    .listRowBackground(Forest.surface)
-                    ForEach(entries) { entry in
+                    .listRowBackground(ForestListRowSurface(position: .first))
+                    ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                         Button { onSelect(entry) } label: {
                             StudyRow(entry: entry)
                         }
-                        .buttonStyle(.plain)
-                        .listRowBackground(Forest.surface)
+                        .buttonStyle(ForestRowButtonStyle())
+                        .listRowBackground(ForestListRowSurface(position: index == entries.count - 1 ? .last : .middle))
                         .studyRemovalActions(entry: entry, noun: noun, onDelete: onDelete)
                     }
                 }

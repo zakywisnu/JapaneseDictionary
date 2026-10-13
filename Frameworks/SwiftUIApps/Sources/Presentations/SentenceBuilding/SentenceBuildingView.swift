@@ -35,7 +35,7 @@ struct SentenceBuildingView: View {
                     HStack {
                         Button("Undo") { viewModel.send(.undo) }
                         Button("Clear") { viewModel.send(.clear) }
-                    }.buttonStyle(.bordered).tint(Forest.ink).disabled(!viewModel.canEdit || viewModel.state.selectedIDs.isEmpty)
+                    }.buttonStyle(SecondaryButtonStyle()).tint(Forest.ink).disabled(!viewModel.canEdit || viewModel.state.selectedIDs.isEmpty)
                     Text("Available tokens").font(.headline)
                     tokenGrid(shuffledTokens(metadata.tokens, seed: question.fingerprint).filter { !viewModel.state.selectedIDs.contains($0.id) }, selected: false)
                     if viewModel.state.isRevealed {
@@ -54,7 +54,7 @@ struct SentenceBuildingView: View {
                 }.tint(Forest.inkMuted)
                 if let error = viewModel.state.errorMessage {
                     StateMessage(title: "Practice unavailable", message: error, actionTitle: "Retry", action: { viewModel.send(.retry) })
-                    Button("Exit practice") { dismiss() }.buttonStyle(.bordered)
+                    Button("Exit practice") { dismiss() }.buttonStyle(SecondaryButtonStyle())
                 }
             }.padding(Forest.Space.l).foregroundStyle(Forest.ink)
         }.id(viewModel.state.position).background(Forest.canvas).navigationTitle(title).navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar).toolbar(.hidden, for: .tabBar)
@@ -87,7 +87,7 @@ struct SentenceBuildingView: View {
                 Button { viewModel.send(selected ? .remove(token.id) : .append(token.id)) } label: {
                     Text(token.text).font(.headword(22, relativeTo: .title3)).fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, minHeight: 44).padding(Forest.Space.s)
-                }.buttonStyle(.bordered).tint(Forest.ink).disabled(!viewModel.canEdit)
+                }.buttonStyle(SecondaryButtonStyle()).tint(Forest.ink).disabled(!viewModel.canEdit)
                     .accessibilityLabel("\(selected ? "Remove" : "Add") \(token.text)")
             }
         }

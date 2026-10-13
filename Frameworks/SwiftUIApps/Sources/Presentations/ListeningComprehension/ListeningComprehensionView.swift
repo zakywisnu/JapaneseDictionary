@@ -4,6 +4,7 @@ import DataKit
 struct ListeningComprehensionView: View {
     @State var viewModel: ListeningComprehensionViewModel
     let title: String
+    @Environment(\.dynamicTypeSize) private var textSize
     @Environment(\.scenePhase) private var scenePhase
     var body: some View {
         ScrollView {
@@ -15,13 +16,13 @@ struct ListeningComprehensionView: View {
                     Text("Listening practice complete").font(.title2.bold())
                     Text("\(viewModel.state.matched) correct / \(viewModel.state.checked) checked answers")
                     Text("Transcript-assisted questions are ungraded. Review dates and your saved-item goal stay unchanged.").foregroundStyle(Forest.inkMuted)
-                    Button("Practice again") { viewModel.send(.restart) }.buttonStyle(.bordered).tint(Forest.ink)
+                    Button("Practice again") { viewModel.send(.restart) }.buttonStyle(SecondaryButtonStyle()).tint(Forest.ink)
                 } else if let question = viewModel.current {
                     Text("Question \(viewModel.state.position + 1) of \(viewModel.snapshots.count)").font(.subheadline).foregroundStyle(Forest.inkMuted)
                     Text("Listen to the passage, then answer its meaning question.").font(.headline)
-                    HStack {
-                        Button(viewModel.state.heardPlayback ? "Replay passage" : "Listen to passage") { viewModel.send(.play) }.buttonStyle(.bordered).tint(Forest.ink)
-                        if viewModel.pronunciation.state == .playing { Button("Stop") { viewModel.send(.stop) }.buttonStyle(.bordered).tint(Forest.ink) }
+                    (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.s)) : AnyLayout(HStackLayout(spacing: Forest.Space.s))) {
+                        Button(viewModel.state.heardPlayback ? "Replay passage" : "Listen to passage") { viewModel.send(.play) }.buttonStyle(SecondaryButtonStyle()).tint(Forest.ink)
+                        if viewModel.pronunciation.state == .playing { Button("Stop") { viewModel.send(.stop) }.buttonStyle(SecondaryButtonStyle()).tint(Forest.ink) }
                     }.frame(minHeight: 44)
                     Text("Synthesized Japanese speech").font(.footnote).foregroundStyle(Forest.inkMuted)
                     if let error = viewModel.playbackError {
@@ -33,8 +34,9 @@ struct ListeningComprehensionView: View {
                             HStack(alignment: .top) {
                                 Image(systemName: viewModel.state.selected == index ? "checkmark.circle" : "circle")
                                 Text(question.choices[index]).frame(maxWidth: .infinity, alignment: .leading)
-                            }.padding(Forest.Space.m).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
-                        }.buttonStyle(.plain).disabled(viewModel.state.answered || viewModel.state.error != nil)
+                            }.padding(Forest.Space.m).frame(minHeight: 44)
+                        }.buttonStyle(ForestChoiceButtonStyle(isSelected: viewModel.state.selected == index)).disabled(viewModel.state.answered || viewModel.state.error != nil)
+                            .accessibilityAddTraits(viewModel.state.selected == index ? .isSelected : [])
                     }
                     if viewModel.state.assisted {
                         Text("Transcript-assisted practice. This question won't count toward checked accuracy.").font(.subheadline).foregroundStyle(Forest.inkMuted)
@@ -53,10 +55,10 @@ struct ListeningComprehensionView: View {
                             Text(question.metadata?.stimulus ?? "").font(.headword(24, relativeTo: .title2))
                             Text(question.metadata?.suppliedReading ?? "")
                             Text(question.metadata?.translation ?? "")
-                        }.padding(Forest.Space.l).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                        }.padding(Forest.Space.l).forestSurface()
                     } else {
                         Button("Show transcript · remaining questions become ungraded") { viewModel.send(.revealTranscript) }
-                            .buttonStyle(.bordered).tint(Forest.ink).disabled(viewModel.state.error != nil)
+                            .buttonStyle(SecondaryButtonStyle()).tint(Forest.ink).disabled(viewModel.state.error != nil)
                     }
                     Text(question.metadata?.source ?? "Original beginner practice").font(.footnote).foregroundStyle(Forest.inkMuted)
                 } else { StateMessage(title: "No passage available", message: "Return to Practice and choose another activity.") }

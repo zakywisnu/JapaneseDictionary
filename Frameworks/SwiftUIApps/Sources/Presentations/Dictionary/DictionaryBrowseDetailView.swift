@@ -21,7 +21,7 @@ struct DictionaryBrowseDetailView: View {
                     .foregroundStyle(Forest.ink)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(Forest.Space.l)
-                    .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    .forestSurface()
                     DictionaryDetailCard(word: word)
                     Button("Sources") { router.push(.sources, hideNavBar: false) }
                         .buttonStyle(.plain).foregroundStyle(Forest.ink)
@@ -73,7 +73,7 @@ struct DictionaryBrowseDetailView: View {
                     }
                     if let saved = viewModel.state.savedWord {
                         Button("View saved word") { router.push(.detail(.init(kotoba: saved, kanji: nil)), hideNavBar: false) }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(SecondaryButtonStyle())
                     }
                 } else if let saved = viewModel.state.savedWord {
                     Text(viewModel.state.didAdd ? "Added to your collection" : "Already in your collection")
@@ -107,12 +107,12 @@ struct DictionaryBrowseDetailView: View {
                 Button("Practice speaking") {
                     pronunciation.stop()
                     router.push(.speaking(.init(id: word.id, prompt: word.headword, suppliedReading: word.reading, acceptedWrittenForms: [word.headword])), hideNavBar: false)
-                }.buttonStyle(.bordered).frame(minHeight: 44)
+                }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
             }
             LevelTag(level: word.level)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, Forest.Space.xl).padding(.horizontal, Forest.Space.l)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
     }
 }

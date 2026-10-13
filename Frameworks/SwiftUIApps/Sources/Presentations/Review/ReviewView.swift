@@ -114,7 +114,7 @@ struct ReviewView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, Forest.Space.xl)
         .padding(.horizontal, Forest.Space.l)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
     }
 
     private func answer(_ item: ReviewItem) -> some View {
@@ -136,7 +136,7 @@ struct ReviewView: View {
             }
             .padding(Forest.Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+            .forestSurface()
             }
         }
     }

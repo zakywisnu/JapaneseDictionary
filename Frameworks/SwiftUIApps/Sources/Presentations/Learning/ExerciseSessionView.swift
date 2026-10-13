@@ -40,10 +40,8 @@ struct ExerciseSessionView: View {
                                     }
                                     .padding(Forest.Space.l).frame(minHeight: 44)
                                     .foregroundStyle(Forest.ink)
-                                    .background(Forest.surface, in: RoundedRectangle(cornerRadius: Forest.Radius.card))
-                                    .overlay { RoundedRectangle(cornerRadius: Forest.Radius.card).strokeBorder(Forest.line) }
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(ForestChoiceButtonStyle(isSelected: viewModel.state.selectedIndex == index))
                                 .disabled(viewModel.state.selectedIndex != nil)
                                 .accessibilityAddTraits(viewModel.state.selectedIndex == index ? .isSelected : [])
                             }
@@ -64,7 +62,7 @@ struct ExerciseSessionView: View {
                     }.tint(Forest.inkMuted)
                     if let message = viewModel.state.errorMessage {
                         StateMessage(title: "Practice unavailable", message: message, actionTitle: "Retry", action: { viewModel.send(.retry) })
-                        Button("Exit practice") { dismiss() }.buttonStyle(.bordered)
+                        Button("Exit practice") { dismiss() }.buttonStyle(SecondaryButtonStyle())
                     }
                 }
                 .foregroundStyle(Forest.ink).padding(Forest.Space.l)

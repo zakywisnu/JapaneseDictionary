@@ -83,6 +83,23 @@ final class LearningProgressTests: XCTestCase {
         let result = LearningProgressSummary.calculate(attempts: [], events: [], days: 7, now: date, calendar: local)
         XCTAssertEqual(result.rangeStart, local.date(from: DateComponents(year: 2026, month: 3, day: 3))!)
         XCTAssertNotEqual(result.rangeStart, local.startOfDay(for: date).addingTimeInterval(-6 * 86_400))
+        XCTAssertEqual(result.dailyPractice.count, 7)
+        XCTAssertEqual(result.dailyPractice.last?.date, local.startOfDay(for: date))
+        XCTAssertEqual(Set(result.dailyPractice.map(\.date)).count, 7)
+    }
+    func testDailyCellsDeduplicateResponsesAndKeepLegacyActivitySeparate() {
+        let yesterday = calendar.startOfDay(for: now).addingTimeInterval(-1)
+        let answer = attempt(at: now)
+        let rating = ReviewRatingEvent(actionID: UUID(), sessionID: UUID(), id: .init(kind: .word, id: "saved"), again: true, submittedAt: now)
+        let activity = PracticeActivity(id: .init(kind: .word, id: "older"), completedAt: yesterday, calendar: calendar)
+        let summary = LearningProgressSummary.calculate(attempts: [answer, answer, attempt(at: now.addingTimeInterval(1))], events: [rating, rating], days: 7, now: now, calendar: calendar, activities: [activity, activity])
+        XCTAssertEqual(summary.dailyPractice.count, 7)
+        XCTAssertEqual(summary.dailyPractice.last?.responses, 2)
+        XCTAssertEqual(summary.dailyPractice.last?.practiced, true)
+        XCTAssertEqual(summary.dailyPractice[5].responses, 0)
+        XCTAssertTrue(summary.dailyPractice[5].practiced)
+        XCTAssertEqual(summary.dailyPractice.filter(\.practiced).count, summary.practiceDays)
+        XCTAssertEqual(summary.dailyPractice.reduce(0) { $0 + $1.responses }, 2)
     }
     func testPathStatusCurrentRevisionAndHistoricalCompletion() {
         let steps = (0..<5).map { LearningPathStep(id: "step\($0)", revision: 2, title: "Step \($0)", activityKey: "practice", requiredContentIDs: ["q\($0)"]) }

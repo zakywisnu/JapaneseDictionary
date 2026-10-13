@@ -17,7 +17,7 @@ struct SpeakingView: View {
                         PronunciationControl(reading: viewModel.target.suppliedReading, service: viewModel.pronunciation)
                     }
                 }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Forest.surface, in: RoundedRectangle(cornerRadius: Forest.Radius.card))
+                    .forestSurface()
                 availabilityMessage
                 captureControls
                 if let error = viewModel.state.error {
@@ -61,21 +61,21 @@ struct SpeakingView: View {
             Button("Record") { viewModel.send(.record) }.buttonStyle(PrimaryButtonStyle()).disabled(!viewModel.canRecord)
         case .requestingPermission:
             ProgressView("Requesting recording access")
-            Button("Cancel") { viewModel.send(.retry) }.buttonStyle(.bordered).frame(minHeight: 44)
+            Button("Cancel") { viewModel.send(.retry) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
         case .recording:
             Text("Recording, up to 15 seconds").font(.subheadline).foregroundStyle(Forest.ink)
             Button("Stop recording") { viewModel.send(.stop) }.buttonStyle(PrimaryButtonStyle())
         case .comparing:
             ProgressView("Recognizing your phrase on this iPhone")
-            Button("Cancel") { viewModel.send(.cancelComparison) }.buttonStyle(.bordered).frame(minHeight: 44)
+            Button("Cancel") { viewModel.send(.cancelComparison) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
         case .recorded:
             if viewModel.state.recording == nil { ProgressView("Keeping your recording") }
             else {
-                Button("Replay my recording") { viewModel.send(.replay) }.buttonStyle(.bordered).frame(minHeight: 44)
+                Button("Replay my recording") { viewModel.send(.replay) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
                 if viewModel.state.comparison == nil {
                     Button("Compare recognized phrase") { viewModel.send(.compare) }.buttonStyle(PrimaryButtonStyle())
                 }
-                Button("Try again") { viewModel.send(.retry) }.buttonStyle(.bordered).frame(minHeight: 44)
+                Button("Try again") { viewModel.send(.retry) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
             }
         }
     }
@@ -90,15 +90,15 @@ struct SpeakingView: View {
             Text(result.reason).font(.subheadline)
         }.foregroundStyle(Forest.ink).fixedSize(horizontal: false, vertical: true)
             .padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading)
-            .background(Forest.surface, in: RoundedRectangle(cornerRadius: Forest.Radius.card))
+            .forestSurface()
     }
 
     @ViewBuilder private var explanationControls: some View {
         if viewModel.state.isExplaining {
             ProgressView("Explaining the transcript comparison")
-            Button("Cancel explanation") { viewModel.send(.cancelExplanation) }.buttonStyle(.bordered).frame(minHeight: 44)
+            Button("Cancel explanation") { viewModel.send(.cancelExplanation) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
         } else if viewModel.explanationAvailability == .available {
-            Button("Explain this result") { viewModel.send(.explain) }.buttonStyle(.bordered).frame(minHeight: 44)
+            Button("Explain this result") { viewModel.send(.explain) }.buttonStyle(SecondaryButtonStyle()).frame(minHeight: 44)
         } else {
             Text(explanationUnavailable).font(.footnote).foregroundStyle(Forest.inkMuted)
         }

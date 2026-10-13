@@ -70,7 +70,7 @@ struct MemoryAidCard: View {
         .foregroundStyle(Forest.ink)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(Forest.Space.l)
-        .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+        .forestSurface()
     }
 
     private func field(_ title: String, text: String) -> some View {

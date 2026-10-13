@@ -67,7 +67,7 @@ struct Headword: View {
             Text(text)
                 .font(.headword(cellSize * 0.62))
                 .foregroundStyle(Forest.ink)
-                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
@@ -123,11 +123,12 @@ extension Kanji {
 struct StudyRow: View {
     let entry: StudyEntry
     var showsLevel = true
+    @Environment(\.dynamicTypeSize) private var textSize
 
     var body: some View {
-        HStack(alignment: .top, spacing: Forest.Space.m) {
+        (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.m)) : AnyLayout(HStackLayout(alignment: .center, spacing: Forest.Space.m))) {
             VStack(alignment: .leading, spacing: Forest.Space.s) {
-                Headword(text: entry.headword)
+                Text(entry.headword).font(.headword(34, relativeTo: .title)).fixedSize(horizontal: false, vertical: true)
                 if let reading = entry.reading {
                     Text(reading)
                         .font(.subheadline)
@@ -136,17 +137,16 @@ struct StudyRow: View {
                 Text(entry.meaning)
                     .font(.body)
                     .foregroundStyle(Forest.ink)
-                    .lineLimit(2)
+                    .lineLimit(textSize.isAccessibilitySize ? nil : 2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer(minLength: 0)
-            if showsLevel {
-                LevelTag(level: entry.level)
+            if !textSize.isAccessibilitySize { Spacer(minLength: Forest.Space.s) }
+            HStack(alignment: .center, spacing: Forest.Space.m) {
+                if showsLevel { LevelTag(level: entry.level) }
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.semibold)).foregroundStyle(Forest.inkMuted)
+                    .accessibilityHidden(true)
             }
-            Image(systemName: "chevron.right")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(Forest.inkMuted)
-                .padding(.top, Forest.Space.s)
-                .accessibilityHidden(true)
         }
         .padding(.vertical, Forest.Space.xs)
         .contentShape(.rect)
@@ -211,7 +211,7 @@ struct StateMessage: View {
                 .fixedSize(horizontal: false, vertical: true)
             if let actionTitle, let action {
                 Button(actionTitle, action: action)
-                    .buttonStyle(.bordered)
+                    .buttonStyle(SecondaryButtonStyle())
                     .tint(Forest.moss)
                     .padding(.top, Forest.Space.xs)
             }
@@ -224,18 +224,19 @@ struct StateMessage: View {
 
 struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.body.weight(.semibold))
-            .foregroundStyle(Forest.onMoss)
+            .foregroundStyle(isEnabled ? Forest.onMoss : Forest.inkMuted)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, Forest.Space.l)
             .padding(.vertical, Forest.Space.m)
-            .frame(maxWidth: .infinity, minHeight: 50)
-            .background(Forest.moss.opacity(isEnabled ? 1 : 0.5), in: .capsule)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .background(isEnabled ? Forest.moss : Forest.sunken, in: .rect(cornerRadius: Forest.Radius.card))
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.98 : 1)
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
@@ -290,7 +291,8 @@ struct StudyKindPicker: View {
                 HStack(spacing: Forest.Space.s) {
                     Text(selection.rawValue).fixedSize(horizontal: false, vertical: true)
                     Image(systemName: "chevron.up.chevron.down").font(.caption)
-                }.frame(minWidth: 44, minHeight: 44)
+                }.padding(.horizontal, Forest.Space.m).frame(minWidth: 44, minHeight: 44)
+                    .forestSurface(radius: Forest.Radius.control)
             }.foregroundStyle(Forest.ink).accessibilityLabel("Study material, \(selection.rawValue)")
         } else {
         Picker("Show", selection: $selection.animation(.easeInOut(duration: 0.2))) {
@@ -333,30 +335,138 @@ struct ForestNavigationRow: View {
         Button(action: action) {
             HStack(spacing: Forest.Space.m) {
                 VStack(alignment: .leading, spacing: Forest.Space.xs) {
-                    Text(title).fixedSize(horizontal: false, vertical: true)
+                    Text(title).font(.headline).fixedSize(horizontal: false, vertical: true)
                     if let subtitle { Text(subtitle).font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true) }
                 }
                 Spacer(minLength: Forest.Space.s)
                 Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(Forest.inkMuted)
             }.padding(.horizontal, Forest.Space.l).padding(.vertical, Forest.Space.m).frame(maxWidth: .infinity, minHeight: 44, alignment: .leading).contentShape(Rectangle())
-        }.buttonStyle(.plain).foregroundStyle(Forest.ink)
+        }.buttonStyle(ForestRowButtonStyle()).foregroundStyle(Forest.ink)
     }
 }
 
 
 extension View {
+    func forestSurface(radius: CGFloat = Forest.Radius.card) -> some View {
+        self.background(Forest.surface, in: .rect(cornerRadius: radius))
+            .overlay { RoundedRectangle(cornerRadius: radius).strokeBorder(Forest.inkMuted, lineWidth: 1).allowsHitTesting(false) }
+    }
+
     func forestStudyCard() -> some View {
         self.fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(Forest.Space.l)
-            .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+            .forestSurface()
     }
 
     func forestTabList() -> some View {
-        self.listStyle(.insetGrouped).scrollContentBackground(.hidden).background(Forest.canvas)
+        self.listStyle(.plain).scrollContentBackground(.hidden).background(Forest.canvas)
             .contentMargins(.horizontal, Forest.Space.l, for: .scrollContent)
             .contentMargins(.top, Forest.Space.s, for: .scrollContent)
             .listSectionSpacing(Forest.Space.xl)
             .listRowInsets(EdgeInsets(top: Forest.Space.m, leading: Forest.Space.l, bottom: Forest.Space.m, trailing: Forest.Space.l))
+    }
+}
+
+struct SecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label.font(.body.weight(.medium))
+            .foregroundStyle(isEnabled ? Forest.ink : Forest.inkMuted)
+            .multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, Forest.Space.m).padding(.vertical, Forest.Space.s)
+            .frame(minWidth: 44, minHeight: 44)
+            .background(configuration.isPressed || !isEnabled ? Forest.sunken : Forest.surface, in: .rect(cornerRadius: Forest.Radius.control))
+            .overlay { RoundedRectangle(cornerRadius: Forest.Radius.control).strokeBorder(Forest.inkMuted).allowsHitTesting(false) }
+    }
+}
+
+struct ForestRowButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed && isEnabled ? Forest.sunken : .clear, in: .rect(cornerRadius: Forest.Radius.card))
+    }
+}
+
+struct ForestChoiceButtonStyle: ButtonStyle {
+    var isSelected: Bool
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label.foregroundStyle(Forest.ink)
+            .background(isSelected || configuration.isPressed ? Forest.sunken : Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+            .overlay {
+                RoundedRectangle(cornerRadius: Forest.Radius.card)
+                    .strokeBorder(isSelected ? Forest.ink : Forest.inkMuted, lineWidth: isSelected ? 2 : 1)
+                    .allowsHitTesting(false)
+            }
+    }
+}
+
+enum ForestRowPosition {
+    case first, middle, last, single
+    static func at(_ index: Int, count: Int) -> Self {
+        count == 1 ? .single : index == 0 ? .first : index == count - 1 ? .last : .middle
+    }
+}
+
+struct ForestListRowSurface: View {
+    var position: ForestRowPosition = .single
+    var body: some View {
+        UnevenRoundedRectangle(
+            topLeadingRadius: position == .first || position == .single ? Forest.Radius.card : 0,
+            bottomLeadingRadius: position == .last || position == .single ? Forest.Radius.card : 0,
+            bottomTrailingRadius: position == .last || position == .single ? Forest.Radius.card : 0,
+            topTrailingRadius: position == .first || position == .single ? Forest.Radius.card : 0
+        ).fill(Forest.surface).overlay {
+            GeometryReader { geometry in
+                Path { path in
+                    let w = geometry.size.width - 0.5, h = geometry.size.height - 0.5
+                    let r = Forest.Radius.card
+                    let top = position == .first || position == .single
+                    let bottom = position == .last || position == .single
+                    path.move(to: CGPoint(x: 0.5, y: top ? r : 0))
+                    path.addLine(to: CGPoint(x: 0.5, y: bottom ? h - r : h))
+                    if bottom {
+                        path.addQuadCurve(to: CGPoint(x: r, y: h), control: CGPoint(x: 0.5, y: h))
+                        path.addLine(to: CGPoint(x: w - r, y: h))
+                        path.addQuadCurve(to: CGPoint(x: w, y: h - r), control: CGPoint(x: w, y: h))
+                    } else { path.move(to: CGPoint(x: w, y: h)) }
+                    path.addLine(to: CGPoint(x: w, y: top ? r : 0))
+                    if top {
+                        path.addQuadCurve(to: CGPoint(x: w - r, y: 0.5), control: CGPoint(x: w, y: 0.5))
+                        path.addLine(to: CGPoint(x: r, y: 0.5))
+                        path.addQuadCurve(to: CGPoint(x: 0.5, y: r), control: CGPoint(x: 0.5, y: 0.5))
+                    }
+                }.stroke(Forest.inkMuted, lineWidth: 1)
+            }
+        }.allowsHitTesting(false)
+    }
+}
+
+struct ForestSkillRow: View {
+    let title: String
+    let subtitle: String
+    var character: String? = nil
+    var symbol: String? = nil
+    let action: () -> Void
+    @Environment(\.dynamicTypeSize) private var textSize
+    @ScaledMetric(relativeTo: .title2) private var markerSize = 44
+    var body: some View {
+        Button(action: action) {
+            (textSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Forest.Space.s)) : AnyLayout(HStackLayout(spacing: Forest.Space.m))) {
+                Group {
+                    if let character { Text(character).font(.headword(28, relativeTo: .title2)) }
+                    else if let symbol { Image(systemName: symbol).font(.title2) }
+                }.frame(width: markerSize, height: markerSize).accessibilityHidden(true)
+                HStack(spacing: Forest.Space.m) {
+                    VStack(alignment: .leading, spacing: Forest.Space.xs) {
+                        Text(title).font(.headline)
+                        Text(subtitle).font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    }.fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: Forest.Space.s)
+                    Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(Forest.inkMuted).accessibilityHidden(true)
+                }
+            }.padding(Forest.Space.l).frame(maxWidth: .infinity, minHeight: 44, alignment: .leading).contentShape(Rectangle())
+        }.buttonStyle(ForestRowButtonStyle()).foregroundStyle(Forest.ink)
     }
 }

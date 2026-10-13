@@ -8,17 +8,23 @@ struct ProgressWeekOverview: View {
     @EnvironmentObject private var router: AppRouter
     var body: some View {
         VStack(alignment: .leading, spacing: Forest.Space.m) {
-            Text("This week").font(.title2.weight(.semibold))
-            if viewModel.state.loading { ProgressView("Loading this week's activity") }
+            Text("Last 7 days").font(.title2.weight(.semibold))
+            if viewModel.state.loading { ProgressView("Loading recent activity") }
             else if let error = viewModel.state.error {
                 StateMessage(title: "Couldn't load activity", message: error, actionTitle: "Try again", action: { viewModel.send(.load) })
             } else if let summary = viewModel.state.summary {
+                Text(summary.rangeCaption).font(.subheadline).foregroundStyle(Forest.inkMuted)
                 if summary.practiceDays == 0 {
-                    Text("No practice recorded this week. Your reviews and exercises will appear here.").font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true)
+                    ProgressDayStrip(days: summary.dailyPractice, timeZoneIdentifier: summary.timeZoneIdentifier)
+                    Text("No practice recorded in the last 7 days. Your reviews and exercises will appear here.").font(.subheadline).foregroundStyle(Forest.inkMuted).fixedSize(horizontal: false, vertical: true)
                     Button("Choose practice") { router.push(.learningPractice, hideNavBar: false) }.buttonStyle(PrimaryButtonStyle())
                 } else {
-                    Text("\(summary.practiceDays) " + (summary.practiceDays == 1 ? "day practiced" : "days practiced")).font(.system(.largeTitle, design: .rounded).weight(.semibold))
-                    Text(summary.rangeCaption).font(.subheadline).foregroundStyle(Forest.inkMuted)
+                    if summary.distinctSavedItemsPracticed > 0 {
+                        Text(summary.distinctSavedItemsPracticed.formatted()).font(.system(.largeTitle, design: .rounded).weight(.semibold)).monospacedDigit()
+                        Text("Distinct saved items practiced").font(.headline)
+                    }
+                    Text("\(summary.practiceDays) " + (summary.practiceDays == 1 ? "day practiced" : "days practiced")).font(.headline)
+                    ProgressDayStrip(days: summary.dailyPractice, timeZoneIdentifier: summary.timeZoneIdentifier)
                     if summary.gradedTotal > 0 { Text("\(summary.gradedCorrect) correct / \(summary.gradedTotal) graded answers") }
                     if summary.selfRatedTotal > 0 { Text("\(summary.selfRatedGotIt) Got it / \(summary.selfRatedTotal) self-rated responses") }
                     if summary.meaningSelfRatedSubmitted > 0 { Text("\(summary.meaningSelfRatedRemembered) remembered / \(summary.meaningSelfRatedSubmitted) self-rated meanings") }
@@ -26,6 +32,44 @@ struct ProgressWeekOverview: View {
             }
         }.frame(maxWidth: .infinity, alignment: .leading).onAppear { viewModel.send(.load) }
     }
+}
+
+private struct ProgressDayStrip: View {
+    let days: [LearningPracticeDay]
+    let timeZoneIdentifier: String
+    @Environment(\.dynamicTypeSize) private var textSize
+    private var columns: [GridItem] {
+        Array(repeating: GridItem(.flexible(), spacing: Forest.Space.s), count: textSize.isAccessibilitySize ? 2 : days.contains(where: { $0.responses >= 1_000 }) ? 4 : 7)
+    }
+    var body: some View {
+        VStack(alignment: .leading, spacing: Forest.Space.s) {
+            LazyVGrid(columns: columns, spacing: Forest.Space.s) {
+                ForEach(days) { day in
+                    VStack(spacing: Forest.Space.s) {
+                        Text(dateLabel(day.date)).font(.caption).foregroundStyle(Forest.inkMuted)
+                        Text(day.responses > 0 ? day.responses.formatted() : day.practiced ? "✓" : "–")
+                            .font(.headline.monospacedDigit())
+                    }.padding(.vertical, Forest.Space.m).frame(maxWidth: .infinity, minHeight: 66)
+                        .forestSurface(radius: Forest.Radius.control)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(fullDate(day.date) + ": " + (day.responses > 0 ? "\(day.responses) recorded " + (day.responses == 1 ? "response" : "responses") : day.practiced ? "Saved-item practice recorded" : "No practice recorded"))
+                }
+            }
+            Text("Recorded answers and review ratings per day").font(.footnote).foregroundStyle(Forest.inkMuted)
+            if days.contains(where: { $0.practiced && $0.responses == 0 }) {
+                Text("✓ Saved-item practice with no retained answer count").font(.footnote).foregroundStyle(Forest.inkMuted)
+            }
+        }
+    }
+    private func formatter(_ format: String) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.timeZone = TimeZone(identifier: timeZoneIdentifier)
+        formatter.dateFormat = format
+        return formatter
+    }
+    private func dateLabel(_ date: Date) -> String { formatter(textSize.isAccessibilitySize ? "EEE d" : "EEEEE").string(from: date) }
+    private func fullDate(_ date: Date) -> String { formatter("EEEE, MMM d").string(from: date) }
 }
 
 struct LearningProgressView: View {
@@ -58,7 +102,7 @@ struct LearningProgressView: View {
                                     if summary.conjugation.submitted > 0 { metric("Conjugation", "\(summary.conjugation.correct) / \(summary.conjugation.submitted)") }
                                     if summary.sentenceOrder.submitted > 0 { metric("Sentence building", "\(summary.sentenceOrder.correct) / \(summary.sentenceOrder.submitted)") }
                                     if summary.listeningComprehension.submitted > 0 { metric("Listening comprehension", "\(summary.listeningComprehension.correct) / \(summary.listeningComprehension.submitted)") }
-                                }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading).background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                                }.padding(Forest.Space.l).frame(maxWidth: .infinity, alignment: .leading).forestSurface()
                             }
                             if summary.selfRatedTotal > 0 || summary.meaningSelfRatedSubmitted > 0 {
                                 Text("Self-rated recall").font(.title2.weight(.semibold))
@@ -74,13 +118,13 @@ struct LearningProgressView: View {
                         ForestNavigationRow(title: "Starter path", subtitle: "\(summary.pathStepStatuses.filter { $0.status == .completed }.count) of \(summary.pathStepStatuses.count) steps completed") { router.push(.learningPath, hideNavBar: false) }
                         Divider().overlay(Forest.line)
                         ForestNavigationRow(title: "Answer history") { router.push(.exerciseHistory, hideNavBar: false) }
-                    }.background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                    }.forestSurface()
                     VStack(alignment: .leading, spacing: Forest.Space.m) {
                         Text("Ready to revisit").font(.title2.weight(.semibold))
                         metric("Reviews due now", "\(viewModel.state.dueCount) saved items")
                         if summary.remainingMistakes > 0 {
                             ForestNavigationRow(title: "Practice remaining mistakes", subtitle: "\(summary.remainingMistakes) questions") { router.push(.mistakeReview, hideNavBar: false) }
-                                .background(Forest.surface, in: .rect(cornerRadius: Forest.Radius.card))
+                                .forestSurface()
                             DisclosureGroup("Mistakes by practice type") {
                                 ForEach(mistakeKinds, id: \.0) { kind, title in
                                     if let count = summary.remainingMistakesByKind[kind], count > 0 { metric(title, "\(count)").padding(.top, Forest.Space.s) }
